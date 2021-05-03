@@ -8,7 +8,8 @@ const productSchema= new Schema ( {
  category:{ type: String,required:true},
  size:{type: String,required:true},
  description:{type: String,required:true},
-img:{type: String}
+img:{type: String},
+active:{type: Boolean,required:true}
  
 },
 {

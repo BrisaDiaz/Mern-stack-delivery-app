@@ -25,7 +25,7 @@ const getProductById= async (req,res) => {
 const postNewProduct = async (req,res) =>{
 try{
 
-const { name, category, size ,description } = req.body
+const { name, category, size ,description,active } = req.body
 const price = Number(req.body.price);
 
  const  img =  req.file.filename;
@@ -36,6 +36,7 @@ const price = Number(req.body.price);
    size,
    description,
    img,
+  active,
  })
 
 const newProduct = await product.save(  )
@@ -51,7 +52,7 @@ console.log(error)
 
 const updateProductById= async (req,res) => {
 
-const { name, category, size ,description } = req.body
+const { name, category, size ,description ,active} = req.body
 const price = Number(req.body.price);
 const  img = (req.file) ?  req.file.filename :  null
   try{
@@ -78,7 +79,8 @@ fs.unlink(oldImgPath, (err) => {
                 category: category || product.category,
                 price: price || product.price,
                size: size || product.size,
-                img: img || product.img
+                img: img || product.img,
+                active: active || product.active
             }, { new: true });
             
             updatedProduct = await product.save();

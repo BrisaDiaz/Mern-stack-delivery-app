@@ -31,14 +31,15 @@ res.status(200).json(users)
 
 
    const UpdateUserById = async (req,res) =>{
-   const { roles } = req.body
+   let { roles } = req.body
+   roles = roles ? roles : ["user"];
 
  try{ 
 
 
   
     let rolesFound = await Role.find({ name: { $in: roles } });
-  (rolesFounde.length > 0 ) ? rolesFounde : null;
+
     let user = await User.findById(req.params.id);
 
   if (!user) return res.status(404).json({success:false, message:'user not found'});
@@ -114,7 +115,7 @@ const { roles ,name,password,newPassword,adress,number} = req.body
       });
     let rolesFound = await Role.find({ name: { $in: roles } });
 
-  (rolesFound.length > 0 ) ? rolesFound : null;
+  (rolesFound?.length > 0 ) ? rolesFound : null;
   
      (newPassword) ? await User.encryptPassword(newPassword) : null;
 

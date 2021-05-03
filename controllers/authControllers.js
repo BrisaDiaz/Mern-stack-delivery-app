@@ -63,7 +63,7 @@ const jwt =require('jsonwebtoken');
       expiresIn: 86400, 
     });
 
-    res.status(200).json({ token: token ,roles: userFound.roles ,userId:userFound._id});
+    res.status(200).json({ token: token ,roles: userFound.roles ,user:userFound});
 
   } catch (error) {
     console.log(error);
