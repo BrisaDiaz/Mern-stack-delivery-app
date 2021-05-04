@@ -42,7 +42,7 @@ const isAdmin = async (req,res,next) =>{
   } 
   catch (error) {
     console.log(error)
-    return res.status(500).send({ message: error });
+    return res.status(500).json({ message: error });
   }
  
 }
@@ -62,7 +62,7 @@ try{
 
 }catch (error) {
     console.log(error)
-    return res.status(500).send({ message: error });
+    return res.status(500).json({ message: error });
     
   }
 

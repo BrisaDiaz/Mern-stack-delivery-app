@@ -117,22 +117,22 @@ const { roles ,name,password,newPassword,adress,number} = req.body
 
   (rolesFound?.length > 0 ) ? rolesFound : null;
   
-     (newPassword) ? await User.encryptPassword(newPassword) : null;
+     const encodedPassword = (newPassword) ? await User.encryptPassword(newPassword) : null;
 
 
 
             user = await User.findByIdAndUpdate(req.params.id, {
-                name: name || user.name,
-                password: newPassword || user.password,
-                email: user.email,
-                roles: rolesFound.map((role) => role._id) || user.roles,
-                    adress: adress || user.adress,
-               number: number ||user.number,
+                name: name || userFound.name,
+                password: encodedPassword || ususerFounder.password,
+                email: userFound.email,
+                roles: rolesFound.map((role) => role._id) || userFound.roles,
+                    adress: adress || userFound.adress,
+               number: number || userFound.number,
              
             }, { new: true });
             updatedUser = await user.save();
 
-    res.status(200).json({success: true ,message: `User ${user.name} Udated Successfully`});
+    res.status(200).json({success: true ,message: `User ${updatedUser.name} Udated Successfully`});
 
   }catch(error){ 
     console.log(error)
