@@ -15,9 +15,8 @@ padding-top:60px;
 
 `;
 const UsersTable = styled.div` 
-max-width:500px;
-min-width:300px;
 width:100%;
+min-width:300px;
 margin-top:30px;
 border: 1px solid #fecb00;
   border-bottom: none;
@@ -26,19 +25,19 @@ border: 1px solid #fecb00;
 `
 export const AdminTable = styled.div` 
 
-max-width:320px;
+width:100%;
 min-width:300px;
 margin: 0 5px;
 height:max-content;
 margin-top:30px;
 border: 1px solid #fecb00;
   border-bottom: none;
-
+flex:1;
 `
 
 const TablesContainer = styled.div`
 display:flex;
-width:100%;
+width:90%;
     flex-wrap: wrap-reverse;
 align-items:start;
 margin:0 auto;
