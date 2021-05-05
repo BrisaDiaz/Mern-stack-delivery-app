@@ -25,7 +25,7 @@ const productsRouter = require('./routes/products.js');
 const usersRouter = require('./routes/users.js');
 const authRouter = require('./routes/auth.js');
 
-if ( process.env.ENV === 'production'){
+if ( process.env.NODE_ENV === 'production'){
   
   app.use(express.static(path.join(__dirname, 'frontend','build'))); 
 
