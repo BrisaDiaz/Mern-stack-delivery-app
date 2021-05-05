@@ -9,10 +9,12 @@ import {   useContext } from 'react'
 const StyledNewestProducts= styled.section`
 min-height:100vh;
 width:100vw;
-
-
 text-aling:center;
 `
+const ProductsWrapper=styled(ProductsSection) `
+height:100%;
+align-items:center;
+`;
 
 export default function NewestProducts(){
 
@@ -26,7 +28,7 @@ const LatestProducts = activeProducts.slice(-4)
    
    <StyledNewestProducts>
   <SectionTitle>Últimas Novedades</SectionTitle>
-  <ProductsSection>
+  <ProductsWrapper>
     {LatestProducts.map( product => {
  
  return <Item key={product._id} item={product}></Item>
@@ -34,7 +36,7 @@ const LatestProducts = activeProducts.slice(-4)
     
       )}
  
-  </ProductsSection>
+  </ProductsWrapper>
 
 </StyledNewestProducts>
 
