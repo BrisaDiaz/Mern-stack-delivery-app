@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap");
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+body {
+  overflow-x: hidden;
+  box-sizing: inherit;
+  width: 100%;
+  max-width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 15px;
+  color: #272727;
+}
+p,
+input,
+textarea,
+textarea::placeholder,
+input::placeholder {
+  font-family: "Open Sans", sans-serif;
+}
+textarea::placeholder,
+input::placeholder {
+  font-family: "Open Sans", sans-serif;
+  font-style: oblique;
+}
+a {
+  font-family: "Open Sans", sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  margin: 0;
+}
+h2 {
+  font-family: "Oswald", sans-serif;
+  font-size: 35px;
+  margin: 0 0 20px;
+  line-height: 1.2em;
+  letter-spacing: 2px;
+}
+@media screen and(min-width:500px) {
+  h2 {
+    font-size: 45px;
+    margin: 0 0 20px;
+    line-height: 1.2em;
+  }
+}
+
+h3 {
+  font-family: "Oswald", sans-serif;
+  font-size: 35px;
+  margin: 0 0 35px;
+  letter-spacing: 2px;
+}
+
+h4 {
+  font-family: "Oswald", sans-serif;
+  font-size: 19px;
+  margin: 0 0 24px;
+  letter-spacing: 2px;
+}
+[type="submit"] {
+  outline: none;
+  border: none;
+}
+li {
+  list-style: none;
+}
+
+.flex {
+  display: flex;
+}
+.flex-column {
+  display: flex;
+
+  flex-direction: column-reverse;
+}
+.grid {
+  display: grid;
+  grid-template-columns: auto-fit (minmax(290px, 300px));
+}
+b {
+  margin-right: 2px;
+}
