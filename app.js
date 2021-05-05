@@ -1,6 +1,6 @@
 const express= require('express');
 const app = express();
-port = process.env.PORT || 7000;
+
 const cors = require('cors');
  require('dotenv').config({path: '.env'});
 const connectDB = require( './db.js');
@@ -18,12 +18,25 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors());
 app.use(morgan('tiny'));
-// app.use(express.static(path.join(__dirname, 'public','react-app','build')));
+
+
+const port = process.env.PORT || 7000;
 const productsRouter = require('./routes/products.js');
 const usersRouter = require('./routes/users.js');
 const authRouter = require('./routes/auth.js');
 
+if ( process.env.ENV === 'production'){
+  
+  app.use(express.static(path.join(__dirname, 'frontend','build'))); 
+
+  app.get( ' * ' , (req,res) => {
+    res.sendFile(path.join(__dirname, 'frontend','build','index.html'))
+  } )
+
+}else{
 app.use(express.static(path.join(__dirname, 'frontend')));
+}
+
 app.use('/api/auth',authRouter)
 app.use('/api/products',productsRouter)
 app.use('/api/users',usersRouter)
