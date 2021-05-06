@@ -66,8 +66,8 @@ placeholder={placeholder}
           ref={register({
   
                   minLength: {
-            value: 10,
-            message: "*Teléfono Invalido (10 dígitos)"
+            value: 9,
+            message: "*Teléfono Invalido (9 dígitos min)"
                                       },
                      pattern: {
             value: /[0-9]/,

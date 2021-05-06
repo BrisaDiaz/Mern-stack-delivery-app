@@ -155,7 +155,7 @@ let active =  e.target.state.checked ? true : false ;
 
 
   try {
-        let res = await fetch("http://localhost:7000/api/products", setting);
+        let res = await fetch("/api/products", setting);
         let json =  await res.json()
         console.log(json)
           getProducts()

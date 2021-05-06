@@ -57,6 +57,7 @@ export const PaswordInput = styled(NameInput).attrs( props => ({
 export const ErrorMessage = styled.small`
 color:#bf0000;
 margin-right:auto;
+margin-left:20px;
 `;
 export const ErrorServerMessage = styled(ErrorMessage)`
 text-align:center;
