@@ -11,7 +11,7 @@ async function getUsers({token,setAllUsers}){
         }
     try{
 
-const res = await fetch('http://localhost:7000/api/users', setting);
+const res = await fetch('/api/users', setting);
   const data = await res.json()
 
 setAllUsers(data)

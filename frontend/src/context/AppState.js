@@ -38,7 +38,7 @@ export default  function AppState(props) {
    const getProducts = async() =>{
     try{
 
-const res = await fetch('http://localhost:7000/api/products');
+const res = await fetch('/api/products');
   const data = await res.json()
 
 console.log(data)
@@ -68,7 +68,7 @@ const deleteConfirmation = window.confirm('El producto será eliminado de la bas
 
 if(deleteConfirmation){
 try {
-        let res = await fetch("http://localhost:7000/api/products/"+id, setting);
+        let res = await fetch("/api/products/"+id, setting);
       console.log(res.json())
 getProducts()
       } catch (err) {
@@ -118,7 +118,7 @@ priceValue){
           body: formData,
         }
 
-let url =`http://localhost:7000/api/products/${id}`
+let url =`/api/products/${id}`
   try {
         let res = await fetch(url , setting);
       console.log(res)

@@ -52,7 +52,7 @@ headers.append('Content-Type', 'application/json');
 
 
 
-        let res = await fetch(`http://localhost:7000/api/users/me/${id}`, setting);
+        let res = await fetch(`/api/users/me/${id}`, setting);
             let  json = await res.json()
 setIsLoading(false)
 

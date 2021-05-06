@@ -36,7 +36,7 @@ headers.append('Content-Type', 'application/json');
 
 
 
-        let res = await fetch("http://localhost:7000/api/auth/singUp", setting);
+        let res = await fetch("/api/auth/singUp", setting);
             let  json = await res.json()
 setIsLoading(false)
 

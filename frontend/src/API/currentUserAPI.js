@@ -13,7 +13,7 @@ async function getCurrentUser({setCurrentUser,token}){
         }
     try{
 
-const res = await fetch(`http://localhost:7000/api/users/me/${id}`,setting);
+const res = await fetch(`/api/users/me/${id}`,setting);
   const data = await res.json()
 
 setCurrentUser(data)
