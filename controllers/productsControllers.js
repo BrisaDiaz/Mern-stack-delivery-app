@@ -25,10 +25,10 @@ const getProductById= async (req,res) => {
 const postNewProduct = async (req,res) =>{
 try{
 
-const { name, category, size ,description,active } = req.body
+const { name, category, size ,description ,active} = req.body
 const price = Number(req.body.price);
+const  img = (req.file) ?  req.file.filename :  null
 
- const  img =  req.file.filename;
  const product =    new Product({
    name,
    price,
@@ -39,7 +39,7 @@ const price = Number(req.body.price);
   active,
  })
 
-const newProduct = await product.save(  )
+const newProduct = await product.save( )
 
  res.status(201).json({success: true , data: newProduct})
  

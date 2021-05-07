@@ -32,7 +32,8 @@ res.status(200).json(users)
 
    const UpdateUserById = async (req,res) =>{
    let { roles } = req.body
-   roles = roles ? roles : ["user"];
+
+   roles = roles ? roles : null;
 
  try{ 
 
@@ -50,7 +51,7 @@ res.status(200).json(users)
                 name: user.name,
                 password: user.password,
                 email: user.email,
-                roles: rolesFound.map((role) => role._id) || 
+                roles: rolesFound?.map((role) => role._id) || 
                 user.roles,
                 adress: user.adress,
                number: user.number,

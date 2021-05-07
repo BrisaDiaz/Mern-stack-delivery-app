@@ -41,7 +41,7 @@ const EmailContact = styled.small`
 color: orange;
 text-align:center;
 margin-top:30px;
-
+padding-bottom: 50px;
 `;
 const QuoteIcon = styled.img`
 width:60px;

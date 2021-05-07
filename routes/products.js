@@ -39,9 +39,9 @@ router.get('/', getAllProducts);
 
 router.get('/:id', getProductById);
 
-router.post('/',upload.single('img'),[verifyToken,isAdmin],postNewProduct);
+router.post('/',[verifyToken,isAdmin,upload.single('img')],postNewProduct);
 
-router.put('/:id',upload.single('img'),[verifyToken,isAdmin],updateProductById);
+router.put('/:id',[verifyToken,isAdmin,upload.single('img')],updateProductById);
 
 router.delete('/:id',[verifyToken,isAdmin], deleteProductById);
 
