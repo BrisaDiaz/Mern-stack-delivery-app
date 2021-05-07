@@ -159,7 +159,10 @@ console.log(token)
         let res = await fetch("/api/products", setting);
         let json =  await res.json()
         console.log(json)
-        if(res.status === 200)     getProducts()
+        if(res.status === 200){
+getProducts()
+e.target.reset()
+        }     
       
       } catch (err) {
 

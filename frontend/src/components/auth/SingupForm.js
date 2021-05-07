@@ -87,7 +87,7 @@ export function UserNameInput({register,errors}){
           ref={register({
                required: '*El campo es requrido',
               pattern:{
-                        value: /^[A-Za-zñÑáÁéÉíÍóÓúÚÜü\s\w]+$/,
+                        value: /^[a-z]+\s[a-z ]+$/i,
                          message:"*Nombre no valido"
                       }
             
