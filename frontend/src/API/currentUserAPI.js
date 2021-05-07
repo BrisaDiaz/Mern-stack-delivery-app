@@ -3,7 +3,7 @@ async function getCurrentUser({setCurrentUser,token}){
     const id = localStorage.getItem('userId')
         const headers = new Headers();
         headers.append('Accept', 'application/json');
-      headers.append('x-access-token',token);
+      headers.append('Authorization', `Bearer ${token}`);
 
 
     const setting = {

@@ -2,7 +2,7 @@ import {useForm} from 'react-hook-form'
 import {useHistory} from 'react-router-dom';
 import usersAPI from '../API/usersAPI'
 import currentUserAPI from '../API/currentUserAPI'
-export default  function useLoginForm({setIsLogin,setIsNotSingup,setIsAdmin,setToken,setServerError, setCurrentUser,setIsLoading,setAllUsers,token}){
+export default  function useLoginForm({setIsLogin,setIsNotSingup,setIsAdmin,setToken,setServerError, setCurrentUser,setIsLoading,setAllUsers,token,setIsModerator}){
 const history =useHistory();
   const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
@@ -29,8 +29,9 @@ headers.append('Content-Type', 'application/json');
 
         const setting = {
           method: 'POST',
+            body: JSON.stringify(info),
           headers: headers,
-          body: JSON.stringify(info),
+        
         }
 
 
@@ -51,14 +52,21 @@ headers.append('Content-Type', 'application/json');
          currentUserAPI({setCurrentUser,token})
 
            for (let i = 0; i < roles.length ; i ++){
-     if ( roles[i].name.includes('admin') || roles[i].name.includes('moderator')) {
+             
+     if ( roles[i].name.includes('admin')) {
          setIsAdmin(true)
              usersAPI({setAllUsers,token})
-             return history.push("/dashboard/users")
+          return history.push("/dashboard/users")
+      }
+     else if(roles[i].name.includes('moderator')){
+      setIsModerator(true)
+          usersAPI({setAllUsers,token})
+        return history.push("/dashboard/users")
       }
 
-           }
-        return history.push("/menu")
+
+     }
+      return history.push("/menu")
       
     }
  if(res.status === 500) {

@@ -12,7 +12,7 @@ min-height:100vh;
 height:max-content;
 padding:15px;
 padding-top:60px;
-
+margin-left:-6px;
 `;
 const UsersTable = styled.div` 
 width:100%;

@@ -18,10 +18,7 @@ try{
 
 
 
-  const rolesInputs=[e.target.moderator,e.target.admin,e.target.user]
 
- const selectRoles = rolesInputs.filter(role => role?.checked === true ).map(role => role?.value)
-let roles = (selectRoles.length) > 0 ?  selectRoles : ["user"];
 
 
 const info ={
@@ -30,7 +27,7 @@ password:e.target.userPassword.value,
 newPassword:e.target.newPassword.value,
 number:e.target.userNumber.value,
 adress:e.target.userAdress.value.toLowerCase(),
-roles,
+
 }
 
 
@@ -41,7 +38,7 @@ roles,
      const headers = new Headers();
         headers.append('Accept', 'application/json');
 headers.append('Content-Type', 'application/json');
-     headers.append('x-access-token', token);
+      headers.append('Authorization', `Bearer ${token}`);
 
         const setting = {
           method: 'PUT',

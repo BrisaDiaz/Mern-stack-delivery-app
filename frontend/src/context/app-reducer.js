@@ -17,6 +17,7 @@ SET_IS_LOGIN_TRUE,
 SET_IS_SING_UP_FALSE,
 SET_IS_LOGIN_FALSE,
 SET_IS_ADMIN,
+SET_IS_MODERATOR,
 SET_MENU_SEARCH_QUERY,
 SET_ADMIN_SEARCH_QUERY,
 SET_MENU_SORT_PREFERENCE,
@@ -119,6 +120,12 @@ case SET_IS_ADMIN:
             ...state,
                 isAdmin: action.payload,
         };
+case SET_IS_MODERATOR:
+        return{ 
+            ...state,
+                isModerator: action.payload,
+        };
+
 case SET_IS_LOGIN_FALSE:
         return{ 
             ...state,

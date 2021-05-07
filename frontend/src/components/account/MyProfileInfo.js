@@ -10,6 +10,7 @@ justify-content:center;
 align-items: center;
 padding:15px;
 padding-top:60px;
+    margin-left: -6px;
 `;
 const UserCard =styled.article`
 margin:0 auto;

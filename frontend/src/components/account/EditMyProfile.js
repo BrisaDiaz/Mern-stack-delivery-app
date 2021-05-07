@@ -6,7 +6,7 @@ import useEditProfileForm from '../../hooks/useEditProfileForm'
 import loadingSvg from '../../img/spinning-circles.svg'
 import {UserNameInput,UserPasswordInput,UserNewPasswordInput,ErrorServerMessage,ErrorMessage} from '../auth/SingupForm'
 import {FormButtons } from '../dashboard/CreateNewProductForm'
-import {RolesLabel,RolesInputs} from '../dashboard/EditUserModal'
+
 import {NameInput } from '../contact/ContactForm';
 import {Link , LinksWrapper} from '../dashboard/DashboardNewProduct'
 import userEditIcone from '../../img/user-edit-solid.svg'
@@ -66,8 +66,8 @@ placeholder={placeholder}
           ref={register({
   
                   minLength: {
-            value: 9,
-            message: "*Teléfono Invalido (9 dígitos min)"
+            value: 10,
+            message: "*Teléfono Invalido (10 dígitos)"
                                       },
                      pattern: {
             value: /[0-9]/,
@@ -103,7 +103,7 @@ export default function EditMyProfile() {
   const [serverError,setServerError] = useState("");
 const [isLoading,setIsLoading] = useState(false);
 const [isSuccess,setIsSuccess] = useState(false);
-const {token,getUsers,isAdmin,setCurrentUser,setAllUsers} = useContext(AppContext);
+const {token,getUsers,setCurrentUser,setAllUsers} = useContext(AppContext);
 
    const {register,handleSubmit,errors,onSubmit} = useEditProfileForm({setServerError,setIsLoading,token,getUsers,setCurrentUser,setAllUsers,setIsSuccess})
 
@@ -127,11 +127,7 @@ const {token,getUsers,isAdmin,setCurrentUser,setAllUsers} = useContext(AppContex
          <AdressInput  errors={errors} register={register} placeholder="Tu Dirección..."/>
             <InnerLink href ="#!">Por favor verifique que esté dentro de las zonas de envio disponibles.</InnerLink>
      
-     {isAdmin && 
-     <Fragment>
-       <RolesLabel>Selecciónar Roles:</RolesLabel>
-                              <RolesInputs/>
-</Fragment> }
+
        
    {isLoading ?  <img src={loadingSvg} alt="loading..."/> :
 

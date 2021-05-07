@@ -1,7 +1,7 @@
 async function getUsers({token,setAllUsers}){
        const headers = new Headers();
         headers.append('Accept', 'application/json');
-      headers.append('x-access-token', token);
+      headers.append('Authorization', `Bearer ${token}`);
 
 
     const setting = {

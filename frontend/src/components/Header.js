@@ -154,7 +154,7 @@ display:none;
 `;
 
 export default function Header(){
-const { numberOfProductsInCart, isLogin,toggleCart,setIsSingUp,setIsNotSingup,isAdmin}  = useContext(AppContext);
+const { numberOfProductsInCart, isLogin,toggleCart,setIsSingUp,setIsNotSingup,isAdmin,isModerator}  = useContext(AppContext);
 const [navIsOpened, setNavIsOpened ]= useState(false)
 
 
@@ -188,7 +188,7 @@ setIsNotSingup() ;
     <StyledLink to="/"  onClick={closeNav}>Home</StyledLink>
 <StyledLink to="/menu" onClick={closeNav}>Menu</StyledLink>
 <StyledLink to="/contact" onClick={closeNav}>Contacto</StyledLink>
-{isAdmin === true &&   <StyledLink to="/dashboard/myProducts"  onClick={closeNav}>Dashboard</StyledLink>}
+{(isAdmin === true || isModerator === true ) &&   <StyledLink to="/dashboard/myProducts"  onClick={closeNav}>Dashboard</StyledLink>}
 
 
 {isLogin ? 

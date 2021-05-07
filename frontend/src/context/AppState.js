@@ -20,6 +20,7 @@ SET_IS_SING_UP_FALSE,
 SET_IS_LOGIN_TRUE,
 SET_IS_LOGIN_FALSE,
 SET_IS_ADMIN,
+SET_IS_MODERATOR,
 SET_MENU_SEARCH_QUERY,
 SET_ADMIN_SEARCH_QUERY,
 SET_MENU_SORT_PREFERENCE,
@@ -55,7 +56,7 @@ setIsLoading(false)
   async function deleteProduct(token,id){
      const headers = new Headers();
         headers.append('Accept', 'application/json');
-      headers.append('x-access-token', token);
+      headers.append('Authorization', `Bearer ${token}`);
 
 
         const setting = {
@@ -109,7 +110,7 @@ priceValue){
       
         const headers = new Headers();
         headers.append('Accept', 'application/json');
-      headers.append('x-access-token', token);
+      headers.append('Authorization', `Bearer ${token}`);
 
 
         const setting = {
@@ -141,16 +142,16 @@ let active =  e.target.state.checked ? true : false ;
         formData.append('price', e.target.price.value)
         formData.append('active', active)
       
-        const headers = new Headers();
+       const headers = new Headers();
         headers.append('Accept', 'application/json');
-        headers.append('x-access-token', token);
+      headers.append('Authorization', `Bearer ${token}`);
 
-
+console.log(token)
         const setting = {
           method: 'POST',
-          mode: 'no-cors',
+                  body: formData,
           headers: headers,
-          body: formData,
+           mode: 'no-cors',
         }
 
 
@@ -158,7 +159,8 @@ let active =  e.target.state.checked ? true : false ;
         let res = await fetch("/api/products", setting);
         let json =  await res.json()
         console.log(json)
-          getProducts()
+        if(res.status === 200)     getProducts()
+      
       } catch (err) {
 
         console.log(err)
@@ -195,6 +197,7 @@ isCartOpen:false,
 isSingUp:false,
 isLogin:false,
 isAdmin:false,
+isModerator:false,
 menuSearchQuery:"",
 adminSearchQuery:"",
 menuSortPreference:"default",
@@ -308,7 +311,13 @@ payload:bulean
   })
   
 }
-
+const setIsModerator = (bulean) =>{
+  dispatch({
+type: SET_IS_MODERATOR,
+payload:bulean
+  })
+  
+}
 
 const setMenuSearchQuery = (query) =>{
 dispatch({
@@ -351,6 +360,7 @@ isCartOpen:state.isCartOpen,
 isSingUp:state.isSingUp,
 isLogin:state.isLogin,
 isAdmin: state.isAdmin,
+isModerator: state.isModerator,
 menuSearchQuery:state.menuSearchQuery,
 adminSearchQuery: state.adminSearchQuery,
 menuSortPreference : state.menuSortPreference,
@@ -374,6 +384,7 @@ setIsNotSingup,
 setIsLogin,
 setIsNotLogin,
 setIsAdmin,
+setIsModerator,
 deleteProduct,
 setMenuSearchQuery,
 setAdminSearchQuery,

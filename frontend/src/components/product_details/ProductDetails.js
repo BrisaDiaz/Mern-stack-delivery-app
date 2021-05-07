@@ -11,7 +11,9 @@ min-height:100vh;
 padding: 20px 15px;
 padding-top:58px;
 margin:0 auto;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 @media screen and (min-width:550px){
  width:70vw;
 }
@@ -20,17 +22,23 @@ margin:0 auto;
 }
 `
 const PrductImg = styled.img`
+position:relative;
+left:50%;
+transform:translate(-50%, 0);
+max-width:500px;
 width:100%;
 `;
 const Name =styled.h2`
-    margin: 10px 0 20px;
-
+    margin: 10px 0 ;
 letter-spasing:0;
 line-height:35px;
+max-width:200px;
+font-size:30px;
 text-transform:capitalize ;
-@media screen and (max-width:500px){
-  font-size:30px;
-  margin-bottom: 10px;
+@media screen and (min-width:600px){
+  font-size:35px;
+  margin-bottom: 20px;
+  max-width:100%;
 }
 `
 const Line = styled.div`
@@ -42,19 +50,26 @@ margin:5px auto;
 `
 ;
 const ThisCartButton =styled(CartButton)`
+transform:scale(0.8);
 margin-top:-45px;
 margin-bottom:10px;
-@media screen and (max-width:500px){
-transform:scale(0.8);
+@media screen and (min-width:600px){
+margin-top:-50px;
+transform:scale(1);
 }
 
 `;
 const Deltail = styled.p`
 line-height:25px;
+text-transform:capitalize ;
 & > b {
       color: rgb(252 175 1);
 }
 `;
+const Description = styled(Deltail)`
+text-transform:none;
+
+` 
 export default function ProductDetailsPage(){
     const {products,cartProducts,addToCart,addToTotalCost}  = useContext(AppContext);
  const {productId}=  useParams()
@@ -72,7 +87,7 @@ const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProdu
      <Deltail><b>Categoría:</b>{thisProductInfo.category}</Deltail>
    <Deltail><b>Porción:</b>{thisProductInfo.size}</Deltail>
    <Deltail><b>Precio:</b>${thisProductInfo.price}</Deltail>
-  <Deltail><b>Ingredientes:</b>{thisProductInfo.description}</Deltail>
+  <Description><b>Ingredientes:</b>{thisProductInfo.description}</Description>
     
   
 </ProductDetails>

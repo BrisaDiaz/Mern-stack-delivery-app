@@ -3,7 +3,7 @@ import EditProductForm from './EditProductForm'
 
 import {Link , LinksWrapper} from './DashboardNewProduct'
 export const StyledSection = styled.main`
-
+    margin-left: -6px;
 padding-top:60px;
 min-height:100vh;
 width:100vw;

@@ -11,7 +11,7 @@ border-radius:5px;
 position:relative;
 flex: 1 1 280px;
 max-width:280px;
-min-height:350px;
+height:350px;
 flex-flow:column;
 margin:15px;
 margin-left: 0;
@@ -77,7 +77,7 @@ transition: all 0.3s ease;
 
 `;
 const ImgContainer = styled.div`
-height:230px;
+height:150px;
 width:100%;
 overflow:hidden;
 positon:relative;
