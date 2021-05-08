@@ -21,10 +21,10 @@ margin-top:30px;
 border: 1px solid #fecb00;
   border-bottom: none;
   flex:1;
-
+    border-radius: 4px;
 `
 export const AdminTable = styled.div` 
-
+    border-radius: 4px;
 width:100%;
 min-width:300px;
 margin: 0 5px;
@@ -47,18 +47,19 @@ export const TableHeader = styled.div`
 width:100%;
 padding: 5px 15px;
 background: #fecb00;
-
+box-shadow: inset 0 0 20px 5px rgb(255 177 0);
 `
 export const TableTitle = styled.h4`
 margin:0;
 font-size:25px;
 text-align:center;
+    text-shadow: 0 0 1px #000000;
     color: #ffffff;
 line-height: 40px;
 `
 
 const Wrapper= styled.div`
-margin-top:10px;
+margin-top:5px;
 display:flex;
 justify-content:space-between;
 `;
@@ -69,16 +70,22 @@ display:flex;
 flex-flow:column;
 align-items:space-between;
 
-padding: 5px 10px;
+padding: 5px 15px;
   border-bottom: 1px solid #fecb00;
 `;
-
+const UserName = styled.b`
+font-size: 19px;
+text-transform: capitalize;
+`;
 const UserStatus = styled.b`
-    padding:  5px 8px;
-    background: #e83c2e ;
+padding: 5px 8px;
+    background: #e83c2e;
     border-radius: 10px;
     color: #ffffff;
-    cursor:pointer;
+    cursor: pointer;
+    text-shadow: 0 0 1px black;
+    box-shadow: inset 0 0 5px #9c0101;
+    margin-bottom: 5px;
 `
 
 
@@ -114,7 +121,7 @@ setIsEditing(true) ;
 
 {normalUsers.map(user =>
    <UserCell key={user._id}>
-    <b>{user.name}</b><p>{user.email}</p> 
+    <UserName>{user.name}</UserName><p>{user.email}</p> 
     <Wrapper>
  <p>{user.createdAt.slice(0,10).split("-").reverse().join(" /")}</p>
 
@@ -137,7 +144,7 @@ setIsEditing(true) ;
   </TableHeader>
   {adminsAndModerators.map(user =>
        <UserCell key={user._id}>
-    <b>{user.name}</b><p>{user.email}</p> 
+    <UserName>{user.name}</UserName><p>{user.email}</p> 
    < Wrapper>
 <p>{user.createdAt.slice(0,10).split("-").reverse().join(" /")}</p>
         {user.roles.map(role =>

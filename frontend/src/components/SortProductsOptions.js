@@ -9,7 +9,10 @@ border-radius:5px;
 outline:none;
 cursor:pointer;
 margin:0 20px 20px auto;
-   background: #1111;
+      background: #eaeaea;
+    border: none;
+
+    box-shadow: 0 0 3px 1px rgb(0 0 0 / 50%);
 `
 export const Option = styled.option`
 &:checked{

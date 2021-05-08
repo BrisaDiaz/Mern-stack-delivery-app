@@ -64,6 +64,8 @@ line-height:25px;
 text-transform:capitalize ;
 & > b {
       color: rgb(252 175 1);
+          margin-right: 5px;
+
 }
 `;
 const Description = styled(Deltail)`

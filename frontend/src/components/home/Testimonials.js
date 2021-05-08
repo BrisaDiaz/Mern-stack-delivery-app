@@ -8,7 +8,7 @@ width:100vw;
 margin:35px 0;
 `;
 const Title=styled(SectionTitle)`
-padding-bottom: 20px;
+padding-bottom: 0;
 `
 const TestimonialsWrapper= styled.div`
 width:100%;
