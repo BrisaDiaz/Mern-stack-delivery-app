@@ -78,7 +78,7 @@ priceValue)
  style={{ borderColor: errors.productName && "#bf0000" }  }
           placeholder="Nombre..."
                 value={nameValue }
-                onChange={(e)=>setNameValue(e.target.files)}
+                onChange={(e)=>setNameValue(e.target.value)}
                        name="productName"
           ref={register({
              required: false,

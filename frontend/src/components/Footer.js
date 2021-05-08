@@ -72,6 +72,7 @@ margin-right:8px;
 `;
 const Logo = styled.img`
 width:100px;
+margin-bottom:10px;
 `;
 export default function Footer() {
 
@@ -81,23 +82,23 @@ export default function Footer() {
 
 < FooterSection >
 <Logo src ={logo} alt="logo"></Logo>
-<p>The main component of a healthy environment for self esteem.</p>
+<p>El principal componente para un entorno saludable de autoestima.</p>
 </FooterSection>
 < FooterSection >
 <h4>NUESTROS LOCALES
 </h4>
 <List>
 
-  <ListItem><Icone><img src={locationIcone} alt="location"></img></Icone> <Link> PO Box 16122 Collins Street</Link></ListItem>
-    <ListItem><Icone><img src={locationIcone} alt="location"></img></Icone> <Link>295 Streets, Melbourne, Aus</Link></ListItem>
+  <ListItem><Icone><img src={locationIcone} alt="location"></img></Icone> <Link> 984 Calle, Barrio, Córdoba</Link></ListItem>
+    <ListItem><Icone><img src={locationIcone} alt="location"></img></Icone> <Link>295 Calle, Barrio, Córdoba</Link></ListItem>
     
 </List>
 </FooterSection>
 < FooterSection >
 <h4>CONTACTO</h4>
   <List>
-<ListItem><Icone><img src={phoneIcone} alt="phone"></img></Icone> <Link>+66 396 847 2637</Link></ListItem>
-<ListItem><Icone><img src={emailcone} alt="email"></img></Icone> <Link>Hello@Burger.Com</Link></ListItem>
+<ListItem><Icone><img src={phoneIcone} alt="phone"></img></Icone> <Link>+54 15 555 5787</Link></ListItem>
+<ListItem><Icone><img src={emailcone} alt="email"></img></Icone> <Link>brisaabiaildiaz2000@gmial.com</Link></ListItem>
   </List>
   
 
