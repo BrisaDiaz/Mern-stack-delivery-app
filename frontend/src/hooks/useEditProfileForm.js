@@ -45,7 +45,7 @@ headers.append('Content-Type', 'application/json');
           headers: headers,
             body: JSON.stringify(info),
         }
-        console.log(setting.body)
+
 
 
 

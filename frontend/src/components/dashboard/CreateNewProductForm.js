@@ -44,6 +44,12 @@ transform: scale(1.5);
     margin: 0 10px;
     cursor: pointer;
 }
+& > small {
+  margin-left: 5%;
+}
+& > input [type ="file"] {
+  width:50%;
+}
 & > label{
 font-weight:600;
 font-size:20px;
@@ -60,6 +66,7 @@ max-width:90%;
 width:90%;
 & > input {
   background :#f0f0f0;
+
 }
 `
  export const TextInput= styled.input.attrs(props => ({
