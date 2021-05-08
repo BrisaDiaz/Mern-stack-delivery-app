@@ -53,7 +53,7 @@ res.status(200).json(users)
                 email: user.email,
                 roles: rolesFound?.map((role) => role._id) || 
                 user.roles,
-                adress: user.adress,
+                address: user.address,
                number: user.number,
              
             }, { new: true });
@@ -98,7 +98,7 @@ console.log(error)
    }
 }
 const UpdateProfileById = async (req,res) =>{
-const { name,password,newPassword,adress,number} = req.body
+const { name,password,newPassword,address,number} = req.body
 
  try{ 
  let userFound = await User.findById(req.params.id);
@@ -127,7 +127,7 @@ const { name,password,newPassword,adress,number} = req.body
                 password: encodedPassword || ususerFounder.password,
                 email: userFound.email,
                 roles: userFound.roles,
-                    adress: adress || userFound.adress,
+                    address: address || userFound.address,
                number: number || userFound.number,
              
             }, { new: true });

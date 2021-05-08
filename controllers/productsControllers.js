@@ -95,9 +95,26 @@ fs.unlink(oldImgPath, (err) => {
 
 const deleteProductById= async (req,res) => {
   try{
+
+ let product = await Product.findById(req.params.id).exec();
+
+  if (!product) return res.status(404).json({success:false, message:'product not faund'});
+
+let oldImgPath ="./frontend/public/uploads/"+product.img
+
+ if(req.file){
+fs.unlink(oldImgPath, (err) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+ })
+ }
+
   await Product.findByIdAndRemove(req.params.id);
 
     res.status(200).json({success:true , message:"Product has been deleted"});
+    
   }catch(error){
     console.log(error)
 
