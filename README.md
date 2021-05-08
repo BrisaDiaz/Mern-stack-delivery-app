@@ -29,7 +29,7 @@
 
 ## Frontend
 
-### Tecnologies:
+### Tecnologies and tools:
 
 + React.js 
 + style-components
