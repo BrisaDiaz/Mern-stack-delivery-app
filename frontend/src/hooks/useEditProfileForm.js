@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import currentUserAPI from '../API/currentUserAPI'
 import usersAPI from '../API/usersAPI'
 
-export default function useSingupForm({setServerError,setIsLoading,token,getUsers,setCurrentUser,setAllUsers,setIsSuccess}){
+export default function useEditProfileForm({setServerError,setIsLoading,token,setCurrentUser,setAllUsers,setIsSuccess}){
    const history = useHistory()
     const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
@@ -19,14 +19,15 @@ try{
 
 
 
-
+const name =  e?.target?.userName?.value?.toLowerCase(),
+adress = e.target.userAdress?.value?.toLowerCase();
 
 const info ={
-name: e.target.userName.value.toLowerCase(),
-password:e.target.userPassword.value,
-newPassword:e.target.newPassword.value,
-number:e.target.userNumber.value,
-adress:e.target.userAdress.value.toLowerCase(),
+name,
+password:e?.target?.userPassword?.value,
+newPassword:e?.target?.userNewPassword?.value,
+number:e.target.userNumber?.value,
+adress,
 
 }
 
@@ -48,21 +49,22 @@ headers.append('Content-Type', 'application/json');
 
 
 
-
         let res = await fetch(`/api/users/me/${id}`, setting);
             let  json = await res.json()
+
 setIsLoading(false)
 
          if(res.status === 200) {
         
-        usersAPI({token, setAllUsers});
+
+
        currentUserAPI({token,setCurrentUser})
 
          setIsSuccess(true);
          setTimeout(() => {
                     setServerError(false);
                     history.push("/myAccount/myProfile")
-         }, 5000);
+         }, 3000);
   
       }
 

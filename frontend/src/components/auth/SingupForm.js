@@ -138,15 +138,15 @@ placeholder={placeholder}
     </Fragment>
   );
 }
-export function UserNewPasswordInput({register,errors,placeholder,name}){
+export function UserNewPasswordInput({register,errors,placeholder}){
 
   return(
     <Fragment>
-       {errors.name && <ErrorMessage  role="alert">{errors.name.message}</ErrorMessage>}
+       {errors.userNewPassword && <ErrorMessage  role="alert">{errors.userNewPassword.message}</ErrorMessage>}
 
 <PaswordInput
 placeholder={placeholder}
- name={name}
+ name="userNewPassword"
           ref={register({
               
                      minLength: {
