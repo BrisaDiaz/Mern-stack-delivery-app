@@ -23,9 +23,6 @@ background: rgb(252,175,1);
 218deg
 , rgb(252 175 1 / 60%) 0%, rgb(255 165 0 / 58%) 100%);
 box-box-shadow: 2px 2px 6px #000;
-
-@media screen and  (max-width:500px){
- width: 310px;
 & > input {
   border:none;
       box-shadow: inset 0 0 5px 0px rgb(23 23 23 / 36%);
@@ -33,6 +30,9 @@ box-box-shadow: 2px 2px 6px #000;
 & > img {
   margin-bottom: 10px;
 }
+@media screen and  (max-width:500px){
+ width: 310px;
+
 
 `;
 export const Logo = styled.img`
@@ -61,7 +61,7 @@ export const PaswordInput = styled(NameInput).attrs( props => ({
   required:true
 
 }))`
-    border: 2px solid #171717;
+
     &:placeholder{
         color: #272727;
     }
