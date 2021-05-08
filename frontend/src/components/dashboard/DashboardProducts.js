@@ -18,7 +18,7 @@ margin-bottom:40px;
 const StyledSection = styled.main`
 min-height:100vh;
 width:100vw;
-margin-left:5px;
+
 padding-top:60px;
 `
 const FiltersBoard = styled.div`

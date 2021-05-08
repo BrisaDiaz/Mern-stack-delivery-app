@@ -21,9 +21,12 @@ min-heght:600px;
 background: rgb(252,175,1);
 background: linear-gradient(218deg, rgba(252,175,1,1) 0%, rgba(254,203,0,0.6278886554621849) 100%);
 box-box-shadow: 2px 2px 6px #000;
+
 @media screen and  (max-width:500px){
- width: 320px;
+ width: 310px;
 }
+
+
 `;
 export const Logo = styled.img`
 width:120px;
@@ -31,14 +34,16 @@ margin-bottom:20px;
 height:auto;
 `;
 export const Form = styled.form`
-min-width:290px;
+width:90%;
 margin-left: -10px;
-max-width:350px;
 padding-bottom:25px;
 display:flex;
 margin:0 auto;
 flex-flow:column;
 align-items:center;
+& > input {
+      width: 90%;
+}
 @media screen and  (max-width:500px){
 width:260px;
 
@@ -56,8 +61,8 @@ export const PaswordInput = styled(NameInput).attrs( props => ({
 `;
 export const ErrorMessage = styled.small`
 color:#bf0000;
-margin-right:auto;
-margin-left:20px;
+margin:-10px auto 4px 5%;
+
 `;
 export const ErrorServerMessage = styled(ErrorMessage)`
 text-align:center;
@@ -83,7 +88,8 @@ export function UserNameInput({register,errors}){
           ref={register({
                required: '*El campo es requrido',
               pattern:{
-                        value: /^[A-Za-zñÑáÁéÉíÍóÓúÚÜü\s\w]+$/,
+                        value: /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/
+,
                          message:"*Nombre no valido"
                       }
             
@@ -133,23 +139,23 @@ placeholder={placeholder}
     </Fragment>
   );
 }
-export function UserNewPasswordInput({register,errors,placeholder,name}){
+export function UserNewPasswordInput({register,errors,placeholder}){
 
   return(
     <Fragment>
-       {errors.name && <ErrorMessage  role="alert">{errors.name.message}</ErrorMessage>}
+       {errors.userNewPassword && <ErrorMessage  role="alert">{errors.userNewPassword.message}</ErrorMessage>}
 
 <PaswordInput
 placeholder={placeholder}
- name={name}
+ name="userNewPassword"
           ref={register({
-              
+                 required: '*El campo es requrido',
                      minLength: {
             value: 5,
             message: "*El largo mínimo es de 5 carácteres"
           } 
           })}
-           style={{ borderColor: errors.userPassword && "#bf0000" }}/>
+           style={{ borderColor: errors.userNewPassword && "#bf0000" }}/>
     </Fragment>
   );
 }

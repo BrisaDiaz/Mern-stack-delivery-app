@@ -2,7 +2,7 @@ import {useForm} from 'react-hook-form'
 import {useHistory} from 'react-router-dom';
 import usersAPI from '../API/usersAPI'
 import currentUserAPI from '../API/currentUserAPI'
-export default  function useLoginForm({setIsLogin,setIsNotSingup,setIsAdmin,setToken,setServerError, setCurrentUser,setIsLoading,setAllUsers,token}){
+export default  function useLoginForm({setIsLogin,setIsNotSingup,setIsAdmin,setToken,setServerError, setCurrentUser,setIsLoadingForm,setAllUsers,token,setIsModerator,setIsLoading}){
 const history =useHistory();
   const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
@@ -12,7 +12,7 @@ const history =useHistory();
 
     e.preventDefault()
   try {
-setIsLoading(true)
+setIsLoadingForm(true)
 
 const info ={
 email:e.target.userEmail.value,
@@ -29,15 +29,16 @@ headers.append('Content-Type', 'application/json');
 
         const setting = {
           method: 'POST',
+            body: JSON.stringify(info),
           headers: headers,
-          body: JSON.stringify(info),
+        
         }
 
 
 
         let res = await fetch("/api/auth/login", setting);
        let json = await res.json()
-    setIsLoading(false)
+    setIsLoadingForm(false)
      
       if(res.status === 200) {
               setServerError("")
@@ -51,14 +52,21 @@ headers.append('Content-Type', 'application/json');
          currentUserAPI({setCurrentUser,token})
 
            for (let i = 0; i < roles.length ; i ++){
-     if ( roles[i].name.includes('admin') || roles[i].name.includes('moderator')) {
+             
+     if ( roles[i].name === 'admin') {
          setIsAdmin(true)
-             usersAPI({setAllUsers,token})
-             return history.push("/dashboard/users")
+         setIsLoading(true)
+             usersAPI({setAllUsers,token,setIsLoading})
+          return history.push("/dashboard/users")
+      }
+     else if(roles[i].name === 'moderator'){
+      setIsModerator(true)
+      
+        return history.push("/dashboard/myProducts")
       }
 
-           }
-        return history.push("/menu")
+     }
+      return history.push("/menu")
       
     }
  if(res.status === 500) {

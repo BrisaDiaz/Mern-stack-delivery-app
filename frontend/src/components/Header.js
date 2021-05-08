@@ -60,7 +60,7 @@ display:flex;
   align-items: center;
   border-bottom:1px solid #1111;
 `;
-const LogoLink = styled.a`
+const LogoLink = styled(Link)`
 text-decorations:none;
 cursor:pointer;
 justify-self:flex-start;
@@ -88,8 +88,9 @@ heght:100%;
     transform: scale(0.8);
 `
 const ProfileIcone = styled(CartIcone)`
-    width: 85%;
+    width: 135%;
     margin-left: 25%;
+
 `;
 const CartNumber = styled.span`
 padding: 0 5px;
@@ -154,7 +155,7 @@ display:none;
 `;
 
 export default function Header(){
-const { numberOfProductsInCart, isLogin,toggleCart,setIsSingUp,setIsNotSingup,isAdmin}  = useContext(AppContext);
+const { numberOfProductsInCart, isLogin,toggleCart,setIsSingUp,setIsNotSingup,isAdmin,isModerator}  = useContext(AppContext);
 const [navIsOpened, setNavIsOpened ]= useState(false)
 
 
@@ -182,13 +183,13 @@ setIsNotSingup() ;
 
   return(
 <StyledHeader>
-<LogoLink href ="/"><LogoImg src={logo} alt="home"></LogoImg></LogoLink>
+<LogoLink to="/"><LogoImg src={logo} alt="home"></LogoImg></LogoLink>
 <NavWrapper navIsOpened={navIsOpened}>
   <NavLinks>
     <StyledLink to="/"  onClick={closeNav}>Home</StyledLink>
 <StyledLink to="/menu" onClick={closeNav}>Menu</StyledLink>
 <StyledLink to="/contact" onClick={closeNav}>Contacto</StyledLink>
-{isAdmin === true &&   <StyledLink to="/dashboard/myProducts"  onClick={closeNav}>Dashboard</StyledLink>}
+{(isAdmin === true || isModerator === true ) &&   <StyledLink to="/dashboard/myProducts"  onClick={closeNav}>Dashboard</StyledLink>}
 
 
 {isLogin ? 

@@ -13,7 +13,7 @@ font-size:15px;
 `;
 export const LinksWrapper =styled.div`
 display:flex;
-margin-top:15px;
+margin:5px 0;
 margin-left:15px;
 
 width:max-content;

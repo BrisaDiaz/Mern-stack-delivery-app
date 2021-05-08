@@ -23,7 +23,7 @@ roles,
     const headers = new Headers();
         headers.append('Accept', 'application/json');
 headers.append('Content-Type', 'application/json');
-         headers.append('x-access-token', token);
+      headers.append('Authorization', `Bearer ${token}`);
 
 
        

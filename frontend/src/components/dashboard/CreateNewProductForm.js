@@ -24,7 +24,7 @@ background-size: 100%  100%;
 export const FormTitle= styled.h2`
 color: #ffa500;
 text-transform: uppercase;
-    text-shadow: 3px 3px 2px #000000a1;
+    text-shadow: 3px 0 2px #000000a1;
 font-size: 25px;
 
 margin-bottom: 20px;
@@ -44,6 +44,12 @@ transform: scale(1.5);
     margin: 0 10px;
     cursor: pointer;
 }
+& > small {
+  margin-left: 5%;
+}
+& > input[type="file"]{
+  width:50%;
+}
 & > label{
 font-weight:600;
 font-size:20px;
@@ -60,6 +66,7 @@ max-width:90%;
 width:90%;
 & > input {
   background :#f0f0f0;
+
 }
 `
  export const TextInput= styled.input.attrs(props => ({
@@ -103,8 +110,8 @@ outline:none;
 border:none;
 `
  export const Description =styled.textarea`
-max-width:95%;
-width:95%;
+
+width:90%;
   border:none;
   outline:none;
   box-shadow: 0 0 2px rgba(0,0,0,0.5);
@@ -124,10 +131,9 @@ border-radius: 5px;
  export const DropZone = styled.input`
   box-shadow: 0 0 4px rgba(0,0,0,0.5);
   position:relative;
-  width: 200px;
+max-width: 50%;
   height: 45px;
   display: inline-block; 
-
   margin:25px auto;
   cursor:pointer;
   outline:none;
@@ -280,7 +286,7 @@ export function ProductPriceInput({register,errors}){
     <Fragment>
       {errors.productImg && <ErrorMessage  role="alert">*El Campo es requerido</ErrorMessage>}
 
-          <DropZone type="file" name="img"    ref={register({
+          <DropZone id="imgInput" type="file" name="img"    ref={register({
              required: true,
               
           })}></DropZone>
@@ -297,12 +303,14 @@ export function FormButtons(){
           </ButtonsWrapper>
     )
   }
-export function ProductState(){
-    return(
+export function ProductState(props){
+  let state = props?.state || false 
+
+   return(
           <CheckboxWrapper >
 <label for="state">Publicar:</label>
 <input
-id="state" type="checkbox" name="state"></input>
+id="state" type="checkbox" defaultChecked={state} name="state" />
           </CheckboxWrapper>
     )
   }
@@ -339,7 +347,7 @@ export default function UpdateNewProductForm() {
 <ProductPriceInput register={register} errors={errors}/>
 <ProductDescriptionTextArea register={register} errors={errors}  />
 
-<ProductState/>
+<ProductState state="checked"/>
   
 
 

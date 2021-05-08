@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import currentUserAPI from '../API/currentUserAPI'
 import usersAPI from '../API/usersAPI'
 
-export default function useSingupForm({setServerError,setIsLoading,token,getUsers,setCurrentUser,setAllUsers,setIsSuccess}){
+export default function useEditProfileForm({setServerError,setIsLoading,token,setCurrentUser,setAllUsers,setIsSuccess,isAdmin}){
    const history = useHistory()
     const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
@@ -18,19 +18,17 @@ try{
 
 
 
-  const rolesInputs=[e.target.moderator,e.target.admin,e.target.user]
 
- const selectRoles = rolesInputs.filter(role => role?.checked === true ).map(role => role?.value)
-let roles = (selectRoles.length) > 0 ?  selectRoles : ["user"];
-
+const name =  e?.target?.userName?.value?.toLowerCase(),
+address = e.target.userAddress?.value?.toLowerCase();
 
 const info ={
-name: e.target.userName.value.toLowerCase(),
-password:e.target.userPassword.value,
-newPassword:e.target.newPassword.value,
-number:e.target.userNumber.value,
-adress:e.target.userAdress.value.toLowerCase(),
-roles,
+name,
+password:e?.target?.userPassword?.value,
+newPassword:e?.target?.userNewPassword?.value,
+number:e.target.userNumber?.value,
+address,
+
 }
 
 
@@ -41,31 +39,32 @@ roles,
      const headers = new Headers();
         headers.append('Accept', 'application/json');
 headers.append('Content-Type', 'application/json');
-     headers.append('x-access-token', token);
+      headers.append('Authorization', `Bearer ${token}`);
 
         const setting = {
           method: 'PUT',
           headers: headers,
             body: JSON.stringify(info),
         }
-        console.log(setting.body)
 
 
 
         let res = await fetch(`/api/users/me/${id}`, setting);
             let  json = await res.json()
+
 setIsLoading(false)
 
          if(res.status === 200) {
         
-        usersAPI({token, setAllUsers});
+
+         (isAdmin) && usersAPI({token,setAllUsers})
        currentUserAPI({token,setCurrentUser})
 
          setIsSuccess(true);
          setTimeout(() => {
                     setServerError(false);
                     history.push("/myAccount/myProfile")
-         }, 5000);
+         }, 3000);
   
       }
 

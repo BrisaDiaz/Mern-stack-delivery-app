@@ -6,7 +6,7 @@ import useEditProfileForm from '../../hooks/useEditProfileForm'
 import loadingSvg from '../../img/spinning-circles.svg'
 import {UserNameInput,UserPasswordInput,UserNewPasswordInput,ErrorServerMessage,ErrorMessage} from '../auth/SingupForm'
 import {FormButtons } from '../dashboard/CreateNewProductForm'
-import {RolesLabel,RolesInputs} from '../dashboard/EditUserModal'
+
 import {NameInput } from '../contact/ContactForm';
 import {Link , LinksWrapper} from '../dashboard/DashboardNewProduct'
 import userEditIcone from '../../img/user-edit-solid.svg'
@@ -51,9 +51,7 @@ margin: -5px -15px 0 0;
     box-shadow: 0 0 5px;
     border-radius: 50%;
 `
-const InnerLink = styled.a`
-color: #e83c2e;
-`;
+
 function CellphoneInput({errors,placeholder,register}) {
   
   return(
@@ -64,17 +62,17 @@ function CellphoneInput({errors,placeholder,register}) {
 placeholder={placeholder}
  name="userNumber"
           ref={register({
-  
+              required: '*El campo es requrido',
                   minLength: {
-            value: 9,
-            message: "*Teléfono Invalido (9 dígitos min)"
+            value: 10,
+            message: "*Teléfono Invalido (10 dígitos)"
                                       },
                      pattern: {
             value: /[0-9]/,
             message: "*Solo se aceptan carácteres"
           } 
           })}
-           style={{ borderColor: errors.userPassword && "#bf0000" }}/>
+           style={{ borderColor: errors.userNumber && "#bf0000" }}/>
 </Fragment>
   )
 } 
@@ -82,19 +80,19 @@ function AdressInput({errors,name,placeholder,register}) {
   
   return(
 <Fragment>
-    {errors.userAdress && <ErrorMessage  role="alert">{errors.userAdress.message}</ErrorMessage>}
+    {errors.userAdress && <ErrorMessage  role="alert">{errors.userAddress.message}</ErrorMessage>}
 
 <NameInput
 placeholder={placeholder}
- name="userAdress" 
+ name="userAddress" 
           ref={register({
-        
-                  minLength: {
-            value: 5,
-            message: "*Dirección no valida"
-                                      },
+
+            
+                      required: '*El campo es requrido (Ej: Calle 548, Barrio ,Córdoba)',
+          
+                        
           })}
-           style={{ borderColor: errors.userPassword && "#bf0000" }}/>
+           style={{ borderColor: errors.userAddress && "#bf0000" }}/>
 </Fragment>
   )
 } 
@@ -103,9 +101,9 @@ export default function EditMyProfile() {
   const [serverError,setServerError] = useState("");
 const [isLoading,setIsLoading] = useState(false);
 const [isSuccess,setIsSuccess] = useState(false);
-const {token,getUsers,isAdmin,setCurrentUser,setAllUsers} = useContext(AppContext);
+const {token,getUsers,setCurrentUser,setAllUsers,isAdmin} = useContext(AppContext);
 
-   const {register,handleSubmit,errors,onSubmit} = useEditProfileForm({setServerError,setIsLoading,token,getUsers,setCurrentUser,setAllUsers,setIsSuccess})
+   const {register,handleSubmit,errors,onSubmit} = useEditProfileForm({setServerError,setIsLoading,token,getUsers,setCurrentUser,setAllUsers,setIsSuccess,isAdmin})
 
   return(
 <StyledSection>
@@ -125,13 +123,9 @@ const {token,getUsers,isAdmin,setCurrentUser,setAllUsers} = useContext(AppContex
                <CellphoneInput  errors={errors} register={register}  placeholder="Tu telèfono..."/>
 
          <AdressInput  errors={errors} register={register} placeholder="Tu Dirección..."/>
-            <InnerLink href ="#!">Por favor verifique que esté dentro de las zonas de envio disponibles.</InnerLink>
+
      
-     {isAdmin && 
-     <Fragment>
-       <RolesLabel>Selecciónar Roles:</RolesLabel>
-                              <RolesInputs/>
-</Fragment> }
+
        
    {isLoading ?  <img src={loadingSvg} alt="loading..."/> :
 

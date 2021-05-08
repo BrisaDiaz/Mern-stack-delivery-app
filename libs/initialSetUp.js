@@ -26,7 +26,7 @@ try{
 
     const user = await User.findOne({ email: "admin@localhost.com" });
 
-  const roles = await Role.find({ name: { $in: ["admin", "moderator"] } });
+  const roles = await Role.find({ name: { $in: ["admin"] } });
 
   if (!user) {
  

@@ -22,6 +22,6 @@ const productsFilter = () =>{
 
   }
    let FilteredProducts = productsFilter()
-console.log(FilteredProducts)
+
     return { FilteredProducts}
 }

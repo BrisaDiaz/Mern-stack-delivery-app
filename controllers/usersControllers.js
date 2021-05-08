@@ -32,7 +32,8 @@ res.status(200).json(users)
 
    const UpdateUserById = async (req,res) =>{
    let { roles } = req.body
-   roles = roles ? roles : ["user"];
+
+   roles = roles ? roles : null;
 
  try{ 
 
@@ -50,9 +51,9 @@ res.status(200).json(users)
                 name: user.name,
                 password: user.password,
                 email: user.email,
-                roles: rolesFound.map((role) => role._id) || 
+                roles: rolesFound?.map((role) => role._id) || 
                 user.roles,
-                adress: user.adress,
+                address: user.address,
                number: user.number,
              
             }, { new: true });
@@ -97,7 +98,7 @@ console.log(error)
    }
 }
 const UpdateProfileById = async (req,res) =>{
-const { roles ,name,password,newPassword,adress,number} = req.body
+const { name,password,newPassword,address,number} = req.body
 
  try{ 
  let userFound = await User.findById(req.params.id);
@@ -113,9 +114,9 @@ const { roles ,name,password,newPassword,adress,number} = req.body
         token: null,
         message: "Invalid Password",
       });
-    let rolesFound = await Role.find({ name: { $in: roles } });
 
-  (rolesFound?.length > 0 ) ? rolesFound : null;
+
+
   
      const encodedPassword = (newPassword) ? await User.encryptPassword(newPassword) : null;
 
@@ -125,8 +126,8 @@ const { roles ,name,password,newPassword,adress,number} = req.body
                 name: name || userFound.name,
                 password: encodedPassword || ususerFounder.password,
                 email: userFound.email,
-                roles: rolesFound.map((role) => role._id) || userFound.roles,
-                    adress: adress || userFound.adress,
+                roles: userFound.roles,
+                    address: address || userFound.address,
                number: number || userFound.number,
              
             }, { new: true });

@@ -7,7 +7,7 @@ display:flex;
 padding:20px 0;
 justify-content:center;
 `;
-const SocialLink= styled.div`
+const SocialLink= styled.a`
 display:grid;
 width:30px;
 height:30px;
@@ -33,9 +33,9 @@ export default function SocialsMenu(props){
 
   return(
     <StyledSocialsMenu>
-        <SocialLink as="a" href="/"><SocialIcone src={facebook} alt="facebook"></SocialIcone></SocialLink>
-        <SocialLink as="a" href="/"><SocialIcone src={instagram} alt="instagram"></SocialIcone></SocialLink>
-        <SocialLink as="a" href="/"><SocialIcone src={twitter} alt="twitter"></SocialIcone></SocialLink>
+        <SocialLink  href="#!" target="_blank"><SocialIcone src={facebook} alt="facebook"></SocialIcone></SocialLink>
+        <SocialLink href="#!" target="_blank"><SocialIcone src={instagram} alt="instagram"></SocialIcone></SocialLink>
+        <SocialLink  href="#!" target="_blank"><SocialIcone src={twitter} alt="twitter"></SocialIcone></SocialLink>
     
     </StyledSocialsMenu>
   )

@@ -25,10 +25,10 @@ const getProductById= async (req,res) => {
 const postNewProduct = async (req,res) =>{
 try{
 
-const { name, category, size ,description,active } = req.body
+const { name, category, size ,description ,active} = req.body
 const price = Number(req.body.price);
+const  img = (req.file) ?  req.file.filename :  null
 
- const  img =  req.file.filename;
  const product =    new Product({
    name,
    price,
@@ -39,7 +39,7 @@ const price = Number(req.body.price);
   active,
  })
 
-const newProduct = await product.save(  )
+const newProduct = await product.save( )
 
  res.status(201).json({success: true , data: newProduct})
  
@@ -95,9 +95,26 @@ fs.unlink(oldImgPath, (err) => {
 
 const deleteProductById= async (req,res) => {
   try{
+
+ let product = await Product.findById(req.params.id).exec();
+
+  if (!product) return res.status(404).json({success:false, message:'product not faund'});
+
+let oldImgPath ="./frontend/public/uploads/"+product.img
+
+ if(req.file){
+fs.unlink(oldImgPath, (err) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+ })
+ }
+
   await Product.findByIdAndRemove(req.params.id);
 
     res.status(200).json({success:true , message:"Product has been deleted"});
+    
   }catch(error){
     console.log(error)
 

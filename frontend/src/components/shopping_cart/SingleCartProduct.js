@@ -116,6 +116,7 @@ const Quantity = styled.span`
 background: rgba(250,250,250,0.8);
 padding:1px 8px;
 border: 1px solid rgba(0,0,0,0.8);
+border-radius: 5px;
 `
 export default function SingleCartProduct({ThisProduct}) {
 

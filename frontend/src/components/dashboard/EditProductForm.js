@@ -144,7 +144,7 @@ priceValue)
        style={{ borderColor: errors.description && "#bf0000" }  }
                  value={descriptionValue }
                       name="description"
-                
+                   onChange={(e) => setDescriptionValue(e.target.value)}
           ref={register({
               required:'*El campo es requerido' ,
              defaultValues:{descriptionValue }
@@ -158,7 +158,8 @@ priceValue)
              required: false,
               
           })}></DropZone>  
-<ProductState />
+
+<ProductState state={productToEdit.active ? "checked" : null } />
          <ButtonsWrapper>
 <LoadButton as="input" type="submit" value="Cargar"/>
 <ResetButton as="input" type="reset" value="Abortar"/>

@@ -1,7 +1,7 @@
-async function getUsers({token,setAllUsers}){
+async function getUsers({token,setAllUsers,setIsLoading}){
        const headers = new Headers();
         headers.append('Accept', 'application/json');
-      headers.append('x-access-token', token);
+      headers.append('Authorization', `Bearer ${token}`);
 
 
     const setting = {
@@ -13,8 +13,11 @@ async function getUsers({token,setAllUsers}){
 
 const res = await fetch('/api/users', setting);
   const data = await res.json()
+if (res.status === 200){
+  setIsLoading(false)
+  setAllUsers(data)
+}
 
-setAllUsers(data)
 
     }catch(err){
 

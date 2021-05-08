@@ -16,7 +16,7 @@ min-height:100vh;
 width:100vw;
 padding:15px;
 padding-top:40px;
-margin:0 ;
+margin-left: -6px ;
 text-aling:center;
 `;
 export default function Sing() {
