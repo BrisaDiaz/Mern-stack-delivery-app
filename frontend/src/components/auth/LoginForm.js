@@ -17,10 +17,10 @@ transition:all 0.5s esea;
 }`
 export default function SinginForm(){
 const [serverError,setServerError] = useState("")
-const [isLoading,setIsLoading] = useState(false)
-     const {setIsLogin,setIsNotSingup,setIsAdmin,setIsModerator,setToken,getUsers,setAllUsers,setCurrentUser,token} = useContext(AppContext);
+const [isLoadingForm,setIsLoadingForm] = useState(false)
+     const {setIsLogin,setIsNotSingup,setIsAdmin,setIsModerator,setToken,getUsers,setAllUsers,setCurrentUser,token,setIsLoading} = useContext(AppContext);
      const {register, handleSubmit, errors, onSubmit ,redirectToSingUp} = 
-      useLoginForm({setIsLogin,setIsNotSingup,setIsAdmin,setToken,setServerError, getUsers,setIsLoading,setAllUsers,setCurrentUser,token,setIsModerator})
+      useLoginForm({setIsLogin,setIsNotSingup,setIsAdmin,setToken,setServerError, getUsers,setIsLoadingForm,setAllUsers,setCurrentUser,token,setIsModerator,setIsLoading})
 
 
 
@@ -31,7 +31,7 @@ const [isLoading,setIsLoading] = useState(false)
 
 <UserEmailInput  errors={errors} register={register} name="userEmail" />
     <UserPasswordInput name="userPassword" placeholder="Tu contraseña..."  errors={errors} register={register}/>
-           {isLoading ?  <img src={loadingSvg} alt="loading..."/> :
+           {isLoadingForm ?  <img src={loadingSvg} alt="loading..."/> :
 
          <ErrorServerMessage>{serverError}</ErrorServerMessage>
           }    

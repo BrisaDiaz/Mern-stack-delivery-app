@@ -303,12 +303,14 @@ export function FormButtons(){
           </ButtonsWrapper>
     )
   }
-export function ProductState(){
-    return(
+export function ProductState(props){
+  let state = props?.state || false 
+
+   return(
           <CheckboxWrapper >
 <label for="state">Publicar:</label>
 <input
-id="state" type="checkbox" name="state"></input>
+id="state" type="checkbox" defaultChecked={state} name="state" />
           </CheckboxWrapper>
     )
   }
@@ -345,7 +347,7 @@ export default function UpdateNewProductForm() {
 <ProductPriceInput register={register} errors={errors}/>
 <ProductDescriptionTextArea register={register} errors={errors}  />
 
-<ProductState/>
+<ProductState state="checked"/>
   
 
 

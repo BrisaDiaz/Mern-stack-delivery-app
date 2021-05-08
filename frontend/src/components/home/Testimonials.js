@@ -5,7 +5,7 @@ import eatingPeople from '../../img/People-Eating-And-Drinking-90673271.jpg'
 
 const StyledTestimonials = styled.section`
 width:100vw;
-margin:35px 0;
+margin-bottom:20px;
 `;
 const Title=styled(SectionTitle)`
 padding-bottom: 0;

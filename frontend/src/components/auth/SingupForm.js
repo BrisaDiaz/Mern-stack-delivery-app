@@ -88,7 +88,8 @@ export function UserNameInput({register,errors}){
           ref={register({
                required: '*El campo es requrido',
               pattern:{
-                        value: /^[a-z]+\s[a-z ]+$/i,
+                        value: /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/
+,
                          message:"*Nombre no valido"
                       }
             
@@ -148,13 +149,13 @@ export function UserNewPasswordInput({register,errors,placeholder}){
 placeholder={placeholder}
  name="userNewPassword"
           ref={register({
-              
+                 required: '*El campo es requrido',
                      minLength: {
             value: 5,
             message: "*El largo mínimo es de 5 carácteres"
           } 
           })}
-           style={{ borderColor: errors.userPassword && "#bf0000" }}/>
+           style={{ borderColor: errors.userNewPassword && "#bf0000" }}/>
     </Fragment>
   );
 }

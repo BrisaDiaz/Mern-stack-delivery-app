@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import currentUserAPI from '../API/currentUserAPI'
 import usersAPI from '../API/usersAPI'
 
-export default function useEditProfileForm({setServerError,setIsLoading,token,setCurrentUser,setAllUsers,setIsSuccess}){
+export default function useEditProfileForm({setServerError,setIsLoading,token,setCurrentUser,setAllUsers,setIsSuccess,isAdmin}){
    const history = useHistory()
     const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
@@ -20,14 +20,14 @@ try{
 
 
 const name =  e?.target?.userName?.value?.toLowerCase(),
-adress = e.target.userAdress?.value?.toLowerCase();
+address = e.target.userAddress?.value?.toLowerCase();
 
 const info ={
 name,
 password:e?.target?.userPassword?.value,
 newPassword:e?.target?.userNewPassword?.value,
 number:e.target.userNumber?.value,
-adress,
+address,
 
 }
 
@@ -57,7 +57,7 @@ setIsLoading(false)
          if(res.status === 200) {
         
 
-
+         (isAdmin) && usersAPI({token,setAllUsers})
        currentUserAPI({token,setCurrentUser})
 
          setIsSuccess(true);

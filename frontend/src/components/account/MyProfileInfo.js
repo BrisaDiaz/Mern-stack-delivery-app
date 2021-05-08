@@ -110,7 +110,7 @@ localStorage.removeItem('userId');
  <small>Permitenos contactarnos inmediatamente ante cualquier duda o inprevisto.</small>
           <UserInfo><InfoLabel>Teléfono: </InfoLabel>{currentUser.number || null }</UserInfo>
                <small>Su orden será enviada a la dirección suministrada.</small>
-              <UserInfo><InfoLabel>Dirección: </InfoLabel>{currentUser.adress || null }</UserInfo>
+              <UserInfo><InfoLabel>Dirección: </InfoLabel>{currentUser.address || null }</UserInfo>
 
              <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
     </CardInfo>

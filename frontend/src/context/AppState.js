@@ -42,12 +42,12 @@ export default  function AppState(props) {
 const res = await fetch('/api/products');
   const data = await res.json()
 
-console.log(data)
+
 setAllProducts(data)
 setIsLoading(false)
     }catch(err){
       getProducts()
-      console.log(err)
+
     }
 
   }
@@ -70,7 +70,7 @@ const deleteConfirmation = window.confirm('El producto será eliminado de la bas
 if(deleteConfirmation){
 try {
         let res = await fetch("/api/products/"+id, setting);
-      console.log(res.json())
+  
 getProducts()
       } catch (err) {
 
@@ -134,7 +134,7 @@ let url =`/api/products/${id}`
       const formData = new FormData()
 let active =  e.target.state.checked ? true : false ;
 
-        formData.append('img', e.target.img.files[0])
+        formData.append('img', e.target.img?.files[0])
         formData.append('name', e.target.name.value)
         formData.append('category', e.target.category.value)
         formData.append('size', e.target.size.value)
@@ -151,14 +151,14 @@ console.log(token)
           method: 'POST',
                   body: formData,
           headers: headers,
-           mode: 'no-cors',
+
         }
 
 
   try {
         let res = await fetch("/api/products", setting);
         let json =  await res.json()
-        console.log(json)
+
         if(res.status === 200){
 getProducts()
 e.target.reset()
@@ -369,6 +369,7 @@ adminSearchQuery: state.adminSearchQuery,
 menuSortPreference : state.menuSortPreference,
 productStateFilterPreference: state.productStateFilterPreference,
 createNewProduct,
+setIsLoading,
 setToken,
 getProducts,
 setAllUsers,
