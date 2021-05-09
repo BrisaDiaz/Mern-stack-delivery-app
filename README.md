@@ -17,7 +17,7 @@
 
 + athentication with Jeson Web Tokens  
 
-+ password encryption width scrypt librery  
++ password encryption width bcrypt librery  
 
 + accesss of routes base athorization and permition  
 
@@ -29,7 +29,7 @@
 
 ## Frontend
 
-### Tecnologies:
+### Tecnologies and tools:
 
 + React.js 
 + style-components
@@ -45,7 +45,7 @@
 + Access to Public and Private routes base on roles.
 + Contact section with form validation.
 + Loading modal and loading form indicators.
-+ Shopping cart with CRUD oparetions.
++ Shopping cart with CRUD operations.
 + Editable User profile. 
 + Products sorter, filter and search bar.
 + Product details page.
