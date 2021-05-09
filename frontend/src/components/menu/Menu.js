@@ -11,7 +11,7 @@ import Item  from './MenuItem'
 const StyledMenu= styled.section`
 min-height:100vh;
 width:100vw;
-padding: 58px 15px 15px 15px;
+padding: 65px 15px 15px 15px;
 margin:0;
 
 margin-bottom:20px;
@@ -34,10 +34,12 @@ width:100%;
 
 `;
 const CategoryTitle = styled.h3 `
-text-align:center;
-margin: 10px 5px;
-text-shadow: -1px -1px 0 #fcba1c;
-text-transform:capitalize ;
+text-align: center;
+    line-height: 15px;
+    font-size: 28px;
+    margin: 10px 5px;
+    text-shadow: -1px -1px 0 #fcba1c;
+    text-transform: capitalize;
 & + h3:before {
   content:"- ";
 }
@@ -47,10 +49,10 @@ width:100%;
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
+margin 0  0  20xp -6px;  
 `;
 export const ProductsSection = styled.div`
 display:flex;
-
 flex-flow:row wrap;
 padding:0 ;
  justify-content:center;

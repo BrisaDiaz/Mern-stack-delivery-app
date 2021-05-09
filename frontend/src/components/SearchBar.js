@@ -18,6 +18,7 @@ outline: none;
 box-shadow: 0 0 2px rgba(0,0,0,0.5);
 transition: all 0.5s ease;
 border:none;
+margin-left: -6px;
 &:focus{
   width:250px;
 box-shadow: 0 0 10px rgba(0,0,0,0.2);
