@@ -1,15 +1,12 @@
 import styled  from 'styled-components'
 import TestimonialsSlider from './TestimonialsSlider'
-import {SectionTitle} from '../menu/Menu'
 import eatingPeople from '../../img/People-Eating-And-Drinking-90673271.jpg'
 
 const StyledTestimonials = styled.section`
 width:100vw;
 margin-bottom:20px;
 `;
-const Title=styled(SectionTitle)`
-padding-bottom: 0;
-`
+
 const TestimonialsWrapper= styled.div`
 width:100%;
 min-height:360px;
@@ -40,7 +37,7 @@ min-height:100%;
  
 return(
  <StyledTestimonials>
-     <Title>Clientes Felices</Title>
+
      <TestimonialsWrapper className="flex">
  
   <TestimonialsImage>

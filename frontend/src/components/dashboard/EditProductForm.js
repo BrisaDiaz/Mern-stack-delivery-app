@@ -28,7 +28,7 @@ transform:scale(0.75);
 
 export default function UpdateNewProductForm() {
 
-    const {updateProduct,token,productToEdit}  = useContext(AppContext);
+    const {updateProduct,token,productToEdit,setIsSuccessfullySend}  = useContext(AppContext);
       const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
 });
@@ -53,14 +53,17 @@ async function onSubmit(data,e) {
 
   e.preventDefault()
     updateProduct(
-      token,
+  {    token,
       e,
     id,
     nameValue,
 categoryValue,
 sizeValue,
 descriptionValue,
-priceValue)
+priceValue,
+setIsSuccessfullySend
+}
+)
 
   }
  

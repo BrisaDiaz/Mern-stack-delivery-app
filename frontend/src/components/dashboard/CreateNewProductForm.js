@@ -132,6 +132,7 @@ border-radius: 5px;
   box-shadow: 0 0 4px rgba(0,0,0,0.5);
   position:relative;
 max-width: 50%;
+min-width: 200px;
   height: 45px;
   display: inline-block; 
   margin:25px auto;
@@ -315,7 +316,7 @@ id="state" type="checkbox" defaultChecked={state} name="state" />
     )
   }
 export default function UpdateNewProductForm() {
-    const {createNewProduct,token}  = useContext(AppContext);
+    const {createNewProduct,token,setIsSuccessfullySend}  = useContext(AppContext);
  const { register, handleSubmit, formState: { errors } } = useForm({
   mode: "onBlur",
 });
@@ -323,7 +324,7 @@ export default function UpdateNewProductForm() {
  const onSubmit = async (data,e) =>{
 
         e.preventDefault()
-        createNewProduct(token,e)
+        createNewProduct({token,e,setIsSuccessfullySend})
       
 
   }

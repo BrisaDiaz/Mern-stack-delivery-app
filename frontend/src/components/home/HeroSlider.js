@@ -6,10 +6,10 @@ import BurgerSlide from '../../img/hamburger-slide.jpg'
 import PizzaSlide from '../../img/pizza-slide.jpg'
 import EmpanadaSlide from '../../img/empanadas-slide.jpg'
 
-const StyledSlider = styled.div`
+const StyledSlider = styled.section`
 position:relative;
 width:100vw;
-height:100vh;
+    height: calc(100vh - 58px);
 text-aling:center;
 margin-bottom:20px;
 `;

@@ -10,7 +10,7 @@ import {FormButtons } from '../dashboard/CreateNewProductForm'
 import {NameInput } from '../contact/ContactForm';
 import {Link , LinksWrapper} from '../dashboard/DashboardNewProduct'
 import userEditIcone from '../../img/user-edit-solid.svg'
-import correctIcone from '../../img/check-circle-solid.svg'
+
 
 const EditProfileForm = styled.form`
 
@@ -34,23 +34,7 @@ margin: 0 auto;
 margin-bottom:20px;
 margin-top:-20px;
 `
-const CorrectlySendedIcone = styled.div`
-width:150px;
-height:150px;
-position:absolute;
-z-index:1000;
-top:50%;
-left:50%;
-transform:translate(-50%,0);
-background:#fff;
-border-radius:50%;
-`; 
-const OkIcone = styled(FormIcone)`
-width:160px;
-margin: -5px -15px 0 0;
-    box-shadow: 0 0 5px;
-    border-radius: 50%;
-`
+
 
 function CellphoneInput({errors,placeholder,register}) {
   
@@ -99,11 +83,11 @@ placeholder={placeholder}
 export default function EditMyProfile() {
   
   const [serverError,setServerError] = useState("");
-const [isLoading,setIsLoading] = useState(false);
-const [isSuccess,setIsSuccess] = useState(false);
-const {token,getUsers,setCurrentUser,setAllUsers,isAdmin} = useContext(AppContext);
+const [formIsLoading,setFormIsLoading] = useState(false);
 
-   const {register,handleSubmit,errors,onSubmit} = useEditProfileForm({setServerError,setIsLoading,token,getUsers,setCurrentUser,setAllUsers,setIsSuccess,isAdmin})
+const {token,getUsers,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} = useContext(AppContext);
+
+   const {register,handleSubmit,errors,onSubmit} = useEditProfileForm({setServerError,setFormIsLoading,token,getUsers,setCurrentUser,setAllUsers,setIsSuccessfullySend,isAdmin})
 
   return(
 <StyledSection>
@@ -127,13 +111,11 @@ const {token,getUsers,setCurrentUser,setAllUsers,isAdmin} = useContext(AppContex
      
 
        
-   {isLoading ?  <img src={loadingSvg} alt="loading..."/> :
+   {formIsLoading ?  <img src={loadingSvg} alt="loading..."/> :
 
          <ErrorServerMessage>{serverError}</ErrorServerMessage>
-          }   
-          {isSuccess &&  <CorrectlySendedIcone><OkIcone src={correctIcone} alt="uploaded"/></CorrectlySendedIcone>
-          } 
-   
+      
+  }
           <FormButtons />
   </EditProfileForm>
 

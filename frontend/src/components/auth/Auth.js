@@ -12,11 +12,10 @@ background : url(${background}) no-repeat right top ;
 display: flex;
 justify-content:center;
 align-items: center;
-min-height:100vh;
 width:100vw;
 padding:15px;
-padding-top:40px;
-margin-left: -6px ;
+padding-top:60px;
+
 text-aling:center;
 `;
 export default function Sing() {

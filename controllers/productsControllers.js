@@ -102,14 +102,14 @@ const deleteProductById= async (req,res) => {
 
 let oldImgPath ="./frontend/public/uploads/"+product.img
 
- if(req.file){
+
 fs.unlink(oldImgPath, (err) => {
   if (err) {
     console.error(err)
     return
   }
  })
- }
+ 
 
   await Product.findByIdAndRemove(req.params.id);
 

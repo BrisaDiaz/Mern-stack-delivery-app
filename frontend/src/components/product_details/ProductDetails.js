@@ -7,7 +7,7 @@ import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
 import useAddToCartButton from '../../hooks/useAddToCartButton'
 const ProductDetails = styled.main`
 width:90vw;
-min-height:100vh;
+    min-height: calc(100vh - 58px);
 padding: 20px 15px;
 padding-top:58px;
 margin:0 auto;

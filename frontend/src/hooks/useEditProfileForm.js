@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import currentUserAPI from '../API/currentUserAPI'
 import usersAPI from '../API/usersAPI'
 
-export default function useEditProfileForm({setServerError,setIsLoading,token,setCurrentUser,setAllUsers,setIsSuccess,isAdmin}){
+export default function useEditProfileForm({setServerError,setFormIsLoading,token,setCurrentUser,setAllUsers,setIsSuccessfullySend,isAdmin}){
    const history = useHistory()
     const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
@@ -14,8 +14,8 @@ async function onSubmit(data,e) {
 
  e.preventDefault()
 try{
-  setIsLoading(true)
-
+  setFormIsLoading(true)
+   setServerError("");
 
 
 
@@ -52,7 +52,7 @@ headers.append('Content-Type', 'application/json');
         let res = await fetch(`/api/users/me/${id}`, setting);
             let  json = await res.json()
 
-setIsLoading(false)
+setFormIsLoading(false)
 
          if(res.status === 200) {
         
@@ -60,9 +60,9 @@ setIsLoading(false)
          (isAdmin) && usersAPI({token,setAllUsers})
        currentUserAPI({token,setCurrentUser})
 
-         setIsSuccess(true);
+         setIsSuccessfullySend(true);
          setTimeout(() => {
-                    setServerError(false);
+                 
                     history.push("/myAccount/myProfile")
          }, 3000);
   

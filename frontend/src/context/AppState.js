@@ -1,5 +1,6 @@
 import  {useReducer,useEffect} from 'react';
 import AppContext from  './app-context';
+import { useHistory } from 'react-router-dom'
 import appReducer from  './app-reducer';
 import {
   SET_IS_LOADING,
@@ -24,8 +25,8 @@ SET_IS_MODERATOR,
 SET_MENU_SEARCH_QUERY,
 SET_ADMIN_SEARCH_QUERY,
 SET_MENU_SORT_PREFERENCE,
-SET_PRODUCT_STATE_FILTER_PREFERENCE
-
+SET_PRODUCT_STATE_FILTER_PREFERENCE,
+SET_FORM_DATA_SUCCESFULLY_SEND
 } from './app-actions'
 
 
@@ -35,8 +36,10 @@ SET_PRODUCT_STATE_FILTER_PREFERENCE
 
 
 export default  function AppState(props) {
-  
-   const getProducts = async() =>{
+  const history = useHistory()
+
+
+ const getProducts = async() =>{
     try{
 
 const res = await fetch('/api/products');
@@ -85,14 +88,16 @@ getProducts()
   }
 
   async function updateProduct(
-    token,
+{    token,
     e,
     id,
     nameValue,
 categoryValue,
 sizeValue,
 descriptionValue,
-priceValue){
+priceValue,
+setIsSuccessfullySend}
+){
      const formData = new FormData()
       let active =  e.target.state.checked ? true : false ;
 
@@ -123,14 +128,26 @@ let url =`/api/products/${id}`
   try {
         let res = await fetch(url , setting);
       console.log(res)
-      getProducts()
+
+      if(res.status === 200){
+           getProducts()
+           setIsSuccessfullySend(true)
+
+setTimeout(() => {
+  setIsSuccessfullySend(false)
+   history.push('/dashboard/myProducts')
+}, 3000);
+
+      }
+   
 
       } catch (err) {
 
         console.log(err)
       }
   }
-  async function createNewProduct(token,e){
+  async function createNewProduct({token,e,setIsSuccessfullySend}){
+
       const formData = new FormData()
 let active =  e.target.state.checked ? true : false ;
 
@@ -157,11 +174,18 @@ console.log(token)
 
   try {
         let res = await fetch("/api/products", setting);
-        let json =  await res.json()
+       
+        if(res.status >= 200  || res.status < 300  ){
 
-        if(res.status === 200){
 getProducts()
 e.target.reset()
+setIsSuccessfullySend(true)
+
+setTimeout(() => {
+  setIsSuccessfullySend(false)
+
+}, 3000);
+
         }     
       
       } catch (err) {
@@ -205,6 +229,7 @@ menuSearchQuery:"",
 adminSearchQuery:"",
 menuSortPreference:"default",
 productStateFilterPreference:"default",
+isSuccessfullySend: false,
 }
 
 const [state, dispatch] = useReducer(appReducer, initialState)
@@ -346,6 +371,12 @@ dispatch({
   payload: preference
 })
 }
+const setIsSuccessfullySend = (bulean) =>{
+  dispatch({
+type:SET_FORM_DATA_SUCCESFULLY_SEND,
+payload: bulean,
+  })
+}
   return (
 
     <AppContext.Provider 
@@ -368,6 +399,7 @@ menuSearchQuery:state.menuSearchQuery,
 adminSearchQuery: state.adminSearchQuery,
 menuSortPreference : state.menuSortPreference,
 productStateFilterPreference: state.productStateFilterPreference,
+isSuccessfullySend:state.isSuccessfullySend,
 createNewProduct,
 setIsLoading,
 setToken,
@@ -393,7 +425,8 @@ deleteProduct,
 setMenuSearchQuery,
 setAdminSearchQuery,
 setMenuSortPreference,
-setFilterProductStatePreference
+setFilterProductStatePreference,
+setIsSuccessfullySend,
     }}>
 
           {props.children}

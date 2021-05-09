@@ -10,7 +10,8 @@ import {NameInput , EmailInput} from '../contact/ContactForm';
 
 export const FormCard =  styled.article`
   box-shadow: 0 0 4px rgba(0,0,0,0.5);
-margin: 0 auto;
+
+margin: 30px auto;
 border-radius:10px;
 width: 380px;
 display:flex;
@@ -44,7 +45,7 @@ flex-flow:column;
 align-items:center;
 & > input {
       width: 90%;
-      margin-bottom:20px;
+ margin-bottom:15px;
       border:none;
       box-shadow: inset 0 0 4px 0px rgb(23 23 23 / 36%);
 }
@@ -56,7 +57,7 @@ align-items:center;
 width: 90%;
 & > input {
       width: 95%;
-      margin-bottom:20px;
+   
   
 }
 }

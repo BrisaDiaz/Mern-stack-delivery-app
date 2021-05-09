@@ -9,6 +9,7 @@ import DashboardProducts from './components/dashboard/DashboardProducts'
 import DashboardEditProduct from './components/dashboard/DashboardEditProduct'
 import DashboardUsers from './components/dashboard/DashboardUsers'
 import Header from './components/Header'
+import SuccessfullFormModal from './components/SuccessfullFormModal'
 import InitSession from './components/auth/Auth'
 import ProductsDetails from './components/product_details/ProductDetails'
 import Contact  from './components/contact/Contact'
@@ -33,7 +34,7 @@ function App() {
     return (
       <Router>
         <AppState>
-          
+          <SuccessfullFormModal/>
           <LoadingPage/>
         <Header/>
   <Switch>
@@ -73,6 +74,7 @@ function App() {
        <h2>         Not Found 404</h2>
         </Route>
       </Switch>
+
 
       <ShooppingCart />
             

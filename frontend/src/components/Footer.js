@@ -13,13 +13,13 @@ const StyleFooter = styled.footer`
   background-color:#171717 ;
   color:#F0F0F0;
  `;
-const FooterWrapper = styled.div`
+const FooterWrapper = styled.section`
 display:flex;
 width:100%;
 flex-wrap:wrap;
 
 `;
-const FooterSection = styled.section`
+const FooterSection = styled.article`
 
 min-width:300px;
 padding:15px;

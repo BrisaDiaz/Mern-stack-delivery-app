@@ -105,7 +105,6 @@ min-width:85px;
 margin-left: auto;
 `;
 const ProductControls = styled.div`
-
 margin-left: auto;
 margin-top: 15px;
 position:relative:

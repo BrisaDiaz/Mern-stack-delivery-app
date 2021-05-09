@@ -21,7 +21,8 @@ SET_IS_MODERATOR,
 SET_MENU_SEARCH_QUERY,
 SET_ADMIN_SEARCH_QUERY,
 SET_MENU_SORT_PREFERENCE,
-SET_PRODUCT_STATE_FILTER_PREFERENCE
+SET_PRODUCT_STATE_FILTER_PREFERENCE,
+SET_FORM_DATA_SUCCESFULLY_SEND
 } from './app-actions'
 
  function appReducer(state,action){
@@ -153,6 +154,11 @@ case SET_PRODUCT_STATE_FILTER_PREFERENCE:
             ...state,
           productStateFilterPreference:action.payload
          };         
+case SET_FORM_DATA_SUCCESFULLY_SEND:
+        return{
+            ...state,
+          isSuccessfullySend:action.payload
+         };                  
   default:  return state;
 
 }
