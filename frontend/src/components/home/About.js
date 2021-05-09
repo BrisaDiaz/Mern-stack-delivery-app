@@ -12,16 +12,16 @@ const Title=styled(SectionTitle)`
 padding-bottom: 20px;
 `
 const AboutWrapper= styled.article`
-
+max-width:1250px;
+justify-content:center;
+min-height: 300px;
 width:100vw;
 display:flex;
 flex-flow: row;
 flex-wrap: wrap;
-
+margin: 0 auto;
   & > *{
-    width:100%;
     flex:1 0 1;
- min-height: 300px;
  margin-top:-50px;
     @media  screen and (min-width:950px){
       width:50%;
@@ -30,26 +30,33 @@ flex-wrap: wrap;
   }
 `; 
 const ImgSection = styled.div`
-background:url(${background}) no-repeat center center;
-background-size: auto 100%;
+display:flex;
+justify-content:center;
 
- @media  screen and (min-width:950px){
-     background:url(${background}) no-repeat 30% center;
-   background-size: auto 100%;
-    margin-top:0;
-
+`;
+const Image = styled.img`
+max-width:400px;
+margin: 0 auto;
+@media  screen and (min-width:950px){
+    margin-top:-70px;
     }
 `;
 const HistoriSection = styled.div`
 text-align:center;
-padding:25px;
+padding:  50px 25px;
+margin-left:-6px;
 display:flex;
 justify-content:center;
 align-items:center;
 line-heigth:35px;
 @media  screen and (min-width:950px){
-    padding:50px;
-    }
+  max-width:600px;
+    margin-right: -100px;
+    align-items:flex-start;
+}
+
+
+    
 `;
 export default function About(){
 return(
@@ -65,7 +72,7 @@ return(
       </p>
   </HistoriSection>
 <ImgSection>
-
+<Image src={background} alt="burger"></Image>
 </ImgSection>
 
   </AboutWrapper>

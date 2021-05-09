@@ -82,7 +82,7 @@ export default function Footer() {
 
 < FooterSection >
 <Logo src ={logo} alt="logo"></Logo>
-<p>El principal componente para un entorno saludable de autoestima.</p>
+<p>El principal componente para un entorno saludable y de autoestima.</p>
 </FooterSection>
 < FooterSection >
 <h4>NUESTROS LOCALES

@@ -49,7 +49,7 @@ width:100%;
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
-margin 0  0  20xp -6px;  
+margin :   20px 0;  
 `;
 export const ProductsSection = styled.div`
 display:flex;

@@ -14,7 +14,6 @@ max-width:280px;
 height:350px;
 flex-flow:column;
 margin:15px;
-margin-left: 0;
 over-flow:hidden;
 padding:20px;
 border: 1px solid #00000026;

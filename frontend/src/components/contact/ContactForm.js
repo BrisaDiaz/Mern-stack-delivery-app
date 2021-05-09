@@ -13,12 +13,13 @@ import {Link, Icone,ListItem,List} from  '../Footer'
  const StyledContact = styled.article`
 box-sizing:border-box:
 max-width:100%;
-padding:40px 0;
+padding:20px 0;
 display:flex;
 flex-wrap:wrap;
 & > * {
-padding:12px  25px;
-  height:75vh;
+padding:10px  25px;
+max-height:460px;
+height:100%;
 }
 `;
 const FormSection = styled.div`
@@ -26,7 +27,8 @@ const FormSection = styled.div`
 width:100%;
   flex: 1 1 450px;
   @media screen and (min-width: 550px){
-    padding:12px  32px;
+    padding:10px  32px ;
+  
   }
 `;
 const Form = styled.form`
@@ -44,11 +46,12 @@ display:flex;
 flex-flow:column;
 justify-content:space-evenly;
   flex: 1 0 1;
+  min-height:460px;
  width: 40%;
-
  @media screen and (max-width:750px){
     width: 100%;
-     
+     padding:0  25px;
+       min-height:350px;
  }
 `;
 export const NameInput= styled.input.attrs(props => ({
@@ -104,8 +107,8 @@ resize: 'none',
 }
   border: 2px solid #171717;
   border-radius:5px;
-  min-heigth: 400px;
-  max-height:600px; 
+
+  max-height:250px; 
   outline:none;
     margin-bottom:25px;
   width:100%;
@@ -114,6 +117,9 @@ resize: 'none',
 `;
 const ContactTitle = styled.h2`
 
+ @media screen and (min-width:750px){
+    margin-top: -40px;
+ }
 `;
 const ContactLink = styled(Link)`
 color:#000;
