@@ -66,12 +66,15 @@ cursor:pointer;
 justify-self:flex-start;
 `;
 const LogoImg = styled.img`
-width: 80px;
+width: 60px;
 transition:all 0.3s ease;
 
 &:hover{
   transform: scale(1.1);
 
+}
+@media screen and (min-width:500px){
+  width: 80px;
 }
 `;
 const IconeButton = styled.div`
@@ -85,7 +88,11 @@ position:relative;
 const CartIcone = styled.img`
 width: 100%;
 heght:100%;
+    transform: scale(0.65);
+@media screen and (min-width:500px){
     transform: scale(0.8);
+}
+
 `
 const ProfileIcone = styled(CartIcone)`
     width: 135%;

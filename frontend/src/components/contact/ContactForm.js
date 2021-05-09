@@ -34,7 +34,9 @@ width:100%;
 height:100%;
 display:flex;
 flex-flow:column;
-
+& > small {
+      margin: -10px auto 4px 0;
+}
 `;
 
 const InfoSection = styled.div`
@@ -102,6 +104,8 @@ resize: 'none',
 }
   border: 2px solid #171717;
   border-radius:5px;
+  min-heigth: 400px;
+  max-height:600px; 
   outline:none;
     margin-bottom:25px;
   width:100%;

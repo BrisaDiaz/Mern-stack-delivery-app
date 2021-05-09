@@ -23,17 +23,11 @@ background: rgb(252,175,1);
 218deg
 , rgb(252 175 1 / 60%) 0%, rgb(255 165 0 / 58%) 100%);
 box-box-shadow: 2px 2px 6px #000;
-& > input {
-  border:none;
-      box-shadow: inset 0 0 5px 0px rgb(23 23 23 / 36%);
-}
-& > img {
-  margin-bottom: 10px;
-}
-@media screen and  (max-width:500px){
- width: 310px;
 
+@media screen and  (max-width:400px){
+ width: 100%;
 
+}
 `;
 export const Logo = styled.img`
 width:120px;
@@ -50,10 +44,21 @@ flex-flow:column;
 align-items:center;
 & > input {
       width: 90%;
+      margin-bottom:20px;
+      border:none;
+      box-shadow: inset 0 0 4px 0px rgb(23 23 23 / 36%);
+}
+
+& > img {
+  margin-bottom: 10px;
 }
 @media screen and  (max-width:500px){
-width:260px;
-
+width: 90%;
+& > input {
+      width: 95%;
+      margin-bottom:20px;
+  
+}
 }
 `;
 export const PaswordInput = styled(NameInput).attrs( props => ({
