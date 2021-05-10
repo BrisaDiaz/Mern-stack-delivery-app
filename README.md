@@ -4,6 +4,7 @@
 # Mern-stack-delivery-app
 
 ### Demo: https://fast-food-delivery-app.herokuapp.com/
+![alt screenshoot](https://drive.google.com/file/d/1CjTzfCcKKUwQ19f7x2nr4tUBIiUzNIUE/view?usp=sharing)
 ### State: MAINTENANCE
 ## Backend
 
