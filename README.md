@@ -5,7 +5,9 @@
 
 ### Demo: https://fast-food-delivery-app.herokuapp.com/
 
- ![image](https://drive.google.com/uc?export=view&id=1CjTzfCcKKUwQ19f7x2nr4tUBIiUzNIUE)
+ ![image](https://drive.google.com/uc?export=view&id=1CXsCqEg85_EYkjLC2UdS4FpSHxauAXFL)
+ 
+ ![image](https://drive.google.com/uc?export=view&id=13fhdJtsE7aE63N2qRZ46UF9DlnGRhcgY)
 
 ### State: MAINTENANCE
 ## Backend
