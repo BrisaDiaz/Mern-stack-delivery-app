@@ -15,6 +15,7 @@ right:0;
 bottom:0;
 background:#0000002b;
 display: ${(props)=>(props.isEditing === true ? "block" : "none")};
+z-index:1000;
 
 `
 const EditTable = styled.div` 
@@ -22,21 +23,24 @@ max-width:320px;
 min-width:300px;
 height:max-content;
   border-bottom: none;
-border: 1px solid #e83c2e;
+border: 2px solid #e83c2e;
 margin: 0 auto;
 position:absolute;
 top:50%;
+border-radius: 5px;
 left:50%;
 transform:translate(-50%,-50%);
 `
 const EditTableBody = styled.div`
-padding: 15px;
-background:#ecccc9;
+padding: 20px;
+    background: #fff;
+
 `
 const EditTableHeader = styled.div`
-background:  #e83c2e;
-width:100%;
-padding: 5px 15px;
+background: #e83c2e;
+    width: 100%;
+    padding: 8px 15px;
+    box-shadow: inset 0 0 20px 5px rgb(23 23 23 / 15%);
 `
 export const InfoLabel= styled.b`
 color:#e83c2e;
@@ -75,6 +79,12 @@ const EditForm= styled.form`
 display:flex;
 flex-flow:column;
 align-items:center;
+& > ${LoaderSpinner}{
+  margin-bottom:10px;
+}
+& > ${FormButtons}{
+transform:scale(0.95);
+}
 `;
  const InputWrapper = styled.div` 
 display:flex;
@@ -116,7 +126,7 @@ return(
 
    <EditForm onSubmit={(e) =>handelSubmit(e,user._id)} onReset={handelReset}>
          <RolesInputs/>
-    {isFormLoading ?  <LoaderSpinner/> :
+    {isFormLoading ?  <LoaderSpinner small /> :
 
          <ErrorServerMessage>{serverError}</ErrorServerMessage>
           }    

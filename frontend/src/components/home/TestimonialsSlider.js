@@ -30,11 +30,12 @@ text-align:center;
 
 `;
 const Name = styled.h4`
-
+line-height: 25px;
 font-size:25px;
 color: #fcba1c;
 text-align:center;
 text-shadow: 2px 2px 0 #000;
+    height: 30px;
 `;
 const EmailContact = styled.small`
 

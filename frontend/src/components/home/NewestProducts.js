@@ -20,7 +20,7 @@ export default function NewestProducts(){
 
   const {products,isLoading}  = useContext(AppContext);
 const activeProducts = products.filter(product=> product.active === true ) 
-const LatestProducts = activeProducts.slice(-4)
+const LatestProducts = activeProducts.slice(-6)
 
   return(
 

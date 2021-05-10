@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap");
+
 *,
 *:before,
 *:after {
@@ -35,7 +36,6 @@ input::placeholder {
 textarea::placeholder,
 input::placeholder {
   font-family: "Open Sans", sans-serif;
-  /* font-style: oblique; */
   font-size: 10px;
 }
 a {
@@ -94,7 +94,4 @@ li {
 }
 b {
   margin-right: 2px;
-}
-article::-webkit-scrollbar {
-  width: 10px;
 }

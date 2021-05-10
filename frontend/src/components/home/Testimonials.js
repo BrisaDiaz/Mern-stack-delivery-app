@@ -30,7 +30,7 @@ height:360px;
 
 `; 
 const Img = styled.img`
-width:100%;
+width:130%;
 min-height:100%;
 `;
  export default function Testimonials (){

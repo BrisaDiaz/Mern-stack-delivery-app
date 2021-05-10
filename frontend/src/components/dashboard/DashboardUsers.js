@@ -1,9 +1,9 @@
 import styled  from 'styled-components';
-import {useContext,useState} from 'react' 
+import {useContext,useState,Fragment} from 'react' 
 import AppContext from '../../context/app-context'
 import {Link , LinksWrapper} from './DashboardNewProduct';
 import EditUserModal from './EditUserModal'
-
+import SeeMoreButton from "./../SeeMoreButton"
 
 const Section = styled.div`
 position:relative;
@@ -18,7 +18,7 @@ const UsersTable = styled.div`
 width:100%;
 min-width:300px;
 margin-top:30px;
-border: 1px solid #fecb00;
+    border: 2px solid rgb(252 175 1);
   border-bottom: none;
   flex:1;
     border-radius: 4px;
@@ -30,7 +30,7 @@ min-width:300px;
 margin: 0 5px;
 height:max-content;
 margin-top:30px;
-border: 1px solid #fecb00;
+    border: 2px solid rgb(252 175 1);
   border-bottom: none;
 flex:1;
 `
@@ -64,18 +64,23 @@ display:flex;
 justify-content:space-between;
 `;
 const UserCell = styled.div`
+position:relative;
 background:#fecb0005;
 width:100%;
 display:flex;
 flex-flow:column;
 align-items:space-between;
-
 padding: 5px 15px;
-  border-bottom: 1px solid #fecb00;
+  border-bottom: 1px solid rgb(252 175 1);
+  & > b{
+    padding: 1px 0;
+    margin-right: 4px;
+  }
 `;
 const UserName = styled.b`
 font-size: 19px;
 text-transform: capitalize;
+margin-left:32px;
 `;
 const UserStatus = styled.b`
 padding: 5px 8px;
@@ -88,6 +93,38 @@ padding: 5px 8px;
     margin-bottom: 5px;
 `
 
+function UserInfoCell({user,handelClick}){
+
+ const [isToggledDetails,setIsToggledDetails] = useState(false)
+ const trigger= () =>{
+ setIsToggledDetails(!isToggledDetails)
+ }
+  return(
+ <UserCell>
+
+     <SeeMoreButton  trigger={trigger}/>
+
+    <UserName>{user?.name}</UserName><p><b>Email:</b>{user?.email}</p> 
+
+    {isToggledDetails && <Fragment>
+
+ {user?.number && <p><b>Número:</b>{user?.number}</p>}
+      {user?.address && <p><b>Dirección:</b>{user?.address}</p>}
+
+    </Fragment>}
+     
+    <Wrapper>
+ <p>{user?.createdAt.slice(0,10).split("-").reverse().join(" /")}</p>
+
+ {user?.roles.map(role =>
+   <UserStatus key={role?._id} onClick={()=> handelClick(user)}>{role?.name}</UserStatus>
+  )}
+
+    </Wrapper>
+</UserCell>
+  );
+
+}
 
 export  default function DashboardUsers(){
   const [editingUser,setEditingUser] = useState("")
@@ -106,6 +143,7 @@ setIsEditing(true) ;
      user.roles[0].name ==='moderator'
 
     )
+
   return(
 <Section>
    <LinksWrapper>
@@ -120,19 +158,8 @@ setIsEditing(true) ;
   </TableHeader>
 
 {normalUsers.map(user =>
-   <UserCell key={user._id}>
-    <UserName>{user.name}</UserName><p>{user.email}</p> 
-    <Wrapper>
- <p>{user.createdAt.slice(0,10).split("-").reverse().join(" /")}</p>
-
- {user.roles.map(role =>
-   <UserStatus key={role._id} onClick={()=> handelClick(user)}>{role.name}</UserStatus>
-  )}
-
-    </Wrapper>
-   
-  </UserCell>
-  
+ <UserInfoCell key={user._id} user={user} handelClick={handelClick}>
+  </UserInfoCell>
   
   )}
  
@@ -142,23 +169,16 @@ setIsEditing(true) ;
   <TableHeader>
     <TableTitle>Admins y Mediadores</TableTitle>
   </TableHeader>
-  {adminsAndModerators.map(user =>
-       <UserCell key={user._id}>
-    <UserName>{user.name}</UserName><p>{user.email}</p> 
-   < Wrapper>
-<p>{user.createdAt.slice(0,10).split("-").reverse().join(" /")}</p>
-        {user.roles.map(role =>
-   <UserStatus key={role._id}  onClick={()=> handelClick(user)}>{role.name}</UserStatus>
-  )}
-   </Wrapper>
-    </UserCell>
+  {adminsAndModerators.map( user =>
+       <UserInfoCell key={user._id} user={user} handelClick={handelClick}>
+  </UserInfoCell>
     
     )}
-
-   
 </AdminTable>
 
 </TablesContainer>
 </Section>
   );
 }
+
+

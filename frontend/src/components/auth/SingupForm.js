@@ -48,12 +48,14 @@ align-items:center;
       border:none;
       box-shadow: inset 0 0 4px 0px rgb(23 23 23 / 36%);
 }
+& >${LoaderSpinner}{
+  margin-bottom: 10px;
+}
 
 @media screen and  (max-width:500px){
 width: 90%;
 & > input {
       width: 95%;
-   
   
 }
 }

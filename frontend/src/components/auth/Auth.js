@@ -7,7 +7,7 @@ import AppContext from '../../context/app-context'
 import background from '../../img/sing-up-background.jpg'
 
 const StyledInitSession = styled.main`
-
+    min-height: 100vh;
 background : url(${background}) no-repeat right top ;
 display: flex;
 justify-content:center;
