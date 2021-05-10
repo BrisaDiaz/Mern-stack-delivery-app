@@ -1,6 +1,8 @@
+  
 import styled  from 'styled-components'
 import {useHistory} from 'react-router-dom'
 import AppContext from '../../context/app-context'
+import DeleteProductAPI from '../../API/DeleteProductAPI'
 import useMenuProductsDispayer from '../../hooks/useMenuProductsDispayer'
 import FilerProductsOptions from '../FilerProductsOptions'
 import {   useContext , Fragment} from 'react'
@@ -49,7 +51,8 @@ margin: 20px auto;
 
 
  export default function DashboardProducts(){
-    let {adminSearchQuery,products,deleteProduct,token,setProductToEdit,productStateFilterPreference}  = useContext(AppContext);
+
+    let {adminSearchQuery,products,productsAPI,token,setProductToEdit,productStateFilterPreference}  = useContext(AppContext);
   const {toDisplayProducts} =useMenuProductsDispayer(adminSearchQuery,products)
 
    let { FilteredProducts} =useProductStateFilter(productStateFilterPreference,toDisplayProducts)
@@ -94,7 +97,7 @@ FilteredProducts.map( product =>
      <EditIcone src={editIcone} alt="edit"></EditIcone>
    </EditButton>
 
-   <DeleteOfDatabaseButton  onClick={ () =>deleteProduct(token,product._id)}>
+   <DeleteOfDatabaseButton  onClick={ () =>DeleteProductAPI(productsAPI,token,product._id)}>
    <TrashIcone src={DeleteIcone} alt="delete"/>
    </DeleteOfDatabaseButton>
    </Fragment>

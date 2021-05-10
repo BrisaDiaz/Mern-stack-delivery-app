@@ -1,9 +1,9 @@
-import styled  from 'styled-components'
+import styled from 'styled-components'
 import {StyledSection} from '../dashboard/DashboardEditProduct'
-import {useContext,useState,Fragment} from 'react' 
+import {useContext,Fragment} from 'react' 
 import AppContext from '../../context/app-context'
 import useEditProfileForm from '../../hooks/useEditProfileForm'
-import loadingSvg from '../../img/spinning-circles.svg'
+import {LoaderSpinner} from './../LoaderSpinner'
 import {UserNameInput,UserPasswordInput,UserNewPasswordInput,ErrorServerMessage,ErrorMessage} from '../auth/SingupForm'
 import {FormButtons } from '../dashboard/CreateNewProductForm'
 
@@ -48,9 +48,13 @@ placeholder={placeholder}
           ref={register({
               required: '*El campo es requrido',
                   minLength: {
-            value: 10,
-            message: "*Teléfono Invalido (10 dígitos)"
+            value: 9,
+            message: "*Teléfono Invalido"
                                       },
+           maxLength: {
+            value: 10,
+            message: "*Teléfono Invalido"
+                                      },                                      
                      pattern: {
             value: /[0-9]/,
             message: "*Solo se aceptan carácteres"
@@ -82,12 +86,14 @@ placeholder={placeholder}
 } 
 export default function EditMyProfile() {
   
-  const [serverError,setServerError] = useState("");
-const [formIsLoading,setFormIsLoading] = useState(false);
 
-const {token,getUsers,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} = useContext(AppContext);
 
-   const {register,handleSubmit,errors,onSubmit} = useEditProfileForm({setServerError,setFormIsLoading,token,getUsers,setCurrentUser,setAllUsers,setIsSuccessfullySend,isAdmin})
+const {token,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} = useContext(AppContext);
+
+   const { 
+ register,handleSubmit,errors,onSubmit ,serverError,formIsLoading
+} = useEditProfileForm(
+  {token,setCurrentUser,setAllUsers,setIsSuccessfullySend,isAdmin})
 
   return(
 <StyledSection>
@@ -111,11 +117,12 @@ const {token,getUsers,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} 
      
 
        
-   {formIsLoading ?  <img src={loadingSvg} alt="loading..."/> :
+   {formIsLoading ?  <LoaderSpinner /> :
 
          <ErrorServerMessage>{serverError}</ErrorServerMessage>
       
   }
+  
           <FormButtons />
   </EditProfileForm>
 

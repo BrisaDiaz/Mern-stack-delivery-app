@@ -1,6 +1,7 @@
 import styled  from 'styled-components'
 import {useForm} from 'react-hook-form'
 import AppContext from '../../context/app-context'
+import postProductAPI from '../../API/postProductAPI'
 import {Fragment ,useContext} from 'react'
 import {ErrorMessage} from '../auth/SingupForm'
 import trayIcon from '../../img/tray.svg';
@@ -309,26 +310,30 @@ export function ProductState(props){
 
    return(
           <CheckboxWrapper >
-<label for="state">Publicar:</label>
+<label htmlFor="state">Publicar:</label>
 <input
 id="state" type="checkbox" defaultChecked={state} name="state" />
           </CheckboxWrapper>
     )
   }
 export default function UpdateNewProductForm() {
-    const {createNewProduct,token,setIsSuccessfullySend}  = useContext(AppContext);
+
+
+
+    const {token,setIsSuccessfullySend,productsAPI}  = useContext(AppContext);
+
  const { register, handleSubmit, formState: { errors } } = useForm({
   mode: "onBlur",
 });
     
- const onSubmit = async (data,e) =>{
+ const onSubmit =  (data,e) =>{
 
         e.preventDefault()
-        createNewProduct({token,e,setIsSuccessfullySend})
-      
+
+        postProductAPI({token,e,productsAPI,setIsSuccessfullySend})
+
 
   }
-  
  
   return(
     <StyledSection>

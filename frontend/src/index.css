@@ -35,7 +35,8 @@ input::placeholder {
 textarea::placeholder,
 input::placeholder {
   font-family: "Open Sans", sans-serif;
-  font-style: oblique;
+  /* font-style: oblique; */
+  font-size: 10px;
 }
 a {
   font-family: "Open Sans", sans-serif;
@@ -93,4 +94,7 @@ li {
 }
 b {
   margin-right: 2px;
+}
+article::-webkit-scrollbar {
+  width: 10px;
 }

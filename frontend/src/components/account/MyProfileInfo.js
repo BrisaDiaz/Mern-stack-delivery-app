@@ -86,9 +86,11 @@ padding: 4px 8px;
 `;
 function MyProfileInfo() {
 
-  const {currentUser,setIsAdmin,setToken,setIsNotLogin} = useContext(AppContext)
-const handleLogout = () =>{
+  const {currentUser,setIsAdmin,setToken,setIsNotLogin,emptyCart} = useContext(AppContext)
 
+  
+const handleLogout = () =>{
+emptyCart()
 setIsNotLogin() ;
 setToken("");
  setIsAdmin(false);

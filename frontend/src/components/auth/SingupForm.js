@@ -1,12 +1,11 @@
 import styled  from 'styled-components'
-import {useContext ,Fragment,useState} from 'react' 
+import {useContext ,Fragment} from 'react' 
 import AppContext from '../../context/app-context'
 import useSingupForm from '../../hooks/useSingupForm'
-import loadingSvg from '../../img/spinning-circles.svg'
 import {ButtonPrimary} from '../Buttons'
 import burgerIcon from '../../img/burger-icon.png'
 import {NameInput , EmailInput} from '../contact/ContactForm';
-
+import {LoaderSpinner} from './../LoaderSpinner'
 
 export const FormCard =  styled.article`
   box-shadow: 0 0 4px rgba(0,0,0,0.5);
@@ -50,9 +49,6 @@ align-items:center;
       box-shadow: inset 0 0 4px 0px rgb(23 23 23 / 36%);
 }
 
-& > img {
-  margin-bottom: 10px;
-}
 @media screen and  (max-width:500px){
 width: 90%;
 & > input {
@@ -173,11 +169,10 @@ placeholder={placeholder}
   );
 }
 export default function SingupForm(){
-    const {setIsSingUp} = useContext(AppContext);
-const [serverError,setServerError] = useState("")
-const [isLoading,setIsLoading] = useState(false)
-   const {register,handleSubmit,errors,onSubmit,redirectToLogin} = useSingupForm(setIsSingUp,setServerError,setIsLoading)
 
+    const {setIsSingUp} = useContext(AppContext);
+
+   const {register,handleSubmit,errors,onSubmit,redirectToLogin,isFormLoading,serverError} = useSingupForm(setIsSingUp)
   return(
     <FormCard>
              <Logo src={burgerIcon} alt="LogoBrand"></Logo>
@@ -187,7 +182,7 @@ const [isLoading,setIsLoading] = useState(false)
      <UserEmailInput  errors={errors} register={register}/>
      <UserPasswordInput  errors={errors} register={register} placeholder="Tu contraseña..."  name="userPassword"/>
       
-   {isLoading ?  <img src={loadingSvg} alt="loading..."/> :
+   {isFormLoading ?  <LoaderSpinner small /> :
 
          <ErrorServerMessage>{serverError}</ErrorServerMessage>
           }    

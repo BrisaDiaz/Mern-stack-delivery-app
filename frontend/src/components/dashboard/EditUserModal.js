@@ -1,11 +1,12 @@
 import styled  from 'styled-components';
-import {useContext,useState} from 'react' 
+import {useContext} from 'react' 
 import AppContext from '../../context/app-context'
 import {FormButtons } from './CreateNewProductForm'
-import useEditUserForm from '../../hooks/useEditUserForm'
+import useEditUserModal from '../../hooks/useEditUserModal'
 import {TableTitle} from './DashboardUsers'
-import loadingSvg from '../../img/spinning-circles.svg'
+import {LoaderSpinner} from './../LoaderSpinner'
 import {ErrorServerMessage} from '../auth/SingupForm'
+
 const EditModal = styled.div`
 position:absolute;
 top:0;
@@ -95,18 +96,11 @@ export function RolesInputs(){
 ,setIsEditing}) {
 
 const {token,setAllUsers} = useContext(AppContext);
-const [serverError,setServerError] = useState("")
-const [isLoading,setIsLoading] = useState(false)
 
-const {editUser} = useEditUserForm({token,setIsLoading,setServerError,setIsEditing,setAllUsers})
 
-const handelReset = () =>{
-setIsEditing(false);
- setServerError("");
-}
-const handelSubmit = (e) =>{
-  editUser(e,user._id)
-}
+const {serverError,isFormLoading,handelReset,handelSubmit} = useEditUserModal({token,setIsEditing,setAllUsers})
+
+
 
 return(
     <EditModal isEditing={isEditing}>
@@ -120,9 +114,9 @@ return(
       <p><InfoLabel>Email: </InfoLabel>{user.email}</p>
        <RolesLabel>Selecciónar Roles:</RolesLabel>
 
-   <EditForm onSubmit={handelSubmit} onReset={handelReset}>
+   <EditForm onSubmit={(e) =>handelSubmit(e,user._id)} onReset={handelReset}>
          <RolesInputs/>
-    {isLoading ?  <img src={loadingSvg} alt="loading..."/> :
+    {isFormLoading ?  <LoaderSpinner/> :
 
          <ErrorServerMessage>{serverError}</ErrorServerMessage>
           }    

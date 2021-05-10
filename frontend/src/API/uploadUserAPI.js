@@ -1,15 +1,16 @@
+import usersAPI from './usersAPI'
 
-import usersAPI from '../API/usersAPI'
-export default  function useEditUserForm({token,setIsLoading,setServerError,setIsEditing,setAllUsers}){
-
-
-
-  async function editUser(e,id) {
-
-    e.preventDefault();
-
-  try {
-setIsLoading(true)
+async function uploadUserAPI({
+setFormIsLoading,
+setIsEditing,
+setServerError,
+e,
+setAllUsers,
+token,
+id
+}){
+try {
+setFormIsLoading(true)
 const rolesInputs=[e.target.moderator,e.target.admin,e.target.user]
 
  const selectRoles = rolesInputs.filter(role => role.checked === true ).map(role => role.value);
@@ -39,7 +40,7 @@ headers.append('Content-Type', 'application/json');
         let res = await fetch(`/api/users/${id}`, setting);
        let json = await res.json()
     
-     setIsLoading(false)
+     setFormIsLoading(false)
       if(res.status === 200) {
 
              usersAPI({setAllUsers,token})
@@ -60,12 +61,6 @@ setIsEditing(false);
 
   console.log(err)
 }
+}
 
-
-    
- 
-  }
-
- 
-  return {editUser} 
-     }
+export default uploadUserAPI

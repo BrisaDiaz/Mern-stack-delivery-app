@@ -1,6 +1,6 @@
 import  {useReducer,useEffect} from 'react';
 import AppContext from  './app-context';
-import { useHistory } from 'react-router-dom'
+
 import appReducer from  './app-reducer';
 import {
   SET_IS_LOADING,
@@ -36,10 +36,10 @@ SET_FORM_DATA_SUCCESFULLY_SEND
 
 
 export default  function AppState(props) {
-  const history = useHistory()
 
 
- const getProducts = async() =>{
+
+ const productsAPI = async() =>{
     try{
 
 const res = await fetch('/api/products');
@@ -48,159 +48,21 @@ const res = await fetch('/api/products');
 
 setAllProducts(data)
 setIsLoading(false)
-    }catch(err){
-      getProducts()
 
+
+    }catch(err){
+      productsAPI()
+
+console.log(err)
     }
 
   }
 
 
-  async function deleteProduct(token,id){
-     const headers = new Headers();
-        headers.append('Accept', 'application/json');
-      headers.append('Authorization', `Bearer ${token}`);
-
-
-        const setting = {
-          method: 'DELETE',
-          headers: headers,
-
-        }
-
-const deleteConfirmation = window.confirm('El producto será eliminado de la base de datos ¿Esta seguro? ');
-
-if(deleteConfirmation){
-try {
-        let res = await fetch("/api/products/"+id, setting);
-  
-getProducts()
-      } catch (err) {
-
-        console.log(err)
-      }
-
-}else{
-  return
-}
-  
-
-  }
-
-  async function updateProduct(
-{    token,
-    e,
-    id,
-    nameValue,
-categoryValue,
-sizeValue,
-descriptionValue,
-priceValue,
-setIsSuccessfullySend}
-){
-     const formData = new FormData()
-      let active =  e.target.state.checked ? true : false ;
-
-
-          formData.append('img',e.target.img.files[0])
-        formData.append('name', nameValue)
-        formData.append('category', categoryValue)
-        formData.append('size', sizeValue)
-        formData.append('description', descriptionValue)
-        formData.append('price', priceValue)
-        formData.append('active', active)
-
-       
-   
-      
-        const headers = new Headers();
-        headers.append('Accept', 'application/json');
-      headers.append('Authorization', `Bearer ${token}`);
-
-
-        const setting = {
-          method: 'PUT',
-          headers: headers,
-          body: formData,
-        }
-
-let url =`/api/products/${id}`
-  try {
-        let res = await fetch(url , setting);
-      console.log(res)
-
-      if(res.status === 200){
-           getProducts()
-           setIsSuccessfullySend(true)
-
-setTimeout(() => {
-  setIsSuccessfullySend(false)
-   history.push('/dashboard/myProducts')
-}, 3000);
-
-      }
-   
-
-      } catch (err) {
-
-        console.log(err)
-      }
-  }
-  async function createNewProduct({token,e,setIsSuccessfullySend}){
-
-      const formData = new FormData()
-let active =  e.target.state.checked ? true : false ;
-
-        formData.append('img', e.target.img?.files[0])
-        formData.append('name', e.target.name.value)
-        formData.append('category', e.target.category.value)
-        formData.append('size', e.target.size.value)
-        formData.append('description', e.target.description.value)
-        formData.append('price', e.target.price.value)
-        formData.append('active', active)
-      
-       const headers = new Headers();
-        headers.append('Accept', 'application/json');
-      headers.append('Authorization', `Bearer ${token}`);
-
-console.log(token)
-        const setting = {
-          method: 'POST',
-                  body: formData,
-          headers: headers,
-
-        }
-
-
-  try {
-        let res = await fetch("/api/products", setting);
-       
-        if(res.status >= 200  || res.status < 300  ){
-
-getProducts()
-e.target.reset()
-setIsSuccessfullySend(true)
-
-setTimeout(() => {
-  setIsSuccessfullySend(false)
-
-}, 3000);
-
-        }     
-      
-      } catch (err) {
-
-        console.log(err)
-      }
-  }
-
- 
-
-  
   
     useEffect( ()=>{
   
-getProducts()
+productsAPI()
 
   },[ ])
 
@@ -400,13 +262,11 @@ adminSearchQuery: state.adminSearchQuery,
 menuSortPreference : state.menuSortPreference,
 productStateFilterPreference: state.productStateFilterPreference,
 isSuccessfullySend:state.isSuccessfullySend,
-createNewProduct,
 setIsLoading,
 setToken,
-getProducts,
+productsAPI,
 setAllUsers,
 setCurrentUser,
-updateProduct,
 emptyCart,
 setProductToEdit,
 addToCart,
@@ -421,7 +281,6 @@ setIsLogin,
 setIsNotLogin,
 setIsAdmin,
 setIsModerator,
-deleteProduct,
 setMenuSearchQuery,
 setAdminSearchQuery,
 setMenuSortPreference,

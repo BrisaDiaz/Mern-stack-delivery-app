@@ -1,8 +1,8 @@
 import styled  from 'styled-components'
 import useLoginForm from '../../hooks/useLoginForm'
-import {useContext,useState} from 'react' 
+import {useContext} from 'react' 
 import AppContext from '../../context/app-context'
-import loadingSvg from '../../img/spinning-circles.svg'
+import {LoaderSpinner} from './../LoaderSpinner'
 import {ButtonPrimary} from '../Buttons'
 import burgerIcon from '../../img/burger-icon.png'
 
@@ -16,12 +16,14 @@ transition:all 0.5s esea;
   color:#fff;
 }`
 export default function SinginForm(){
-const [serverError,setServerError] = useState("")
-const [isLoadingForm,setIsLoadingForm] = useState(false)
-     const {setIsLogin,setIsNotSingup,setIsAdmin,setIsModerator,setToken,getUsers,setAllUsers,setCurrentUser,token,setIsLoading} = useContext(AppContext);
-     const {register, handleSubmit, errors, onSubmit ,redirectToSingUp} = 
-      useLoginForm({setIsLogin,setIsNotSingup,setIsAdmin,setToken,setServerError, getUsers,setIsLoadingForm,setAllUsers,setCurrentUser,token,setIsModerator,setIsLoading})
 
+
+     const {setIsLogin,setIsNotSingup,setIsAdmin,setToken,getUsers,setAllUsers,setCurrentUser,token,setIsLoading} = useContext(AppContext);
+     
+     const {register, handleSubmit, errors, onSubmit ,redirectToSingUp,
+      serverError,isFormLoading
+    } = 
+      useLoginForm({setIsLogin,setIsLoading,setIsNotSingup,setIsAdmin,setToken, getUsers,setAllUsers,setCurrentUser,token})
 
 
   return(
@@ -31,7 +33,7 @@ const [isLoadingForm,setIsLoadingForm] = useState(false)
 
 <UserEmailInput  errors={errors} register={register} name="userEmail" />
     <UserPasswordInput name="userPassword" placeholder="Tu contraseña..."  errors={errors} register={register}/>
-           {isLoadingForm ?  <img src={loadingSvg} alt="loading..."/> :
+           {isFormLoading ?   <LoaderSpinner small />  :
 
          <ErrorServerMessage>{serverError}</ErrorServerMessage>
           }    

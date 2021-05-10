@@ -1,8 +1,7 @@
 import styled  from 'styled-components'
-import {useForm} from 'react-hook-form'
-import {  useContext, useState,useEffect} from 'react'
+import {  useContext} from 'react'
 import AppContext from '../../context/app-context'
-
+import useEditProductForm from '../../hooks/useEditProductForm'
 import {ErrorMessage} from '../auth/SingupForm'
 import {Logo} from '../auth/SingupForm'
 import {ThisFormCard, ThisForm} from './CreateNewProductForm'
@@ -28,44 +27,13 @@ transform:scale(0.75);
 
 export default function UpdateNewProductForm() {
 
-    const {updateProduct,token,productToEdit,setIsSuccessfullySend}  = useContext(AppContext);
-      const { register, handleSubmit, formState: { errors } }= useForm({
-  mode: "onBlur",
-});
-
-let [nameValue, setNameValue] = useState(productToEdit.name)
-let [categoryValue, setCategoryValue] = useState(productToEdit.category)
-let [priceValue, setPriceValue] = useState(productToEdit.price)
-let [sizeValue, setSizeValue] = useState(productToEdit.size )
-let [descriptionValue, setDescriptionValue] = useState(productToEdit.description )
-let id= productToEdit._id
-useEffect(() => {
- setNameValue (productToEdit.name)
-setCategoryValue (productToEdit.category)
- setPriceValue (productToEdit.price)
-setSizeValue (productToEdit.size )
-setDescriptionValue(productToEdit.description)
-
-}, [productToEdit])
- 
-async function onSubmit(data,e) {
-
-
-  e.preventDefault()
-    updateProduct(
-  {    token,
-      e,
-    id,
-    nameValue,
-categoryValue,
-sizeValue,
-descriptionValue,
-priceValue,
-setIsSuccessfullySend
-}
-)
-
-  }
+    const {productsAPI,token,productToEdit,setIsSuccessfullySend}  = useContext(AppContext);
+const {register ,handleSubmit, errors, onSubmit,setNameValue,setCategoryValue,setPriceValue,setSizeValue,setDescriptionValue,nameValue,categoryValue,
+priceValue,sizeValue,descriptionValue
+} = useEditProductForm({token,
+productToEdit,
+productsAPI,
+setIsSuccessfullySend})
  
   return(
     <StyledSection>

@@ -1,95 +1,49 @@
 import {useForm} from 'react-hook-form';
 import {useHistory} from 'react-router-dom';
-import currentUserAPI from '../API/currentUserAPI'
-import usersAPI from '../API/usersAPI'
+import {useState} from 'react' 
+import uploadProfileAPI from '../API/uploadProfileAPI'
 
-export default function useEditProfileForm({setServerError,setFormIsLoading,token,setCurrentUser,setAllUsers,setIsSuccessfullySend,isAdmin}){
+export default function useEditProfileForm({token,setCurrentUser,setAllUsers,setIsSuccessfullySend,isAdmin}){
+  
+  const [serverError,setServerError] = useState("");
+const [formIsLoading,setFormIsLoading] = useState(false);
+
    const history = useHistory()
+
     const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
 });
 
-async function onSubmit(data,e) {
+ function onSubmit(data,e) {
 
 
  e.preventDefault()
-try{
-  setFormIsLoading(true)
-   setServerError("");
 
-
-
-const name =  e?.target?.userName?.value?.toLowerCase(),
-address = e.target.userAddress?.value?.toLowerCase();
-
-const info ={
-name,
-password:e?.target?.userPassword?.value,
-newPassword:e?.target?.userNewPassword?.value,
-number:e.target.userNumber?.value,
-address,
-
-}
-
-
-  const id = localStorage.getItem('userId');
-
-
-
-     const headers = new Headers();
-        headers.append('Accept', 'application/json');
-headers.append('Content-Type', 'application/json');
-      headers.append('Authorization', `Bearer ${token}`);
-
-        const setting = {
-          method: 'PUT',
-          headers: headers,
-            body: JSON.stringify(info),
-        }
-
-
-
-        let res = await fetch(`/api/users/me/${id}`, setting);
-            let  json = await res.json()
-
-setFormIsLoading(false)
-
-         if(res.status === 200) {
-        
-
-         (isAdmin) && usersAPI({token,setAllUsers})
-       currentUserAPI({token,setCurrentUser})
-
-         setIsSuccessfullySend(true);
-         setTimeout(() => {
-                 
-                    history.push("/myAccount/myProfile")
-         }, 3000);
-  
-      }
-
-       if(res.status === 500) {
-   console.log(json)
-   setServerError('Error interno, vuelva a interntar')
-return
- }
- 
-  const {message} = json
-        console.log(message)
-      setServerError(message)
-      
-}catch(err){
-
-  console.log(err)
-}
-
+uploadProfileAPI({
+  setFormIsLoading,
+setIsSuccessfullySend,
+setServerError,
+e,
+isAdmin,
+setAllUsers,
+token,
+setCurrentUser,
+history,
+})
 
 
   }
   
 
 
-  return {register,handleSubmit,errors,onSubmit} 
+  return {
+    register,
+    handleSubmit,
+    errors,
+    onSubmit ,
+    serverError,
+formIsLoading
+} 
 
   
 }

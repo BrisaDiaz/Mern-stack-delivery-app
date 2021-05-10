@@ -78,6 +78,7 @@ border-radius:50%;
 cursor:pointer;
 background: #e83c2e;
 margin-bottom: 10px;
+margin-left:5px;
 box-shadow:0 0 5px #e83c2e;
 transition:all 0.5s ease;
 
