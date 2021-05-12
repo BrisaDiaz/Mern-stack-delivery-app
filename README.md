@@ -10,7 +10,11 @@
  ![image](https://drive.google.com/uc?export=view&id=1deChmB_NGZgpBxa2KCGHLY_ZQD3Kj8NL)
  
   ![image](https://drive.google.com/uc?export=view&id=1Pv2IGiVlcZvALZG9UCecEbUtuZad24r6)
-
+  
+  ### Environment variables
+  
+URI =  The conecction string to mongoDB .
+SECRET= The custom secret key for the JSON web tokens
 
 ## Backend
 
