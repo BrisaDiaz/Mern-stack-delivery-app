@@ -1,6 +1,5 @@
 import styled  from 'styled-components'
-import {useForm} from 'react-hook-form'
-
+import useContactForm from '../../hooks/useContactForm'
 import SocilasMenu from '../SocialsMenu'
 import {ErrorMessage} from '../auth/SingupForm'
 import {ButtonPrimary} from '../Buttons'
@@ -127,14 +126,7 @@ color:#000;
 
 export default  function ContactForm() {
 
-    const { register, handleSubmit, formState: { errors } }= useForm({
-  mode: "onBlur",
-});
-  function onSubmit(data,e) {
-    e.preventDefault()
-    console.log(data);
-
-  }
+    const {register,handleSubmit,errors,onSubmit}= useContactForm()
   
   return(
     <StyledContact>

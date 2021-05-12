@@ -1,4 +1,5 @@
 import {useForm} from 'react-hook-form'
+import contactAPI from '../API/contactAPI.js'
 
 export default function useContactForm(){
  const { register, handleSubmit, formState: { errors } }= useForm({
@@ -6,9 +7,14 @@ export default function useContactForm(){
 });
  function onSubmit(data,e) {
     e.preventDefault()
-    console.log(data);
     
-       alert("your message has been send")
+const formData = new FormData()
+      formData.append('useName',data.userName)
+     formData.append( 'userEmail',data.userEmail)
+     formData.append( 'userMessage',data.userMessage)
+
+    contactAPI(formData)
+     
 }
 
   return {register,handleSubmit,errors,onSubmit}

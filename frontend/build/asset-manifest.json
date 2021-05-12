@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.95979cef.chunk.css",
-    "main.js": "/static/js/main.2e869688.chunk.js",
-    "main.js.map": "/static/js/main.2e869688.chunk.js.map",
+    "main.css": "/static/css/main.dab45325.chunk.css",
+    "main.js": "/static/js/main.5cd872cb.chunk.js",
+    "main.js.map": "/static/js/main.5cd872cb.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.1a77d0ad.js",
     "runtime-main.js.map": "/static/js/runtime-main.1a77d0ad.js.map",
-    "static/js/2.172a950e.chunk.js": "/static/js/2.172a950e.chunk.js",
-    "static/js/2.172a950e.chunk.js.map": "/static/js/2.172a950e.chunk.js.map",
+    "static/js/2.02039135.chunk.js": "/static/js/2.02039135.chunk.js",
+    "static/js/2.02039135.chunk.js.map": "/static/js/2.02039135.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.95979cef.chunk.css.map": "/static/css/main.95979cef.chunk.css.map",
-    "static/js/2.172a950e.chunk.js.LICENSE.txt": "/static/js/2.172a950e.chunk.js.LICENSE.txt",
+    "static/css/main.dab45325.chunk.css.map": "/static/css/main.dab45325.chunk.css.map",
+    "static/js/2.02039135.chunk.js.LICENSE.txt": "/static/js/2.02039135.chunk.js.LICENSE.txt",
     "static/media/People-Eating-And-Drinking-90673271.265692fe.jpg": "/static/media/People-Eating-And-Drinking-90673271.265692fe.jpg",
     "static/media/about-background.fd4c3f69.png": "/static/media/about-background.fd4c3f69.png",
     "static/media/burger-icon.4ba9750a.png": "/static/media/burger-icon.4ba9750a.png",
@@ -33,7 +33,6 @@
     "static/media/shopping-cart-solid.f0d47d21.svg": "/static/media/shopping-cart-solid.f0d47d21.svg",
     "static/media/shopping-cart.3e5c9c9b.svg": "/static/media/shopping-cart.3e5c9c9b.svg",
     "static/media/sing-up-background.03cf7d60.jpg": "/static/media/sing-up-background.03cf7d60.jpg",
-    "static/media/spinning-circles.f2322b35.svg": "/static/media/spinning-circles.f2322b35.svg",
     "static/media/trash-alt-regular.617dd641.svg": "/static/media/trash-alt-regular.617dd641.svg",
     "static/media/tray.fe877925.svg": "/static/media/tray.fe877925.svg",
     "static/media/twitter-brands.a3f5953c.svg": "/static/media/twitter-brands.a3f5953c.svg",
@@ -42,8 +41,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.1a77d0ad.js",
-    "static/js/2.172a950e.chunk.js",
-    "static/css/main.95979cef.chunk.css",
-    "static/js/main.2e869688.chunk.js"
+    "static/js/2.02039135.chunk.js",
+    "static/css/main.dab45325.chunk.css",
+    "static/js/main.5cd872cb.chunk.js"
   ]
 }

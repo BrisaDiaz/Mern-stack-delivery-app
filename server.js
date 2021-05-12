@@ -13,11 +13,7 @@ createRoles()
 createAdmin()
 
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+
 app.use(express.urlencoded({extended: false})); 
 app.use(express.json());
 app.use(cors());
@@ -28,6 +24,7 @@ const port = process.env.PORT || 7000;
 const productsRouter = require('./routes/products.js');
 const usersRouter = require('./routes/users.js');
 const authRouter = require('./routes/auth.js');
+const contactRouter = require('./routes/contact.js');
 
 if ( process.env.NODE_ENV === 'production'){
   
@@ -44,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'frontend')));
 app.use('/api/auth',authRouter)
 app.use('/api/products',productsRouter)
 app.use('/api/users',usersRouter)
+app.use('/api/contact',contactRouter)
 
 
 

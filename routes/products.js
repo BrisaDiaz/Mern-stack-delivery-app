@@ -1,7 +1,8 @@
 
 const router = require('express').Router();
 const multer = require('multer');
-const path = require('path')
+const path = require('path');
+
 const { getAllProducts,getProductById,postNewProduct,updateProductById,deleteProductById} =require(
   '../controllers/productsControllers')
   const {verifyToken,isAdmin,isModerator } =require('../middlewares/authJwt')
