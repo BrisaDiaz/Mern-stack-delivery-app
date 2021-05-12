@@ -14,7 +14,7 @@
 ## Environment variables
   
 URI =  The conecction string to mongoDB.  
-SECRET= The custom secret key for the JSON web tokens  
+SECRET= The custom secret key for JSON web tokens  
 
 ## Backend
 
