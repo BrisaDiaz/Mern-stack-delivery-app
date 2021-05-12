@@ -2,7 +2,7 @@
 
 
 # Mern-stack-delivery-app
-
+### state: prone to new features and code refactoring.  
 ### Demo: https://fast-food-delivery-app.herokuapp.com/
 
  ![image](https://drive.google.com/uc?export=view&id=1ZejNCwfLN3uflqsjPZdqFWGXU-S3vboS)
@@ -10,7 +10,11 @@
  ![image](https://drive.google.com/uc?export=view&id=1deChmB_NGZgpBxa2KCGHLY_ZQD3Kj8NL)
  
   ![image](https://drive.google.com/uc?export=view&id=1Pv2IGiVlcZvALZG9UCecEbUtuZad24r6)
-
+  
+## Environment variables
+  
+URI =  The conecction string to mongoDB.  
+SECRET= The custom secret key for JSON web tokens  
 
 ## Backend
 
