@@ -14,10 +14,14 @@ const history =useHistory();
 });
 
   async function onSubmit(data,e) {
-
+    
+const info ={
+email:e.target.userEmail.value,
+password:e.target.userPassword.value
+}
     e.preventDefault()
     loginAPI({
-      e,
+      info,
 setIsLoading,
 setServerError,
 setIsLogin,

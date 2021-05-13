@@ -59,7 +59,7 @@ const jwt =require('jsonwebtoken');
         message: "Invalid Password",
       });
 
-    const token = jwt.sign({ id: userFound._id }, process.env.SECRET, {
+    const token = jwt.sign({ id: userFound._id }, process.env.JWT_SECRET_KEY, {
       expiresIn: 86400, 
     });
 

@@ -2,7 +2,7 @@ import usersAPI from './usersAPI'
 import currentUserAPI from './currentUserAPI'
 
 async function loginAPI({
-e,
+info,
 setIsLoading,
 setServerError,
 setIsLogin,
@@ -17,10 +17,7 @@ setIsModerator
 try {
 setIsFormLoading(true)
 
-const info ={
-email:e.target.userEmail.value,
-password:e.target.userPassword.value
-}
+
 
     const headers = new Headers();
         headers.append('Accept', 'application/json');

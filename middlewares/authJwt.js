@@ -9,7 +9,7 @@ try{
   if(!token) return res.status(403).json({message:"No token provided"})
 
   
- const decoded = jwt.verify(token, process.env.SECRET)
+ const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY)
 
 req.userId = decoded.id
 

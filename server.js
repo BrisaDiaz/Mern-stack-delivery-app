@@ -3,7 +3,7 @@ const app = express();
 
 const cors = require('cors');
  require('dotenv').config({path: '.env'});
-const connectDB = require( './db.js');
+const connectDB = require( './config/db.js');
 const path = require('path');
 const morgan = require('morgan');
 const { createRoles,createAdmin} = require('./libs/initialSetUp');
