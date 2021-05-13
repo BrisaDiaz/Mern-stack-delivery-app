@@ -4,15 +4,11 @@ async function singUpAPI({
 setIsFormLoading,
 setServerError,
 setIsSingUp,
-e
+info
 }){
 try{
   setIsFormLoading(true)
-const info ={
-name: e.target.userName.value.toLowerCase(),
-email:e.target.userEmail.value,
-password:e.target.userPassword.value
-}
+
 
   
 

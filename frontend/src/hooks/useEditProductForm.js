@@ -37,9 +37,21 @@ setDescriptionValue(productToEdit.description)
 
   e.preventDefault()
   
+   const formData = new FormData()
+      let active =  e.target.state.checked ? true : false ;
+
+
+          formData.append('img',e.target.img.files[0])
+        formData.append('name', nameValue)
+        formData.append('category', categoryValue)
+        formData.append('size', sizeValue)
+        formData.append('description', descriptionValue)
+        formData.append('price', priceValue)
+        formData.append('active', active)
+
 updateProductAPI({
     token,
-    e,
+    formData,
     id,
     nameValue,
 categoryValue,

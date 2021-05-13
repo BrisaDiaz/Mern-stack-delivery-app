@@ -5,7 +5,7 @@ async function UploadProfileAPI({
   setFormIsLoading,
 setIsSuccessfullySend,
 setServerError,
-e,
+info,
 isAdmin,
 setAllUsers,
 token,
@@ -18,17 +18,7 @@ history,
 
 
 
-const name =  e?.target?.userName?.value?.toLowerCase(),
-address = e.target.userAddress?.value?.toLowerCase();
 
-const info ={
-name,
-password:e?.target?.userPassword?.value,
-newPassword:e?.target?.userNewPassword?.value,
-number:e.target.userNumber?.value,
-address,
-
-}
 
 
   const id = localStorage.getItem('userId');

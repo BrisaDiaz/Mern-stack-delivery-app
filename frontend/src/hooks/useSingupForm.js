@@ -13,13 +13,18 @@ const [isFormLoading,setIsFormLoading] = useState(false)
 
  function onSubmit(data,e) {
 
-
  e.preventDefault()
+
+const info ={
+name: e.target.userName.value.toLowerCase(),
+email:e.target.userEmail.value,
+password:e.target.userPassword.value
+}
 
 singUpAPI({
 setServerError,
 setIsSingUp,
-e,
+info,
 setIsFormLoading
 })
 

@@ -4,21 +4,14 @@ async function uploadUserAPI({
 setFormIsLoading,
 setIsEditing,
 setServerError,
-e,
+info,
 setAllUsers,
 token,
 id
 }){
 try {
 setFormIsLoading(true)
-const rolesInputs=[e.target.moderator,e.target.admin,e.target.user]
 
- const selectRoles = rolesInputs.filter(role => role.checked === true ).map(role => role.value);
- 
-const roles = (selectRoles.length !== 0) ? selectRoles : ["user"];
-const info ={
-roles,
-}
 
 
     const headers = new Headers();
