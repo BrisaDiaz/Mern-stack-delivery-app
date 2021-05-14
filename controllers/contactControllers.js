@@ -1,21 +1,54 @@
+
 const sendEmail = require('../config/nodemailer') ;
 
 
-const sendToAdminEmail = async (req,res) =>{
+const sendToAdminEmail  = async (req,res) =>{
 
-  const {userEmail,userMessage,userName} = req.body
+try{
+
+
+  const { userEmail,userMessage,userName,subject } = req.body
+
+ if(!userName || !userEmail || !userMessage) return  res.status(400).json({successful: false, message :" Bad request name, email ,subject and message are required"})
 
   const emailOptions = {
      from: `"Food Delivery App " <${process.env.OAUTH_USER}> `, 
-    to: 'tiffany191817@gmail.com' , 
-    subject: `User ${userName}  have send you a message`, 
+    to: process.env.OAUTH_USER, 
+    subject: subject, 
     html: `
-    <h2>Message:</h2>
-    <p>${userMessage}</p>
-    <address><b>email : ${userEmail}</b></address>`,
+      <h1 style="text-align: center;
+    color: #fcba1c;
+        padding-bottom: 20px;
+   ">${subject}</h1>
+
+    <h2 style="color: #404040de;
+        margin: 5px 0;
+    ">Remitente:</h2>
+    <div>   
+
+    <p style="text-transform: capitalize; 
+        margin: 0;
+        font-size: 16px;
+        "><b style="color: #fcba1c;">Nombre: </b>${userName}</p>
+    
+    <p style="margin: 0;
+            font-size: 16px;
+    "><b style="color: #fcba1c;">Email: </b>${userEmail}</p>
+
+    </div>
+       <h2 style="color: #404040de;
+           margin: 5px 0;
+           ">Mensaje:</h2>
+
+    <div  style="padding: 5px 15px; background: #00000005">
+ 
+    <p style="font-size: 16px;">${userMessage}</p>
+    
+    </div>
+  
+`,
   }
   
-try{
 
   await  sendEmail(emailOptions);
   
@@ -30,4 +63,4 @@ try{
 
 }
 
-module.exports = sendToAdminEmail
+module.exports = {sendToAdminEmail}

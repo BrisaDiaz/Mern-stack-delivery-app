@@ -1,26 +1,25 @@
 const express= require('express');
 const app = express();
-
 const cors = require('cors');
  require('dotenv').config({path: '.env'});
-const connectDB = require( './config/db.js');
+const connectDB = require( './config/db.js')
 const path = require('path');
 const morgan = require('morgan');
 const { createRoles,createAdmin} = require('./libs/initialSetUp');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false })); 
+app.use(cors());
+app.use(morgan('tiny'));
 
 connectDB()
 createRoles()
 createAdmin()
 
-
-
-app.use(express.urlencoded({extended: false})); 
-app.use(express.json());
-app.use(cors());
-app.use(morgan('tiny'));
-
-
 const port = process.env.PORT || 7000;
+
+
+
 const productsRouter = require('./routes/products.js');
 const usersRouter = require('./routes/users.js');
 const authRouter = require('./routes/auth.js');

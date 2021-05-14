@@ -77,6 +77,11 @@ border:none;
   width:100%;
 padding: 12px 10px 12px 20px;
 `;
+const SubjectInput =styled( NameInput).attrs(props => ({
+type:"text",
+  placeholder:'Asunto...'
+
+}))``
 export const EmailInput= styled(NameInput).attrs(props => ({
 type:"email",
   placeholder:'Tu Email...'
@@ -84,7 +89,6 @@ type:"email",
 }))`
   border: 2px solid #171717;
 `
-
 ;
 const Textarea= styled.textarea.attrs(props => ({
  rows: 50,
@@ -106,11 +110,12 @@ resize: 'none',
 }
   border: 2px solid #171717;
   border-radius:5px;
-
+  min-height:250px; 
   max-height:250px; 
   outline:none;
     margin-bottom:25px;
-  width:100%;
+  min-width:100%;
+    max-width:100%;
   padding: 12px 10px 12px 20px;
 
 `;
@@ -162,6 +167,17 @@ export default  function ContactForm() {
            style={{ borderColor: errors.userEmail && "#bf0000" }}
           />
                {errors.userMessage && <ErrorMessage>{errors.userMessage.message}</ErrorMessage>}
+
+
+           <  SubjectInput 
+          placeholder='Asunto...'
+          name="subject"
+          ref={register({
+             required: "*El campo es requrido",
+            
+          })}
+                 style={{ borderColor: errors.subject && "#bf0000" }}
+          />     
           <Textarea 
           name="userMessage"
           ref={register({

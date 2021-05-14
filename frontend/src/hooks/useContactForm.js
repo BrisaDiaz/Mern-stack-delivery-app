@@ -9,9 +9,10 @@ export default function useContactForm(){
     e.preventDefault()
     
 const formData = new FormData()
-      formData.append('useName',data.userName)
+      formData.append('userName',data.userName)
      formData.append( 'userEmail',data.userEmail)
      formData.append( 'userMessage',data.userMessage)
+    formData.append( 'subject',data.subject)
 
     contactAPI(formData)
      

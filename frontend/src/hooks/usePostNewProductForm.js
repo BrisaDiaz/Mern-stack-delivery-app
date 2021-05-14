@@ -1,5 +1,5 @@
 import {useForm} from 'react-hook-form'
-import postProductAPI from '../../API/postProductAPI'
+import postProductAPI from '../API/postProductAPI'
 
 
 export default function usePostNewProductForm({

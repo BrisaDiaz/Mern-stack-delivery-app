@@ -13,14 +13,19 @@ const contactAPI = async (formData) =>{
 
   try{
   
-    let res  = await fetch('/api/contact',setting)
-    let json = await res.Json()
+  
+let res  = await fetch("/api/contact",setting)
+if(res.status === 200){
 
-    console.log(json.message)
+  let {message} = res.json()
+      console.log(message)
+}
 
 
+return res
 
   }catch(err){
+    console.log("There was a problem submitting contact form")
     console.log(err)
   }
 
