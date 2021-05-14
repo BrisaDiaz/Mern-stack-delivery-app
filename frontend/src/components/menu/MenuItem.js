@@ -30,6 +30,12 @@ font-size:28px;
 letter-spasing:0;
 line-height:35px;
 text-transform:capitalize ;
+transition: all 0.5s;
+    margin-left: 5px;
+&:hover {
+      color: #fcba1c;
+    text-shadow: -1px -1px 1px #000;
+}
 `
 const ProductLink = styled(Link)`
 text-decoration:none;

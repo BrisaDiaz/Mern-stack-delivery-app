@@ -8,13 +8,14 @@ export default function useContactForm(){
  function onSubmit(data,e) {
     e.preventDefault()
     
-const formData = new FormData()
-      formData.append('userName',data.userName)
-     formData.append( 'userEmail',data.userEmail)
-     formData.append( 'userMessage',data.userMessage)
-    formData.append( 'subject',data.subject)
+const info = {
+userName: data.userName,
+userEmail: data.userEmail,
+userMessage: data.userMessage,
+subject: data.subject,
+}
 
-    contactAPI(formData)
+    contactAPI(info)
      
 }
 

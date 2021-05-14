@@ -17,7 +17,6 @@ display:flex;
 flex-wrap:wrap;
 & > * {
 padding:10px  25px;
-max-height:460px;
 height:100%;
 }
 `;
@@ -166,7 +165,7 @@ export default  function ContactForm() {
           })}
            style={{ borderColor: errors.userEmail && "#bf0000" }}
           />
-               {errors.userMessage && <ErrorMessage>{errors.userMessage.message}</ErrorMessage>}
+               {errors.subject && <ErrorMessage>{errors.subject.message}</ErrorMessage>}
 
 
            <  SubjectInput 
@@ -178,6 +177,7 @@ export default  function ContactForm() {
           })}
                  style={{ borderColor: errors.subject && "#bf0000" }}
           />     
+            {errors.userMessage && <ErrorMessage>{errors.userMessage.message}</ErrorMessage>}
           <Textarea 
           name="userMessage"
           ref={register({

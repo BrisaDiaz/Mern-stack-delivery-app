@@ -9,7 +9,7 @@ try{
 
   const { userEmail,userMessage,userName,subject } = req.body
 
- if(!userName || !userEmail || !userMessage) return  res.status(400).json({successful: false, message :" Bad request name, email ,subject and message are required"})
+ if(!userName || !userEmail || !userMessage ||!subject) return  res.status(400).json({successful: false, message :" Bad request name, email ,subject and message are required"})
 
   const emailOptions = {
      from: `"Food Delivery App " <${process.env.OAUTH_USER}> `, 
@@ -17,11 +17,11 @@ try{
     subject: subject, 
     html: `
       <h1 style="text-align: center;
-    color: #fcba1c;
+    color: #fc9707;
         padding-bottom: 20px;
    ">${subject}</h1>
 
-    <h2 style="color: #404040de;
+    <h2 style="color: #272727;
         margin: 5px 0;
     ">Remitente:</h2>
     <div>   
@@ -36,7 +36,7 @@ try{
     "><b style="color: #fcba1c;">Email: </b>${userEmail}</p>
 
     </div>
-       <h2 style="color: #404040de;
+       <h2 style="color: #272727;
            margin: 5px 0;
            ">Mensaje:</h2>
 

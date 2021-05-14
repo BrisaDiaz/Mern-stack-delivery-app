@@ -1,13 +1,15 @@
 
-const contactAPI = async (formData) =>{
+const contactAPI = async (info) =>{
 
   const headers = new Headers();
         headers.append('Accept', 'application/json');
+headers.append('Content-Type', 'application/json');
 
             const setting = {
           method: 'POST',
-                  body: formData,
-          headers: headers,
+                 headers: headers,
+                  body: JSON.stringify(info),
+   
 
         }
 
