@@ -62,10 +62,11 @@ transform:scale(1);
 const Deltail = styled.p`
 line-height:25px;
 text-transform:capitalize ;
-& > b {
-      color: rgb(252 175 1);
-          margin-right: 5px;
-
+& > span {
+      
+color: rgb(255 165 0);
+    margin-right: 5px;
+    font-weight: 600;
 }
 `;
 const Description = styled(Deltail)`
@@ -86,10 +87,10 @@ const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProdu
        onClick={ () => {handlerAddToCartAndAddToTotalCost(thisProductInfo,parseInt(thisProductInfo.price))}}><CartIcon style={{  position:'absolute'}} src={shoopingCartIcon} alt="add-to-cart"/></ThisCartButton>
 
     <Line/>
-     <Deltail><b>Categoría:</b>{thisProductInfo.category}</Deltail>
-   <Deltail><b>Porción:</b>{thisProductInfo.size}</Deltail>
-   <Deltail><b>Precio:</b>${thisProductInfo.price}</Deltail>
-  <Description><b>Ingredientes:</b>{thisProductInfo.description}</Description>
+     <Deltail><span>Categoría:</span>{thisProductInfo.category}</Deltail>
+   <Deltail><span>Porción:</span>{thisProductInfo.size}</Deltail>
+   <Deltail><span>Precio:</span>${thisProductInfo.price}</Deltail>
+  <Description><span>Ingredientes:</span>{thisProductInfo.description}</Description>
     
   
 </ProductDetails>
