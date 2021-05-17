@@ -14,16 +14,14 @@ left:0;
 right:0;
 z-index:2000;
 background: #fff;
-& > h4{
-    margin: 0 0 15px 15px;
-}
+
 `;
 export default function LoadingPage(){
       const {isLoading}  = useContext(AppContext);
   return(
 
    isLoading ?
-   <Page ><h2>Loading</h2><LoaderSpinner/></Page>
+   <Page ><LoaderSpinner/></Page>
  : null
 
   )

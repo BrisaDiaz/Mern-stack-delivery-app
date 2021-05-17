@@ -11,6 +11,7 @@ border-radius:5px;
 position:relative;
 flex: 1 1 280px;
 max-width:280px;
+min-width:280px;
 height:350px;
 flex-flow:column;
 margin:15px;
@@ -33,8 +34,8 @@ text-transform:capitalize ;
 transition: all 0.5s;
     margin-left: 5px;
 &:hover {
-      color: #fcba1c;
-    text-shadow: -1px -1px 1px #000;
+      color: color: rgb(0 0 0 / 50%);
+
 }
 `
 const ProductLink = styled(Link)`

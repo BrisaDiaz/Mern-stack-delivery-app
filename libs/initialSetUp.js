@@ -35,6 +35,7 @@ try{
       email: "admin@localhost.com",
       password: await bcrypt.hash("admin", 10),
       roles: roles.map((role) => role._id),
+      confirmed:true
     });
     console.log('Admin User Created!')
   }

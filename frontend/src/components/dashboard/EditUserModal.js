@@ -45,15 +45,18 @@ background: #e83c2e;
 export const InfoLabel= styled.b`
 color:#e83c2e;
 margin-right:5px;
+font-family: "Oswald", sans-serif;
 `;
 export const RolesLabel = styled.h4`
 margin: 10px 0;
+    font-family: "Oswald", sans-serif;
 
 `
  const RoleInput = styled.input`
 visibility:hidden;
 position:relative;
 margin-right:${(props)=>(props.marg)};
+
 &:before{
   visibility:visible;
   content:'${(props)=>(props.role)}';
@@ -63,7 +66,7 @@ margin-right:${(props)=>(props.marg)};
   justify-content:center;
   align-items:center;
     padding:  10px;
-  
+  font-family: "Oswald", sans-serif;
  border-radius: 10px;
     color: #ffffff;
     cursor:pointer;

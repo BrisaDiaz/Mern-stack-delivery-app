@@ -38,7 +38,7 @@ headers.append('Content-Type', 'application/json');
 
         let res = await fetch("/api/auth/login", setting);
        let json = await res.json()
-       
+         let {message} = json
     setIsFormLoading(false)
      
       if(res.status === 200) {
@@ -72,25 +72,21 @@ headers.append('Content-Type', 'application/json');
       return history.push("/menu")
       
     }
- if(res.status === 500) {
-   console.log(json)
-   setServerError('Error interno, vuelva a interntar')
-return
- }else{
-  const {message} = json
-        console.log(message)
+
+if(res.status === 500){
+   setServerError('Error en el servidor, vuelva a interntar')
+
+}
+
+
    
      setServerError(message)
 
- }
-    
-     
-
-         
        
 }catch(err){
 
   console.log(err)
+
 }
 
 }

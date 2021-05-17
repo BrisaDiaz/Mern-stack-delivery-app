@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model')
 const {Role} = require('../models/role.model')
+
+
 const verifyToken = async (req,res,next) =>{
 
 try{ 
@@ -24,7 +26,16 @@ res.status(401).json({message: "Unauthorized"})
   
 }
 
-const isAdmin = async (req,res,next) =>{
+const verifyAccountConfirmartion = async (req,res,next) =>{
+
+  const user = await User.findOne({email: req.body.email})
+
+   if(!user) return res.status(404).json({success:false ,message:"No user faund"} )
+
+   next()
+
+}
+ const isAdmin = async (req,res,next) =>{
 
   try{
   const user = await User.findById(req.userId)
@@ -68,4 +79,4 @@ try{
 
 }
 
-module.exports = {verifyToken,isAdmin,isModerator}
+module.exports = {verifyToken,isAdmin,isModerator,verifyAccountConfirmartion}

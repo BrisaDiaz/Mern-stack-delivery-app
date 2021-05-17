@@ -5,6 +5,17 @@ import {useParams} from 'react-router-dom'
 import {CartButton,CartIcon} from '../menu/MenuItem'
 import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
 import useAddToCartButton from '../../hooks/useAddToCartButton'
+import {Link } from '../dashboard/DashboardNewProduct'
+
+
+export const GoBackLink = styled(Link)`
+margin-left:0;
+padding: 10px 0;
+&:before{
+  content : "<-- ";
+  margin-right:3px;
+}
+`;
 const ProductDetails = styled.main`
 width:90vw;
     min-height: calc(100vh - 58px);
@@ -25,8 +36,10 @@ const PrductImg = styled.img`
 position:relative;
 left:50%;
 transform:translate(-50%, 0);
-max-width:500px;
-width:100%;
+max-width: 350px;
+    max-height: 350px;
+    height: 100%;
+
 `;
 const Name =styled.h2`
     margin: 10px 0 ;
@@ -67,6 +80,9 @@ text-transform:capitalize ;
 color: rgb(255 165 0);
     margin-right: 5px;
     font-weight: 600;
+        font-family: "Oswald", sans-serif;
+        letter-spacing:1px;
+ 
 }
 `;
 const Description = styled(Deltail)`
@@ -81,6 +97,9 @@ export default function ProductDetailsPage(){
 const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProductInfo,cartProducts,addToCart,addToTotalCost)
   return(
 <ProductDetails>
+  
+             <GoBackLink to="/menu" > Regresar al Menú</GoBackLink>
+       
   <PrductImg src={process.env.PUBLIC_URL +'/uploads/'+thisProductInfo.img}  alt={thisProductInfo.name}/>
     <Line/>
   <Name>{thisProductInfo.name}</Name><ThisCartButton isAdded={isAdded}

@@ -31,9 +31,8 @@ res.status(200).json(users)
 
 
    const UpdateUserById = async (req,res) =>{
-   let { roles } = req.body
+   const { roles } = req.body
 
-   roles = roles ? roles : null;
 
  try{ 
 

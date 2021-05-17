@@ -60,6 +60,9 @@ setFormIsLoading(false)
 
      return
       }
+      
+  const {message} = json
+        console.log(message)
 
        if(res.status === 500) {
    console.log(json)
@@ -67,8 +70,7 @@ setFormIsLoading(false)
 return
  }
  
-  const {message} = json
-        console.log(message)
+
       setServerError(message)
       
 }catch(err){

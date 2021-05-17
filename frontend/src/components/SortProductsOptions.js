@@ -4,15 +4,16 @@ import AppContext from '../context/app-context'
 
 
 export const OptionList = styled.select`
-padding:5px;
-border-radius:5px;
-outline:none;
-cursor:pointer;
-margin:0 20px 20px auto;
-      background: #eaeaea;
+
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    margin: 0 20px 20px auto;
+background: #111;
     border: none;
 
-    box-shadow: 0 0 3px 1px rgb(0 0 0 / 50%);
 `
 export const Option = styled.option`
 &:checked{

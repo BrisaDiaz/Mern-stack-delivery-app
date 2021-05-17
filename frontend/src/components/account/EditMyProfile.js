@@ -8,7 +8,7 @@ import {UserNameInput,UserPasswordInput,UserNewPasswordInput,ErrorServerMessage,
 import {FormButtons } from '../dashboard/CreateNewProductForm'
 
 import {NameInput } from '../contact/ContactForm';
-import {Link , LinksWrapper} from '../dashboard/DashboardNewProduct'
+import {GoBackLink} from '../product_details/ProductDetails'
 import userEditIcone from '../../img/user-edit-solid.svg'
 
 
@@ -98,9 +98,9 @@ const {token,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} = useCont
   return(
 <StyledSection>
 
-           <LinksWrapper>
-    <Link to="/myAccount/myProfile" >Regresar</Link>
-          </LinksWrapper>
+  
+    <GoBackLink to="/myAccount/myProfile" >Regresar</GoBackLink>
+  
 
   <EditProfileForm onSubmit={handleSubmit(onSubmit)}>
 

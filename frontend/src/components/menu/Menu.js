@@ -22,34 +22,42 @@ export const SectionTitle= styled.h2`
 text-align:center;
 text-transform: uppercase;
 color:#fcba1c;
-text-shadow: 2px 2px 2px #000;
+
+    text-shadow: -2px -1px 0 #000;
 `;
 const MenuWrapper= styled.section`
 display:flex;
 flex-wrap: wrap;
-
-padding: 20px 0;
+padding-bottom: 20px ;
 margin: 0 0px;
 width:100%;
 
 `;
 const CategoryTitle = styled.h3 `
-text-align: center;
+    text-align: center;
     line-height: 15px;
+    color: #fcba1c;
     font-size: 28px;
     margin: 10px 5px;
-    text-shadow: -1px -1px 0 #fcba1c;
+    text-shadow: -2px -2px 0 #272727;
     text-transform: capitalize;
 & + h3:before {
-  content:"- ";
+  content:".";
 }
 `
+const SearchBarWrapper = styled.div`
+width:100vw;
+margin-bottom: 20px;
+`;
 const CategoryWrapper = styled.article`
-width:100%;
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-margin :   20px 0;  
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background: #9c0101;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-left: -6px;
+    padding:  20px 15px;
 `;
 export const ProductsSection = styled.div`
 display:flex;
@@ -89,24 +97,30 @@ const activeProducts = products.filter(product=> product.active === true )
 
     <SectionTitle>Menú</SectionTitle>
 
-<SearchBar/>
-
 
 <MenuWrapper>
 
 
+
 <CategoryWrapper >
-  {categorys.map((category, index) =>
+  {categorys?.map((category, index) =>
    <CategoryTitle key={index}>{category}</CategoryTitle>
 )}
 </CategoryWrapper >
 
+
+<SearchBarWrapper>
+
+  <SearchBar/>
+</SearchBarWrapper>
+
 <SortProductsOptions/>
+
 
   <ProductsSection >
 
-    {   sortProducts.length !== 0 ?
-       sortProducts.map(product =>
+    {   sortProducts?.length !== 0 ?
+       sortProducts?.map(product =>
 
 <Item key={product._id } item={product}/>)
  :

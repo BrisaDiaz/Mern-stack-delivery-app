@@ -12,6 +12,7 @@ min-height:100vh;
 height:max-content;
 padding:15px;
 padding-top:60px;
+margin-left: -6px;
 
 `;
 const UsersTable = styled.div` 
@@ -73,14 +74,17 @@ align-items:space-between;
 padding: 5px 15px;
   border-bottom: 1px solid rgb(252 175 1);
   & > b{
-    padding: 1px 0;
-    margin-right: 4px;
+     color: #e83c2e;
+    margin-right: 5px;
+        font-family: "Oswald", sans-serif;
+
   }
 `;
-const UserName = styled.b`
+const UserName = styled.h4`
 font-size: 19px;
 text-transform: capitalize;
-margin-left:32px;
+text-align:center;
+margin-bottom:5px;
 `;
 const UserStatus = styled.b`
 padding: 5px 8px;
@@ -91,8 +95,13 @@ padding: 5px 8px;
     text-shadow: 0 0 1px black;
     box-shadow: inset 0 0 5px #9c0101;
     margin-bottom: 5px;
-`
+        font-family: "Oswald", sans-serif;
 
+`
+const AccountState = styled.span`
+    color: #88dd60;
+
+`
 function UserInfoCell({user,handelClick}){
 
  const [isToggledDetails,setIsToggledDetails] = useState(false)
@@ -102,9 +111,10 @@ function UserInfoCell({user,handelClick}){
   return(
  <UserCell>
 
-     <SeeMoreButton  trigger={trigger}/>
+      {  (user.number || user.address) && <SeeMoreButton  trigger={trigger}/>}
 
-    <UserName>{user?.name}</UserName><p><b>Email:</b>{user?.email}</p> 
+    <UserName>{user?.name}<AccountState>{user?.confirmed && " ✔"}</AccountState></UserName>
+    <p> <b>Email:</b>{user?.email}</p> 
 
     {isToggledDetails && <Fragment>
 
@@ -112,7 +122,8 @@ function UserInfoCell({user,handelClick}){
       {user?.address && <p><b>Dirección:</b>{user?.address}</p>}
 
     </Fragment>}
-     
+ 
+      
     <Wrapper>
  <p>{user?.createdAt.slice(0,10).split("-").reverse().join(" /")}</p>
 

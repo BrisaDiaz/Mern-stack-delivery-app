@@ -1,44 +1,136 @@
 
 const User =require('../models/user.model');
+const TemporalUser =require('../models/temporalUser.model');
 const {Role} =require('../models/role.model');
  require('dotenv').config({path: '.env'})
 const jwt =require('jsonwebtoken');
 
+const sendConfirmationEmailFunction = require('../libs/sendConfirmationEmail') ;
 
  const signUp = async (req, res) => {
   try {
- 
-    const { name, email, password, roles } = req.body;
+   const { name, email, password, roles } = req.body;
 
-    const newUser = new User({
+  const newTemporalUser = new TemporalUser({
       name,
       email,
-      password: await User.encryptPassword(password),
-    });
+      password,
 
+    });
 
     if (req.body.roles) {
 
       const foundRoles = await Role.find({ name: { $in: roles } });
-      newUser.roles = foundRoles.map((role) => role._id);
+      newTemporalUser.roles = foundRoles.map((role) => role._id);
 
     } else {
 
       const role = await Role.findOne({ name: "user" });
-      newUser.roles = [role._id];
+      newTemporalUser.roles = [role._id];
+
     }
 
+   const token = jwt.sign({ 
+    email :newTemporalUser.email, 
+  
+  }, process.env.JWT_EMAIL_CONFIRMATION_KEY);
 
-    await newUser.save();
+  newTemporalUser.emailToken = token
 
- 
-    return res.status(200).json({ mesage:"user registered" });
+    await newTemporalUser.save();
+
+
+
+    return res.status(201).json({successful: true ,message:"User creacted successfully",redirect:`/authentication/confirmation/${newUser.email}`})
+
   } catch (error) {
     console.log(error);
 
-    return res.status(500).json({error});
+    return res.status(500).json({successful: false ,message:"Something went wrong"});
   }
 };
+
+const sendConfirmationEmail = async(req,res) => {
+  try{
+
+   const userFound = await User.findOne({email: req.body.userEmail})
+
+   if(userFound.confirmed){ 
+    
+(process.env.NODE_ENV === 'production') ?
+
+ res.redirect('/authentication')
+ :
+res.redirect('http://localhost:3000/authentication')
+  
+return
+  }
+
+  const token = userFound.emailToken
+
+  const domain = req.headers.origin
+
+  const url = `${domain}api/auth/verification/${token}`
+
+   await sendConfirmationEmailFunction(url,userFound.email)
+
+res.status(200).json({success: true , message: " Account confirmation email has been send successfully"})
+
+
+  }catch(error){
+    console.log(error);
+
+   return  res.status(500).json({message:error})
+  }
+
+ 
+}
+
+const validateEmailToken  = async (req,res) => {
+
+  try{ 
+
+   const token = req.params.token
+
+  if(!token) return res.status(403).json({success:false ,message:"No token provided"})
+
+ const decoded =   jwt.verify(token, process.env.JWT_EMAIL_CONFIRMATION_KEY)
+
+const email  =  decoded.email
+
+
+ const user = await TemporalUser.findOne({email: email}).exec()
+
+
+ if(!user) return res.status(404).json({message:"No user faund"} )
+
+const newUser = new User({
+      name: user.name,
+      email: user.email,
+      password: await User.encryptPassword(user.password),
+      roles:user.roles,
+    });
+
+    await newUser.save();
+    await TemporalUser.findByIdAndRemove(user._id);
+    
+
+(process.env.NODE_ENV === 'production') ?
+
+ res.redirect('/authentication')
+ :
+res.redirect('http://localhost:3000/authentication')
+
+}catch(err){
+
+console.log(err)
+  
+
+
+
+}
+
+}
 
 
  const login = async (req, res) => {
@@ -71,4 +163,4 @@ const jwt =require('jsonwebtoken');
   }
 };
 
-module.exports = {signUp,login}
+module.exports = {signUp,login,validateEmailToken,sendConfirmationEmail}

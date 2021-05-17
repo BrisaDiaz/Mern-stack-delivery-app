@@ -6,7 +6,8 @@ const userSchema= new Schema ( {
  name:{
    type: String,
    required:true,
-     unique: true,
+
+     trim: true,
  },
  password:{
    type:String,
@@ -16,14 +17,17 @@ const userSchema= new Schema ( {
  email:{
    type:String,
    required:true,
+    index:1
  },
   address:{
    type:String,
    required:false,
+
  },
   number:{
    type:Number,
    required:false,
+
  },
   roles: [
       {
@@ -31,13 +35,28 @@ const userSchema= new Schema ( {
         ref: "Role",
       },
     ],
-
+    
+subscribed:{
+type: Boolean,
+default:false
 },
+orders:[
+  {
+        type: Schema.Types.ObjectId,
+        ref: "Orders",
+      },
+]
+},
+
 {
-  timestamps:true,
+ timestamps: true ,
       versionKey: false,
+
 }
 );
+
+
+
 userSchema.statics.encryptPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
@@ -46,6 +65,11 @@ userSchema.statics.encryptPassword = async (password) => {
 userSchema.statics.comparePassword = async (password, receivedPassword) => {
   return await bcrypt.compare(password, receivedPassword)
 }
+
+
+
 const User =mongoose.model('User',userSchema)
+
+
 
 module.exports = User 

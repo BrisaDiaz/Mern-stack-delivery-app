@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import {SectionTitle} from '../menu/Menu'
 import background from '../../img/about-background.png'
 
 const StyledAbout = styled.section`
@@ -8,8 +7,13 @@ margin-bottom:40px;
 
 
 `;
-const Title=styled(SectionTitle)`
+const Title=styled.h2`
 padding-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fcba1c;
+    margin-bottom: 15px;
+    text-shadow: -2px -1px 0 #000;
 `
 const AboutWrapper= styled.article`
 max-width:1250px;

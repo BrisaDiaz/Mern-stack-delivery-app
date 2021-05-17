@@ -6,7 +6,7 @@ const connectDB = require( './config/db.js')
 const path = require('path');
 const morgan = require('morgan');
 const { createRoles,createAdmin} = require('./libs/initialSetUp');
-
+const router = require('express').Router();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); 
 app.use(cors());
@@ -35,8 +35,8 @@ if ( process.env.NODE_ENV === 'production'){
 
 }else{
 app.use(express.static(path.join(__dirname, 'frontend')));
-}
 
+}
 app.use('/api/auth',authRouter)
 app.use('/api/products',productsRouter)
 app.use('/api/users',usersRouter)

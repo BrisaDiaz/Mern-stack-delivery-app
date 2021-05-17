@@ -4,6 +4,7 @@ async function singUpAPI({
 setIsFormLoading,
 setServerError,
 setIsSingUp,
+history,
 info
 }){
 try{
@@ -31,26 +32,33 @@ headers.append('Content-Type', 'application/json');
             let  json = await res.json()
 setIsFormLoading(false)
 
-         if(res.status === 200) {
+         if(res.status === 201 || 302) {
       setServerError("")
 
        setIsSingUp()
-      
+
+        const {redirect} = json 
+  
+ setTimeout(() => {
+       return history.push(redirect)
+  }, 1000);
       }
 
        if(res.status === 500) {
-   console.log(json)
-   setServerError('Error interno, vuelva a interntar')
+
+   setServerError('Error en el servidor, vuelva a interntar')
 return
  }
  
   const {message} = json
-        console.log(message)
+   
       setServerError(message)
       
 }catch(err){
 
   console.log(err)
+
+
 }
 
 }
