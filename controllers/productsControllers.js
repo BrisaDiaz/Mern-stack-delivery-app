@@ -61,7 +61,7 @@ const  img = (req.file) ?  req.file.filename :  null
 
   if (!product) return res.status(404).json({success:false, message:'product not faund'});
 
-let oldImgPath ="./frontend/public/uploads/"+product.img
+let oldImgPath ="./storage/media/"+product.img
 
  if(req.file){
 fs.unlink(oldImgPath, (err) => {
@@ -101,7 +101,7 @@ const deleteProductById= async (req,res) => {
 
   if (!product) return res.status(404).json({success:false, message:'product not faund'});
 
-let oldImgPath ="./frontend/public/uploads/"+product.img
+let oldImgPath ="./storage/media/"+product.img
 
 
 fs.unlink(oldImgPath, (err) => {

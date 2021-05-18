@@ -98,10 +98,7 @@ padding: 5px 8px;
         font-family: "Oswald", sans-serif;
 
 `
-const AccountState = styled.span`
-    color: #88dd60;
 
-`
 function UserInfoCell({user,handelClick}){
 
  const [isToggledDetails,setIsToggledDetails] = useState(false)
@@ -113,7 +110,7 @@ function UserInfoCell({user,handelClick}){
 
       {  (user.number || user.address) && <SeeMoreButton  trigger={trigger}/>}
 
-    <UserName>{user?.name}<AccountState>{user?.confirmed && " ✔"}</AccountState></UserName>
+    <UserName>{user?.name}</UserName>
     <p> <b>Email:</b>{user?.email}</p> 
 
     {isToggledDetails && <Fragment>

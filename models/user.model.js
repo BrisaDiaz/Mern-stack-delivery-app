@@ -6,8 +6,9 @@ const userSchema= new Schema ( {
  name:{
    type: String,
    required:true,
-
-     trim: true,
+lowercase:true,
+ trim:true,
+  
  },
  password:{
    type:String,
@@ -17,17 +18,18 @@ const userSchema= new Schema ( {
  email:{
    type:String,
    required:true,
+   trim:true,
     index:1
  },
   address:{
    type:String,
    required:false,
-
+   trim:true
  },
   number:{
    type:Number,
    required:false,
-
+   
  },
   roles: [
       {

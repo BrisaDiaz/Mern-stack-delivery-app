@@ -10,7 +10,7 @@ const { getAllProducts,getProductById,postNewProduct,updateProductById,deletePro
 const storage = multer.diskStorage({
   
   destination: function(req,file,cb){
-    cb(null,'./frontend/public/uploads')
+    cb(null,'./storage/media')
 
   },
 

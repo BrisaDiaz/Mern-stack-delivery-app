@@ -3,7 +3,7 @@ import SingleCartProduct from './SingleCartProduct';
 import useShoppingCart from '../../hooks/useShoppingCart'
 import {useContext} from 'react';
 import AppContext from '../../context/app-context'
-import {ButtonPrimary} from '../Buttons';
+
 
   const StyledCart = styled.article`
   position:fixed;
@@ -31,7 +31,9 @@ transition: all 0.5s ;
   `
   const CartTitle = styled.h2`
   text-shadow: 1px 1px 0px #000;
-  padding-top: 20px ;
+  padding-top: 10px ;
+    margin-bottom: 10px ;
+color: #fcba1c;
   `;
   const CartProductsList = styled.ul `
    list-style:none;
@@ -40,27 +42,28 @@ overflow-y:scroll;
   max-height:160px;
 
   `
-    const DeleteAllButton = styled(ButtonPrimary)`
-        box-shadow: none;
-position:relative;
-padding:10px;
-color:#000;
-margin: 10px 0;
-border-radius:15px;
-background:transparent;
-border:2px solid #ffa500;
-&:hover{
-  background:#ffa500;
+    const DeleteAllButton = styled.button`
+    position: relative;
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    margin: 10px 0;
+    border-radius: 15px;
+    background: #171717;
+    box-shadow: inset 0 0 13px 0 #0000006e;
+    font-family: "Oswald",sans-serif;
+    font-size: 19px;
+    transition: all 0.5s ease;
+    &:hover{
+  transform:scale(1.04);
 }
   `;
       const MakeOrdenButton = styled(DeleteAllButton)`
-
 margin: 10px 15px 0 0;
-transition: all 0.5s ease;
-background:#ffa500;
-&:hover{
-  transform:scale(1.08);
-}
+background:#fcba1c;
+    color: #171717;
   `;
       const CartResume = styled.div`
 margin:10px 0;

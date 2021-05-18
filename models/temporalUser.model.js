@@ -7,6 +7,7 @@ const temporalUserSchema= new Schema ( {
    type: String,
    required:true,
      trim: true,
+     lowercase:true, 
  },
  password:{
    type:String,
@@ -16,6 +17,7 @@ const temporalUserSchema= new Schema ( {
  email:{
    type:String,
    required:true,
+   trim:true,
     index:1
  },
   roles: [
@@ -29,15 +31,17 @@ emailToken:{
 type: String,
 require:true
 },
-createdAt: { type: Date, expires: 86400, default: Date.now }
-},
 
+ createdAt: { type: Date, expires: 24*60*60, default: Date.now }
+
+
+}
 );
 
 
 
-
 const TemporalUser =mongoose.model('TemporalUser',temporalUserSchema)
+
 
 
 

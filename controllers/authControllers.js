@@ -1,4 +1,5 @@
 
+const mongoose = require('mongoose')
 const User =require('../models/user.model');
 const TemporalUser =require('../models/temporalUser.model');
 const {Role} =require('../models/role.model');
@@ -11,7 +12,10 @@ const sendConfirmationEmailFunction = require('../libs/sendConfirmationEmail') ;
   try {
    const { name, email, password, roles } = req.body;
 
+   const id =mongoose.Types.ObjectId()
+
   const newTemporalUser = new TemporalUser({
+      _id: id,
       name,
       email,
       password,
@@ -31,7 +35,7 @@ const sendConfirmationEmailFunction = require('../libs/sendConfirmationEmail') ;
     }
 
    const token = jwt.sign({ 
-    email :newTemporalUser.email, 
+    id, 
   
   }, process.env.JWT_EMAIL_CONFIRMATION_KEY);
 
@@ -41,7 +45,7 @@ const sendConfirmationEmailFunction = require('../libs/sendConfirmationEmail') ;
 
 
 
-    return res.status(201).json({successful: true ,message:"User creacted successfully",redirect:`/authentication/confirmation/${newUser.email}`})
+    return res.status(201).json({successful: true ,message:"User creacted successfully",redirect:'/authentication/confirmation' ,id: id })
 
   } catch (error) {
     console.log(error);
@@ -53,24 +57,14 @@ const sendConfirmationEmailFunction = require('../libs/sendConfirmationEmail') ;
 const sendConfirmationEmail = async(req,res) => {
   try{
 
-   const userFound = await User.findOne({email: req.body.userEmail})
+   const userFound = await TemporalUser.findById(req.body.id)
 
-   if(userFound.confirmed){ 
-    
-(process.env.NODE_ENV === 'production') ?
-
- res.redirect('/authentication')
- :
-res.redirect('http://localhost:3000/authentication')
-  
-return
-  }
 
   const token = userFound.emailToken
 
-  const domain = req.headers.origin
 
-  const url = `${domain}api/auth/verification/${token}`
+
+  const url = `${process.env.HOST || 'localhost:7000'}/api/auth/verification/${token}`
 
    await sendConfirmationEmailFunction(url,userFound.email)
 
@@ -80,7 +74,7 @@ res.status(200).json({success: true , message: " Account confirmation email has 
   }catch(error){
     console.log(error);
 
-   return  res.status(500).json({message:error})
+   return  res.status(500).json({message:"something went wrong"})
   }
 
  
@@ -101,7 +95,7 @@ const email  =  decoded.email
 
  const user = await TemporalUser.findOne({email: email}).exec()
 
-
+console.log(email)
  if(!user) return res.status(404).json({message:"No user faund"} )
 
 const newUser = new User({
@@ -115,11 +109,11 @@ const newUser = new User({
     await TemporalUser.findByIdAndRemove(user._id);
     
 
-(process.env.NODE_ENV === 'production') ?
 
- res.redirect('/authentication')
- :
-res.redirect('http://localhost:3000/authentication')
+
+ res.redirect(`${process.env.HOST || 'localhost:3000'}/authentication`)
+
+
 
 }catch(err){
 

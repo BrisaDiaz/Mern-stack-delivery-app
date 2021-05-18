@@ -1,5 +1,5 @@
 import styled  from 'styled-components'
-import {useParams,useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import {useState} from 'react'
 import accountConfirmationAPI from '../../API/accountConfirmationAPI'
 import {LoaderSpinner} from './../LoaderSpinner'
@@ -12,7 +12,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 padding: 15px;
-
+    padding-top: 58px;
 `
 const MessageCard = styled.article` 
 margin: 30px 0;
@@ -62,7 +62,8 @@ font-size: 50px;
 }
 `
 export default function Confirmation(){
- const {email}=  useParams()
+
+
  const history= useHistory()
  const {setIsSuccessfullySend} = useContext(AppContext);
 const [isRequesLoading, setIsRequesLoading] = useState(false)
@@ -71,9 +72,9 @@ const [isRequesLoading, setIsRequesLoading] = useState(false)
   <MessageCard>
     <span>📬</span>
     <h4>Tu cuenta necesita ser verificada</h4>
-    <p>Para poder gestionar su cuenta de la aplicación es necesario que verifique su correo electronico.Al precionar el siguiente botón un mensaje le sera enviado a su cuenta de email con el link de verificación.</p>
+    <p>Para poder gestionar su cuenta en la aplicación es necesario que verifique su correo electronico. Al precionar el siguiente botón un mensaje le será enviado a su email con un link de verivicacón válido por 24hs.</p>
      {isRequesLoading && <LoaderSpinner small />}
-    <button onClick = {() => accountConfirmationAPI ({email,setIsRequesLoading,setIsSuccessfullySend,history}) }>Enviar Correo</button>
+    <button onClick = {() => accountConfirmationAPI ({setIsRequesLoading,setIsSuccessfullySend,history}) }>Enviar Correo</button>
 
   </MessageCard>
 </Page>

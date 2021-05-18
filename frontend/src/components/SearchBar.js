@@ -24,7 +24,10 @@ margin-left: -6px;
 box-shadow: 0 0 10px rgba(0,0,0,0.2);
   
 }
+&::placeholder {
+    font-size: 14px;
 
+}
 &:focus + div{
   margin-left: 210px;
   

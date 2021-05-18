@@ -4,14 +4,14 @@ import AppContext from '../../context/app-context'
 import {  useContext} from 'react'
 import {Link} from 'react-router-dom';
 import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
+
 const Item = styled.div `
 display:flex;
 box-sizing:border-box;
 border-radius:5px;
 position:relative;
-flex: 1 1 280px;
-max-width:280px;
-min-width:280px;
+    max-width: 250px;
+    min-width: 250px;
 height:350px;
 flex-flow:column;
 margin:15px;
@@ -20,19 +20,19 @@ padding:20px;
 border: 1px solid #00000026;
 box-shadow: 1px 1px 5px #00000057;
 `
-const Figcaption =styled.figcaption`
+const Figcaption =styled.div`
 display:flex;
 align-items:center;
 padding-bottom:5px;
 `;
 const Name =styled.h4`
 margin-bottom:0;
-font-size:28px;
+font-size:25px;
 letter-spasing:0;
 line-height:35px;
 text-transform:capitalize ;
 transition: all 0.5s;
-    margin-left: 5px;
+
 &:hover {
       color: color: rgb(0 0 0 / 50%);
 
@@ -44,16 +44,17 @@ margin-bottom:2px;
   color: #272727;
 `;
 const Size = styled.small`
-color: rgba(0,0,0,0.8);
-font-weight:600;
-margin-top:10px;
-margin-left:5px;
+align-self: flex-start;
+    color: rgba(0,0,0,0.8);
+    font-weight: 600;
+    margin: 10px;
+    margin-top: 8px;
 `;
 const Price = styled.h3 `
-margin: 0 5px;
-font-size:22px;
-color:#fcba1c;
-
+    font-size: 19px;
+    align-self: end;
+    color: #fcba1c;
+    margin:0;
 &:before{
   content:"$";
 }
@@ -123,7 +124,7 @@ const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(item,cart
 
 <ImgContainer> 
 
-<Img src ={process.env.PUBLIC_URL +'/uploads/'+item.img} alt={item.name}></Img>
+<Img src={item?.img} alt={item.name}></Img>
 
 
 

@@ -62,7 +62,7 @@ transform:scale(0.8);
 font-size:20px;
 color:#fff;
 transition: all 0.3s ease;
-box-shadow: 0 0 3px #e83c2e;
+box-shadow: inset 0 0 4px rgb(0 0 0 / 50%);
 &:hover{
 opacity:0.8;
 }
@@ -79,7 +79,7 @@ cursor:pointer;
 background: #e83c2e;
 margin-bottom: 10px;
 margin-left:5px;
-box-shadow:0 0 5px #e83c2e;
+box-shadow:inset 0 0 4px rgb(0 0 0 / 50%);
 transition:all 0.5s ease;
 
 

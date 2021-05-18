@@ -37,8 +37,10 @@ setIsFormLoading(false)
 
        setIsSingUp()
 
-        const {redirect} = json 
-  
+        const {redirect,id} = json 
+
+       localStorage.setItem('toConfirmUser', id)
+
  setTimeout(() => {
        return history.push(redirect)
   }, 1000);

@@ -57,7 +57,7 @@ text-transform:capitalize ;
 const Line = styled.div`
 
 width:100%;
-height:1px;
+height:2px;
 background:#fcaf01;
 margin:5px auto;
 `
@@ -100,7 +100,7 @@ const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProdu
   
              <GoBackLink to="/menu" > Regresar al Menú</GoBackLink>
        
-  <PrductImg src={process.env.PUBLIC_URL +'/uploads/'+thisProductInfo.img}  alt={thisProductInfo.name}/>
+  <PrductImg src={thisProductInfo.img}  alt={thisProductInfo.name}/>
     <Line/>
   <Name>{thisProductInfo.name}</Name><ThisCartButton isAdded={isAdded}
        onClick={ () => {handlerAddToCartAndAddToTotalCost(thisProductInfo,parseInt(thisProductInfo.price))}}><CartIcon style={{  position:'absolute'}} src={shoopingCartIcon} alt="add-to-cart"/></ThisCartButton>

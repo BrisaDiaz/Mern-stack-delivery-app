@@ -46,7 +46,7 @@ function App() {
     
     
         <Route path = "/authentication" exact component={ InitSession }  />
-     <PublicRoute path = "/authentication/confirmation/:email" component={ Confimation }  />
+     <PublicRoute path = "/authentication/confirmation" component={ Confimation }  />
         <Route path = "/contact" component={ Contact } />
        
     <PublicRoute path = "/myAccount/myProfile" component ={MyProfile}/>

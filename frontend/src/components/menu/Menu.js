@@ -58,6 +58,7 @@ const CategoryWrapper = styled.article`
     margin-bottom: 20px;
     margin-left: -6px;
     padding:  20px 15px;
+        box-shadow: inset 0 0 20px 0 #1111118c;
 `;
 export const ProductsSection = styled.div`
 display:flex;
@@ -89,7 +90,7 @@ const activeProducts = products.filter(product=> product.active === true )
  let {sortProducts} = useMenuSorter(menuSortPreference,toDisplayProducts)
 
 
- 
+
   return(
   isLoading ? null :   
 

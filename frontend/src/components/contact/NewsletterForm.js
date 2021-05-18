@@ -1,8 +1,11 @@
 import styled  from 'styled-components'
 import {useForm} from 'react-hook-form'
 import {ErrorMessage} from '../auth/SingupForm'
-
+import {useContext} from 'react';
+import AppContext from '../../context/app-context'
+import newsletterSubscribtionAPI from '../../API/newsletterSubscribtionAPI'
 import {Button} from '../Buttons'
+
 const StyledNewsletter = styled.article`
 box-sizing:border-box:
 max-width:100%;
@@ -41,6 +44,9 @@ display:flex;
 flex-flow:column;
 align-items:center;
 justify-content:center;
+& > ${ErrorMessage}{
+  color:#fff;
+}
 `;
 
 const NewsletterFormWrapper= styled.div`
@@ -53,6 +59,7 @@ align-items:center;
   min-width:200px;
   margin: 10px 5px
 }
+
 `;
 const NewsletterInput= styled.input.attrs(props => ({
   type: 'text',
@@ -74,13 +81,16 @@ padding: 17px 10px 17px 20px;
 `;
 
 export default function NewsletterForm(){
+  const {isLogin,setIsSuccessfullySend} = useContext(AppContext)
     const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
 });
   function onSubmit(data,e) {
     e.preventDefault()
-    console.log(data);
-
+      const email = data.userEmail.value()
+    isLogin ? 
+    newsletterSubscribtionAPI({email,setIsSuccessfullySend})
+: alert('Para poder subscribirse es necesario que inicie seción')
   }
   return(
 <StyledNewsletter>
@@ -97,13 +107,13 @@ export default function NewsletterForm(){
 
           ref={register({
                      required: true,
-                
+                    
                       pattern:{
                       value:/^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$/,
                       message: "*Email no valido"
                       }
           })}
-           style={{ borderColor: errors.userEmail && "#bf0000" }}
+           style={{ borderColor: errors.userEmail && "#000" }}
         ></NewsletterInput>
       
 <Button as="input" type="submit" value="Subscribirme"/>

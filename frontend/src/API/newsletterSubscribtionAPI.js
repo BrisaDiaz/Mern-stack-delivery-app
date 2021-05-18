@@ -1,8 +1,6 @@
-const accountConfirmationAPI = async ({setIsSuccessfullySend,setIsRequesLoading,history}) =>{
+const newsletterSubscribtionAPI = async ({email,setIsSuccessfullySend}) =>{
 
-setIsRequesLoading(true)
-
-  const info =  localStorage.getItem('toConfirmUser')
+  const info =  {email: email}
 
   const headers = new Headers();
         headers.append('Accept', 'application/json');
@@ -19,22 +17,21 @@ headers.append('Content-Type', 'application/json');
   try{
   
   
-let res  = await fetch("/api/auth/confirmation",setting)
+let res  = await fetch("/api/newsletter",setting)
 
-setIsRequesLoading(false)
 
 if(res.status === 200) {
   setIsSuccessfullySend(true)
-  localStorage.removeItem('toConfirmUser');
+
   setTimeout(() => {
     setIsSuccessfullySend(false)
-    history.push('/menu')
+
   }, 3000);
 }
 if(res.status === 500) alert("Error en el servidor, vuelva a interntar")
 
-
   }catch(err){
+
     console.log(err)
 
 
@@ -42,4 +39,4 @@ if(res.status === 500) alert("Error en el servidor, vuelva a interntar")
 
 }
 
- export default accountConfirmationAPI
+ export default newsletterSubscribtionAPI
