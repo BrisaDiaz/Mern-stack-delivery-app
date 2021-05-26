@@ -1,21 +1,22 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-CATEGORYS = [
-  {name:'pizzas',icone: '🍕'},{name:'hamburguesas', icone: '🍔'}, {name:'acompañantes', icone: '🍟'}, {name:'pastas', icone: '🍝'}, {name:'Gaceosas', icone: '🥤'}, {name:'hot dogs', icone: '🌭'}, {name:'empanadas', icone: '🥟'}, {name:'Sandwiches', icone: '🥪'}, {name:'tacos', icone: '🌮'},  {name:'burritos', icone: '🌯'}, {name:'bebidas alcoholicas', icone: '🍺'}, {name:'pollo frito', icone: '🍗'}, {name:'ensaladas', icone: '🥗'}, {name:'sushi', icone: '🍣'}, {name:'asado', icone: '🥩'}, {name:'postres', icone: '🥧'}, {name:'sopas', icone: '🥣'},  {name:'combos', icone: '💣'}, {name:'otros', icone: '🍽️'}, {name:'new category', icone: '👩‍🍳'},
 
-]
+const CATEGORIES = ['pizzas','haburguesas','sandwiches','hot dogs','empanadas','acompañantes','bebidas','bebidas alcoholicas','ensaladas','pollo frito','asado','picadas','burritos','tacos','sushi','postres','lomitos','combo','elaborados','otros']
 
 const categorySchema = new Schema(
   {
-    name: String,
-    icone:String,
+    name: {type: String , require: true, trim:true ,lowercase:true },
+    quantity:{ type: Number ,default: 0},
+    active:{type: Boolean , default: true}
   },
   {
-    versionKey: false,
+  timestamps:true,
+  versionKey: false,
   }
 );
 
-const Category = mongoose.model('Role', categorySchema);
 
-module.exports = {Category,CATEGORYS}
+const Category = mongoose.model('Category', categorySchema);
+
+module.exports = {Category,CATEGORIES}

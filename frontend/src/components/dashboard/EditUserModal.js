@@ -6,24 +6,24 @@ import useEditUserModal from '../../hooks/useEditUserModal'
 import {TableTitle} from './DashboardUsers'
 import {LoaderSpinner} from './../LoaderSpinner'
 import {ErrorServerMessage} from '../auth/SingupForm'
-
+import {OptionList,Option} from '../SortProductsOptions'
 const EditModal = styled.div`
 position:absolute;
 top:0;
 left:0;
 right:0;
 bottom:0;
+padding:15px;
 background:#0000002b;
 display: ${(props)=>(props.isEditing === true ? "block" : "none")};
 z-index:1000;
 
 `
 const EditTable = styled.div` 
-max-width:320px;
-min-width:300px;
+max-width:370px;
+width:100%;
 height:max-content;
-  border-bottom: none;
-border: 2px solid #e83c2e;
+    box-shadow: 2px 4px 14px 6px rgb(23 23 23 / 36%);
 margin: 0 auto;
 position:absolute;
 top:50%;
@@ -32,51 +32,28 @@ left:50%;
 transform:translate(-50%,-50%);
 `
 const EditTableBody = styled.div`
-padding: 20px;
-    background: #fff;
-
+padding: 10px 15px 20px;
+color: #ffffff;
+  background:  #272727;
+text-align:center;
+& > h4 {
+margin-bottom: 5px;
+}
+& > h3:last-child {
+color: #e83c2e;
+margin-bottom: 10px;
+}
 `
 const EditTableHeader = styled.div`
 background: #e83c2e;
     width: 100%;
     padding: 8px 15px;
+  text-shadow: -2px -1px 0 #000000;
     box-shadow: inset 0 0 20px 5px rgb(23 23 23 / 15%);
 `
-export const InfoLabel= styled.b`
-color:#e83c2e;
-margin-right:5px;
-font-family: "Oswald", sans-serif;
-`;
-export const RolesLabel = styled.h4`
-margin: 10px 0;
-    font-family: "Oswald", sans-serif;
 
-`
- const RoleInput = styled.input`
-visibility:hidden;
-position:relative;
-margin-right:${(props)=>(props.marg)};
 
-&:before{
-  visibility:visible;
-  content:'${(props)=>(props.role)}';
-  position:absolute;
-    background:#000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-    padding:  10px;
-  font-family: "Oswald", sans-serif;
- border-radius: 10px;
-    color: #ffffff;
-    cursor:pointer;
-    font-weight:900;
-        box-shadow: 1px 1px 3px #000;
-}
-&:checked:before{
-  background:#e83c2e;
-}
-`;
+
 
 const EditForm= styled.form`
 display:flex;
@@ -85,26 +62,16 @@ align-items:center;
 & > ${LoaderSpinner}{
   margin-bottom:10px;
 }
-& > ${FormButtons}{
-transform:scale(0.95);
+& >  ${FormButtons} > inputs{
+    transform: scale(0.8);
 }
-`;
- const InputWrapper = styled.div` 
-display:flex;
-width:100%;
-justify-content:space-evenly;
-margin: 0 40px 40px  10px;
 
-`;
-export function RolesInputs(){
-  return(
-<InputWrapper>
-         <RoleInput type="checkbox"  role="Admin" name="admin" marg="30px"  value="admin"></RoleInput>
-<RoleInput type="checkbox" role="Mediador" marg=" 50px"  name="moderator" value="moderator"></RoleInput>
-<RoleInput type="checkbox"   role="Usuario"  marg="30px" name="user" value="user"></RoleInput>
-         </InputWrapper>
-  );
+& >  ${OptionList} {
+margin: 10px auto;
 }
+`;
+
+
  export default function EditUserForm({user,isEditing
 ,setIsEditing}) {
 
@@ -123,16 +90,21 @@ return(
     
   </EditTableHeader>
   <EditTableBody>
-      <p><InfoLabel>Nombre: </InfoLabel>{user.name}</p>
-      <p><InfoLabel>Email: </InfoLabel>{user.email}</p>
-       <RolesLabel>Selecciónar Roles:</RolesLabel>
+      <h3>{user?.name}</h3>
+       <h4>Selecciónar Roles</h4>
 
    <EditForm onSubmit={(e) =>handelSubmit(e,user._id)} onReset={handelReset}>
-         <RolesInputs/>
+
+  <OptionList name="role">
+<Option value="user" >User</Option>
+<Option value="admin" >Admin</Option>
+<Option value="moderator" >Moderador</Option>
+
+</OptionList>
     {isFormLoading ?  <LoaderSpinner small /> :
 
          <ErrorServerMessage>{serverError}</ErrorServerMessage>
-          }    
+          }            
 
 <FormButtons />
        </EditForm>

@@ -20,6 +20,7 @@ const history = useHistory()
 
 const info ={
 name: e.target.userName.value.toLowerCase(),
+lastName: e.target.userLastName.value.toLowerCase(),
 email:e.target.userEmail.value,
 password:e.target.userPassword.value
 }

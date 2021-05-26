@@ -4,7 +4,6 @@ import useShoppingCart from '../../hooks/useShoppingCart'
 import {useContext} from 'react';
 import AppContext from '../../context/app-context'
 
-
   const StyledCart = styled.article`
   position:fixed;
 
@@ -76,14 +75,12 @@ align-items:center;
 
 
 
-export default  function ShooppingCart(props) {
+export default   function ShooppingCart() {
 
-const {totalCost,emptyCart,resetTotalCost,isCartOpen,isLogin}  = useContext(AppContext);
-let {cartProducts} = useContext(AppContext);
+let {cartProducts,totalCost,emptyCart,resetTotalCost,isCartOpen,isLogin,currentUser,setCurrentUser,token,setAllOrders,setIsLoading,toggleCart}  = useContext(AppContext)
+
 const {emptyCartAndResetTotalCost,handelOrden} = useShoppingCart(
-  emptyCart,resetTotalCost,isLogin,cartProducts)
-
-
+{  emptyCart,resetTotalCost,isLogin,cartProducts,currentUser,setCurrentUser,token,setAllOrders,setIsLoading,toggleCart})
 
 
   return(
@@ -99,8 +96,8 @@ const {emptyCartAndResetTotalCost,handelOrden} = useShoppingCart(
       
        
            <SingleCartProduct 
-         key={product._id}
-           ThisProduct={product}>  
+         key={product.info._id}
+          product={product}>  
       
       </SingleCartProduct>
          

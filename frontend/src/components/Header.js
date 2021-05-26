@@ -8,6 +8,8 @@ import menu from '../img/menu.svg'
 import clouseMenu from '../img/close.svg' 
 import cartIcone from '../img/shopping-cart.svg' 
 import profileIcon from '../img/user-circle-solid.svg'
+
+
  export const StyledLink = styled(Link)`
 display:flex;
 aling-items:center;
@@ -82,7 +84,7 @@ width: 40px;
 heght:40px;
 text-decoretion:none;
 cursor:pointer;
-margin-right:20px;
+margin-right: 35px;
 position:relative;
 `
 const CartIcone = styled.img`
@@ -200,7 +202,12 @@ setIsNotSingup() ;
 
 
 {isLogin ? 
+ <Fragment>
+      <StyledLink to="/myAccount/myOrders" onClick={closeNav}>Mis Pedidos</StyledLink>
 <Link to="/myAccount/myProfile" onClick={closeNav} ><IconeButton><ProfileIcone src ={profileIcon} alt="profile"></ProfileIcone></IconeButton></Link>
+
+ </Fragment>
+
 :
 <Fragment>
  <StyledLink className="primary" to="/authentication"  onClick={handleSingUp}>Sing Up</StyledLink>

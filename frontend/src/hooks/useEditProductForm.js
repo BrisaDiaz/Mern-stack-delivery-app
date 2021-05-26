@@ -36,7 +36,7 @@ setDescriptionValue(productToEdit.description)
  function onSubmit(data,e) {
 
   e.preventDefault()
-  
+
    const formData = new FormData()
       let active =  e.target.state.checked ? true : false ;
 

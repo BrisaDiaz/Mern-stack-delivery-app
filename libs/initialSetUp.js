@@ -1,7 +1,9 @@
 const {Role} = require('../models/role.model');
+const {Category,CATEGORIES} = require('../models/category.model');
 const User = require('../models/user.model');
-const OrderState = require('../models/orderSates.model');
 const bcrypt = require('bcryptjs')
+
+
 const createRoles = async () =>{
   try{
 const count = await Role.estimatedDocumentCount();
@@ -9,9 +11,9 @@ const count = await Role.estimatedDocumentCount();
 if( count > 0) return ;
 
 const values = await Promise.all([
-  new OrderState({name: "placed"}).save(),
-  new OrderState({name: "moderator"}).save(),
-  new OrderState({name: "admin"}).save(),
+  new Role({name: "user"}).save(),
+  new Role({name: "moderator"}).save(),
+  new Role({name: "admin"}).save(),
 ]);
 
 console.log(values)
@@ -44,6 +46,19 @@ try{
 }
 
 };
+const creatCategorys = async () =>{
+  try{
+    const count = await Category.estimatedDocumentCount();
 
+if( count > 0) return ;
+
+ const defaultCategories = CATEGORIES.map( category => ({name: category}))
+
+ await Category.create(defaultCategories)
+ 
+  }catch(err){
+    console.error(err)
+  }
+}
 module.exports = { createRoles,
-createAdmin}
+createAdmin,creatCategorys}

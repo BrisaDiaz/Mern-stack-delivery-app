@@ -1,6 +1,6 @@
 import usersAPI from './usersAPI'
 import currentUserAPI from './currentUserAPI'
-
+import getAllOrdersAPI from './getAllOrdersAPI'
 async function loginAPI({
 info,
 setIsLoading,
@@ -11,8 +11,10 @@ setIsAdmin,
 history,
 setCurrentUser,
 setAllUsers,
+setAllOrders,
 setIsFormLoading,
-setIsModerator
+setIsModerator,
+
 }){
 try {
 setIsFormLoading(true)
@@ -43,7 +45,7 @@ headers.append('Content-Type', 'application/json');
      
       if(res.status === 200) {
               setServerError("")
-            setIsLogin()
+    
         
        const {token,roles,user} = json
          setToken(token) ;
@@ -52,18 +54,22 @@ headers.append('Content-Type', 'application/json');
         
       await   currentUserAPI({setCurrentUser,token})
 
+        setIsLogin()
+        
            for (let i = 0; i < roles.length ; i ++){
              
      if ( roles[i].name === 'admin') {
          setIsAdmin(true)
          setIsLoading(true)
-        await usersAPI({setAllUsers,token,setIsLoading})
-         
-           return  history.push("/dashboard/users")
+        
+        await usersAPI({setAllUsers,token})
+   await getAllOrdersAPI({token,setAllOrders,setIsLoading})
+
+           return  history.push("/dashboard/orders")
       }
      else if(roles[i].name === 'moderator'){
       setIsModerator(true)
-      
+    await getAllOrdersAPI({token,setAllOrders,setIsLoading})
           return history.push("/dashboard/myProducts")
        
       }

@@ -10,16 +10,16 @@ const sendConfirmationEmailFunction = require('../libs/sendConfirmationEmail') ;
 
  const signUp = async (req, res) => {
   try {
-   const { name, email, password, roles } = req.body;
+   const { name, lastName, email, password, roles } = req.body;
 
    const id =mongoose.Types.ObjectId()
 
   const newTemporalUser = new TemporalUser({
       _id: id,
-      name,
+      name:req.userName,
       email,
       password,
-
+     
     });
 
     if (req.body.roles) {

@@ -8,8 +8,8 @@ const userSchema= new Schema ( {
    required:true,
 lowercase:true,
  trim:true,
-  
  },
+
  password:{
    type:String,
    required:true,
@@ -37,17 +37,23 @@ lowercase:true,
         ref: "Role",
       },
     ],
-    
 subscribed:{
 type: Boolean,
 default:false
 },
+profileState:{
+type: String,
+default:'incompleted',
+trim:true,
+lowercase:true
+},
 orders:[
   {
         type: Schema.Types.ObjectId,
-        ref: "Orders",
+        ref: "Order",
       },
-]
+],
+client:{type:Boolean , default:false}
 },
 
 {

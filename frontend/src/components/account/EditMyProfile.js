@@ -1,17 +1,21 @@
 import styled from 'styled-components'
-import {StyledSection} from '../dashboard/DashboardEditProduct'
 import {useContext,Fragment} from 'react' 
 import AppContext from '../../context/app-context'
 import useEditProfileForm from '../../hooks/useEditProfileForm'
 import {LoaderSpinner} from './../LoaderSpinner'
-import {UserNameInput,UserPasswordInput,UserNewPasswordInput,ErrorServerMessage,ErrorMessage} from '../auth/SingupForm'
+import {UserNameInput,UserLastNameInput,UserPasswordInput,UserNewPasswordInput,ErrorServerMessage,ErrorMessage} from '../auth/SingupForm'
+import {OptionList,Option} from '../dashboard/CreateNewProductForm'
 import {FormButtons } from '../dashboard/CreateNewProductForm'
-
 import {NameInput } from '../contact/ContactForm';
 import {GoBackLink} from '../product_details/ProductDetails'
 import userEditIcone from '../../img/user-edit-solid.svg'
 
-
+const EditProfilePage = styled.section`
+    min-height:100vh;
+width:100vw;
+padding: 60px 0px;
+    margin-left: -6px;
+`
 const EditProfileForm = styled.form`
 
   max-width:400px;
@@ -27,6 +31,9 @@ align-items:center;
   border:none;
   background: #f0f0f0;
 }
+& >${OptionList} {
+  width: 100%
+}
   `
 const FormIcone = styled.img`
 width:120px;
@@ -34,9 +41,15 @@ margin: 0 auto;
 margin-bottom:20px;
 margin-top:-20px;
 `
+const GoToProfileLink = styled(GoBackLink)`
+margin-left: 15px;
+&:before{
+      content: "<-- ";
+    margin-right: 3px;
+}
+`
 
-
-function CellphoneInput({errors,placeholder,register}) {
+function CellphoneInput({register,errors,placeholder}) {
   
   return(
 <Fragment>
@@ -57,30 +70,66 @@ placeholder={placeholder}
                                       },                                      
                      pattern: {
             value: /[0-9]/,
-            message: "*Solo se aceptan carácteres"
+            message: "*Solo se aceptan números"
           } 
           })}
            style={{ borderColor: errors.userNumber && "#bf0000" }}/>
 </Fragment>
   )
 } 
-function AdressInput({errors,name,placeholder,register}) {
+function CityAddressOptions({register}){
+  return(
+   <OptionList name="userCityAddress"
+   ref={register({
+
+           required: '*El campo es requrido',
+        
+          })}
+   
+   >
+<Option value="Córdoba" >Córdoba</Option>
+</OptionList>
+  );
+}
+function StreetAddressInput({errors,placeholder,register}) {
   
   return(
 <Fragment>
-    {errors.userAdress && <ErrorMessage  role="alert">{errors.userAddress.message}</ErrorMessage>}
+    {errors.userStreetAddress && <ErrorMessage  role="alert">{errors.userStreetAddress.message}</ErrorMessage>}
 
 <NameInput
 placeholder={placeholder}
- name="userAddress" 
+ name="userStreetAddress" 
           ref={register({
-
-            
-                      required: '*El campo es requrido (Ej: Calle 548, Barrio ,Córdoba)',
-          
-                        
+           required: '*El campo es requrido',
+        
           })}
-           style={{ borderColor: errors.userAddress && "#bf0000" }}/>
+           style={{ borderColor: errors.userStreetAddress && "#bf0000" }}/>
+</Fragment>
+  )
+} 
+function StreetNumberInput({errors,placeholder,register}) {
+  
+  return(
+<Fragment>
+    {errors.userStreetNumber && <ErrorMessage  role="alert">{errors.userStreetNumber.message}</ErrorMessage>}
+
+<NameInput
+placeholder={placeholder}
+ name="userStreetNumber" 
+          ref={register({
+    required: '*El campo es requrido',
+            
+           maxLength: {
+            value: 4,
+            message: "*Número Invalido"
+                                      },                                      
+                     pattern: {
+            value: /[0-9]/,
+            message: "*Solo se aceptan números"
+          } 
+          })}
+           style={{ borderColor: errors.userStreetNumber && "#bf0000" }}/>
 </Fragment>
   )
 } 
@@ -96,37 +145,40 @@ const {token,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} = useCont
   {token,setCurrentUser,setAllUsers,setIsSuccessfullySend,isAdmin})
 
   return(
-<StyledSection>
+<EditProfilePage>
 
   
-    <GoBackLink to="/myAccount/myProfile" >Regresar</GoBackLink>
+    <GoToProfileLink to="/myAccount/myProfile" >Regresar</GoToProfileLink>
   
 
   <EditProfileForm onSubmit={handleSubmit(onSubmit)}>
 
     <FormIcone src={userEditIcone} alt="edit-profile"/>
 <UserNameInput  errors={errors} register={register}/>
-   
+   <UserLastNameInput  errors={errors} register={register}/>
      <UserPasswordInput  errors={errors} register={register} name="userPassword" placeholder="Tu contraseña..."/>
      <UserNewPasswordInput  errors={errors} register={register} name="newPassword" placeholder="Nueva contraseña..."/>
       
                <CellphoneInput  errors={errors} register={register}  placeholder="Tu telèfono..."/>
 
-         <AdressInput  errors={errors} register={register} placeholder="Tu Dirección..."/>
+<CityAddressOptions register={register} />
+         <StreetAddressInput  errors={errors} register={register} placeholder="Calle..."/>
+
+         <StreetNumberInput  errors={errors} register={register} placeholder="Número de puerta..."/>
 
      
 
        
-   {formIsLoading ?  <LoaderSpinner /> :
+   {formIsLoading ?  <LoaderSpinner small /> :
 
          <ErrorServerMessage>{serverError}</ErrorServerMessage>
       
   }
   
-          <FormButtons />
+          <FormButtons small/>
   </EditProfileForm>
 
-</StyledSection>
+</EditProfilePage>
 
   );
 

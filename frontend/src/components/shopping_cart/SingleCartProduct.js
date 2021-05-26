@@ -44,6 +44,7 @@ font-weight:600;
 const TotalPrice = styled.h4`
 margin:0;
 margin-left:  10px;
+    text-align: left;
 color:#fcba1c;
 &:before{
   content:"$";
@@ -118,12 +119,12 @@ padding:1px 8px;
 border: 1px solid rgba(0,0,0,0.8);
 border-radius: 5px;
 `
-export default function SingleCartProduct({ThisProduct}) {
+export default function SingleCartProduct({product}) {
 
 
- const {deleteOfCart, addToTotalCost,deleteOfTotalCost}  = useContext(AppContext);
+ const {deleteOfCart, addToTotalCost,deleteOfTotalCost,actualizeCart}  = useContext(AppContext);
 
-const {quantity,increaseQuantityAndActualizeTotalCost,decreaseQuantityAndActualizeTotalCost} = useCartProductQuantityCounter(addToTotalCost ,deleteOfTotalCost,ThisProduct.price)
+const {quantity,increaseQuantityAndActualizeTotalCost,decreaseQuantityAndActualizeTotalCost} = useCartProductQuantityCounter({addToTotalCost ,deleteOfTotalCost,product,actualizeCart})
 
 const {deleteOfCartAndTotalCostHandler} = useCartProductDeleteButton(deleteOfCart,deleteOfTotalCost)
 
@@ -138,11 +139,11 @@ const {deleteOfCartAndTotalCostHandler} = useCartProductDeleteButton(deleteOfCar
 
        <ProductHeader>
              <DeleteProductButton onClick={ ()=> 
-              deleteOfCartAndTotalCostHandler(ThisProduct._id,quantity*ThisProduct.price)}>
+              deleteOfCartAndTotalCostHandler(product.info._id,quantity*product.info.price)}>
                <DeleteProductIcone src={DeleteIcone} alt="delete-of-cart"/>
                 </DeleteProductButton>
 <ProductInfo>  
-  <PoductName>{ThisProduct.name}  </PoductName>   <Price >{ThisProduct.price} x {ThisProduct.size}</Price>
+  <PoductName>{product.info.name}  </PoductName>   <Price >{product.info.price} x {product.info.size}</Price>
   </ProductInfo>
     <ProductControls>
                     <Counter>
@@ -152,7 +153,7 @@ const {deleteOfCartAndTotalCostHandler} = useCartProductDeleteButton(deleteOfCar
              <IncreaseButton onClick={() =>increaseQuantityAndActualizeTotalCost()}>+
              </IncreaseButton>
       </Counter>
-             <TotalPrice>{quantity*ThisProduct.price }</TotalPrice>
+             <TotalPrice>{quantity*product.info.price }</TotalPrice>
        </ProductControls>
     </ProductHeader>
        

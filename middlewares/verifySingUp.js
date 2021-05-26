@@ -2,7 +2,7 @@ const User = require('../models/user.model');
 const TemporalUser =require('../models/temporalUser.model');
 const { ROLES } = require('../models/role.model');
 
-const checkDuplicateEmail = async (req, res, next) => {
+const checkDuplicatedEmail = async (req, res, next) => {
   try {
 
     const user = await User.findOne({ email: req.body.email });
@@ -12,12 +12,12 @@ const checkDuplicateEmail = async (req, res, next) => {
   const temporaUser = await TemporalUser.findOne({email: req.body.email})
 
 
-  if (temporaUser) return res.status(302).json({successful:false,message:"Email unverified" ,redirect:`/authentication/confirmation/${user.email}`}) ;
+  if (temporaUser) return res.status(302).json({successful:false,message:"Email unverified" ,redirect:`/authentication/confirmation`,id: temporaUser._id } ) ;
 
     next();
 
   } catch (error) {
-    res.status(500).json({ success:false , message: "singup fail" });
+    res.status(500).json({ success:false , message: "Something went wrong , singup fail" });
   }
 };
 
@@ -35,4 +35,4 @@ const checkRolesExisted = (req, res, next) => {
   next();
 };
 
-module.exports = { checkDuplicateEmail, checkRolesExisted }
+module.exports = { checkDuplicatedEmail, checkRolesExisted }

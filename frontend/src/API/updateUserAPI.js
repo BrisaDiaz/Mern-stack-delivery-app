@@ -36,7 +36,7 @@ headers.append('Content-Type', 'application/json');
      setFormIsLoading(false)
       if(res.status === 200) {
 
-             usersAPI({setAllUsers,token})
+          await   usersAPI({setAllUsers,token})
          setServerError("");
 setIsEditing(false);
     }

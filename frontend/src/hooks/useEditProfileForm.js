@@ -1,7 +1,7 @@
 import {useForm} from 'react-hook-form';
 import {useHistory} from 'react-router-dom';
 import {useState} from 'react' 
-import uploadProfileAPI from '../API/uploadProfileAPI'
+import upldateProfileAPI from '../API/upldateProfileAPI'
 
 export default function useEditProfileForm({token,setCurrentUser,setAllUsers,setIsSuccessfullySend,isAdmin}){
   
@@ -20,17 +20,20 @@ const [formIsLoading,setFormIsLoading] = useState(false);
 
  
 const name =  e?.target?.userName?.value?.toLowerCase(),
-address = e.target.userAddress?.value?.toLowerCase();
-
+ lastName =  e?.target?.userName?.value?.toLowerCase(),
+city = e.target.userCityAddress?.value?.toLowerCase(),
+street = e.target.userStreetAddress?.value?.toLowerCase();
 const info ={
 name,
+lastName,
 password:e?.target?.userPassword?.value,
 newPassword:e?.target?.userNewPassword?.value,
 number:e.target.userNumber?.value,
-address,
-
+city,
+street,
+streetNumber: e.target.userStreetNumber?.value
 }
-uploadProfileAPI({
+upldateProfileAPI({
   setFormIsLoading,
 setIsSuccessfullySend,
 setServerError,

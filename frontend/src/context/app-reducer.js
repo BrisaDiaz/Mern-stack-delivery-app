@@ -2,6 +2,8 @@ import {
   SET_IS_LOADING,
   SET_ALL_PRODUCTS,
   SET_ALL_USERS,
+  SET_ALL_ORDERS,
+  SET_ALL_CATEGORIES,
   SET_CURRENT_USER,
   SET_TOKEN,
   SET_PRODUCT_TO_EDIT,
@@ -9,6 +11,7 @@ import {
 ADD_TO_TOTAL_COST,
 DELETE_OF_TOTAL_COST,
 ADD_PRODUCT_TO_CART,
+ACTUALIZE_CART,
 DELETE_PRODUCT_OF_CART,
 EMPTY_CART,
 RESET_TOTAL_COST,
@@ -44,6 +47,16 @@ switch (action.type) {
           ...state,
           users: action.payload
         };
+  case SET_ALL_ORDERS:
+        return{ 
+          ...state,
+          orders: action.payload
+        };        
+  case SET_ALL_CATEGORIES:
+        return{ 
+          ...state,
+          categories: action.payload
+        };        
     case SET_CURRENT_USER:
         return{ 
           ...state,
@@ -69,8 +82,29 @@ switch (action.type) {
                ...state,
           cartProducts:[...state.cartProducts,action.payload]
         };
+case ACTUALIZE_CART:{
+
+  let actualizedCart = state.cartProducts.map( product =>
+{
+     if(product.info._id === action.payload.id) {
+return  ( {info:product.info, quantity: action.payload.quantity})
+
+     } else {
+       
+   return   product
+
+}
+  }  )
+
+        return{ 
+               ...state,
+        
+          cartProducts: actualizedCart
+        };     
+          }
   case DELETE_PRODUCT_OF_CART:{
-    let actualizedCart = state.cartProducts.filter(product => product._id !== action.payload);
+
+    let actualizedCart = state.cartProducts.filter(product => product.info._id !== action.payload);
   return{ 
           ...state,
           cartProducts: actualizedCart

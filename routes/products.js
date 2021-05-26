@@ -5,13 +5,11 @@ const path = require('path');
 
 const { getAllProducts,getProductById,postNewProduct,updateProductById,deleteProductById} =require(
   '../controllers/productsControllers')
-  const {verifyToken,isAdmin,isModerator } =require('../middlewares/authJwt')
-
+  const {verifyToken,isAdmin,isAdminOrIsModerator } =require('../middlewares/authJwt')
+const  {verifyCategoryExist} = require('../middlewares/verifyProduct');
 const storage = multer.diskStorage({
-  
   destination: function(req,file,cb){
     cb(null,'./storage/media')
-
   },
 
   filename: function(req,file,cb){
@@ -40,7 +38,7 @@ router.get('/', getAllProducts);
 
 router.get('/:id', getProductById);
 
-router.post('/',[verifyToken,isAdmin,upload.single('img')],postNewProduct);
+router.post('/',[verifyCategoryExist,verifyToken,isAdminOrIsModerator,upload.single('img')],postNewProduct);
 
 router.put('/:id',[verifyToken,isAdmin,upload.single('img')],updateProductById);
 

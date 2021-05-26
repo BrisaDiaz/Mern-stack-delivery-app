@@ -15,7 +15,9 @@ ButtonsWrapper,
 LoadButton,
 ProductState,
 ResetButton,
-DropZone
+DropZone,
+OptionList,
+Option
 } from './CreateNewProductForm'
 import editIcone from '../../img/pencil-edit-form.svg'
 
@@ -27,7 +29,7 @@ transform:scale(0.75);
 
 export default function UpdateNewProductForm() {
 
-    const {productsAPI,token,productToEdit,setIsSuccessfullySend}  = useContext(AppContext);
+    const {productsAPI,token,productToEdit,setIsSuccessfullySend,categories}  = useContext(AppContext);
 const {register ,handleSubmit, errors, onSubmit,setNameValue,setCategoryValue,setPriceValue,setSizeValue,setDescriptionValue,nameValue,categoryValue,
 priceValue,sizeValue,descriptionValue
 } = useEditProductForm({token,
@@ -109,6 +111,32 @@ setIsSuccessfullySend})
           })}
           
           />
+
+
+    {errors.category && <ErrorMessage  role="alert">{errors.category.message}</ErrorMessage>}
+<OptionList 
+name="category"
+    style={{ borderColor: errors.category && "#bf0000" }  }
+                  
+         onChange = {(e) => setCategoryValue(e.target.value)}
+          ref={register({
+       required: '*El campo es requrido',
+    
+          })}
+>
+  {categories?.map(cat =>
+
+<Option key={cat?._id } value={cat?.name}  
+
+selected = {categoryValue?.toLowerCase() === cat?.name ? true : false}
+
+
+>{cat?.name}</Option>
+
+  )}
+
+</OptionList>
+
  {errors.description && <ErrorMessage  role="alert">{errors.description.message}</ErrorMessage>}
       <Description 
       placeholder="Descripción..."

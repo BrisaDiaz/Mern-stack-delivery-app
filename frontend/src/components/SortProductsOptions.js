@@ -4,14 +4,19 @@ import AppContext from '../context/app-context'
 
 
 export const OptionList = styled.select`
-color: #111;
-    padding: 5px;
+    color: rgb(0 0 0 / 50%);
+    padding: 7px;
     border-radius: 5px;
     outline: none;
     cursor: pointer;
+    font-size: 14px;
+    margin: 0;
+    border: none;
+    margin-bottom: 20px;
+    background: #fff;
+    box-shadow: inset 0 0 6px 0 #00000033;
+    text-transform: capitalize;
     margin: 0 20px 20px auto;
-    background: #fffbfb;
-    border: 1px solid rgb(255 165 0);
 
 `
 export const Option = styled.option`

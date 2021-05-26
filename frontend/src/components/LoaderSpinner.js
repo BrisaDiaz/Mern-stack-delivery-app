@@ -7,6 +7,7 @@ const spin = keyframes `
 `
 
 export  const LoaderSpinner = styled.div`
+    margin: 0 auto 20px;
  border: ${(props) => (props.small ? "12px" : "16px" )}  solid #f3f3f3; 
   border-top: ${(props) => (props.small ? "12px" : "16px" )} solid #fcba1c;
   border-radius: 50%;

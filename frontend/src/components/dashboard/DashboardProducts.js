@@ -2,12 +2,12 @@
 import styled  from 'styled-components'
 import {useHistory} from 'react-router-dom'
 import AppContext from '../../context/app-context'
-import DeleteProductAPI from '../../API/DeleteProductAPI'
+import deleteProductAPI from '../../API/deleteProductAPI'
+import DashboardNav from '../DashboardNav'
 import useMenuProductsDispayer from '../../hooks/useMenuProductsDispayer'
 import FilerProductsOptions from '../FilerProductsOptions'
 import {   useContext , Fragment} from 'react'
 import useProductStateFilter from '../../hooks/useProductStateFilter'
-import {Link , LinksWrapper} from './DashboardNewProduct'
 import {SectionTitle,ProductsSection,NotFaundMessage} from '../menu/Menu'
 import Item, {CartButton,CartIcon} from '../menu/MenuItem'
 import SearchBar from '../SearchBar'
@@ -20,7 +20,7 @@ margin-bottom:40px;
 const StyledSection = styled.main`
 min-height:100vh;
 width:100vw;
-
+    margin-left: -6px;
 padding-top:60px;
 `
 const FiltersBoard = styled.div`
@@ -32,12 +32,16 @@ const FiltersBoard = styled.div`
 const EditButton = styled(CartButton)`
     height: 50px;
 background:  #3f51b5 ;
-
+transform: scale(0.7);
 `;
 const DeleteOfDatabaseButton = styled(EditButton)`
 margin:0;
 background: #e83c2e;
 margin-top:-50px;
+    background: #e83c2e;
+    margin-top: -50px;
+    margin-left: auto;
+    margin-right: 50px;
 `
 const EditIcone = styled(CartIcon)`
 transform:scale(1.2);
@@ -72,10 +76,7 @@ setProductToEdit(product);
   return(
 <StyledSection>
 
-    <LinksWrapper>
-    <Link to="/dashboard/newProduct" >Nuevo Producto</Link>/<Link to="/dashboard/users" >Usuarios</Link>
-          </LinksWrapper>
-
+    <DashboardNav/>
 <Title>mis productos</Title>
 
 
@@ -87,9 +88,9 @@ setProductToEdit(product);
 
 <StyledProductsSection>
 
-  {   FilteredProducts.length !== 0 ?
+  {   FilteredProducts?.length !== 0 ?
   
-FilteredProducts.map( product => 
+FilteredProducts?.map( product => 
  <Fragment key={product._id+"abc"}>
  <Item  key={product._id} item={product}>
    <Fragment>
@@ -97,7 +98,7 @@ FilteredProducts.map( product =>
      <EditIcone src={editIcone} alt="edit"></EditIcone>
    </EditButton>
 
-   <DeleteOfDatabaseButton  onClick={ () =>DeleteProductAPI(productsAPI,token,product._id)}>
+   <DeleteOfDatabaseButton  onClick={ () =>deleteProductAPI(productsAPI,token,product._id)}>
    <TrashIcone src={DeleteIcone} alt="delete"/>
    </DeleteOfDatabaseButton>
    </Fragment>

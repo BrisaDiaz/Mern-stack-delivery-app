@@ -1,4 +1,4 @@
-async function getUsers({token,setAllUsers,setIsLoading}){
+async function getUsers({token,setAllUsers}){
        const headers = new Headers();
         headers.append('Accept', 'application/json');
       headers.append('Authorization', `Bearer ${token}`);
@@ -16,7 +16,7 @@ const res = await fetch('/api/users', setting);
 if (res.status === 200){
 
   setAllUsers(data)
-    setIsLoading(false)
+
 }
 
 

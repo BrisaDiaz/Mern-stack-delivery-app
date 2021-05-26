@@ -18,12 +18,12 @@ transition:all 0.5s esea;
 export default function SinginForm(){
 
 
-     const {setIsLogin,setIsNotSingup,setIsAdmin,setToken,getUsers,setAllUsers,setCurrentUser,token,setIsLoading} = useContext(AppContext);
+     const {setIsLogin,setIsNotSingup,setIsAdmin,setToken,getUsers,setAllUsers,setCurrentUser,token,setIsLoading,setAllOrders} = useContext(AppContext);
      
      const {register, handleSubmit, errors, onSubmit ,redirectToSingUp,
       serverError,isFormLoading
     } = 
-      useLoginForm({setIsLogin,setIsLoading,setIsNotSingup,setIsAdmin,setToken, getUsers,setAllUsers,setCurrentUser,token})
+      useLoginForm({setIsLogin,setIsLoading,setIsNotSingup,setIsAdmin,setToken, getUsers,setAllUsers,setCurrentUser,token,setAllOrders})
 
 
   return(

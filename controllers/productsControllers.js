@@ -28,7 +28,7 @@ try{
 
 const { name, category, size ,description ,active} = req.body
 const price = Number(req.body.price);
-const  img = (req.file) ?  req.file.filename :  null
+const  img = req.file.filename 
 
  const product =    new Product({
    name,
@@ -36,9 +36,9 @@ const  img = (req.file) ?  req.file.filename :  null
    category,
    size,
    description,
-   img,
   active,
  })
+product.setImgUrl(img)
 
 const newProduct = await product.save( )
 
@@ -55,15 +55,24 @@ const updateProductById= async (req,res) => {
 
 const { name, category, size ,description ,active} = req.body
 const price = Number(req.body.price);
-const  img = (req.file) ?  req.file.filename :  null
+
   try{
  let product = await Product.findById(req.params.id).exec();
-
   if (!product) return res.status(404).json({success:false, message:'product not faund'});
+
+
+let img;
+
+if(req.file){
+  img = req.file.filename
+}else{
+  img = product.img
+}
 
 let oldImgPath ="./storage/media/"+product.img
 
  if(req.file){
+   
 fs.unlink(oldImgPath, (err) => {
   if (err) {
     console.error(err)
@@ -80,7 +89,7 @@ fs.unlink(oldImgPath, (err) => {
                 category: category || product.category,
                 price: price || product.price,
                size: size || product.size,
-                img: img || product.img,
+                img: img ,
                 active: active || product.active
             }, { new: true });
             

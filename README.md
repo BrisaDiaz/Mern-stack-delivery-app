@@ -57,14 +57,14 @@ OAUTH_REFRESH_TOKEN
 
 ### Features:
 
-- Interaction with the backend through API Rest fetch.
+- Interaction with the backend through API Rest .
 - Auto-played sliders with dot indicators and controls.
   +Navbar responsive and animated .
 - Singup/Login system.
 - Access to Public and Private routes base on roles.
 - Contact section with form validation.
 - Loading modal and loading form indicators.
-- Shopping cart with CRUD operations.
+- Shopping cart.
 - Editable User profile.
 - Products sorter, filter and search bar.
 - Product details page.

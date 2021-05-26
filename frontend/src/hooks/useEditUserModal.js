@@ -1,6 +1,6 @@
 
 import {useState} from 'react' 
-import uploadUserAPI from '../API/uploadUserAPI'
+import updateUserAPI from '../API/updateUserAPI'
 
 export default  function useEditUserModal({token,setIsEditing,setAllUsers}){
 const [serverError,setServerError] = useState("")
@@ -17,7 +17,7 @@ const roles = (selectRoles.length !== 0) ? selectRoles : ["user"];
 const info ={
 roles,
 }
-uploadUserAPI({
+updateUserAPI({
   setFormIsLoading,
 setIsEditing,
 setServerError,

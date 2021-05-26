@@ -5,10 +5,16 @@ import {useParams} from 'react-router-dom'
 import {CartButton,CartIcon} from '../menu/MenuItem'
 import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
 import useAddToCartButton from '../../hooks/useAddToCartButton'
-import {Link } from '../dashboard/DashboardNewProduct'
+import {StyledLink } from '../Header'
 
 
-export const GoBackLink = styled(Link)`
+export const GoBackLink = styled(StyledLink)`
+
+
+  @media screen and (max-width:990px){
+margin: 0 ;
+font-size:15px;
+}
 margin-left:0;
 padding: 10px 0;
 &:before{
@@ -57,7 +63,7 @@ text-transform:capitalize ;
 const Line = styled.div`
 
 width:100%;
-height:2px;
+height:1px;
 background:#fcaf01;
 margin:5px auto;
 `
@@ -79,7 +85,7 @@ text-transform:capitalize ;
       
 color: rgb(255 165 0);
     margin-right: 5px;
-    font-weight: 600;
+    font-size: 19px;
         font-family: "Oswald", sans-serif;
         letter-spacing:1px;
  
@@ -98,12 +104,14 @@ const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProdu
   return(
 <ProductDetails>
   
-             <GoBackLink to="/menu" > Regresar al Menú</GoBackLink>
+             <GoBackLink to="/menu" > Regresar</GoBackLink>
        
   <PrductImg src={thisProductInfo.img}  alt={thisProductInfo.name}/>
     <Line/>
   <Name>{thisProductInfo.name}</Name><ThisCartButton isAdded={isAdded}
-       onClick={ () => {handlerAddToCartAndAddToTotalCost(thisProductInfo,parseInt(thisProductInfo.price))}}><CartIcon style={{  position:'absolute'}} src={shoopingCartIcon} alt="add-to-cart"/></ThisCartButton>
+       onClick={ () =>
+        {handlerAddToCartAndAddToTotalCost(thisProductInfo,thisProductInfo.price)}
+        }><CartIcon style={{  position:'absolute'}} src={shoopingCartIcon} alt="add-to-cart"/></ThisCartButton>
 
     <Line/>
      <Deltail><span>Categoría:</span>{thisProductInfo.category}</Deltail>

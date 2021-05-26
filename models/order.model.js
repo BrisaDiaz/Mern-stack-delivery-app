@@ -2,42 +2,43 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const STATES = ['placed','canceled','acepted','in process','shipped','delivered','liquidated'];
+
+// the orden is important !!
+
+const STATES = ['enviado','aceptado','despachado','entregado','liquidado'];
+
+
 
 const orderSchema= new Schema ( {
 
- oderID:{type: String,required:true },
+ orderID:{type: Number ,default: Date.now },
 
- custumer:[{
+ client:[{
         type: Schema.Types.ObjectId,
         ref: "User",
       }] ,
 
 
- description:[
-   {
- product : {
-         type: Schema.Types.ObjectId,
-        ref: "Product",
+description: [
+{  
+product : {
+name:{type:String ,require:true ,trim:true, lowercase:true},
+price:{type: Number, default:0},
+
   },
   quantity:{ type: Number, default: 1},
   total:{ type: Number, default: 0},
 }
 ],
+
 total:{ type: Number , default: 0},
 
- provider: [
-     {
-         type: Schema.Types.ObjectId,
-        ref: "Location",
-  },
- ],
-
- states: [
-   {
-name:{Type:String , default:'placed' ,trim:true},
- date: {Type : Date, default: Date.now}
- }
+ states:[
+ {
+name:{type:String, default:''},
+confirmed:{type: Boolean , default:false},
+date: {type : Date}
+ },
 ]
 },
 {
@@ -46,9 +47,17 @@ name:{Type:String , default:'placed' ,trim:true},
 }
 );
 
- orderSchema.method.getCurrentState = function getCurrentState(){
-   return this.states.slice(-1)[0]
- }
+orderSchema.methods.createStates = function createStates(){
+
+  this.states= STATES.map(state => {
+    if(state === 'enviado') return (
+      {name: state ,confirmed:true,date: Date.now()})
+  
+  return ( {name: state ,confirmed:false})
+         
+  })
+
+}
 const Order = mongoose.model('Order',orderSchema)
 
 module.exports = {Order,STATES} 

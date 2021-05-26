@@ -12,7 +12,8 @@ export const FormCard =  styled.article`
 
 margin: 30px auto;
 border-radius:10px;
-width: 380px;
+width: 100%;
+    max-width: 400px;
 display:flex;
 flex-flow:column;
 align-items:center;
@@ -44,10 +45,11 @@ flex-flow:column;
 align-items:center;
 & > input {
       width: 90%;
- margin-bottom:15px;
+     margin-bottom:15px;
       border:none;
       box-shadow: inset 0 0 4px 0px rgb(23 23 23 / 36%);
 }
+
 & >${LoaderSpinner}{
   margin-bottom: 10px;
 }
@@ -73,12 +75,12 @@ export const PaswordInput = styled(NameInput).attrs( props => ({
 export const ErrorMessage = styled.small`
 color:#bf0000;
 margin:-10px auto 4px 5%;
-
+    display: block;
 `;
 export const ErrorServerMessage = styled(ErrorMessage)`
 text-align:center;
 font-size:20px;
-margin: 10px 0;
+margin: 5px 0;
 `
 const LoginLink = styled.a`
 margin-bottom: 20px;
@@ -94,18 +96,40 @@ export function UserNameInput({register,errors}){
     <Fragment>
        {errors.userName && <ErrorMessage>{errors.userName.message }</ErrorMessage>}
     <  NameInput 
-        placeholder='Tu Nombre Completo...'
+        placeholder='Tu Nombre...'
           name="userName"
           ref={register({
                required: '*El campo es requrido',
               pattern:{
-                        value: /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/
+                        value: /^[A-Za-zñÑáÁéÉíÍóÓúÚÜü\s\w]+$/
 ,
                          message:"*Nombre no valido"
                       }
             
           })}
                  style={{ borderColor: errors.userName&& "#bf0000" }}
+          />
+    </Fragment>
+  );
+}
+export function UserLastNameInput({register,errors}){
+
+  return(
+    <Fragment>
+       {errors.userLastName && <ErrorMessage>{errors.userLastName.message }</ErrorMessage>}
+    <  NameInput 
+        placeholder='Tu Apellido ...'
+          name="userLastName"
+          ref={register({
+               required: '*El campo es requrido',
+              pattern:{
+                        value: /^[A-Za-zñÑáÁéÉíÍóÓúÚÜü\s\w]+$/
+,
+                         message:"*Nombre no valido"
+                      }
+            
+          })}
+                 style={{ borderColor: errors.userLastName && "#bf0000" }}
           />
     </Fragment>
   );
@@ -181,6 +205,7 @@ export default function SingupForm(){
       <Form onSubmit={handleSubmit(onSubmit)}>
      
      <UserNameInput  errors={errors} register={register}/>
+          <UserLastNameInput  errors={errors} register={register}/>
      <UserEmailInput  errors={errors} register={register}/>
      <UserPasswordInput  errors={errors} register={register} placeholder="Tu contraseña..."  name="userPassword"/>
       

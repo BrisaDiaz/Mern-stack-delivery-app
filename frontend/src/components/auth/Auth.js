@@ -15,7 +15,7 @@ align-items: center;
 width:100vw;
 padding:15px;
 padding-top:60px;
-
+    margin-left: -6px;
 text-aling:center;
 `;
 export default function Sing() {

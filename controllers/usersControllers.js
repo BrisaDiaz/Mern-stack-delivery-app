@@ -18,13 +18,15 @@ res.status(200).json(users)
 
   const getUserById = async (req,res) =>{
  try{
-    const user = await User.findById(req.params.id,{password:0});
+    const user = await User.findById(req.params.id,{password:0}).populate('roles').populate({path:'orders',
+  populate:{path:'client'},
+  }).exec()
 
-    res.status(200).json(user);
+    res.status(200).json( { successful:true ,data:user});
 
   }catch(error){
     console.log(error)
-    res.status(400).json({success:false,message:error.mesage})
+    res.status(500).json({success:false,message:error.mesage})
   }
  
  }
@@ -43,8 +45,6 @@ res.status(200).json(users)
     let user = await User.findById(req.params.id);
 
   if (!user) return res.status(404).json({success:false, message:'user not found'});
-
-
 
             user = await User.findByIdAndUpdate(req.params.id, {
                 name: user.name,
@@ -69,9 +69,12 @@ res.status(200).json(users)
  const createUser = async (req,res) =>{
 try{
   const { name, email, password, roles } = req.body;
+
    const rolesFound = await Role.find({ name: { $in: roles } });
 
+  const id =mongoose.Types.ObjectId()
       const user = new User({
+      _id:id,
       name,
       email,
       password,
@@ -82,8 +85,8 @@ try{
 
     const savedUser = await user.save();
 
- res.status(200).json({success: true , data:{
-      _id: savedUser._id,
+ res.status(201).json({success: true , data:{
+      id: savedUser._id,
       username: savedUser.username,
       email: savedUser.email,
       roles: savedUser.roles,
@@ -92,12 +95,12 @@ try{
    }catch(error){
 console.log(error)
 
-     res.status(500).json({success:false,  message:error.mesage})
+     res.status(500).json({success:false,  message:'something went wrong, failt to create user '})
 
    }
 }
 const UpdateProfileById = async (req,res) =>{
-const { name,password,newPassword,address,number} = req.body
+const { name,lastName,password,newPassword,number} = req.body
 
  try{ 
  let userFound = await User.findById(req.params.id);
@@ -115,22 +118,36 @@ const { name,password,newPassword,address,number} = req.body
       });
 
 
-
+let encodedPassword;
+  if(newPassword){
+  encodedPassword = await User.encryptPassword(newPassword) 
+  }else{
+    encodedPassword= undefined
+  }
   
-     const encodedPassword = (newPassword) ? await User.encryptPassword(newPassword) : null;
+let profileState ;
 
+    if(( req.userAdress  ||userFound.address ) && (number || userFound.number) ){
+       profileState = 'complited'
+    }else{
+      profileState='incomplited' 
+    }
 
 
             user = await User.findByIdAndUpdate(req.params.id, {
-                name: name || userFound.name,
+                name: req.userName || userFound.name,
                 password: encodedPassword || ususerFounder.password,
                 email: userFound.email,
                 roles: userFound.roles,
-                    address: address || userFound.address,
+                    address: req.userAdress || userFound.address,
                number: number || userFound.number,
-             
+                profileState: profileState
+
+,
             }, { new: true });
             updatedUser = await user.save();
+
+            console.log(user.profileState )
 
     res.status(200).json({success: true ,message: `User ${updatedUser.name} Udated Successfully`});
 

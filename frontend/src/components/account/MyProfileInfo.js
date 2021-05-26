@@ -13,16 +13,19 @@ padding-top:60px;
     margin-left: -6px;
 `;
 const UserCard =styled.article`
-margin:0 auto;
+margin:30px auto;
 display:flex;
+background:#fecb00;
 height:max-content;
 flex-wrap:wrap;
 min-height: 250px;
-    box-shadow: 0px 0px 6px 0px rgb(0 0 0 / 50%);
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 30%);
 `;
 const CardImg = styled.div`
-    background: #fecb0021;
+     background: #fecb00;
     min-height: 100%;
+    border-radius: 5px;
     padding:10px 0;
 display:flex;
 flex:1 1 150px;
@@ -34,11 +37,12 @@ const Img = styled.img`
 width:120px;
 `;
 const CardInfo = styled.div` 
-
-max-width: 500px;
+color:#fff;
 padding:15px;
 min-height: 250px;
 flex:1 1 400px;
+background:#272727;
+    border-radius: 5px;
 `;
 const UserInfo = styled.p` 
 margin: 5px 0;
@@ -56,14 +60,11 @@ font-weight:600;
 
     margin-left: 80%;
     border: none;
-    background: #000;
-       color:#fff;
+    background: #fff;
+       color:#000;
     transition:all 0.3s ease;
     &:hover{
-      transform:scale(1.2);
-          background: #fdd87f;
-          color:#000;
-              box-shadow: inset 0 0 8px 2px #ffa500;
+       box-shadow: inset 0 0 8px 2px #cdc8c8;
     }
 `
 const LogoutButton = styled.button`
@@ -86,7 +87,7 @@ padding: 4px 8px;
 `;
 function MyProfileInfo() {
 
-  const {currentUser,setIsAdmin,setToken,setIsNotLogin,emptyCart} = useContext(AppContext)
+  const {currentUser,setIsAdmin,setToken,setIsNotLogin,emptyCart,resetTotalCost} = useContext(AppContext)
 
   
 const handleLogout = () =>{
@@ -94,6 +95,7 @@ emptyCart()
 setIsNotLogin() ;
 setToken("");
  setIsAdmin(false);
+ resetTotalCost()
 localStorage.removeItem('userId');
 
 }

@@ -8,6 +8,9 @@ import DashboardNewProduct from './components/dashboard/DashboardNewProduct'
 import DashboardProducts from './components/dashboard/DashboardProducts'
 import DashboardEditProduct from './components/dashboard/DashboardEditProduct'
 import DashboardUsers from './components/dashboard/DashboardUsers'
+import DashboardOrders from './components/dashboard/DashboardOrders'
+import DashboarOrderDetails from  './components/dashboard/DashboarOrderDetails'
+import DashboardCategories from './components/dashboard/DashboardCategories'
 import Header from './components/Header'
 import NotFound404Page from './components/NotFound404Page'
 import SuccessfullFormModal from './components/SuccessfullFormModal'
@@ -18,6 +21,8 @@ import Contact  from './components/contact/Contact'
 import AppState  from './context/AppState'
 import ShooppingCart from './components/shopping_cart/ShoppingCart'
 import EditMyProfile from './components/account/EditMyProfile'
+import MyOrdersPage from './components/account/MyOrdersPage'
+import OrderDetails from './components/account/MyOrdersPage'
 import MyProfile from './components/account/MyProfileInfo'
 import {
   BrowserRouter as Router,
@@ -50,26 +55,30 @@ function App() {
         <Route path = "/contact" component={ Contact } />
        
     <PublicRoute path = "/myAccount/myProfile" component ={MyProfile}/>
-              
+
         <PublicRoute path = "/myAccount/editProfile"
         component={EditMyProfile}/>
-        
- 
-      
+             <PublicRoute   path = "/myAccount/myOrders" exact component={ MyOrdersPage }  />
+               <PublicRoute path = "/myAccount/myOrders/:orderID"   component={ OrderDetails } />
+
           <Route path = "/menu/:productId" component={ ProductsDetails } />
          <PrivateRoute path = "/dashboard/myProducts" component={ DashboardProducts } />
+              
 <PrivateRoute path = "/dashboard/newProduct" component={ DashboardNewProduct } />
        <PrivateRoute path =  "/dashboard/editProduct"  component={   DashboardEditProduct } />
               <PrivateRoute path = "/dashboard/users"  component={   DashboardUsers } />
-        
+         <PrivateRoute   path = "/dashboard/orders"  exact component={ DashboardOrders } />
+                   <PrivateRoute path = "/dashboard/orders/:orderID" component={DashboarOrderDetails } />
+
+               <PrivateRoute   path = "/dashboard/categories" component={ DashboardCategories } />
+ 
             <Route path = "*" component={NotFound404Page} />
           
  
       </Switch>
 
 
-      <ShooppingCart />
-            
+     <ShooppingCart/>
         <Footer/>
 
     </AppState>

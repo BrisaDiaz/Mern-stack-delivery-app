@@ -1,11 +1,12 @@
 import  {useReducer,useEffect} from 'react';
 import AppContext from  './app-context';
-
 import appReducer from  './app-reducer';
 import {
   SET_IS_LOADING,
   SET_ALL_PRODUCTS,
   SET_ALL_USERS,
+  SET_ALL_ORDERS,
+  SET_ALL_CATEGORIES,
   SET_CURRENT_USER,
   SET_TOKEN,
   SET_PRODUCT_TO_EDIT,
@@ -13,6 +14,7 @@ import {
 ADD_TO_TOTAL_COST,
 DELETE_OF_TOTAL_COST,
 ADD_PRODUCT_TO_CART,
+ACTUALIZE_CART,
 DELETE_PRODUCT_OF_CART,
 EMPTY_CART,
 RESET_TOTAL_COST,
@@ -58,13 +60,40 @@ console.log(err)
 
   }
 
+  const getCategoriesAPI = async () => {
+
+   const headers = new Headers();
+        headers.append('Accept', 'application/json');
+     
+
+    const setting = {
+          method: 'GET',
+          headers: headers,
+
+        }
+try{
+let res =  await fetch('/api/categories',setting)
+let  json= await res.json()
+
+const {data} = json
+
+setAllCategories(data)
+
+
+}catch(err){
+getCategoriesAPI()
+
+  console.log(err)
+}
+}  
+
 
   
     useEffect( ()=>{
   
 productsAPI()
-
-  },[ ])
+getCategoriesAPI()
+  },[])
 
 
 
@@ -76,6 +105,8 @@ productsAPI()
 const initialState =  {
 products:[],
 users:[],
+categories:[],
+orders:[],
 currentUser: {},
 token:"",
 isLoading:true,
@@ -117,6 +148,18 @@ const setAllUsers = (data)=>{
     payload: data
   })
 }
+const setAllOrders = (data)=>{
+  dispatch({
+    type: SET_ALL_ORDERS,
+    payload: data
+  })
+}
+ const setAllCategories = (data) =>{
+  dispatch({
+    type:SET_ALL_CATEGORIES,
+    payload: data
+  })
+}
 const setCurrentUser = (data)=>{
   dispatch({
     type: SET_CURRENT_USER,
@@ -129,10 +172,16 @@ const setToken = (token) =>{
     payload: token,
   })
 }
-const addToCart = (product) =>{
+const addToCart = (productInf) =>{
     dispatch({
     type: ADD_PRODUCT_TO_CART,
-    payload : product,
+    payload : productInf,
+  })
+}
+const actualizeCart = (productInf) =>{
+    dispatch({
+    type: ACTUALIZE_CART,
+    payload : productInf,
   })
 }
 const setProductToEdit= (product) =>{
@@ -246,6 +295,8 @@ payload: bulean,
 isLoading: state.isLoading,
 products: state.products,
 users: state.users,
+orders:state.orders,
+categories: state.categories,
 currentUser: state.currentUser,
 token:state.token,
 productToEdit:state.productToEdit,
@@ -266,10 +317,13 @@ setIsLoading,
 setToken,
 productsAPI,
 setAllUsers,
+setAllOrders,
 setCurrentUser,
 emptyCart,
+setAllCategories,
 setProductToEdit,
 addToCart,
+actualizeCart,
 deleteOfCart,
 addToTotalCost,
 deleteOfTotalCost,

@@ -14,7 +14,7 @@ position:relative;
     min-width: 250px;
 height:350px;
 flex-flow:column;
-margin:15px;
+
 over-flow:hidden;
 padding:20px;
 border: 1px solid #00000026;
@@ -25,9 +25,8 @@ display:flex;
 align-items:center;
 padding-bottom:5px;
 `;
-const Name =styled.h4`
+const Name =styled.h3`
 margin-bottom:0;
-font-size:25px;
 letter-spasing:0;
 line-height:35px;
 text-transform:capitalize ;
@@ -50,8 +49,7 @@ align-self: flex-start;
     margin: 10px;
     margin-top: 8px;
 `;
-const Price = styled.h3 `
-    font-size: 19px;
+const Price = styled.h4 `
     align-self: end;
     color: #fcba1c;
     margin:0;

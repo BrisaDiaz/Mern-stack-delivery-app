@@ -33,7 +33,7 @@ headers.append('Content-Type', 'application/json');
         const setting = {
           method: 'PUT',
           headers: headers,
-            body: JSON.stringify(info),
+          body: JSON.stringify(info),
         }
 
 
@@ -46,9 +46,9 @@ setFormIsLoading(false)
          if(res.status === 200) {
         
 
-         (isAdmin) && usersAPI({token,setAllUsers})
+         (isAdmin) && await usersAPI({token,setAllUsers})
 
-       currentUserAPI({token,setCurrentUser})
+       await currentUserAPI({token,setCurrentUser})
 
          setIsSuccessfullySend(true);
          setTimeout(() => {

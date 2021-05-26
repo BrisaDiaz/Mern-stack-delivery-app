@@ -12,7 +12,7 @@ padding-bottom: 20px;
     text-align: center;
     text-transform: uppercase;
     color: #fcba1c;
-    margin-bottom: 15px;
+margin: 0 auto;
     text-shadow: -2px -1px 0 #000;
 `
 const AboutWrapper= styled.article`
@@ -42,7 +42,7 @@ const Image = styled.img`
 max-width:400px;
 margin: 0 auto;
 @media  screen and (min-width:950px){
-    margin-top:-70px;
+    margin-top:-45px;
     }
 `;
 const HistoriSection = styled.div`
@@ -50,7 +50,8 @@ text-align:center;
 padding:  50px 25px;
 margin-left:-6px;
 display:flex;
-justify-content:center;
+justify-content:flex-start;
+flex-flow: column;
 align-items:center;
 line-heigth:35px;
 @media  screen and (min-width:950px){
@@ -66,11 +67,13 @@ export default function About(){
 return(
 <StyledAbout>
 
-  <Title>Sobre Nosotros</Title>
+
 
   <AboutWrapper cassName="flex">
 
   <HistoriSection>
+      <Title>Sobre Nosotros</Title>
+
    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem temporibus quod itaque mollitia quidem. Eos nemo nam corrupti ipsam iusto facilis sit blanditiis, placeat omnis amet voluptatem. Dolor, recusandae atque?.
      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt voluptates quasi corporis nihil pariatur repudiandae debitis! Sed sit, quaerat laudantium consectetur quibusdam ab aut laboriosam veniam ducimus. Odit, sed aperiam!
       </p>

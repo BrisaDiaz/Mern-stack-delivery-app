@@ -8,9 +8,11 @@ const User =require('../models/user.model');
 
   if (!userFound)  return res.status(404).json({message:"No user faund"} )
 
-    await  User.findByIdAndUpdate(userFound._id, {
+    await  User.findByIdAndUpdate(userFound._id, {$set:{
                 subscribe: true ,
-            }, { new: true });
+            }}, { new: true })
+
+      
  }
 
 

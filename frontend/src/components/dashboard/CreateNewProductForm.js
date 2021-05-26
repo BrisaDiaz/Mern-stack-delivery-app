@@ -22,9 +22,10 @@ margin-top:40px;
 background-size: 100%  100%;
 `;
 export const FormTitle= styled.h2`
-color: #ffa500;
+
 text-transform: uppercase;
-    text-shadow: 3px 0 2px #000000a1;
+
+}
 font-size: 25px;
 
 margin-bottom: 20px;
@@ -93,11 +94,13 @@ padding: 12px 10px 12px 20px;
 `;
 export const ButtonsWrapper = styled.div`
 display:flex;
-trasform:${(props) => (props.small ? "scale(0.8)" : "scale(1)")};
-
+justify-content:center;
+width:100%;
+@media screen and (max-width:450px){
+  transform:scale(0.8);
+}
 `;
 export const LoadButton = styled(ButtonPrimary)`
-margin: 0 5px;
 transform:scale(0.9);
 `
 
@@ -105,28 +108,30 @@ export const ResetButton = styled(Button)
 `
   box-shadow: 0 0 4px rgba(0,0,0,0.5);
 transform:scale(0.9);
-margin: 0 5px;
 outline:none;
 border:none;
 `
  export const Description =styled.textarea`
 
-width:90%;
+min-width:90%;
+max-width:90%;
   border:none;
   outline:none;
   box-shadow: 0 0 2px rgba(0,0,0,0.5);
 padding: 12px 10px 12px 20px;
-height: 200px;
+min-height: 200px;
+max-height: 200px;
 border:none;
 background:#f0f0f0;
 border-radius: 5px;
   &::placeholder {
    font-weight: 500;
    font-size: 17px;
-
    letter-spacing: 1px;
-
   }
+@media screen and (max-width: 500px) {
+  min-width: 95%;
+}
 `
  export const DropZone = styled.input`
   box-shadow: 0 0 4px rgba(0,0,0,0.5);
@@ -160,6 +165,55 @@ transition: all 0.5s ease;
       transform:scale(1.1);
     }
   `;
+
+export const OptionList = styled.select`
+    color: rgb(0 0 0 / 50%);
+    padding: 10px;
+    width: 90%;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0;
+    border: none;
+    margin-bottom: 20px;
+    background: #f3f3f3;
+    box-shadow: inset 0 0 6px 0 #00000057;
+    text-transform: capitalize;
+@media screen and (max-width: 500px) {
+  min-width: 95%;
+}
+`
+export const Option = styled.option`
+&:checked{
+   background: #fcba1c;
+}
+`
+export  function CategoriesOptionsInput({register,categories}){
+
+return(
+
+
+<OptionList 
+name="category"
+
+  
+          ref={register({
+       required: '*El campo es requrido',
+    
+          })}
+>
+  {categories?.map(cat =>
+
+<Option key={cat?._id } value={cat?.name} >{cat?.name}</Option>
+
+  )}
+
+</OptionList>
+
+);
+
+} 
 export function ProductNameInput({register,errors}){
 
   return(
@@ -183,27 +237,7 @@ export function ProductNameInput({register,errors}){
   )
 }
 
-export function ProductCategoryInput({register,errors}){
 
-  return(
-    <Fragment>
-            {errors.category && <ErrorMessage  role="alert">{errors.category.message}</ErrorMessage>}
-                 <TextInput
-                  style={{ borderColor: errors.category && "#bf0000" }  }
-                    placeholder="Categoría..."
-                    name="category"
-         
-          ref={register({
-       required: '*El campo es requrido',
-    
-          })}
-         />
-              
-
-    </Fragment>
-             
-  )
-}
 
 export function ProductSizeInput({register,errors}){
 
@@ -315,28 +349,29 @@ id="state" type="checkbox" defaultChecked={state} name="state" />
           </CheckboxWrapper>
     )
   }
-export default function UpdateNewProductForm() {
-
-    const {token,setIsSuccessfullySend,productsAPI}  = useContext(AppContext);
+export default  function UpdateNewProductForm() {
+ 
+    const {token,setIsSuccessfullySend,productsAPI,categories}  = useContext(AppContext);
     
       const  {register,handleSubmit,errors,onSubmit } =   usePostNewProductForm({token,productsAPI,setIsSuccessfullySend})
- 
+
   return(
     <StyledSection>
    
       <ThisFormCard>
   <Logo src = {trayIcon} alt="new-product"></Logo>
-        <ThisForm enctype="multipart/form-data"  method="post" onSubmit={handleSubmit(onSubmit)}>
+        <ThisForm onSubmit={handleSubmit(onSubmit)}>
              <FormTitle>Cargar nuevos productos</FormTitle>
                    
   <ProductNameInput register={register} errors={errors}/>
             
-         <ProductCategoryInput register={register} errors={errors}/>
+
 
          
 <ProductSizeInput register={register} errors={errors}/>
                 
 <ProductPriceInput register={register} errors={errors}/>
+  <CategoriesOptionsInput register={register} errors={errors} categories={categories}/>
 <ProductDescriptionTextArea register={register} errors={errors}  />
 
 <ProductState state="checked"/>

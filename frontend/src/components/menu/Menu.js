@@ -8,7 +8,7 @@ import SortProductsOptions from '../SortProductsOptions'
 import Item  from './MenuItem'
 
 
-const StyledMenu= styled.section`
+const StyledMenu= styled.main`
 min-height:100vh;
 width:100vw;
 padding: 65px 15px 15px 15px;
@@ -21,7 +21,7 @@ text-aling:center;
 export const SectionTitle= styled.h2`
 text-align:center;
 text-transform: uppercase;
-color:#fcba1c;
+color:${(props) =>(props.light ? "#fff" : "#fcba1c")};
 
     text-shadow: -2px -1px 0 #000;
 `;
@@ -29,11 +29,11 @@ const MenuWrapper= styled.section`
 display:flex;
 flex-wrap: wrap;
 padding-bottom: 20px ;
-margin: 0 0px;
+    margin-left: -6px;
 width:100%;
 
 `;
-const CategoryTitle = styled.h3 `
+const CategoryTitle = styled.h4 `
     text-align: center;
     line-height: 15px;
     color: #fcba1c;
@@ -56,7 +56,7 @@ const CategoryWrapper = styled.article`
     background: #9c0101;
     justify-content: center;
     margin-bottom: 20px;
-    margin-left: -6px;
+
     padding:  20px 15px;
         box-shadow: inset 0 0 20px 0 #1111118c;
 `;
@@ -67,6 +67,7 @@ padding:0 ;
  justify-content:center;
  justify-content:center;
 width: 95%;
+    gap: 15px;
 margin:0 auto;
 
 `;

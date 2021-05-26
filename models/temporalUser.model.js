@@ -18,7 +18,6 @@ const temporalUserSchema= new Schema ( {
    type:String,
    required:true,
    trim:true,
-    index:1
  },
   roles: [
       {

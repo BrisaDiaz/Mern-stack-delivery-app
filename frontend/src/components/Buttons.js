@@ -17,6 +17,8 @@ width:max-content;
   letter-spacing:2px;
   border-radius:4px;
     text-decoration: none;
+
+    transform:'${(props)=>(props.small ? "scale(0.7)" : "scale(1)")}';
   transition:all 0.5s ease;
   &:hover{
     background-color:#171717 ;

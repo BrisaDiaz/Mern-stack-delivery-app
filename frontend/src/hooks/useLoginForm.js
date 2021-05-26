@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import loginAPI from '../API/loginAPI'
 import {useState} from 'react' 
 
-export default  function useLoginForm({setIsLogin,setIsNotSingup,setIsAdmin,setToken, setCurrentUser,setAllUsers,token,setIsModerator,setIsLoading}){
+export default  function useLoginForm({setIsLogin,setIsNotSingup,setIsAdmin,setToken, setCurrentUser,setAllUsers,token,setIsModerator,setIsLoading,setAllOrders}){
 
   const [isFormLoading, setIsFormLoading] = useState(false)
 const [serverError, setServerError] = useState("")
@@ -30,6 +30,7 @@ setIsAdmin,
 history,
 setCurrentUser,
 setAllUsers,
+setAllOrders,
 setIsFormLoading,
 setIsModerator
     })
