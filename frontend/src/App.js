@@ -53,8 +53,10 @@ function App() {
          black: '#272727',
          gray:'#F0F0F0',
          darckTextShadow:'  -2px -1px 0 #000',
-         lightTextShadow:'1px 1px 2px #000',
+         whiteTextShadow:'  -2px -1px 0 #fff',
+         lightTextShadow:'-1px 1px 1px #000',
          lightBoxShadow:'1px 1px 5px #00000057',
+         darckBoxShadow:'2px 4px 14px 6px rgb(23 23 23 / 36%);',
          inputShadow:'inset 1px 1px 6px 0px #ccc'
        }
      }>

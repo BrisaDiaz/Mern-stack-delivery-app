@@ -15,7 +15,7 @@ if(!isValidEmail) return res.status(400).json({successful:false, message:`Email 
 if(!lastName || !name) return res.status(400).json({successful:false, message:`Full name is required`})
 
 
-if(typeof(lastName) !== String || typeof(name)  !== String) return res.status(400).json({successful:false, message:` Name is not valid`})
+if(typeof lastName !== String || typeof name  !== String ) return res.status(400).json({successful:false, message:` Name is not valid`})
 
 
 req.userName =`${name} ${lastName}`
@@ -40,7 +40,7 @@ if(number){
 if(!lastName || !name) return res.status(400).json({successful:false, message:`Full name is required`})
 req.userName =`${name} ${lastName}`
 
-if(typeof(lastName) !== String || typeof(name)  !== String) return res.status(400).json({successful:false, message:` Name is not valid`})
+if(typeof astName  !== String || typeof name   !== String) return res.status(400).json({successful:false, message:` Name is not valid`})
 
 
 if(!street|| !city|| !streetNumber) return res.status(400).json({successful:false, message:`Full address is required`})

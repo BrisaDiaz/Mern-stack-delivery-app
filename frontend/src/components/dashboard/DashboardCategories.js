@@ -10,7 +10,7 @@ import {LoaderSpinner} from './../LoaderSpinner'
 
 
 const CategoriesPage = styled(Page)`
-    background: :${props => props.theme.lightYellow};
+    background:${props => props.theme.lightYellow};
 padding-top: 65px;
 
 `
@@ -18,7 +18,7 @@ padding-top: 65px;
 
 const Input = styled(TextInput)`
 background: rgb(0 0 0 / 7%);
-box-shadow: inset 1px 1px 6px 0px #ccc;
+      box-shadow: :${props => props.theme.inputBoxShadow};
 `
 const Wrapper = styled.section`
 width:100%:
@@ -45,13 +45,17 @@ const FormCard = styled.article`
     max-width: 400px;
         padding: 20px 15px 40px;
         height:max-content;
-        background: #fff;
-  
+        background:#fff;
+        box-shadow:${props => props.theme.lightBoxShadow};
 & > h4{
       margin: 10px 0 24px;
         font-size: 25px;
 }
-            box-shadow: :${props => props.theme.lightBoxShadow};
+& >form  h4{
+      margin: 10px 0 24px;
+        font-size: 25px;
+}
+      
     & > form select {
      min-width:95%;
     }
@@ -86,16 +90,16 @@ const DeleteButton = styled.button`
     margin-bottom: 20px;
     cursor: pointer;
     text-transform: uppercase;
-    background: :${props => props.theme.gray};
+    background: ${props => props.theme.black};
     border: none;
-    box-shadow: :${props => props.theme.lightBoxShadow};
+    box-shadow: ${props => props.theme.lightBoxShadow};
     color: white;
     letter-spacing: 1px;
 font-size: 15px;
     font-family: "Oswald",sans-serif;
     border-radius: 4px;
     &:hover{
-background: #e83c2e;
+  background:${props => props.theme.orange};
     }
 `
 export default function DashboardCategories(){

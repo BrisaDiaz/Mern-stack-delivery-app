@@ -74,7 +74,7 @@ border:2px solid #fff;
 background: ${(props)=>(( props.slide === parseInt(props.index )) ? "#fff" : "transparent")} ;
 margin:0 5px;
 cursor:pointer;
-box-shadow:2px 2px 0 #000;
+box-shadow:${props => props.theme.lightTextShadow};
 `;
 
  export const SliderContent = styled.div`

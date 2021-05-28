@@ -12,7 +12,7 @@ position:relative;
 
 `;
 const ThisSlide= styled(Slide)`
-background:#171717;
+background:${props => props.theme.black};
 
 `
 const ThisSlideContent= styled(SliderContent)`
@@ -21,7 +21,7 @@ padding: 50px 0;
 `;
 
 const ThisIndicatorDot = styled(IndicatorDot)`
-border:2px solid #fcba1c;
+border:2px solid ${props => props.theme.darckYellow};
 background: ${(props)=>(( props.slide === parseInt(props.index )) ? "#fcba1c" : "transparent")} ;
 `;
 const Comment = styled.p`
@@ -34,12 +34,11 @@ line-height: 25px;
 font-size:25px;
 color: #fcba1c;
 text-align:center;
-text-shadow: 2px 2px 0 #000;
+text-shadow: ${props => props.theme.darckTextShadow};
     height: 30px;
 `;
 const EmailContact = styled.small`
-
-color: orange;
+color:${props => props.theme.darckYellow};
 text-align:center;
 margin-top:30px;
 padding-bottom: 50px;

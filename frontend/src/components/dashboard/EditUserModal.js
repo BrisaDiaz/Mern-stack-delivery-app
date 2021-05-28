@@ -23,7 +23,7 @@ const EditTable = styled.div`
 max-width:370px;
 width:100%;
 height:max-content;
-    box-shadow: 2px 4px 14px 6px rgb(23 23 23 / 36%);
+    box-shadow: ${props => props.theme.darckBoxShadow};
 margin: 0 auto;
 position:absolute;
 top:50%;
@@ -34,23 +34,23 @@ transform:translate(-50%,-50%);
 const EditTableBody = styled.div`
 padding: 10px 15px 20px;
 color: #ffffff;
-  background:  #272727;
+  background:  ${props => props.theme.black};
 text-align:center;
 & > h4 {
 margin-bottom: 5px;
 }
 & > h3{
-color: #fecb00;
+color: ${props => props.theme.darckYellow};
     text-transform: capitalize;
-    text-shadow: -2px -1px 0 #ffffff;
+    text-shadow: ${props => props.theme.whiteTextShadow};
 margin-bottom: 10px;
 }
 `
 const EditTableHeader = styled.div`
-background: #e83c2e;
+background: ${props => props.theme.orange};
     width: 100%;
     padding: 8px 15px;
-  text-shadow: -2px -1px 0 #000000;
+  text-shadow: ${props => props.theme.darckTextShadow};
     box-shadow: inset 0 0 20px 5px rgb(23 23 23 / 15%);
 `
 

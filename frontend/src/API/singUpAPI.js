@@ -46,15 +46,14 @@ setIsFormLoading(false)
   }, 1000);
       }
 
-       if(res.status === 500) {
-
-   setServerError('Error en el servidor, vuelva a interntar')
+       if(res.status === 400) {
+  const {message} = json
+   console.log(message)
+      setServerError(message)
 return
  }
  
-  const {message} = json
-   
-      setServerError(message)
+
       
 }catch(err){
 

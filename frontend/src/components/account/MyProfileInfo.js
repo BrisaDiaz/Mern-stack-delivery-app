@@ -15,12 +15,12 @@ padding-top:60px;
 const UserCard =styled.article`
 margin:30px auto;
 display:flex;
-background:#fecb00;
 height:max-content;
 flex-wrap:wrap;
 min-height: 250px;
     border-radius: 5px;
-  box-shadow: :${props => props.theme.lightBoxShadow};
+         background:${props => props.theme.darckYellow};
+  box-shadow :${props => props.theme.lightBoxShadow};
 `;
 const CardImg = styled.div`
      background:${props => props.theme.darckYellow};
@@ -43,13 +43,14 @@ min-height: 250px;
 flex:1 1 400px;
 background:${props => props.theme.black};
     border-radius: 5px;
+    & > small{
+    font-style: italic;
+}
 `;
 const UserInfo = styled.p` 
 margin: 5px 0;
 text-transform:capitalize;
-& > small{
-    font-style: italic;
-}
+
 & > b{
   color:${props => props.theme.darckYellow};
 }
@@ -65,7 +66,7 @@ font-weight:600;
     margin-left: 80%;
     border: none;
     background: #fff;
-       color::${props => props.theme.black};
+       color:${props => props.theme.black};
     transition:all 0.3s ease;
     &:hover{
        box-shadow: inset 0 0 8px 2px #cdc8c8;
@@ -81,7 +82,7 @@ padding: 4px 8px;
     font-family: "Oswald",sans-serif;
     font-size: 19px;
     margin: 10px 40%;
-    background: :${props => props.theme.orange};
+    background:${props => props.theme.orange};
     color: #fff;
         transition:all 0.5s ease;
     &:hover{

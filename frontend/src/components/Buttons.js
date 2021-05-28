@@ -2,11 +2,11 @@
 import styled  from 'styled-components'
 
    export  const Button= styled.a`
-     box-shadow: 0 0 4px rgba(0,0,0,0.5);
+     box-shadow: ${props => props.theme.lightBoxShadow};
 padding: 15px 40px;
 color:#fff;
 width:max-content;
- background: ${props => props.theme.darckYellow};
+  background:${props => props.theme.darckYellow};
   text-transform: uppercase;
   text-align:center;
   font-size: 16px;

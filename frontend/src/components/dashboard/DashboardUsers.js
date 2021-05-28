@@ -16,28 +16,19 @@ padding-top:60px;
 margin-left: -6px;
 
 `;
-const UsersTable = styled.div` 
-width:100%;
-min-width:300px;
-margin-top:30px;
-  background:  #272727;
-  flex:1;
-      color: #ffffff;
-      box-shadow: 2px 4px 8px rgb(0 0 0 / 20%);
-    border-radius: 4px;
-`
-export const AdminTable = styled.div` 
+
+export const Table = styled.div` 
     border-radius: 4px;
 width:100%;
 min-width:300px;
 margin: 0 5px;
-    box-shadow: 2px 4px 8px rgb(0 0 0 / 20%);
+    box-shadow: ${props => props.theme.lihgtBoxShadow};
 height:max-content;
 margin-top:30px;
 
 flex:1;
   color: #ffffff;
-      background:  #272727;
+ background:  ${props => props.theme.black};
 `
 
 const TablesContainer = styled.div`
@@ -52,14 +43,14 @@ export const TableHeader = styled.div`
 width:100%;
 padding: 5px 15px;
 background: #fecb00;
-
+    box-shadow: inset 0 0 20px 5px  ${props => props.theme.darckYellow};
   
 `
 export const TableTitle = styled.h4`
 margin:0;
 font-size:25px;
 text-align:center;
-text-shadow: -2px -1px 0 #000000;
+text-shadow:${props => props.theme.lightTextShadow};
     color: #ffffff;
 line-height: 40px;
 `
@@ -71,21 +62,16 @@ justify-content:space-between;
 `;
 const UserCell = styled.div`
 position:relative;
-background:#fecb0005;
+ background:  ${props => props.theme.black};
 width:100%;
 display:flex;
 flex-flow:column;
 align-items:space-between;
 padding: 5px 15px;
   border-bottom: 1px solid rgb(252 175 1);
-  & > b{
-     color: #e83c2e;
-    margin-right: 5px;
-        font-family: "Oswald", sans-serif;
-
-  }
+  
   & > h4 span {
-    text-shadow: 0 0 6px #fcba1c;
+    text-shadow: 0 0 6px ${props => props.theme.darckYellow};
   }
 `;
 const UserName = styled.h4`
@@ -96,7 +82,7 @@ margin-bottom:5px;
 `;
 const UserStatus = styled.b`
 padding: 5px 8px;
-    background: #e83c2e;
+    background:  ${props => props.theme.orange};
     border-radius: 10px;
     color: #ffffff;
     cursor: pointer;
@@ -167,7 +153,7 @@ setIsEditing(true) ;
           <EditUserModal user={editingUser} isEditing={isEditing} setIsEditing={setIsEditing}/>
 
           <TablesContainer>
-<UsersTable>
+<Table>
   <TableHeader>
     <TableTitle>Usuarios</TableTitle>
   </TableHeader>
@@ -179,8 +165,8 @@ setIsEditing(true) ;
   )}
  
 
-</UsersTable>
-<AdminTable>
+</Table>
+<Table>
   <TableHeader>
     <TableTitle>Admins y Mediadores</TableTitle>
   </TableHeader>
@@ -189,7 +175,7 @@ setIsEditing(true) ;
   </UserInfoCell>
     
     )}
-</AdminTable>
+</Table>
 
 </TablesContainer>
 </Page>
