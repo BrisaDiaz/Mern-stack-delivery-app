@@ -26,24 +26,6 @@ productSchema.methods.setImgUrl = function setImgUrl(filename){
 
 }
 
-productSchema.post('save',  async function() {
-  try{
-    let id = this._id
-    const categoryFound = await Category.find({name: this.category})
-   
-     Category.findByIdAndUpdate(categoryFound._id, {$set:{
-         quantity: categoryFound.quantity + 1,
-         products:[...this.products,id]
-        
-        } })
-         
-
-    categoryFound.save()
-
-  }catch(err){
-    console.log(err)
-  }
-});
 
 const Product = mongoose.model('Product',productSchema)
 

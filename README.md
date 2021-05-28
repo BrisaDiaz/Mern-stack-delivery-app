@@ -14,6 +14,7 @@ password : moderator
 MONGODB_URI
 JWT_SECRET_KEY
 HOST
+JWT_EMAIL_CONFIRMATION_KEY
 
 ### oAuth2 keys
 

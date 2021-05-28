@@ -1,4 +1,5 @@
 const Product = require('../models/product.model');
+const {Category} = require('../models/category.model')
 const fs = require("fs")
 
 
@@ -39,6 +40,11 @@ const  img = req.file.filename
   active,
  })
 product.setImgUrl(img)
+
+
+const actualizedQuantity = req.categoryQuantity + 1
+
+await Category.findByIdAndUpdate( req.categoryId,{$set:{ quantity: actualizedQuantity }},{new : true}  )
 
 const newProduct = await product.save( )
 
@@ -119,8 +125,14 @@ fs.unlink(oldImgPath, (err) => {
   }
  })
  
+const productFound = await Product.findById(req.params.id);
 
   await Product.findByIdAndRemove(req.params.id);
+
+const actualizedQuantity = req.categoryQuantity - 1
+
+await Category.findOneAndUpdate( {name: productFound.categorye},{$set:{ quantity: actualizedQuantity }},{new : true} )
+
 
     res.status(204).json({success:true , message:"Product has been deleted"});
     
