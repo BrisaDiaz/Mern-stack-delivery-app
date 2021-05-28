@@ -72,7 +72,7 @@ const [isRequesLoading, setIsRequesLoading] = useState(false)
   <MessageCard>
     <span>📬</span>
     <h4>Tu cuenta necesita ser verificada</h4>
-    <p>Para poder gestionar su cuenta en la aplicación es necesario que verifique su correo electronico. Al precionar el siguiente botón un mensaje le será enviado a su email con un link de verivicacón válido por 24hs.</p>
+    <p>Para poder gestionar su cuenta en la aplicación es necesario que verifique su correo electronico. Al precionar el siguiente botón, un mensaje le será enviado a su email con un link de verificación válido por 24hs.</p>
      {isRequesLoading && <LoaderSpinner small />}
     <button onClick = {() => accountConfirmationAPI ({setIsRequesLoading,setIsSuccessfullySend,history}) }>Enviar Correo</button>
 

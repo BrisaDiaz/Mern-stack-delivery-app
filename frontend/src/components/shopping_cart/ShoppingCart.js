@@ -21,7 +21,7 @@ transition: all 0.5s ;
   margin: 0 auto;
   background:#fff;
     border-radius: 0 0 15px 15px;
-    box-shadow: -2px 2px 8px #00000024;
+    box-shadow: :${props => props.theme.lightBoxShadow};
 
   `;
   const CartHeader = styled.div`
@@ -29,7 +29,7 @@ transition: all 0.5s ;
   color: #ffa500;
   `
   const CartTitle = styled.h2`
-  text-shadow: 1px 1px 0px #000;
+  text-shadow: ${props => props.theme.lightTextShadow};
   padding-top: 10px ;
     margin-bottom: 10px ;
 color: #fcba1c;
@@ -50,7 +50,7 @@ overflow-y:scroll;
     border: none;
     margin: 10px 0;
     border-radius: 15px;
-    background: #171717;
+    background:${props => props.theme.black};
     box-shadow: inset 0 0 13px 0 #0000006e;
     font-family: "Oswald",sans-serif;
     font-size: 19px;
@@ -61,8 +61,8 @@ overflow-y:scroll;
   `;
       const MakeOrdenButton = styled(DeleteAllButton)`
 margin: 10px 15px 0 0;
-background:#fcba1c;
-    color: #171717;
+background:${props => props.theme.darckYellow};
+    color: :${props => props.theme.black};
   `;
       const CartResume = styled.div`
 margin:10px 0;

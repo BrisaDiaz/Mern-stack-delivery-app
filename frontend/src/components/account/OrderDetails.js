@@ -57,6 +57,7 @@ text-align:center;
 }   
 @media screen and (max-width: 400px){
       border-spacing: 0;
+          width: 100%;
   & >  thead th {
   
        font-size:16px;
@@ -64,6 +65,15 @@ text-align:center;
  & >  tbody{
   font-size: 12px;
 }
+}
+`;
+export const ClientInfo = styled.div`
+margin: 0 auto;
+max-width:900px;
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 `;
 export const Process = styled.div`
@@ -102,12 +112,12 @@ function UserOrderStateChart ({states}){
   return(
 
    <Process>
-{states.map(state =>
+{states?.map(state =>
   
-     <ProcessInfo  key ={state.date}>
-           <h4>{state.name}</h4>
-           <small>{new Date(state.date).toLocaleString()?.split(" ")[0]}</small>
-            <small>{new Date(state.date).toLocaleString()?.split(" ")[1]}</small>
+     <ProcessInfo  key ={state?.date}>
+           <h4>{state?.name}</h4>
+           <small>{new Date(state?.date).toLocaleString()?.split(" ")[0]}</small>
+            <small>{new Date(state?.date).toLocaleString()?.split(" ")[1]}</small>
          </ProcessInfo>
   
   )}
@@ -130,25 +140,28 @@ let userOrders = currentUser?.orders
 
 
 
-
   return(
 <Page>
   <CenterTitle>Nº de Pedido:<span>{orderID}</span></CenterTitle>
 
 
 <UserOrderStateChart  
-states={thisOrder?.states.filter(state => state.confirmed === true)}
+states={thisOrder?.states?.filter(state => state?.confirmed === true)}
 />
 
 
 
 
 
-    <h3>Detalles de envio:</h3>
-      <p><b>Destinatario:</b>{thisOrder?.client?.name}</p>
-    <p><b>Dirrección:</b>{thisOrder?.client?.address}</p>
-       <p><b>Teléfono:</b>{thisOrder?.client?.number}</p>
-      
+    <CenterTitle>Detalles de envio</CenterTitle>
+
+    <ClientInfo>
+      <p><b>Destinatario:</b>{thisOrder?.client[0]?.name}</p>
+    <p><b>Dirrección:</b>{thisOrder?.client[0]?.address}</p>
+       <p><b>Teléfono:</b>{thisOrder?.client[0]?.number}</p>
+      </ClientInfo>
+      <br></br>
+      <hr></hr>
            <CenterTitle>Detalles del pedido</CenterTitle>
  <DetailTable>
    <thead>

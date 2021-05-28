@@ -17,7 +17,7 @@ text-align:center;
 font-size: 35px;
 text-transform: uppercase;
 color:#fff;
-text-shadow: 2px 2px 2px #000;
+text-shadow: ${props => props.theme.darckTextShadow};
 @media screen and (min-width:750px){
 font-size: 45px;
 }

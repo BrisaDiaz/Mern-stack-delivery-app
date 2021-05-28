@@ -4,7 +4,7 @@ import AppContext from '../../context/app-context'
 import useEditProfileForm from '../../hooks/useEditProfileForm'
 import {LoaderSpinner} from './../LoaderSpinner'
 import {UserNameInput,UserLastNameInput,UserPasswordInput,UserNewPasswordInput,ErrorServerMessage,ErrorMessage} from '../auth/SingupForm'
-import {OptionList,Option} from '../dashboard/CreateNewProductForm'
+import {OptionList,Option,CheckboxWrapper} from '../dashboard/CreateNewProductForm'
 import {FormButtons } from '../dashboard/CreateNewProductForm'
 import {NameInput } from '../contact/ContactForm';
 import {GoBackLink} from '../product_details/ProductDetails'
@@ -31,8 +31,11 @@ align-items:center;
   border:none;
   background: #f0f0f0;
 }
+&> label {
+  margin: 0 auto 20px
+}
 & >${OptionList} {
-  width: 100%
+  min-width: 100%
 }
   `
 const FormIcone = styled.img`
@@ -49,6 +52,19 @@ margin-left: 15px;
 }
 `
 
+
+function NewPasswordCheckbox({setIsChangingPassword,value}){
+
+
+   return(
+          <CheckboxWrapper >
+<label htmlFor="newPasswordCheckbox">Cambiar contraseña:</label>
+<input
+onChange={(e) =>{setIsChangingPassword(!value)}}
+id="newPasswordCheckbox" type="checkbox" name="newPasswordCheckbox" />
+          </CheckboxWrapper>
+    )
+  }
 function CellphoneInput({register,errors,placeholder}) {
   
   return(
@@ -140,7 +156,7 @@ export default function EditMyProfile() {
 const {token,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} = useContext(AppContext);
 
    const { 
- register,handleSubmit,errors,onSubmit ,serverError,formIsLoading
+ register,handleSubmit,errors,onSubmit ,serverError,formIsLoading,isChangingPassword,setIsChangingPassword
 } = useEditProfileForm(
   {token,setCurrentUser,setAllUsers,setIsSuccessfullySend,isAdmin})
 
@@ -151,14 +167,23 @@ const {token,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} = useCont
     <GoToProfileLink to="/myAccount/myProfile" >Regresar</GoToProfileLink>
   
 
-  <EditProfileForm onSubmit={handleSubmit(onSubmit)}>
+  <EditProfileForm onSubmit={handleSubmit(onSubmit)} novalidate>
 
     <FormIcone src={userEditIcone} alt="edit-profile"/>
 <UserNameInput  errors={errors} register={register}/>
    <UserLastNameInput  errors={errors} register={register}/>
-     <UserPasswordInput  errors={errors} register={register} name="userPassword" placeholder="Tu contraseña..."/>
-     <UserNewPasswordInput  errors={errors} register={register} name="newPassword" placeholder="Nueva contraseña..."/>
-      
+   <NewPasswordCheckbox setIsChangingPassword ={setIsChangingPassword} value={isChangingPassword} />
+
+   {isChangingPassword ? 
+
+<Fragment>
+<UserPasswordInput  errors={errors}  register={register} name="userPassword" placeholder="Tu contraseña..."/>
+     <UserNewPasswordInput  errors={errors}   register={register} name="newPassword" placeholder="Nueva contraseña..."/>
+</Fragment>
+: null
+}
+     
+ 
                <CellphoneInput  errors={errors} register={register}  placeholder="Tu telèfono..."/>
 
 <CityAddressOptions register={register} />

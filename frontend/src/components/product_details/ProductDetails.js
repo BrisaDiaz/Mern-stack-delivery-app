@@ -83,9 +83,9 @@ line-height:25px;
 text-transform:capitalize ;
 & > span {
       
-color: rgb(255 165 0);
+color: ${props => props.theme.darckYellow};
     margin-right: 5px;
-    font-size: 19px;
+    font-size: 18px;
         font-family: "Oswald", sans-serif;
         letter-spacing:1px;
  
@@ -98,13 +98,14 @@ text-transform:none;
 export default function ProductDetailsPage(){
     const {products,cartProducts,addToCart,addToTotalCost}  = useContext(AppContext);
  const {productId}=  useParams()
+
  const thisProductInfo = products.find(product => product._id === productId )
 
 const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProductInfo,cartProducts,addToCart,addToTotalCost)
   return(
 <ProductDetails>
   
-             <GoBackLink to="/menu" > Regresar</GoBackLink>
+             <GoBackLink to= "/menu" > Regresar</GoBackLink>
        
   <PrductImg src={thisProductInfo.img}  alt={thisProductInfo.name}/>
     <Line/>

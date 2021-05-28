@@ -6,7 +6,7 @@ import styled  from 'styled-components'
 padding: 15px 40px;
 color:#fff;
 width:max-content;
- background: #fcba1c;
+ background: ${props => props.theme.darckYellow};
   text-transform: uppercase;
   text-align:center;
   font-size: 16px;
@@ -21,7 +21,7 @@ width:max-content;
     transform:'${(props)=>(props.small ? "scale(0.7)" : "scale(1)")}';
   transition:all 0.5s ease;
   &:hover{
-    background-color:#171717 ;
+    background-color:${props => props.theme.black};
   }
   & > * {
     cursor:pointer;
@@ -30,7 +30,7 @@ width:max-content;
    transform:scale(0.8);
 `;
 export const ButtonPrimary = styled(Button)`
-  background:#e83c2e;
+  background:${props => props.theme.orange};
 `;
 
 

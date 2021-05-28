@@ -104,13 +104,13 @@ const ProfileIcone = styled(CartIcone)`
 const CartNumber = styled.span`
 padding: 0 5px;
 border-radius: 50%;
-background:#e83c2e;
 position:absolute;
 right:0;
 bottom:0;
 color:#fff;
 font-size:14px;
-text-shadow: 1px 1px 0 #000;
+background:${props => props.theme.orange};
+text-shadow: ${props => props.theme.lihgtTextShadow};
 transition:all 0.3s ease;
 &:hover{
   transform: scale(1.1);

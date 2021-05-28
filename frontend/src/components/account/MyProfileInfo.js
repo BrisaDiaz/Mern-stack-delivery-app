@@ -20,10 +20,10 @@ height:max-content;
 flex-wrap:wrap;
 min-height: 250px;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 30%);
+  box-shadow: :${props => props.theme.lightBoxShadow};
 `;
 const CardImg = styled.div`
-     background: #fecb00;
+     background:${props => props.theme.darckYellow};
     min-height: 100%;
     border-radius: 5px;
     padding:10px 0;
@@ -41,16 +41,20 @@ color:#fff;
 padding:15px;
 min-height: 250px;
 flex:1 1 400px;
-background:#272727;
+background:${props => props.theme.black};
     border-radius: 5px;
 `;
 const UserInfo = styled.p` 
 margin: 5px 0;
 text-transform:capitalize;
+& > small{
+    font-style: italic;
+}
+& > b{
+  color:${props => props.theme.darckYellow};
+}
 `;
-const InfoLabel = styled.b`
-color:#fcba1c;
-`;
+
 const EditButton = styled(Link)`
 padding:5px 8px;
 cursor:pointer;
@@ -61,7 +65,7 @@ font-weight:600;
     margin-left: 80%;
     border: none;
     background: #fff;
-       color:#000;
+       color::${props => props.theme.black};
     transition:all 0.3s ease;
     &:hover{
        box-shadow: inset 0 0 8px 2px #cdc8c8;
@@ -77,7 +81,7 @@ padding: 4px 8px;
     font-family: "Oswald",sans-serif;
     font-size: 19px;
     margin: 10px 40%;
-    background: #e83c2e;
+    background: :${props => props.theme.orange};
     color: #fff;
         transition:all 0.5s ease;
     &:hover{
@@ -107,14 +111,14 @@ localStorage.removeItem('userId');
         <CardImg><Img src={FormImg} alt="user"/></CardImg>
  <CardInfo>
    <EditButton to="/myAccount/editProfile">Editar</EditButton>
-      <UserInfo><InfoLabel>Nombre: </InfoLabel>{currentUser.name}</UserInfo>
-      <UserInfo><InfoLabel>Email: </InfoLabel>{currentUser.email}</UserInfo>
+      <UserInfo><b>Nombre: </b>{currentUser.name}</UserInfo>
+      <UserInfo><b>Email: </b>{currentUser.email}</UserInfo>
 
 
  <small>Permitenos contactarnos inmediatamente ante cualquier duda o inprevisto.</small>
-          <UserInfo><InfoLabel>Teléfono: </InfoLabel>{currentUser.number || null }</UserInfo>
+          <UserInfo><b>Teléfono: </b>{currentUser.number || null }</UserInfo>
                <small>Su orden será enviada a la dirección suministrada.</small>
-              <UserInfo><InfoLabel>Dirección: </InfoLabel>{currentUser.address || null }</UserInfo>
+              <UserInfo><b>Dirección: </b>{currentUser.address || null }</UserInfo>
 
              <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
     </CardInfo>

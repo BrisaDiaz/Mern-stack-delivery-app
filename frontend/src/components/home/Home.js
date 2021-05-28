@@ -7,8 +7,9 @@ const StyledHome = styled.main`
 
 width:100vw;
 padding: 58px 0  0 0;
-margin:0;
+
 text-aling:center;
+    margin-left: -6px;
 `;
 export default function Home() {
   return(

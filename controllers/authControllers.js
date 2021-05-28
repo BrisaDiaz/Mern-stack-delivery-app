@@ -10,7 +10,7 @@ const sendConfirmationEmailFunction = require('../libs/sendConfirmationEmail') ;
 
  const signUp = async (req, res) => {
   try {
-   const { name, lastName, email, password, roles } = req.body;
+   const { email, password, roles } = req.body;
 
    const id =mongoose.Types.ObjectId()
 
@@ -90,12 +90,13 @@ const validateEmailToken  = async (req,res) => {
 
  const decoded =   jwt.verify(token, process.env.JWT_EMAIL_CONFIRMATION_KEY)
 
-const email  =  decoded.email
+const id  =  decoded.id
 
 
- const user = await TemporalUser.findOne({email: email}).exec()
+ const user = await TemporalUser.findById(id)
 
-console.log(email)
+
+
  if(!user) return res.status(404).json({message:"No user faund"} )
 
 const newUser = new User({

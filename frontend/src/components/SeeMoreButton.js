@@ -16,6 +16,7 @@ padding: 0 6px;
     border-radius: 5px;
     box-shadow: inset 0 0 4px #00000038;
     text-shadow: 0 1px 2px black;
+        transform: scale(0.8);
 `;
 export default function SeeMoreButton({trigger}){
  const [isToggledDetails,setIsoggledDetails] = useState(false)

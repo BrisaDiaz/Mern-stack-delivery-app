@@ -5,7 +5,7 @@ const checkDuplicatedCategory= async(req,res,next) =>{
      
   const categoryFound = await Category.findOne({name :  req.body.category})
 
-  if(categoryFound) return  req.status(400).json({successful:false, message:'The category already exist'})
+  if(categoryFound) return  req.status(409).json({successful:false, message:'The category already exist'})
 
 
   next()
@@ -23,10 +23,11 @@ const checkCategoryExist = async(req,res,next) =>{
 
   const categoryFound = await Category.findById(req.params.categoryId)
 
-  if(!categoryFound) return  req.status(400).json({successful:false, message:'Not category found'})
+  if(!categoryFound) return  req.status(404).json({successful:false, message:'Not category found'})
 
 req.categoryId = categoryFound._id
 req.categoryName= categoryFound.name
+
   next()
   }catch(err){
     console.log(err)

@@ -1,3 +1,5 @@
+
+import {ThemeProvider} from 'styled-components'
 import PrivateRoute from './components/PrivateRoute'
 import PublicRoute from './components/PublicRoute'
 import Footer from './components/Footer'
@@ -22,7 +24,7 @@ import AppState  from './context/AppState'
 import ShooppingCart from './components/shopping_cart/ShoppingCart'
 import EditMyProfile from './components/account/EditMyProfile'
 import MyOrdersPage from './components/account/MyOrdersPage'
-import OrderDetails from './components/account/MyOrdersPage'
+import OrderDetails from './components/account/OrderDetails'
 import MyProfile from './components/account/MyProfileInfo'
 import {
   BrowserRouter as Router,
@@ -39,8 +41,23 @@ function App() {
 
 
     return (
+        
       <Router>
         <AppState>
+     <ThemeProvider theme={
+       {
+         darckYellow: `#fcaf01`,
+         lightYellow:'rgb(255 165 0 / 58%)',
+         orange:'#e83c2e',
+         darckRed:'#9c0101',
+         black: '#272727',
+         gray:'#F0F0F0',
+         darckTextShadow:'  -2px -1px 0 #000',
+         lightTextShadow:'1px 1px 2px #000',
+         lightBoxShadow:'1px 1px 5px #00000057',
+         inputShadow:'inset 1px 1px 6px 0px #ccc'
+       }
+     }>
           <SuccessfullFormModal/>
           <LoadingPage/>
         <Header/>
@@ -80,10 +97,10 @@ function App() {
 
      <ShooppingCart/>
         <Footer/>
-
+</ThemeProvider>
     </AppState>
       </Router>
-      
+
     );
   }
 

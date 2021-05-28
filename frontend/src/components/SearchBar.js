@@ -15,7 +15,7 @@ padding: 8px;
 padding-left: 15px;
 border-radius: 15px;
 outline: none;
-box-shadow: 0 0 2px rgba(0,0,0,0.5);
+box-shadow: ${props => props.theme.lightBoxShadow};
 transition: all 0.5s ease;
 border:none;
 margin-left: -6px;

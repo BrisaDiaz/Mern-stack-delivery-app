@@ -8,7 +8,7 @@ OAUTH_USER,
 OAUTH_CLIENT_ID,
 OAUTH_CLIENT_SECRET,
 OAUTH_REFRESH_TOKEN,
-  OAUTH_REDERICT_URI
+ OAUTH_REDERICT_URI
 
 
 } =   process.env
@@ -67,9 +67,16 @@ return
 
 return transporter
 
+
+
   }catch(err){
-
-
+console.log('------------------------------------------------')
+console.log(OAUTH_USER,
+OAUTH_CLIENT_ID,
+OAUTH_CLIENT_SECRET,
+OAUTH_REFRESH_TOKEN,
+ OAUTH_REDERICT_URI)
+ console.log('------------------------------------------------')
       console.log(err)
 
   }

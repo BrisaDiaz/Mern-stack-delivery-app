@@ -16,12 +16,16 @@ const deleteConfirmation = window.confirm('El producto será eliminado de la bas
 if(deleteConfirmation){
 
 try {
-        let res = await fetch("/api/products/"+id, setting);
-        if(res.status >= 200  || res.status < 300  ){
+      
 
-await productsAPI()
-    
-                    }
+  
+  
+  let res = await fetch(`/api/products/${id}`, setting);
+
+
+        if(res.status  ===204 ) return await productsAPI()
+  
+        if(res.status === 403) return   alert('Se require rol de Administrador') 
 
       } catch (err) {
 

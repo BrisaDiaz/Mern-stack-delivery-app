@@ -148,7 +148,7 @@ const order = await Order.findById(req.params.orderId)
 
   if(req.confirmedState ==='liquidado'){
 
-  await  User.findByIdAndUpdate(order.client[0]._id,{
+  await  User.findByIdAndUpdate(order.client[0],{
   $set: {
     client: true,
   }
@@ -189,7 +189,7 @@ try{
 },{new:true})
 
 
-    res.status(200).json({success:true , message:"Order has been deleted"});
+    res.status(204).json({success:true , message:"Order has been deleted"});
 
 }catch(err){
   console.log(err)

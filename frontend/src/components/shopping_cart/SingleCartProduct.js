@@ -45,7 +45,7 @@ const TotalPrice = styled.h4`
 margin:0;
 margin-left:  10px;
     text-align: left;
-color:#fcba1c;
+color:${props => props.theme.darckYellow};
 &:before{
   content:"$";
 }
@@ -53,7 +53,7 @@ color:#fcba1c;
 const IncreaseButton = styled.button`
 margin: 0 2px;
 padding: 0 5px;
-background:#e83c2e;
+background:${props => props.theme.orange};
 outline:none;
 border:none;
 border-radius: 4px;
@@ -63,7 +63,7 @@ transform:scale(0.8);
 font-size:20px;
 color:#fff;
 transition: all 0.3s ease;
-box-shadow: inset 0 0 4px rgb(0 0 0 / 50%);
+box-shadow: :${props => props.theme.lightBoxShadow};
 &:hover{
 opacity:0.8;
 }
@@ -77,7 +77,7 @@ min-height:30px;
 transform:scale(0.65);
 border-radius:50%;
 cursor:pointer;
-background: #e83c2e;
+background: :${props => props.theme.orange};
 margin-bottom: 10px;
 margin-left:5px;
 box-shadow:inset 0 0 4px rgb(0 0 0 / 50%);

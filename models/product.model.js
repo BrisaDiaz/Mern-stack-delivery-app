@@ -22,7 +22,7 @@ active:{type: Boolean,required:true ,default: true}
 
 productSchema.methods.setImgUrl = function setImgUrl(filename){
 
-  this.img =`https://${process.env.HOST || 'http://localhost:7000' }/media/${filename}`
+  this.img =` ${process.env.HOST || 'http://localhost:7000' }/media/${filename}`
 
 }
 

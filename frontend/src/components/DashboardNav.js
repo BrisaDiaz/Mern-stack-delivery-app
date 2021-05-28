@@ -10,13 +10,13 @@ import newProduct from '../img/newProduct.svg'
 
 const bounce = keyframes `
 
-  0% { transform: scale(0.9); }
-  50% { transform:  scale(1.1); }
-  100% { transform: scale(0.9); }
+  0% { transform: scale(1.1); }
+  50% { transform:  scale(1.2); }
+  100% { transform: scale(1.1); }
 `
  const NavIcone = styled.img` 
     transition: all 0.3s ease;
-    width: 22px;
+    width: 20px;
     cursor: pointer;
     &:hover{
       transform: scale(1.1);

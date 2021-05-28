@@ -5,7 +5,7 @@ import {  useContext} from 'react'
 import {Link} from 'react-router-dom';
 import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
 
-const Item = styled.div `
+const Item = styled.figure `
 display:flex;
 box-sizing:border-box;
 border-radius:5px;
@@ -60,13 +60,13 @@ const Price = styled.h4 `
 export const CartButton = styled.button`
 margin-left:auto;
 margin-top:auto;
-box-shadow: 0 0 2px #000000bd;
+    box-shadow: ${props=> props.theme.lightBoxShadow};
 padding:20px 0;
 width:50px;
 display:flex;
 justify-content:center;
 align-items:center;
-background: ${(props) => props.isAdded  ? "#fcaf01" : "#272727"}  ;
+background: ${(props) => props.isAdded  ? props.theme.darckYellow :  props.theme.black}  ;
 outline:none;
 border:none;
 border-radius: 4px;
@@ -77,7 +77,7 @@ color:#fff;
 transition: all 0.3s ease;
 &:hover{
 
-  background: #fcaf01;
+  background:${props => props.theme.darckYellow};
 }
 
 `;
@@ -89,9 +89,8 @@ positon:relative;
 display:flex;
 justify-content:center;
 margin-bottom:10px;
-
 border-radius:5px;
-box-shadow: 0 0 2px rgb(0 0 0 / 50%);
+box-shadow: 0 1px 3px #ccc;
 `;
 const Img = styled.img`
 transition:all 0.5s ease;

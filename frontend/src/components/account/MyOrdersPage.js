@@ -3,7 +3,7 @@ import {Link,useHistory} from 'react-router-dom'
 import {ButtonPrimary} from '../Buttons'
 import {SectionTitle} from '../menu/Menu'
 import AppContext from '../../context/app-context'
-import {   useContext } from 'react'
+import {  useContext } from 'react'
 import deleteOrderAPI from '../../API/deleteOrderAPI'
 import currentUserAPI from '../../API/currentUserAPI'
 import refreshIcone from '../../img/refresh.svg'
@@ -18,11 +18,12 @@ width:100%;
 max-width: 1250px;
 margin: 0 auto;
 text-align:center;
-    background: rgb(255 165 0 / 58%);
+background:${props => props.theme.lightYellow};
+
 `;
 export const TableHead = styled.thead`
-background-color: #171717;
-color: #fcba1c;
+background-color: ${props => props.theme.black};
+color: ${props => props.theme.darckYellow};
 & > tr th {
    padding: 10px 0;
        font-family: "Oswald", sans-serif;
@@ -35,8 +36,8 @@ max-width:900px;
 margin: 0 auto;
     border-spacing: 10px;
     border-collapse: collapse;
-    border: 2px solid #171717;
-        box-shadow: 2px 4px 16px rgb(0 0 0 / 20%);
+    border: 2px solid ${props => props.theme.black};
+        box-shadow: ${props => props.theme.lihgtBoxShadow};
         text-transform: capitalize;
 
 &> tbody{
@@ -72,12 +73,12 @@ display: flex;
 & >  tbody tr td:first-child {
   color:#fff;
   padding: 10px 15px;
-background-color: #171717;
+background-color: ${props => props.theme.black};
 
 }
 & >  tbody tr td:first-child:before {
 content:"Nº de Pedido";
-    color: #fcba1c;
+    color: ${props => props.theme.darckYellow};
 }
 & >  tbody tr td:nth-child(3):before {
 content:"Dirección";
@@ -142,33 +143,37 @@ padding:0 10px;
 align-items: center;
     border-radius: 5px;
     height: 40px;
-      box-shadow: 2px 1px 4px 0 rgb(0 0 0 / 20%);
-    background: rgb(0 0 0 / 80%);
-gap:5px;
+      box-shadow: ${props => props.theme.lihgtBoxShadow};
+    background:${props => props.theme.black};
     margin-left: auto;
     margin-bottom: 30px;
     width: max-content;
 display: flex;
     transform: scale(0.7);
     transition: all 0.3s ease;
-& > h4 {
-  color:#fff;
-    margin: 10px 0 13px;
-}
+
 &:hover{
   transform:scale(0.75);
 }
 `
+
+
 export const RefreshIcone = styled.img`
 height: 50%;
 cursor:pointer;
+
+
 `;
 
+
 export default function MyOrdersPage(){
+
+
+
   const history = useHistory()
   const {currentUser,token,setCurrentUser} = useContext(AppContext)
 
-let userOrders = currentUser?.orders
+let userOrders = currentUser?.orders.reverse()
 
 
 const deleteOrder = (e,id) =>{
@@ -187,8 +192,7 @@ const seeDetails = (orderID) =>{
   <SectionTitle light>Mis Pedidos</SectionTitle>
   
 <RefreshButton onClick={(e) =>currentUserAPI({token,setCurrentUser}) }>
-  <h4>Refrescar</h4>
-  <RefreshIcone src={refreshIcone} title='Refrescar Página'/>
+  <RefreshIcone   src={refreshIcone} title='Refrescar Página'/>
   </RefreshButton>
 
   { (userOrders?.length > 0 )?

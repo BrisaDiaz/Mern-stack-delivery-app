@@ -69,7 +69,7 @@ if(req.file){
   img = product.img
 }
 
-let oldImgPath ="./storage/media/"+product.img
+let oldImgPath ="./storage/media/"+product.img.split("/").reverse()[0]
 
  if(req.file){
    
@@ -110,8 +110,7 @@ const deleteProductById= async (req,res) => {
 
   if (!product) return res.status(404).json({success:false, message:'product not faund'});
 
-let oldImgPath ="./storage/media/"+product.img
-
+let oldImgPath ="./storage/media/"+product.img.split("/").reverse()[0]
 
 fs.unlink(oldImgPath, (err) => {
   if (err) {
@@ -123,7 +122,7 @@ fs.unlink(oldImgPath, (err) => {
 
   await Product.findByIdAndRemove(req.params.id);
 
-    res.status(200).json({success:true , message:"Product has been deleted"});
+    res.status(204).json({success:true , message:"Product has been deleted"});
     
   }catch(error){
     console.log(error)

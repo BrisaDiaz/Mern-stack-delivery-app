@@ -16,11 +16,8 @@ export default async function  deleteCategoryAPI({categorySelectId,token,setAllC
 try {
         let res = await fetch("/api/categories/"+categorySelectId, setting);
 
-    if(res.status >= 200  || res.status < 300  ){
-
-      await getCategoriesAPI(setAllCategories)
-return
-    }
+     if(res.status  ===204 )return  await getCategoriesAPI(setAllCategories)
+if(res.status === 403) return   alert('Se require rol de Administrador') 
 
 }catch(err){
   console.log(err)

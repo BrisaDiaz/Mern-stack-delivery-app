@@ -10,7 +10,7 @@ import {LoaderSpinner} from './../LoaderSpinner'
 
 
 const CategoriesPage = styled(Page)`
-    background: rgb(252 175 1 / 60%);
+    background: :${props => props.theme.lightYellow};
 padding-top: 65px;
 
 `
@@ -18,6 +18,7 @@ padding-top: 65px;
 
 const Input = styled(TextInput)`
 background: rgb(0 0 0 / 7%);
+box-shadow: inset 1px 1px 6px 0px #ccc;
 `
 const Wrapper = styled.section`
 width:100%:
@@ -50,7 +51,7 @@ const FormCard = styled.article`
       margin: 10px 0 24px;
         font-size: 25px;
 }
-            box-shadow: 2px 4px 8px rgb(0 0 0 / 20%);
+            box-shadow: :${props => props.theme.lightBoxShadow};
     & > form select {
      min-width:95%;
     }
@@ -85,9 +86,9 @@ const DeleteButton = styled.button`
     margin-bottom: 20px;
     cursor: pointer;
     text-transform: uppercase;
-    background: #111;
+    background: :${props => props.theme.gray};
     border: none;
-    box-shadow: 1px 1px 4px 0 rgb(23 23 23 / 70%);
+    box-shadow: :${props => props.theme.lightBoxShadow};
     color: white;
     letter-spacing: 1px;
 font-size: 15px;

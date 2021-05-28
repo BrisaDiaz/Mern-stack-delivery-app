@@ -39,8 +39,10 @@ text-align:center;
 & > h4 {
 margin-bottom: 5px;
 }
-& > h3:last-child {
-color: #e83c2e;
+& > h3{
+color: #fecb00;
+    text-transform: capitalize;
+    text-shadow: -2px -1px 0 #ffffff;
 margin-bottom: 10px;
 }
 `
@@ -66,8 +68,8 @@ align-items:center;
     transform: scale(0.8);
 }
 
-& >  ${OptionList} {
-margin: 10px auto;
+& >    ${OptionList} {
+    margin: 10px auto 20px;
 }
 `;
 

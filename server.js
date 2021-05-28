@@ -5,7 +5,7 @@ const cors = require('cors');
 const connectDB = require( './config/db.js')
 const path = require('path');
 const morgan = require('morgan');
-const { createRoles,createAdmin,creatCategorys} = require('./libs/initialSetUp');
+const { createRoles,createAdmin,createModerator,creatCategorys} = require('./libs/initialSetUp');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); 
@@ -15,6 +15,7 @@ app.use(morgan('tiny'));
 connectDB()
 createRoles()
 createAdmin()
+createModerator()
 creatCategorys()
 
 
@@ -31,7 +32,7 @@ const newsletterRouter = require('./routes/newsletter.js');
 const ordersRouter = require('./routes/orders.js')
 const categoriesRouter =  require('./routes/categories.js')
 
-  app.use('/media' ,express.static(path.join(__dirname,'storage','img'))); 
+  app.use('/media' ,express.static(path.join(__dirname,'storage','media'))); 
 
 if ( process.env.NODE_ENV === 'production'){
   

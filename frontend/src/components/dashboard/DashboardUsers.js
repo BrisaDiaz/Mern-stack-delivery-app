@@ -22,6 +22,7 @@ min-width:300px;
 margin-top:30px;
   background:  #272727;
   flex:1;
+      color: #ffffff;
       box-shadow: 2px 4px 8px rgb(0 0 0 / 20%);
     border-radius: 4px;
 `
@@ -83,6 +84,9 @@ padding: 5px 15px;
         font-family: "Oswald", sans-serif;
 
   }
+  & > h4 span {
+    text-shadow: 0 0 6px #fcba1c;
+  }
 `;
 const UserName = styled.h4`
 font-size: 19px;
@@ -114,7 +118,7 @@ function UserInfoCell({user,handelClick}){
 
       {  (user.number || user.address) && <SeeMoreButton  trigger={trigger}/>}
 
-    <UserName>{user?.name}{user?.client && <span >🍟</span>}</UserName>
+    <UserName>{user?.name}{(user?.client === true ) && <span >🍟</span>}</UserName>
     <p> <b>Email:</b>{user?.email}</p> 
 
     {isToggledDetails && <Fragment>

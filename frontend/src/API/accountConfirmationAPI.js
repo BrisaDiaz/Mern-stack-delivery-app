@@ -2,7 +2,7 @@ const accountConfirmationAPI = async ({setIsSuccessfullySend,setIsRequesLoading,
 
 setIsRequesLoading(true)
 
-  const info =  localStorage.getItem('toConfirmUser')
+  const info = {id: localStorage.getItem('toConfirmUser')}
 
   const headers = new Headers();
         headers.append('Accept', 'application/json');

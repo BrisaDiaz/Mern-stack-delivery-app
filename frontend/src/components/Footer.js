@@ -10,7 +10,7 @@ const StyleFooter = styled.footer`
  box-sizing:border-box;
   width:100vw;
   padding:15px;
-  background-color:#171717 ;
+  background-color:${props=>props.theme.black} ;
   color:#F0F0F0;
  `;
 const FooterWrapper = styled.section`

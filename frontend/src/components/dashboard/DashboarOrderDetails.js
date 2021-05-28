@@ -4,7 +4,7 @@ import updateOrderStateAPI from '../../API/updateOrderStateAPI'
 import AppContext from '../../context/app-context'
 import {   useContext } from 'react'
 import {GoBackLink} from '../product_details/ProductDetails'
-import {Page,CenterTitle,DetailTable,Process,ProcessInfo} from '../account/OrderDetails'
+import {Page,CenterTitle,DetailTable,Process,ProcessInfo,ClientInfo} from '../account/OrderDetails'
 
 const ConfirmationButton = styled.button`
     cursor: pointer;
@@ -85,11 +85,15 @@ orderId={thisOrder?._id}
 
 
 
-    <h3>Detalles de envio:</h3>
+   <CenterTitle>Detalles de envio</CenterTitle>
+
+    <ClientInfo>
       <p><b>Destinatario:</b>{thisOrder?.client[0].name}</p>
     <p><b>Dirrección:</b>{thisOrder?.client[0].address}</p>
        <p><b>Teléfono:</b>{thisOrder?.client[0].number}</p>
-      
+      </ClientInfo>
+      <br></br>
+          <hr></hr>
            <CenterTitle>Detalles del pedido</CenterTitle>
  <DetailTable>
    <thead>

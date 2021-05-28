@@ -39,7 +39,31 @@ try{
       password: await bcrypt.hash("admin", 10),
       roles: roles.map((role) => role._id),
     });
+    
     console.log('Admin User Created!')
+  }
+}catch(err){
+  console.log(err)
+}
+
+};
+const createModerator = async () => {
+try{
+
+    const user = await User.findOne({ email: "moderator@localhost.com" });
+
+  const roles = await Role.find({ name: { $in: ["moderator"] } });
+
+  if (!user) {
+ 
+    await User.create({
+      name: "moderator",
+      email: "moderator@localhost.com",
+      password: await bcrypt.hash("moderator", 10),
+      roles: roles.map((role) => role._id),
+    });
+    
+    console.log('Moderator User Created!')
   }
 }catch(err){
   console.log(err)
@@ -61,4 +85,4 @@ if( count > 0) return ;
   }
 }
 module.exports = { createRoles,
-createAdmin,creatCategorys}
+createAdmin,createModerator,creatCategorys}

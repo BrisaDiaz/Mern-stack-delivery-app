@@ -64,11 +64,7 @@ setFormIsLoading(false)
   const {message} = json
         console.log(message)
 
-       if(res.status === 500) {
-   console.log(json)
-   setServerError('Error interno, vuelva a interntar')
-return
- }
+
  
 
       setServerError(message)

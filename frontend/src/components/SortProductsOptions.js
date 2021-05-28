@@ -14,7 +14,7 @@ export const OptionList = styled.select`
     border: none;
     margin-bottom: 20px;
     background: #fff;
-    box-shadow: inset 0 0 6px 0 #00000033;
+box-shadow: inset 1px 1px 6px 0px #ccc;
     text-transform: capitalize;
     margin: 0 20px 20px auto;
 

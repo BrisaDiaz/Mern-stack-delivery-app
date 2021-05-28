@@ -4,18 +4,9 @@ const connectDB = async () => {
   try {
 let conn;
 
-    if(process.env.NODE_ENV === 'production'){
+
 
      conn = await mongoose.connect(process.env.MONGODB_URI, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	useCreateIndex: true,
-	useFindAndModify: false
-    });
-      
-    }else{
-
-     conn = await mongoose.connect(process.env.MONGODB_DEVELOPMENT_URI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	useCreateIndex: true,
@@ -23,8 +14,7 @@ let conn;
 
     });
 
-    }
-
+    
 
     console.log(`MongoDB Connected: ${conn.connection.host}`);
     

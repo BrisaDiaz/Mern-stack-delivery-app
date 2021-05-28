@@ -107,42 +107,47 @@ const { name,lastName,password,newPassword,number} = req.body
 
   if (!userFound) return res.status(404).json({success:false, message:'User Not Found'});
 
-   const matchPassword = await User.comparePassword(
+  
+let encodedPassword;
+
+  if(newPassword && password){
+
+ const matchPassword = await User.comparePassword(
       password, userFound.password );
 
     if (!matchPassword)
-
-      return res.status(401).json({
+        return res.status(401).json({
         token: null,
         message: "Invalid Password",
       });
-
-
-let encodedPassword;
-  if(newPassword){
+    
   encodedPassword = await User.encryptPassword(newPassword) 
+
+
   }else{
+
     encodedPassword= undefined
   }
   
 let profileState ;
 
-    if(( req.userAdress  ||userFound.address ) && (number || userFound.number) ){
+    if(( req.userAdress  || userFound.address ) && (number || userFound.number) ){
        profileState = 'complited'
     }else{
       profileState='incomplited' 
     }
-
+        
+    
 
             user = await User.findByIdAndUpdate(req.params.id, {
                 name: req.userName || userFound.name,
-                password: encodedPassword || ususerFounder.password,
+                password: encodedPassword || userFound.password,
                 email: userFound.email,
                 roles: userFound.roles,
                     address: req.userAdress || userFound.address,
                number: number || userFound.number,
-                profileState: profileState
-
+                profileState: profileState,
+                 client: userFound.client
 ,
             }, { new: true });
             updatedUser = await user.save();

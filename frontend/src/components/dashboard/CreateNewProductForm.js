@@ -36,7 +36,7 @@ margin-top: -10px;
 }
 `;
 
-const CheckboxWrapper = styled.div`
+export  const CheckboxWrapper = styled.div`
 display:flex;
 margin: 10px auto;
 align-items:center;
@@ -57,8 +57,9 @@ font-size:20px;
 }
 `;
 export const ThisFormCard = styled(FormCard)`
-width:100vw;
-margin-top:-20px;
+min-width:100vw;
+max-width:900px;
+margin-top:-20px auto 20px;
 background:#fff;
 box-shadow:none;
 `
@@ -67,7 +68,7 @@ max-width:90%;
 width:90%;
 & > input {
   background :#f0f0f0;
-
+// box-shadow: inset 1px 1px 6px 0px #ccc;
 }
 `
  export const TextInput= styled.input.attrs(props => ({
@@ -117,7 +118,7 @@ min-width:90%;
 max-width:90%;
   border:none;
   outline:none;
-  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+box-shadow: inset 1px 1px 6px 0px #ccc;
 padding: 12px 10px 12px 20px;
 min-height: 200px;
 max-height: 200px;
@@ -145,7 +146,7 @@ min-width: 200px;
   outline:none;
 transition: all 0.5s ease;
   &:before{
-     background-color: #000000;
+     background-color: ${props => props.theme.black};
   color: white;
   display: flex;            
   justify-content: center;
@@ -162,7 +163,7 @@ transition: all 0.5s ease;
   
   }
     &:hover{
-      transform:scale(1.1);
+      transform:scale(1.05);
     }
   `;
 
@@ -178,7 +179,7 @@ export const OptionList = styled.select`
     border: none;
     margin-bottom: 20px;
     background: #f3f3f3;
-    box-shadow: inset 0 0 6px 0 #00000057;
+ box-shadow: ${props => props.theme.inputShadow};
     text-transform: capitalize;
 @media screen and (max-width: 500px) {
   min-width: 95%;

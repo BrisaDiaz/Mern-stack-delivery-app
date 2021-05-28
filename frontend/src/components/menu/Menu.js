@@ -22,14 +22,13 @@ export const SectionTitle= styled.h2`
 text-align:center;
 text-transform: uppercase;
 color:${(props) =>(props.light ? "#fff" : "#fcba1c")};
-
-    text-shadow: -2px -1px 0 #000;
+ text-shadow: ${props => props.theme.darckTextShadow};
 `;
 const MenuWrapper= styled.section`
 display:flex;
 flex-wrap: wrap;
 padding-bottom: 20px ;
-    margin-left: -6px;
+   margin-left: -6px;
 width:100%;
 
 `;
@@ -39,9 +38,9 @@ const CategoryTitle = styled.h4 `
     color: #fcba1c;
     font-size: 28px;
     margin: 10px 5px;
-    text-shadow: -2px -2px 0 #272727;
+ text-shadow: ${props => props.theme.darckTextShadow};
     text-transform: capitalize;
-& + h3:before {
+&:before {
   content:".";
 }
 `
@@ -53,12 +52,12 @@ const CategoryWrapper = styled.article`
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    background: #9c0101;
+    background: ${props => props.theme.darckRed};
     justify-content: center;
     margin-bottom: 20px;
 
     padding:  20px 15px;
-        box-shadow: inset 0 0 20px 0 #1111118c;
+    box-shadow: inset 0 0 20px 0 #1111118c;
 `;
 export const ProductsSection = styled.div`
 display:flex;

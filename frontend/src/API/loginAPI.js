@@ -56,9 +56,9 @@ headers.append('Content-Type', 'application/json');
 
         setIsLogin()
         
-           for (let i = 0; i < roles.length ; i ++){
+    
              
-     if ( roles[i].name === 'admin') {
+     if ( roles[0].name === 'admin') {
          setIsAdmin(true)
          setIsLoading(true)
         
@@ -67,20 +67,31 @@ headers.append('Content-Type', 'application/json');
 
            return  history.push("/dashboard/orders")
       }
-     else if(roles[i].name === 'moderator'){
+     if(roles[0].name === 'moderator'){
       setIsModerator(true)
     await getAllOrdersAPI({token,setAllOrders,setIsLoading})
-          return history.push("/dashboard/myProducts")
+       return history.push("/dashboard/myProducts")
        
       }
 
-     }
-      return history.push("/menu")
-      
-    }
+   return history.push("/menu")
 
-if(res.status === 500){
-   setServerError('Error en el servidor, vuelva a interntar')
+     }
+   
+      
+    
+
+if(res.status === 302){
+
+    let {redirect,id} = json
+
+  localStorage.setItem('toConfirmUser', id)
+  console.log(redirect)
+  setTimeout(() => {
+
+   return history.push(redirect)
+  }, 1000);
+
 
 }
 

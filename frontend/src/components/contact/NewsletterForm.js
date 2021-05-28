@@ -9,7 +9,7 @@ import {Button} from '../Buttons'
 const StyledNewsletter = styled.article`
 box-sizing:border-box:
 max-width:100%;
-background: #e83c2e;
+background: ${props => props.theme.orange};
 
 `;
 const Wrapper = styled.div`
@@ -72,7 +72,7 @@ padding: 17px 10px 17px 20px;
    font-size: 17px;
    letter-spacing: 1px;
   padding: 5px 0;
-     color: #EAEAEA;
+    
   }
   border:none;
   border-radius:5px;
@@ -85,7 +85,7 @@ export default function NewsletterForm(){
     const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
 });
-  function onSubmit(data,e) {
+  function onSubmit(e,data) {
     e.preventDefault()
       const email = data.userEmail.value()
     isLogin ? 

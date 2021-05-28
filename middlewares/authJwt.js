@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model')
 const {Role} = require('../models/role.model')
-
+const TemporalUser =require('../models/temporalUser.model');
 
 const verifyToken = async (req,res,next) =>{
 
@@ -53,9 +53,21 @@ try{
 
 const verifyAccountConfirmartion = async (req,res,next) =>{
 
+
   const user = await User.findOne({email: req.body.email})
 
-   if(!user) return res.status(404).json({success:false ,message:"No user faund"} )
+  
+   if(!user) {
+
+    const temporaUser = await TemporalUser.findOne({email: req.body.email})
+
+     if (temporaUser) return res.status(302).json({successful:false,message:"Email unverified" ,redirect:`/authentication/confirmation`,id: temporaUser._id } ) ;
+
+
+    return res.status(404).json({success:false ,message:"No user faund"} )
+
+   }
+   
 
    next()
 

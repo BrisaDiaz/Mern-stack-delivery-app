@@ -24,7 +24,7 @@ try {
         let res = await fetch( `/api/orders/${id}`, setting);
 
 
-        if(res.status >= 200  || res.status < 300  ){
+         if(res.status  ===204 ){
 
    await currentUserAPI({setCurrentUser,token})
     return 

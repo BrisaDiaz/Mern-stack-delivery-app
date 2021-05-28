@@ -40,13 +40,10 @@ headers.append('Content-Type', 'application/json');
          setServerError("");
 setIsEditing(false);
     }
-
-       if(res.status === 500) {
-      
-    setServerError('Error interno, intente nuevamente')
-    return
-    }
+    
+  if(res.status === 403) return   alert('Se require rol de Administrador') 
    const {message} = json
+   
         console.log(message)
          setServerError(message)
        

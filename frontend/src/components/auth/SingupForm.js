@@ -47,7 +47,10 @@ align-items:center;
       width: 90%;
      margin-bottom:15px;
       border:none;
-      box-shadow: inset 0 0 4px 0px rgb(23 23 23 / 36%);
+    box-shadow: ${props => props.theme.inputShadow};
+}
+& > input[type="submit"] {
+    box-shadow: none;
 }
 
 & >${LoaderSpinner}{
@@ -68,9 +71,7 @@ export const PaswordInput = styled(NameInput).attrs( props => ({
 
 }))`
 
-    &:placeholder{
-        color: #272727;
-    }
+    
 `;
 export const ErrorMessage = styled.small`
 color:#bf0000;
@@ -154,7 +155,7 @@ export function UserEmailInput({register,errors}){
     </Fragment>
   );
 }
- export function UserPasswordInput({register,errors,placeholder,name}){
+ export function UserPasswordInput({register,errors,placeholder,}){
 
   return(
     <Fragment>
@@ -162,9 +163,9 @@ export function UserEmailInput({register,errors}){
 
 <PaswordInput
 placeholder={placeholder}
- name={name}
+name ='userPassword'  
           ref={register({
-                     required: '*El campo es requrido',
+                  required: '*El campo es requrido' ,
                      minLength: {
             value: 5,
             message: "*El largo mínimo es de 5 carácteres"
@@ -174,7 +175,8 @@ placeholder={placeholder}
     </Fragment>
   );
 }
-export function UserNewPasswordInput({register,errors,placeholder}){
+export function UserNewPasswordInput({register,errors,placeholder,}){
+ 
 
   return(
     <Fragment>
@@ -182,15 +184,18 @@ export function UserNewPasswordInput({register,errors,placeholder}){
 
 <PaswordInput
 placeholder={placeholder}
- name="userNewPassword"
+
+
+ name='userNewPassword'
           ref={register({
-                 required: '*El campo es requrido',
+             required:  '*El campo es requrido' ,
                      minLength: {
             value: 5,
             message: "*El largo mínimo es de 5 carácteres"
           } 
           })}
            style={{ borderColor: errors.userNewPassword && "#bf0000" }}/>
+
     </Fragment>
   );
 }
@@ -207,7 +212,7 @@ export default function SingupForm(){
      <UserNameInput  errors={errors} register={register}/>
           <UserLastNameInput  errors={errors} register={register}/>
      <UserEmailInput  errors={errors} register={register}/>
-     <UserPasswordInput  errors={errors} register={register} placeholder="Tu contraseña..."  name="userPassword"/>
+     <UserPasswordInput  errors={errors} register={register} placeholder="Tu contraseña..."  />
       
    {isFormLoading ?  <LoaderSpinner small /> :
 

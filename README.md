@@ -4,16 +4,16 @@
 
 ### Demo: https://fast-food-delivery-app.herokuapp.com/
 
-![image](https://drive.google.com/uc?export=view&id=1ZejNCwfLN3uflqsjPZdqFWGXU-S3vboS)
+### To SEE admin features
 
-![image](https://drive.google.com/uc?export=view&id=1deChmB_NGZgpBxa2KCGHLY_ZQD3Kj8NL)
-
-![image](https://drive.google.com/uc?export=view&id=1Pv2IGiVlcZvALZG9UCecEbUtuZad24r6)
+email: moderator@localhost.com
+password : moderator
 
 ## Environment variables
 
-URI = The conecction string to mongoDB.  
-SECRET= The custom secret key for JSON web tokens
+MONGODB_URI
+JWT_SECRET_KEY
+HOST
 
 ### oAuth2 keys
 
@@ -24,10 +24,14 @@ OAUTH_REFRESH_TOKEN
 
 ## Backend
 
-### Main tecnologies:
+### tecnologies:
 
 - Node.js/ Express
 - MongoDB / Mongoose
+- Json WTK
+- oAuth2
+- Nodemailer
+- Multer
 
 ### Features:
 
@@ -35,7 +39,7 @@ OAUTH_REFRESH_TOKEN
 
 - password encryption using bcrypt librery
 
-- secure email sending using Nodemailer and googleapis oAuth2
+- account validation , and functional contact form using Nodemailer and googleapis oAuth2
 
 - accesss of routes base athorization and permition
 
@@ -43,7 +47,9 @@ OAUTH_REFRESH_TOKEN
 
 - **request supported** : GET, PUT, POST, DELETE
 
-- **rutes:** USERS,ROLES, PRODUCTS, AUTH (Login/Sing Up), ME (client Acount)
+- **rutes:** USERS , PRODUCTS, CATEGORIES, ORDERS,NEWSLETTER, CONTACT, AUTH (Login/Sing Up), ME (client Acount)
+
+- initial mongoose set up with : default categories , roles and admin and moderator users.
 
 ## Frontend
 
@@ -59,7 +65,9 @@ OAUTH_REFRESH_TOKEN
 
 - Interaction with the backend through API Rest .
 - Auto-played sliders with dot indicators and controls.
-  +Navbar responsive and animated .
+
+* Navbar responsive and animated .
+
 - Singup/Login system.
 - Access to Public and Private routes base on roles.
 - Contact section with form validation.
@@ -68,4 +76,5 @@ OAUTH_REFRESH_TOKEN
 - Editable User profile.
 - Products sorter, filter and search bar.
 - Product details page.
-- Dashboard with users and products management system.
+- user orders tracker page
+- Dashboard with users, categories, orders and products management system.

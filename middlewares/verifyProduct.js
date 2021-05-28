@@ -1,10 +1,20 @@
-const {CATEGORYS} = require('../models/category.model')
+const {Category} = require('../models/category.model')
 
-const verifyCategoryExist = (req,res,next) =>{
-    
-  let isValid = CATEGORYS.indexOf(req.category)
+const checkCategoryExist = async(req,res,next) =>{
+  try{
 
-  if(isValid === -1) return req.status(404).json({successfull: false,message:'No category found '})
+  const categoryFound = await Category.find({name: req.body.category}).exec()
+
+  if(!categoryFound) return  req.status(404).json({successful:false, message:'Not category found'})
+
+
   next()
+  }catch(err){
+    console.log(err)
+
+    res.status(500).json({ success:false , message: "Something went wrong, category existens verification fail" });
+  }
+
 }
-module.exports = {verifyCategoryExist}
+
+module.exports = checkCategoryExist

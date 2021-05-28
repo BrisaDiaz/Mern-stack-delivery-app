@@ -43,6 +43,7 @@ let url =`/api/products/${id}`
   return history.push('/dashboard/myProducts')
 }, 2000);
 
+      if(res.status === 403) return   alert('Se require rol de Administrador') 
       } catch (err) {
 
         console.log(err)

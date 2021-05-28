@@ -5,7 +5,7 @@ import AppContext from '../context/app-context'
 export default function PublicRoute  ({component: Component, ...rest}) {
        const {isLogin} = useContext(AppContext);
     
-       if (rest.path === "/authentication/confirmation/:email") {
+       if (rest.path === "/authentication/confirmation") {
     return (
 
         <Route {...rest} render={props => (

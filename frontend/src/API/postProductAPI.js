@@ -20,7 +20,7 @@
 
      let res = await fetch("/api/products", setting);
        
-        if(res.status >= 200  || res.status < 300  ){
+        if(res.status === 201 ){
   setIsSuccessfullySend(true)
 e.target.reset()
  
@@ -30,6 +30,7 @@ await productsAPI()
    setIsSuccessfullySend(false)
 
             }, 2000);
+            return
       }     
       
 } catch (err) {

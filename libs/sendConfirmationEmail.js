@@ -26,9 +26,10 @@ try{
         </p>
      <div  style="width: fit-content;
 margin: 40px auto;
-    " ><a href="${url}" target="_blank" style="    font-size: 16px;
+    " ><a href="${url}" target="_blank" style=" font-size: 16px;
     font-family: Helvetica,Arial,sans-serif;
     color: #222;
+    cursor:pointer;
     text-decoration: none;
     padding: 10px 20px;
   border: 2px solid #202124;

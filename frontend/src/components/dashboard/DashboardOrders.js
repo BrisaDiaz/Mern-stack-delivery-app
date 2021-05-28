@@ -28,6 +28,7 @@ color: #fcba1c;
 }
 `;
 export const OrdersTable = styled.table`
+
 width:90%;
 max-width:900px;
 margin: 0 auto;
@@ -116,7 +117,6 @@ const {orders,setAllOrders,token,setIsLoading} = useContext(AppContext)
      <DashboardNav/>
      <SectionTitle>Pedidos</SectionTitle>
      <RefreshButton onClick={(e) =>getAllOrdersAPI({setAllOrders,token,setIsLoading}) }>
-  <h4>Refrescar</h4>
   <RefreshIcone src={refreshIcone} title='Refrescar Página'/>
   </RefreshButton>
 
@@ -133,7 +133,7 @@ const {orders,setAllOrders,token,setIsLoading} = useContext(AppContext)
     </tr>
   </TableHead>
   <tbody>
-{orders?.map(order => 
+{orders?.reverse().map(order => 
     <tr key={order?.orderID}   onClick={ (e) => seeDetails(order?.orderID)}>
     <td>{order?.orderID}</td>
         <td>
