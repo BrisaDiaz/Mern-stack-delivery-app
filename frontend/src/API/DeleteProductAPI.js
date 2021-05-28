@@ -1,4 +1,4 @@
-async function DeleteProductAPI(productsAPI,token,id){
+async function deleteProductAPI(productsAPI,token,id){
 
      const headers = new Headers();
         headers.append('Accept', 'application/json');
@@ -42,4 +42,4 @@ try {
   
 
 
-export default DeleteProductAPI
+export default deleteProductAPI
