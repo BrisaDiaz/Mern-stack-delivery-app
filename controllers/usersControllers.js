@@ -100,7 +100,8 @@ console.log(error)
    }
 }
 const UpdateProfileById = async (req,res) =>{
-const { name,lastName,password,newPassword,number} = req.body
+const { password,newPassword} = req.body
+const number =parseInt( req.body.number);
 
  try{ 
  let userFound = await User.findById(req.params.id);

@@ -8,7 +8,6 @@ export const LinksWrapper =styled.div`
 display:flex;
 margin:5px 0;
 margin-left:15px;
-
 width:max-content;
 `;
 export default function DashboardNewProduct(){

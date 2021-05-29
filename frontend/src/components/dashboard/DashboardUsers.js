@@ -2,7 +2,7 @@ import styled  from 'styled-components';
 import {useContext,useState,Fragment} from 'react' 
 import AppContext from '../../context/app-context'
 import DashboardNav from '../DashboardNav'
-
+import {SectionTitle} from '../menu/Menu'
 import EditUserModal from './EditUserModal'
 import SeeMoreButton from "./../SeeMoreButton"
 
@@ -10,9 +10,9 @@ const Page = styled.main`
 position:relative;
 width:100vw;
 min-height:100vh;
-height:max-content;
-padding:15px;
-padding-top:60px;
+max-height:700px;
+max-height:800px;
+padding: 60px 15px;
 margin-left: -6px;
 
 `;
@@ -149,7 +149,7 @@ setIsEditing(true) ;
   return(
 <Page>
    <DashboardNav/>
-            
+            <SectionTitle>Usuarios</SectionTitle>
           <EditUserModal user={editingUser} isEditing={isEditing} setIsEditing={setIsEditing}/>
 
           <TablesContainer>

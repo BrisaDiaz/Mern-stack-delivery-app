@@ -15,37 +15,42 @@ if(!isValidEmail) return res.status(400).json({successful:false, message:`Email 
 if(!lastName || !name) return res.status(400).json({successful:false, message:`Full name is required`})
 
 
-if(typeof lastName !== String || typeof name  !== String ) return res.status(400).json({successful:false, message:` Name is not valid`})
+if(typeof (lastName) !== "string" || typeof(name)!== "string"  ) return res.status(400).json({successful:false, message:` Name is not valid`})
 
 
 req.userName =`${name} ${lastName}`
 
-if(password.trim().length < 5 ) return res.status(400).json({successful:false, message:`Password min length is 5`})
+if(password.length < 5 ) return res.status(400).json({successful:false, message:`Password min length is 5`})
 
 
 next()
 }
 const checkIsValidUpdate= (req,res,next) =>{
-const {lastName,name,newPassword,street,city,streetNumber,number} = req.body
-
+const {lastName,name,newPassword,street,city} = req.body
+const number =parseInt( req.body.number),
+ streetNumber =parseInt( req.body.streetNumber)
 
 if(newPassword){
   
-  if(password.trim().length < 5 ) return res.status(400).json({successful:false, message:`Password min length is 5`})
+  if(newPassword.length < 5 ) return res.status(400).json({successful:false, message:`Password min length is 5`})
 }
+
 if(number){
-   if(parseInt(number).length < 5 ) return res.status(400).json({successful:false, message:`Number min length is 10`})
+
+   if(number.length < 10 ) return res.status(400).json({successful:false, message:`Number min length is 10`})
+
+   if(typeof number !== "number") return res.status(400).json({successful:false, message:`Number not valid`})
 }
 
 if(!lastName || !name) return res.status(400).json({successful:false, message:`Full name is required`})
 req.userName =`${name} ${lastName}`
 
-if(typeof astName  !== String || typeof name   !== String) return res.status(400).json({successful:false, message:` Name is not valid`})
+if(typeof lastName !== "string" || typeof name  !== "string" ) return res.status(400).json({successful:false, message:` Name is not valid`})
 
 
 if(!street|| !city|| !streetNumber) return res.status(400).json({successful:false, message:`Full address is required`})
 
-if( typeof(streetNumber) !== Number || streetNumber.length > 4  ) return res.status(400).json({successful:false, message:`Street address not valid`})
+if(  typeof streetNumber !== "number" || streetNumber.length > 4  ) return res.status(400).json({successful:false, message:`Street address not valid`})
 
 req.userAdress = `${street} ${streetNumber}, ${city}`
 next()

@@ -11,11 +11,10 @@ import {StyledLink } from '../Header'
 export const GoBackLink = styled(StyledLink)`
 
 
-  @media screen and (max-width:990px){
+
 margin: 0 ;
 font-size:15px;
-}
-margin-left:0;
+
 padding: 10px 0;
 &:before{
   content : "<-- ";
@@ -24,7 +23,6 @@ padding: 10px 0;
 `;
 const ProductDetails = styled.main`
 width:90vw;
-    min-height: calc(100vh - 58px);
 padding: 20px 15px;
 padding-top:58px;
 margin:0 auto;
@@ -81,13 +79,10 @@ transform:scale(1);
 const Deltail = styled.p`
 line-height:25px;
 text-transform:capitalize ;
-& > span {
+& > b {
       
 color: ${props => props.theme.darckYellow};
-    margin-right: 5px;
-    font-size: 18px;
-        font-family: "Oswald", sans-serif;
-        letter-spacing:1px;
+   
  
 }
 `;
@@ -115,10 +110,10 @@ const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProdu
         }><CartIcon style={{  position:'absolute'}} src={shoopingCartIcon} alt="add-to-cart"/></ThisCartButton>
 
     <Line/>
-     <Deltail><span>Categoría:</span>{thisProductInfo.category}</Deltail>
-   <Deltail><span>Porción:</span>{thisProductInfo.size}</Deltail>
-   <Deltail><span>Precio:</span>${thisProductInfo.price}</Deltail>
-  <Description><span>Ingredientes:</span>{thisProductInfo.description}</Description>
+     <Deltail><b>Categoría:</b>{thisProductInfo.category}</Deltail>
+   <Deltail><b>Porción:</b>{thisProductInfo.size}</Deltail>
+   <Deltail><b>Precio:</b>${thisProductInfo.price}</Deltail>
+  <Description><b>Ingredientes:</b>{thisProductInfo.description}</Description>
     
   
 </ProductDetails>
