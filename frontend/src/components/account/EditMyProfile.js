@@ -38,6 +38,10 @@ align-items:center;
   min-width: 100%
 }
   `
+
+  const InputWrapper = styled.div`
+  margin-top:-10px;
+  `;
 const FormIcone = styled.img`
 width:120px;
 margin: 0 auto;
@@ -172,7 +176,9 @@ const {token,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} = useCont
     <FormIcone src={userEditIcone} alt="edit-profile"/>
 <UserNameInput  errors={errors} register={register}/>
    <UserLastNameInput  errors={errors} register={register}/>
+   <InputWrapper >
    <NewPasswordCheckbox setIsChangingPassword ={setIsChangingPassword} value={isChangingPassword} />
+   </InputWrapper>
 
    {isChangingPassword ? 
 

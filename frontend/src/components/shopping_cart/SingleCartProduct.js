@@ -77,7 +77,7 @@ min-height:30px;
 transform:scale(0.65);
 border-radius:50%;
 cursor:pointer;
-background: :${props => props.theme.orange};
+background: ${props => props.theme.orange};
 margin-bottom: 10px;
 margin-left:5px;
 box-shadow:inset 0 0 4px rgb(0 0 0 / 50%);

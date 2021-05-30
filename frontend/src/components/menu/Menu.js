@@ -11,9 +11,8 @@ import Item  from './MenuItem'
 const StyledMenu= styled.main`
 min-height:100vh;
 width:100vw;
-padding: 65px 15px 15px 15px;
+padding: 65px 15px 20px;
 margin:0;
-
 margin-bottom:20px;
 text-aling:center;
 

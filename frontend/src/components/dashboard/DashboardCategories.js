@@ -13,6 +13,7 @@ const CategoriesPage = styled(Page)`
     background:${props => props.theme.lightYellow};
 padding: 65px 15px;
     max-height: max-content;
+width:100%:
 `
 
 

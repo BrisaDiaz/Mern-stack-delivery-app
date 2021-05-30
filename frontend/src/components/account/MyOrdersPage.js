@@ -15,7 +15,6 @@ const Page = styled.main`
     padding: 65px 15px;
 min-height:100vh;
 width:100%;
-max-width: 1250px;
 margin: 0 auto;
 text-align:center;
 background:${props => props.theme.lightYellow};
