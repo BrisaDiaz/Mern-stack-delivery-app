@@ -4,7 +4,7 @@ import AppContext from '../../context/app-context'
 import useSingupForm from '../../hooks/useSingupForm'
 import {ButtonPrimary} from '../Buttons'
 import burgerIcon from '../../img/burger-icon.png'
-import {NameInput , EmailInput} from '../contact/ContactForm';
+import {TextInput,ErrorMessage} from '../contact/ContactForm';
 import {LoaderSpinner} from './../LoaderSpinner'
 
 export const FormCard =  styled.article`
@@ -65,19 +65,6 @@ width: 90%;
 }
 }
 `;
-export const PaswordInput = styled(NameInput).attrs( props => ({
-  type: 'password',
-  required:true
-
-}))`
-
-    
-`;
-export const ErrorMessage = styled.small`
-color:#bf0000;
-margin:-10px auto 4px 5%;
-    display: block;
-`;
 export const ErrorServerMessage = styled(ErrorMessage)`
 text-align:center;
 font-size:20px;
@@ -96,9 +83,10 @@ export function UserNameInput({register,errors}){
   return(
     <Fragment>
        {errors.userName && <ErrorMessage>{errors.userName.message }</ErrorMessage>}
-    <  NameInput 
-        placeholder='Tu Nombre...'
+    <  TextInput 
+        placeholder='Tu nombre...'
           name="userName"
+          type='text'
           ref={register({
                required: '*El campo es requrido',
               pattern:{
@@ -118,8 +106,9 @@ export function UserLastNameInput({register,errors}){
   return(
     <Fragment>
        {errors.userLastName && <ErrorMessage>{errors.userLastName.message }</ErrorMessage>}
-    <  NameInput 
-        placeholder='Tu Apellido ...'
+    <  TextInput 
+    type='text'
+        placeholder='Tu apellido ...'
           name="userLastName"
           ref={register({
                required: '*El campo es requrido',
@@ -140,7 +129,9 @@ export function UserEmailInput({register,errors}){
   return(
     <Fragment>
                     {errors.userEmail && <ErrorMessage>{errors.userEmail.message}</ErrorMessage>}
-          <EmailInput 
+          <TextInput 
+          type='email'
+          placeholder='Tu email...'
           name="userEmail"
           ref={register({
                      required: '*El campo es requrido',
@@ -161,8 +152,9 @@ export function UserEmailInput({register,errors}){
     <Fragment>
        {errors.userPassword && <ErrorMessage  role="alert">{errors.userPassword.message}</ErrorMessage>}
 
-<PaswordInput
+<TextInput
 placeholder={placeholder}
+type='password'
 name ='userPassword'  
           ref={register({
                   required: '*El campo es requrido' ,
@@ -182,10 +174,9 @@ export function UserNewPasswordInput({register,errors,placeholder,}){
     <Fragment>
        {errors.userNewPassword && <ErrorMessage  role="alert">{errors.userNewPassword.message}</ErrorMessage>}
 
-<PaswordInput
+<TextInput
 placeholder={placeholder}
-
-
+type='password'
  name='userNewPassword'
           ref={register({
              required:  '*El campo es requrido' ,

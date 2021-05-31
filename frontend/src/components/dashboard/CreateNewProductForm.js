@@ -3,8 +3,7 @@ import AppContext from '../../context/app-context'
 import usePostNewProductForm from '../../hooks/usePostNewProductForm'
 import {Fragment ,useContext} from 'react'
 import {LoaderSpinner} from './../LoaderSpinner'
-
-import {ErrorMessage} from '../auth/SingupForm'
+import {ErrorMessage} from '../contact/ContactForm';
 import trayIcon from '../../img/tray.svg';
 
 import {
@@ -81,18 +80,16 @@ width:90%;
 
   &::placeholder {
    font-weight: 500;
-   font-size: 17px;
-
+   font-size: 16px;
    letter-spacing: 1px;
-
   }
 background:#f0f0f0;
-  border:none;
+border:none;
   border-radius:5px;
   outline:none;
-    margin-bottom:15px;
+   margin-bottom:15px;
   width:95%;
-padding: 12px 10px 12px 20px;
+padding: 12px 15px;
 
 `;
 export const ButtonsWrapper = styled.div`
@@ -100,7 +97,9 @@ display:flex;
 justify-content:center;
 width:100%;
 @media screen and (max-width:450px){
-  transform:scale(0.8);
+  & >input {
+ transform:scale(0.8);
+  }
 }
 `;
 export const LoadButton = styled(ButtonPrimary)`

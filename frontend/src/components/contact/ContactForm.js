@@ -1,7 +1,6 @@
 import styled  from 'styled-components'
 import useContactForm from '../../hooks/useContactForm'
 import SocilasMenu from '../SocialsMenu'
-import {ErrorMessage} from '../auth/SingupForm'
 import {ButtonPrimary} from '../Buttons'
 import phoneIcone from '../../img/phone-alt-solid.svg'
 import emailcone from '../../img/envelope-regular.svg'
@@ -52,71 +51,37 @@ justify-content:space-evenly;
        min-height:350px;
  }
 `;
-export const NameInput= styled.input.attrs(props => ({
-  type: 'text',
-  required:true
-
-}))`
-
-padding: 12px 10px 12px 20px;
+export const TextInput= styled.input`
   &::placeholder {
    font-weight: 500;
-   font-size: 17px;
-
    letter-spacing: 1px;
-
-
+  font-size:14px;
   }
 
 border:none;
-  border-radius:5px;
-  outline:none;
-    border: 2px solid #171717;
-    margin-bottom:15px;
-  width:100%;
-padding: 12px 10px 12px 20px;
+border-radius:5px;
+outline:transparent;
+border: 2px solid #171717;
+margin-bottom:15px;
+width:100%;
+padding: 12px 15px;
 `;
-const SubjectInput =styled( NameInput).attrs(props => ({
-type:"text",
-  placeholder:'Asunto...'
 
-}))``
-export const EmailInput= styled(NameInput).attrs(props => ({
-type:"email",
-  placeholder:'Tu Email...'
-
-}))`
-  border: 2px solid #171717;
-`
 ;
-const Textarea= styled.textarea.attrs(props => ({
- rows: 50,
- columns: 5,
-resize: 'none',
-  placeholder:'Tu Mensaje...',
-  required:true
-}))`
-  &::placeholder {
-   font-weight: 500;
-   font-size: 17px;
-
-   letter-spacing: 1px;
-
-
-  }
-    &::resizer {
+const Textarea= styled(TextInput)`
+  &::resizer {
   display: none;
 }
-  border: 2px solid #171717;
-  border-radius:5px;
   min-height:250px; 
   max-height:250px; 
-  outline:none;
-    margin-bottom:25px;
+  margin-bottom:25px;
   min-width:100%;
-    max-width:100%;
-  padding: 12px 10px 12px 20px;
-
+  max-width:100%;
+`;
+export const ErrorMessage = styled.small`
+color:#bf0000;
+margin:-10px auto 4px 5%;
+    display: block;
 `;
 const ContactTitle = styled.h2`
 
@@ -138,7 +103,8 @@ export default  function ContactForm() {
         <Form onSubmit={handleSubmit(onSubmit)}>
      
            {errors.userName && <ErrorMessage>{errors.userName.message}</ErrorMessage>}
-          <  NameInput 
+          <  TextInput 
+          type='text'
           placeholder='Tu Nombre Completo...'
           name="userName"
           ref={register({
@@ -153,7 +119,9 @@ export default  function ContactForm() {
                  style={{ borderColor: errors.userName && "#bf0000" }}
           />
                                 {errors.userEmail && <ErrorMessage>{errors.userEmail.message}</ErrorMessage>}
-          <EmailInput 
+          <TextInput 
+          type='email'
+          placeholder='Tu email...'
           name="userEmail"
           ref={register({
                                 required: "*El campo es requrido",
@@ -168,7 +136,8 @@ export default  function ContactForm() {
                {errors.subject && <ErrorMessage>{errors.subject.message}</ErrorMessage>}
 
 
-           <  SubjectInput 
+           <TextInput 
+           type='text'
           placeholder='Asunto...'
           name="subject"
           ref={register({
@@ -179,7 +148,10 @@ export default  function ContactForm() {
           />     
             {errors.userMessage && <ErrorMessage>{errors.userMessage.message}</ErrorMessage>}
           <Textarea 
+          as='texarea'
+          placeholder='Tu mensaje...'
           name="userMessage"
+          
           ref={register({
           required: '*El campo es requerido',
            maxLength:{

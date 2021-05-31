@@ -1,7 +1,7 @@
 # Mern-stack-delivery-app
 
-![image](https://drive.google.com/uc?export=view&id=1suIMST1GKIYOxW_FYcWQKE7r2XvJx1qr>)
-![image](https://drive.google.com/uc?export=view&id=16KEyxTuiZ4JsuUrOT2UDAYqG9J-PNdQD>)
+![image](https://drive.google.com/uc?export=view&id=1suIMST1GKIYOxW_FYcWQKE7r2XvJx1qr)
+![image](https://drive.google.com/uc?export=view&id=16KEyxTuiZ4JsuUrOT2UDAYqG9J-PNdQD)
 
 ### state: prone to new features and code refactoring.
 

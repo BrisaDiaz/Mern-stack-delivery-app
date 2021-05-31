@@ -3,7 +3,8 @@ import {useContext,Fragment} from 'react'
 import AppContext from '../../context/app-context'
 import useEditProfileForm from '../../hooks/useEditProfileForm'
 import {LoaderSpinner} from './../LoaderSpinner'
-import {UserNameInput,UserLastNameInput,UserPasswordInput,UserNewPasswordInput,ErrorServerMessage,ErrorMessage} from '../auth/SingupForm'
+import {ErrorMessage} from '../contact/ContactForm';
+import {UserNameInput,UserLastNameInput,UserPasswordInput,UserNewPasswordInput,ErrorServerMessage} from '../auth/SingupForm'
 import {OptionList,Option,CheckboxWrapper} from '../dashboard/CreateNewProductForm'
 import {FormButtons } from '../dashboard/CreateNewProductForm'
 import {NameInput } from '../contact/ContactForm';

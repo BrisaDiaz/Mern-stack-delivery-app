@@ -2,7 +2,7 @@ import styled  from 'styled-components'
 import {  useContext} from 'react'
 import AppContext from '../../context/app-context'
 import useEditProductForm from '../../hooks/useEditProductForm'
-import {ErrorMessage} from '../auth/SingupForm'
+import {ErrorMessage} from '../contact/ContactForm';
 import {LoaderSpinner} from './../LoaderSpinner'
 import {Logo} from '../auth/SingupForm'
 import {ThisFormCard, ThisForm} from './CreateNewProductForm'
