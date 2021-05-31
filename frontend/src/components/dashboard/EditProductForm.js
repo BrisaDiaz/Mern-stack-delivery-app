@@ -3,6 +3,7 @@ import {  useContext} from 'react'
 import AppContext from '../../context/app-context'
 import useEditProductForm from '../../hooks/useEditProductForm'
 import {ErrorMessage} from '../auth/SingupForm'
+import {LoaderSpinner} from './../LoaderSpinner'
 import {Logo} from '../auth/SingupForm'
 import {ThisFormCard, ThisForm} from './CreateNewProductForm'
 import 
@@ -31,7 +32,7 @@ export default function UpdateNewProductForm() {
 
     const {productsAPI,token,productToEdit,setIsSuccessfullySend,categories}  = useContext(AppContext);
 const {register ,handleSubmit, errors, onSubmit,setNameValue,setCategoryValue,setPriceValue,setSizeValue,setDescriptionValue,nameValue,categoryValue,
-priceValue,sizeValue,descriptionValue
+priceValue,sizeValue,descriptionValue,formIsLoading
 } = useEditProductForm({token,
 productToEdit,
 productsAPI,
@@ -162,6 +163,7 @@ selected = {categoryValue?.toLowerCase() === cat?.name ? true : false}
          <ButtonsWrapper>
 <LoadButton as="input" type="submit" value="Cargar"/>
 <ResetButton as="input" type="reset" value="Abortar"/>
+   {formIsLoading &&  <LoaderSpinner small /> }
           </ButtonsWrapper>
       
 

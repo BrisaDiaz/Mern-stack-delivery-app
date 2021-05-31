@@ -77,16 +77,16 @@ margin-top: 20px;
 
 export default function Menu() {
 
-    const {products,menuSortPreference,isLoading}  = useContext(AppContext);
+    const {products,menuSortPreference,isLoading,setMenuSortPreference}  = useContext(AppContext);
     let {menuSearchQuery}  = useContext(AppContext);
 const activeProducts = products.filter(product=> product.active === true ) 
-  const getCategorysFilter = activeProducts.map(product => product.category);
-  const categorys=[ ...new Set(getCategorysFilter)];
+  const getCategorysFiltered= activeProducts.map(product => product.category);
+  const categorys=[ ...new Set(getCategorysFiltered)];
 
   const {toDisplayProducts} =useMenuProductsDispayer(menuSearchQuery,activeProducts)
 
 
- let {sortProducts} = useMenuSorter(menuSortPreference,toDisplayProducts)
+ let {sortProducts} = useMenuSorter(menuSortPreference,toDisplayProducts,setMenuSortPreference)
 
 
 
@@ -114,7 +114,7 @@ const activeProducts = products.filter(product=> product.active === true )
   <SearchBar/>
 </SearchBarWrapper>
 
-<SortProductsOptions/>
+<SortProductsOptions setSortPreferece={setMenuSortPreference} sortPreference={menuSortPreference} />
 
 
   <ProductsSection >

@@ -2,6 +2,8 @@ import styled  from 'styled-components'
 import AppContext from '../../context/app-context'
 import usePostNewProductForm from '../../hooks/usePostNewProductForm'
 import {Fragment ,useContext} from 'react'
+import {LoaderSpinner} from './../LoaderSpinner'
+
 import {ErrorMessage} from '../auth/SingupForm'
 import trayIcon from '../../img/tray.svg';
 
@@ -352,7 +354,7 @@ id="state" type="checkbox" defaultChecked={state} name="state" />
   }
 export default  function UpdateNewProductForm() {
  
-    const {token,setIsSuccessfullySend,productsAPI,categories}  = useContext(AppContext);
+    const {token,setIsSuccessfullySend,productsAPI,categories,formIsLoading}  = useContext(AppContext);
     
       const  {register,handleSubmit,errors,onSubmit } =   usePostNewProductForm({token,productsAPI,setIsSuccessfullySend})
 
@@ -380,7 +382,7 @@ export default  function UpdateNewProductForm() {
 
 
       <ImageUploader  register={register} errors={errors}/>     
-
+   {formIsLoading &&  <LoaderSpinner small /> }
  <FormButtons/>
       
 

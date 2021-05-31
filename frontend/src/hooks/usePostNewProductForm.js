@@ -1,4 +1,5 @@
 import {useForm} from 'react-hook-form'
+import {useState} from 'react'
 import postProductAPI from '../API/postProductAPI'
 
 
@@ -8,13 +9,14 @@ setIsSuccessfullySend,
 productsAPI
 } ){
 
+  const [formIsLoading,setFormIsLoading] = useState(false);
 
 const { register, handleSubmit, formState: { errors } } = useForm({
   mode: "onBlur",
 });
     
  const onSubmit =  (data,e) =>{
-
+setFormIsLoading(true)
         e.preventDefault()
 const formData = new FormData()
 let active =  e.target.state.checked ? true : false ;
@@ -27,9 +29,9 @@ let active =  e.target.state.checked ? true : false ;
         formData.append('price', e.target.price.value)
         formData.append('active', active)
         
-        postProductAPI({token,e,formData,productsAPI,setIsSuccessfullySend})
+        postProductAPI({token,e,formData,productsAPI,setIsSuccessfullySend,setFormIsLoading})
 
 
   }
-return {register,handleSubmit,errors,onSubmit }
+return {register,handleSubmit,errors,onSubmit,formIsLoading }
 }

@@ -1,10 +1,19 @@
+import {useEffect} from 'react'
 
-export default   function useSearchProductBar(
-  setSearchQuery){
+export default   function useSearchProductBar(setSearchQuery){
+
+useEffect(()=>{
+ return () => {
+         setSearchQuery("")
+        }
+
+},[])
+
 const searcFilter = (e) =>{
   e.preventDefault();
   setSearchQuery(e.target.productsFilterQuery.value)
 }
+
 const resetFilter = (e) =>{
   if( e.target.value.trim().length === 0){
     setSearchQuery("")

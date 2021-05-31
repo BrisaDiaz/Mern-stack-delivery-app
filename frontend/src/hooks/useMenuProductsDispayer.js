@@ -3,6 +3,7 @@
 export default function useMenuProductsDispayer(menuSearchQuery,products){
 
   let queryExistenceCheck = () =>{
+    
 if(menuSearchQuery.length !== 0){
 
  return  products.filter((product ) =>  productsFilter(product)) 

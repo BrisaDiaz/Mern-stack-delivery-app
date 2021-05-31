@@ -13,7 +13,7 @@ min-height:100vh;
 max-height:700px;
 max-height:800px;
 padding: 60px 15px;
-margin-left: -6px;
+
 
 `;
 

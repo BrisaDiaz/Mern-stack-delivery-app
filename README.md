@@ -14,9 +14,9 @@ password : moderator
 
 ## Environment variables
 
-MONGODB_URI
-JWT_SECRET_KEY
-HOST
+MONGODB_URI  
+JWT_SECRET_KEY  
+HOST  
 JWT_EMAIL_CONFIRMATION_KEY
 
 ### oAuth2 keys

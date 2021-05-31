@@ -1,4 +1,5 @@
 
+
 export default function useMenuSorter (menuSortPreference,toDisplayProducts){
 
 const productsSorter = () =>{
@@ -21,6 +22,9 @@ const productsSorter = () =>{
 }
 }
  let sortProducts = productsSorter()
+
+
+
 
     return { sortProducts}
   }

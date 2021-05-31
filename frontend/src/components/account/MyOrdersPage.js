@@ -3,7 +3,7 @@ import {Link,useHistory} from 'react-router-dom'
 import {ButtonPrimary} from '../Buttons'
 import {SectionTitle} from '../menu/Menu'
 import AppContext from '../../context/app-context'
-import {  useContext } from 'react'
+import {  useContext ,useEffect} from 'react'
 import deleteOrderAPI from '../../API/deleteOrderAPI'
 import currentUserAPI from '../../API/currentUserAPI'
 import refreshIcone from '../../img/refresh.svg'
@@ -170,7 +170,7 @@ export default function MyOrdersPage(){
 
 
   const history = useHistory()
-  const {currentUser,token,setCurrentUser} = useContext(AppContext)
+  const {currentUser,token,setCurrentUser,setIsLoading} = useContext(AppContext)
 
 let userOrders = currentUser?.orders.reverse()
 
@@ -183,14 +183,21 @@ const seeDetails = (orderID) =>{
  return history.push(`/myAccount/myOrders/${orderID}` )
 }
 
+const handelRefresh = () =>{
+  setIsLoading(true)
+  currentUserAPI({token,setCurrentUser})
 
+}
+useEffect(()=>{
+ setIsLoading(false)
+},[currentUser])
 
   return(
 <Page>
 
   <SectionTitle light>Mis Pedidos</SectionTitle>
   
-<RefreshButton onClick={(e) =>currentUserAPI({token,setCurrentUser}) }>
+<RefreshButton onClick={handelRefresh}>
   <RefreshIcone   src={refreshIcone} title='Refrescar Página'/>
   </RefreshButton>
 

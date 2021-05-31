@@ -14,7 +14,7 @@ setIsSuccessfullySend
 });
 
    const history = useHistory()
-
+  const [formIsLoading,setFormIsLoading] = useState(false);
 const [nameValue, setNameValue] = useState(productToEdit.name)
 const [categoryValue, setCategoryValue] = useState(productToEdit.category)
 const [priceValue, setPriceValue] = useState(productToEdit.price)
@@ -59,6 +59,7 @@ sizeValue,
 descriptionValue,
 priceValue,
 setIsSuccessfullySend,
+setFormIsLoading,
 productsAPI,
 history
 })
@@ -80,7 +81,7 @@ categoryValue,
 priceValue,
 sizeValue,
 descriptionValue,
-
+formIsLoading
 }
 
 }

@@ -88,10 +88,8 @@ const Deltail = styled.p`
 line-height:25px;
 text-transform:capitalize ;
 & > b {
-      
 color: ${props => props.theme.darckYellow};
-   
- 
+
 }
 `;
 const Description = styled(Deltail)`
@@ -99,13 +97,15 @@ text-transform:none;
 
 ` 
 export default function ProductDetailsPage(){
-    const {products,cartProducts,addToCart,addToTotalCost}  = useContext(AppContext);
+    const {products,cartProducts,addToCart,addToTotalCost,isLoading}  = useContext(AppContext);
  const {productId}=  useParams()
 
  const thisProductInfo = products.find(product => product._id === productId )
 
 const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProductInfo,cartProducts,addToCart,addToTotalCost)
   return(
+      isLoading ? null :   
+      
 <ProductDetails>
   
              <GoBackLink to= "/menu" > Regresar</GoBackLink>

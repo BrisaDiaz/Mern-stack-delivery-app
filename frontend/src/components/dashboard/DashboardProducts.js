@@ -56,10 +56,10 @@ margin: 20px auto;
 
  export default function DashboardProducts(){
 
-    let {adminSearchQuery,products,productsAPI,token,setProductToEdit,productStateFilterPreference}  = useContext(AppContext);
+    let {adminSearchQuery,products,productsAPI,token,setProductToEdit,productStateFilterPreference,setMenuSortPreference}  = useContext(AppContext);
   const {toDisplayProducts} =useMenuProductsDispayer(adminSearchQuery,products)
 
-   let { FilteredProducts} =useProductStateFilter(productStateFilterPreference,toDisplayProducts)
+   let { FilteredProducts} =useProductStateFilter(productStateFilterPreference,toDisplayProducts,setMenuSortPreference)
 
 const history = useHistory()
 
@@ -83,7 +83,7 @@ setProductToEdit(product);
 
 <SearchBar/>
 <FiltersBoard>
-<FilerProductsOptions/>
+<FilerProductsOptions setSortPreferece={setMenuSortPreference}/>
 </FiltersBoard>
 
 <StyledProductsSection>

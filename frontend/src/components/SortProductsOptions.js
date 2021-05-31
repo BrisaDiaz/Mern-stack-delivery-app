@@ -1,6 +1,4 @@
 import styled  from 'styled-components'
-import {useContext} from 'react'
-import AppContext from '../context/app-context'
 
 
 export const OptionList = styled.select`
@@ -24,20 +22,16 @@ export const Option = styled.option`
    background: #fcba1c;
 }
 `
-export default function SortProductsOptions(){
-  const {setMenuSortPreference} = useContext(AppContext);
-  const setSortPreferece = (e) =>{
+export default function SortProductsOptions({setSortPreferece,sortPreference}){
 
-  setMenuSortPreference(e.target.value)
- 
-  }
+
 return(
-<OptionList name="sortProductBy" onChange={setSortPreferece}>
-<Option value="default" disable>Ordenar por</Option>
-<Option value="minPrice">Menor precio</Option>
-<Option value="maxPrice">Mayor precio</Option>
-<Option value="A-Z">A - Z</Option>
-<Option value="Z-A">Z - A</Option>
+<OptionList name="sortProductBy" onChange={(e) => setSortPreferece(e.target.value)}>
+<Option value="default" selected={sortPreference === 'default' ? true : false }>Ordenar por</Option>
+<Option value="minPrice" selected={sortPreference ==="minPrice"  ? true : false }>Menor precio</Option>
+<Option value="maxPrice" selected={sortPreference === "maxPrice" ? true : false }>Mayor precio</Option>
+<Option value="A-Z" selected={sortPreference === "A-Z" ? true : false }>A - Z</Option>
+<Option value="Z-A" selected={sortPreference ==="Z-A" ? true : false }>Z - A</Option>
 </OptionList>
 
 );

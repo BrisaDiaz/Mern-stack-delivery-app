@@ -11,7 +11,7 @@ align-items: center;
 padding:15px;
 max-height:700px;
 padding-top:60px;
-    margin-left: -6px;
+
 `;
 const UserCard =styled.article`
 margin:30px auto;

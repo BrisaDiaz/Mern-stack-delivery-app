@@ -14,7 +14,7 @@ const EditProfilePage = styled.section`
     min-height:100vh;
 width:100vw;
 padding: 60px 0px;
-    margin-left: -6px;
+
 `
 const EditProfileForm = styled.form`
 

@@ -1,4 +1,4 @@
-
+import AppState  from './context/AppState'
 import {ThemeProvider} from 'styled-components'
 import PrivateRoute from './components/PrivateRoute'
 import PublicRoute from './components/PublicRoute'
@@ -20,7 +20,6 @@ import InitSession from './components/auth/Auth'
 import Confimation from './components/auth/Confirmation'
 import ProductsDetails from './components/product_details/ProductDetails'
 import Contact  from './components/contact/Contact'
-import AppState  from './context/AppState'
 import ShooppingCart from './components/shopping_cart/ShoppingCart'
 import EditMyProfile from './components/account/EditMyProfile'
 import MyOrdersPage from './components/account/MyOrdersPage'
@@ -41,7 +40,9 @@ function App() {
 
 
     return (
-        
+       
+
+      
       <Router>
         <AppState>
      <ThemeProvider theme={

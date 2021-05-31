@@ -1,4 +1,5 @@
 
+
 export default function useProductStateFilter (filerPreference,products){
 
 const productsFilter = () =>{
@@ -21,7 +22,9 @@ const productsFilter = () =>{
   
 
   }
+
    let FilteredProducts = productsFilter()
+
 
     return { FilteredProducts}
 }

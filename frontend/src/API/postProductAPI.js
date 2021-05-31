@@ -1,5 +1,5 @@
  
-  async function postProductAPI({token,e,formData,productsAPI,setIsSuccessfullySend}){
+  async function postProductAPI({token,e,formData,productsAPI,setIsSuccessfullySend,setFormIsLoading}){
 
       
       
@@ -19,7 +19,7 @@
   try {
 
      let res = await fetch("/api/products", setting);
-       
+       setFormIsLoading(false)
         if(res.status === 201 ){
   setIsSuccessfullySend(true)
 e.target.reset()

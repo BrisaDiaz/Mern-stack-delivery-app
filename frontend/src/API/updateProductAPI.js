@@ -8,6 +8,7 @@ sizeValue,
 descriptionValue,
 priceValue,
 setIsSuccessfullySend,
+setFormIsLoading,
 productsAPI,
 history,
 
@@ -31,7 +32,7 @@ history,
 let url =`/api/products/${id}`
   try {
         let res = await fetch(url , setting);
-
+       setFormIsLoading(false)
 
       if(res.status === 200){
          
