@@ -64,7 +64,7 @@ outline:transparent;
 border: 2px solid #171717;
 margin-bottom:15px;
 width:100%;
-padding: 10px 15px;
+padding: 12px 15px;
 `;
 
 ;

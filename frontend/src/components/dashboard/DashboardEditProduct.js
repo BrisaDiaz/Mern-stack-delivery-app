@@ -4,9 +4,10 @@ import {GoBackLink} from '../product_details/ProductDetails'
 import { LinksWrapper} from './DashboardNewProduct'
 export const StyledSection = styled.main`
 
-padding: 60px 15px;
-    margin-left: -20px;
-    min-height:100vh;
+padding-top: 60px ;
+margin:0;
+padding:0;
+ min-height:100vh;
 width:100vw;
 `
 const DashboardEditProduct = () =>{

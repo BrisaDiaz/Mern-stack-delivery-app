@@ -28,8 +28,8 @@ street = e.target.userStreetAddress?.value?.toLowerCase();
 const info ={
 name,
 lastName,
-password:e?.target?.userPassword?.value || undefined,
-newPassword:e?.target?.userNewPassword?.value || undefined,
+password:e?.target?.userPassword?.value || null,
+newPassword:e?.target?.userNewPassword?.value || null,
 number:e.target.userNumber?.value,
 city,
 street,

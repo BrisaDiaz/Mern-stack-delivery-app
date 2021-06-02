@@ -12,12 +12,17 @@ html {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 }
 body {
   overflow-x: hidden;
   box-sizing: inherit;
-  width: 100%;
-  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  width: inherit;
+  height: inherit;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;

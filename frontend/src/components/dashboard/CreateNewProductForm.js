@@ -16,10 +16,9 @@ import {ButtonPrimary,Button} from '../Buttons'
 
  export const StyledSection = styled.section`
 position:relative;
-z-index:1;
 min-height:100vh;
 width:100vw;
-margin-top:40px;
+margin: 0 0 40px;
 background-size: 100%  100%;
 `;
 export const FormTitle= styled.h2`
@@ -58,18 +57,19 @@ font-size:20px;
 }
 `;
 export const ThisFormCard = styled(FormCard)`
-min-width:100vw;
+width:100%;
 max-width:900px;
-margin-top:-20px auto 20px;
+margin: 0 auto;
 background:#fff;
 box-shadow:none;
 `
 export const  ThisForm = styled(Form)`
 max-width:90%;
 width:90%;
+margin: 0 auto;
 & > input {
   background :#f0f0f0;
-// box-shadow: inset 1px 1px 6px 0px #ccc;
+
 }
 `
  export const TextInput= styled.input.attrs(props => ({
