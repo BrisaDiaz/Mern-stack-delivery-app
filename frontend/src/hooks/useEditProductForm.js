@@ -6,7 +6,6 @@ import {useHistory} from 'react-router-dom';
 export default function useEditProductForm({
 token,
 productToEdit,
-productsAPI,
 setIsSuccessfullySend
 }){
         const { register, handleSubmit, formState: { errors } }= useForm({
@@ -39,14 +38,14 @@ setDescriptionValue(productToEdit.description)
 
    const formData = new FormData()
       let active =  e.target.state.checked ? true : false ;
-
+let price =parseInt(priceValue)
 
           formData.append('img',e.target.img.files[0])
         formData.append('name', nameValue)
         formData.append('category', categoryValue)
         formData.append('size', sizeValue)
         formData.append('description', descriptionValue)
-        formData.append('price', priceValue)
+        formData.append('price', price)
         formData.append('active', active)
 
 updateProductAPI({
@@ -60,7 +59,6 @@ descriptionValue,
 priceValue,
 setIsSuccessfullySend,
 setFormIsLoading,
-productsAPI,
 history
 })
 

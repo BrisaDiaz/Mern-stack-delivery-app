@@ -1,7 +1,4 @@
 import styled from 'styled-components'
-import {useContext} from 'react';
-import AppContext from '../context/app-context'
-import useSearchProductBar from '../hooks/useSearchProductBar'
 import loupe from '../img/loupe.svg'
 
 const StyledSearchBar = styled.form`
@@ -48,18 +45,23 @@ transform:scale(0.7);
 const SearchIcone = styled.img` 
 height: 100%;
 `;
-export default function SearchBar(){
-      const {setMenuSearchQuery,setAdminSearchQuery}  = useContext(AppContext);
-        let setQueryHandler;
-        
-    window.location.pathname === "/menu" ?   setQueryHandler = setMenuSearchQuery : setQueryHandler = setAdminSearchQuery;
+export default function SearchBar({setSearch,resetQuery}){
 
-      const   {searcFilter, resetFilter} = useSearchProductBar(setQueryHandler)
+const resetFilter = (e) =>{
+  if(e.target.value ===""){
 
-
+setSearch("")
+  }
+}
+const handelSubmit = (e) =>{
+ e.preventDefault()
+     resetQuery()
+  let searchString = e.target.search.value.trim().toLowerCase().split(" ").join("+")
+setSearch(searchString)
+}
   return(
-<StyledSearchBar onSubmit={searcFilter}>
-<SearchInput name="productsFilterQuery" placeholder="Buscar..." type="search" onChange={resetFilter}/>
+<StyledSearchBar onSubmit={handelSubmit}>
+<SearchInput name="search" placeholder="Buscar..." type="search" onChange={resetFilter}/>
 <SerchIconeWrapper ><SearchIcone src={loupe} alt="search"/></SerchIconeWrapper>
 </StyledSearchBar>
   );

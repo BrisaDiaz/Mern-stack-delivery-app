@@ -26,13 +26,16 @@ const ConfirmationButton = styled.button`
 
 function AdminOrderStateChart ({states,orderId}){
 
- const {setAllOrders,token} = useContext(AppContext)
+
+
+
+ const {setAllOrders,token,setIsLoading} = useContext(AppContext)
 
   let nextStep = states?.find(state => state?.confirmed === false)
 
 const handleConfirmation = (e,stateName) =>{
 
-if(!e.target.disabled) return updateOrderStateAPI({token,orderId,stateName,setAllOrders})
+if(!e.target.disabled) return updateOrderStateAPI({token,orderId,stateName,setAllOrders,setIsLoading})
 
 return
 }
@@ -124,9 +127,11 @@ orderId={thisOrder?._id}
     
    </tbody>
    <tfoot>
+     <tr>
      <td colSpan="4">
        <h4><span>Total:</span>${thisOrder?.total}</h4>
        </td>
+       </tr>
    </tfoot>
  </DetailTable>
 </Page>

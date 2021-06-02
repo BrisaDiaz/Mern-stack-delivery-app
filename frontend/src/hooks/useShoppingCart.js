@@ -12,7 +12,9 @@ const emptyCartAndResetTotalCost = () =>{
   emptyCart();
   resetTotalCost();
 }
+
 const history = useHistory()
+
 const handelOrden = () =>{
   
 
@@ -25,26 +27,14 @@ if(cartProducts.length !== 0){
   if(currentUser?.profileState !=="complited") return alert('Se require que complete su  perfil en la cuenta para poder realizar la orden')
 
 
-  const confirmation = window.confirm(`El pedido será automáticamente enviado a ${currentUser?.address}, desea proseguir con el pedido?`)
+
+
+  postOrderAPI({cartProducts,token,emptyCart,setAllOrders,resetTotalCost,setCurrentUser,setIsLoading,toggleCart,history})
 
 
 
-if (confirmation){
-
-  postOrderAPI({cartProducts,token,emptyCart,setAllOrders,resetTotalCost,setCurrentUser,setIsLoading,toggleCart})
-
-
-return
-
-  }
 
 }
-
-
-
-
-
-
 
 }
 

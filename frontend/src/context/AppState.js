@@ -3,7 +3,6 @@ import AppContext from  './app-context';
 import appReducer from  './app-reducer';
 import {
   SET_IS_LOADING,
-  SET_ALL_PRODUCTS,
   SET_ALL_USERS,
   SET_ALL_ORDERS,
   SET_ALL_CATEGORIES,
@@ -24,10 +23,6 @@ SET_IS_LOGIN_TRUE,
 SET_IS_LOGIN_FALSE,
 SET_IS_ADMIN,
 SET_IS_MODERATOR,
-SET_MENU_SEARCH_QUERY,
-SET_ADMIN_SEARCH_QUERY,
-SET_MENU_SORT_PREFERENCE,
-SET_PRODUCT_STATE_FILTER_PREFERENCE,
 SET_FORM_DATA_SUCCESFULLY_SEND
 } from './app-actions'
 
@@ -40,25 +35,6 @@ SET_FORM_DATA_SUCCESFULLY_SEND
 export default  function AppState(props) {
 
 
-
- const productsAPI = async() =>{
-    try{
-
-const res = await fetch('/api/products');
-  const data = await res.json()
-
-
-setAllProducts(data)
-setIsLoading(false)
-
-
-    }catch(err){
-      productsAPI()
-
-console.log(err)
-    }
-
-  }
 
   const getCategoriesAPI = async () => {
 
@@ -78,7 +54,7 @@ let  json= await res.json()
 const {data} = json
 
 setAllCategories(data)
-
+setIsLoading(false)
 
 }catch(err){
 getCategoriesAPI()
@@ -90,8 +66,6 @@ getCategoriesAPI()
 
   
     useEffect( ()=>{
-  
-productsAPI()
 getCategoriesAPI()
   },[])
 
@@ -136,12 +110,7 @@ const setIsLoading=(bulean)=>{
     payload:bulean,
   })
 }
-const setAllProducts = (data) =>{
-  dispatch({
-    type: SET_ALL_PRODUCTS,
-    payload: data
-  })
-}
+
 const setAllUsers = (data)=>{
   dispatch({
     type: SET_ALL_USERS,
@@ -258,30 +227,6 @@ payload:bulean
   
 }
 
-const setMenuSearchQuery = (query) =>{
-dispatch({
-  type: SET_MENU_SEARCH_QUERY,
-  payload: query
-})
-}
-const setAdminSearchQuery = (query) =>{
-dispatch({
-  type: SET_ADMIN_SEARCH_QUERY,
-  payload: query
-})
-}
-const setMenuSortPreference= (preference) =>{
-dispatch({
-  type: SET_MENU_SORT_PREFERENCE,
-  payload: preference
-})
-}
-const setFilterProductStatePreference= (preference) =>{
-dispatch({
-  type: SET_PRODUCT_STATE_FILTER_PREFERENCE,
-  payload: preference
-})
-}
 const setIsSuccessfullySend = (bulean) =>{
   dispatch({
 type:SET_FORM_DATA_SUCCESFULLY_SEND,
@@ -308,14 +253,9 @@ isSingUp:state.isSingUp,
 isLogin:state.isLogin,
 isAdmin: state.isAdmin,
 isModerator: state.isModerator,
-menuSearchQuery:state.menuSearchQuery,
-adminSearchQuery: state.adminSearchQuery,
-menuSortPreference : state.menuSortPreference,
-productStateFilterPreference: state.productStateFilterPreference,
 isSuccessfullySend:state.isSuccessfullySend,
 setIsLoading,
 setToken,
-productsAPI,
 setAllUsers,
 setAllOrders,
 setCurrentUser,
@@ -335,10 +275,6 @@ setIsLogin,
 setIsNotLogin,
 setIsAdmin,
 setIsModerator,
-setMenuSearchQuery,
-setAdminSearchQuery,
-setMenuSortPreference,
-setFilterProductStatePreference,
 setIsSuccessfullySend,
     }}>
 

@@ -21,7 +21,7 @@ const [formIsLoading,setFormIsLoading] = useState(false);
 
  
 const name =  e?.target?.userName?.value?.toLowerCase(),
- lastName =  e?.target?.userName?.value?.toLowerCase(),
+ lastName =  e?.target?.userLastName?.value?.toLowerCase(),
 city = e.target.userCityAddress?.value?.toLowerCase(),
 street = e.target.userStreetAddress?.value?.toLowerCase();
 

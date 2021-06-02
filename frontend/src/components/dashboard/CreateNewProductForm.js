@@ -225,7 +225,7 @@ export function ProductNameInput({register,errors}){
  <TextInput 
  style={{ borderColor: errors.productName && "#bf0000" }  }
           placeholder="Nombre..."
- 
+
                        name="name"
           ref={register({
              required: '*El campo es requrido',
@@ -362,7 +362,7 @@ export default  function UpdateNewProductForm() {
    
       <ThisFormCard>
   <Logo src = {trayIcon} alt="new-product"></Logo>
-        <ThisForm onSubmit={handleSubmit(onSubmit)}>
+        <ThisForm name='productsFactory' onSubmit={handleSubmit(onSubmit)}>
              <FormTitle>Cargar nuevos productos</FormTitle>
                    
   <ProductNameInput register={register} errors={errors}/>

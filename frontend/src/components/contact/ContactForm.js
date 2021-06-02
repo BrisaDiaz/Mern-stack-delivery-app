@@ -55,7 +55,7 @@ export const TextInput= styled.input`
   &::placeholder {
    font-weight: 500;
    letter-spacing: 1px;
-  font-size:14px;
+  font-size:16px;
   }
 
 border:none;
@@ -64,19 +64,32 @@ outline:transparent;
 border: 2px solid #171717;
 margin-bottom:15px;
 width:100%;
-padding: 12px 15px;
+padding: 10px 15px;
 `;
 
 ;
-const Textarea= styled(TextInput)`
+const Textarea= styled.textarea`
   &::resizer {
   display: none;
 }
+  &::placeholder {
+   font-weight: 500;
+   letter-spacing: 1px;
+  font-size:16px;
+
+  }
+border:none;
+border-radius:5px;
+outline:transparent;
+border: 2px solid #171717;
+margin-bottom:15px;
+padding: 10px 15px;
   min-height:250px; 
   max-height:250px; 
   margin-bottom:25px;
   min-width:100%;
   max-width:100%;
+  
 `;
 export const ErrorMessage = styled.small`
 color:#bf0000;
@@ -148,7 +161,6 @@ export default  function ContactForm() {
           />     
             {errors.userMessage && <ErrorMessage>{errors.userMessage.message}</ErrorMessage>}
           <Textarea 
-          as='texarea'
           placeholder='Tu mensaje...'
           name="userMessage"
           

@@ -1,10 +1,9 @@
 import styled  from 'styled-components'
+import {   useEffect,useState} from 'react'
 import Item  from '../menu/MenuItem'
 import {SectionTitle,
 ProductsSection} from '../menu/Menu'
-
-import AppContext from '../../context/app-context'
-import {   useContext } from 'react'
+import {LoaderSpinner} from './../LoaderSpinner'
 
 const StyledNewestProducts= styled.section`
 width:100vw;
@@ -18,18 +17,55 @@ margin-bottom: 30px;
 
 export default function NewestProducts(){
 
-  const {products,isLoading}  = useContext(AppContext);
-const activeProducts = products.filter(product=> product.active === true ) 
-const LatestProducts = activeProducts.slice(-6)
+ 
+  const [isLoading,setIsloading] = useState(false);
+ const [latestProducts,setLatestProducts] =useState([])
+
+  useEffect(()=>{
+let controller = new AbortController()
+ const signal = controller.signal
+    const fetchLatestProducts = async () =>{
+      setIsloading(true)
+      try{
+ let res = await fetch('api/products?active=true&sort=-createdAt&page=1&limit=6',{signal,})
+let json = await res.json()
+
+setLatestProducts([...json.data])
+setIsloading(false)
+      }catch(err){
+ if(err.name === 'AbortError'){
+   console.log('Fetch Canseled: caught abort')
+ }else{
+
+   console.log(err)
+    for(let i = 0; i < 6 ; i++){
+          fetchLatestProducts()
+
+        }
+       
+
+      }
+       }
+    }
+   fetchLatestProducts()
+
+   return () =>{
+     controller.abort()
+   }   
+  },[])
 
   return(
 
-  isLoading ? null :   
+
    
    <StyledNewestProducts>
   <SectionTitle>Últimas Novedades</SectionTitle>
+
+{    
+(isLoading )? <LoaderSpinner small/>
+  :
   <ProductsWrapper>
-    {LatestProducts.map( product => {
+    {latestProducts.map( product => {
  
  return <Item key={product._id} item={product}></Item>
     }
@@ -37,7 +73,7 @@ const LatestProducts = activeProducts.slice(-6)
       )}
  
   </ProductsWrapper>
-
+}
 </StyledNewestProducts>
 
 

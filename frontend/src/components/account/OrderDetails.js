@@ -192,9 +192,11 @@ states={thisOrder?.states?.filter(state => state?.confirmed === true)}
     
    </tbody>
    <tfoot>
+     <tr>
      <td colSpan="4">
        <h4><span>Total:</span>${thisOrder?.total}</h4>
        </td>
+       </tr>
    </tfoot>
  </DetailTable>
 </Page>

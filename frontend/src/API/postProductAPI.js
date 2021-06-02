@@ -1,7 +1,6 @@
  
-  async function postProductAPI({token,e,formData,productsAPI,setIsSuccessfullySend,setFormIsLoading}){
+  async function postProductAPI({token,e,formData,setIsSuccessfullySend,setFormIsLoading}){
 
-      
       
        const headers = new Headers();
        
@@ -11,11 +10,12 @@
 
         const setting = {
           method: 'POST',
-                  body: formData,
+            body: formData,
           headers: headers,
 
         }
 
+        
   try {
 
      let res = await fetch("/api/products", setting);
@@ -24,8 +24,6 @@
   setIsSuccessfullySend(true)
 e.target.reset()
  
-await productsAPI()
-
         setTimeout(() => {
    setIsSuccessfullySend(false)
 

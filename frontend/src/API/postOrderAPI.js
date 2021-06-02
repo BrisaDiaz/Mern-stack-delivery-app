@@ -1,7 +1,7 @@
 
 import currentUserAPI from '../API/currentUserAPI'
 
-async function postOrderAPI({resetTotalCost,cartProducts,token,emptyCart,setCurrentUser,toggleCart}){
+async function postOrderAPI({resetTotalCost,cartProducts,token,emptyCart,setCurrentUser,toggleCart,history}){
 
 try {
 
@@ -45,7 +45,7 @@ headers.append('Content-Type', 'application/json');
      toggleCart(false)
       await   currentUserAPI({setCurrentUser,token})
 
-      return
+      return history.push("/myAccount/myOrders")
       
     }
 

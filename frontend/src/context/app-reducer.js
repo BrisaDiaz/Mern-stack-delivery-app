@@ -1,6 +1,5 @@
 import {
   SET_IS_LOADING,
-  SET_ALL_PRODUCTS,
   SET_ALL_USERS,
   SET_ALL_ORDERS,
   SET_ALL_CATEGORIES,
@@ -21,10 +20,6 @@ SET_IS_SING_UP_FALSE,
 SET_IS_LOGIN_FALSE,
 SET_IS_ADMIN,
 SET_IS_MODERATOR,
-SET_MENU_SEARCH_QUERY,
-SET_ADMIN_SEARCH_QUERY,
-SET_MENU_SORT_PREFERENCE,
-SET_PRODUCT_STATE_FILTER_PREFERENCE,
 SET_FORM_DATA_SUCCESFULLY_SEND
 } from './app-actions'
 
@@ -36,11 +31,6 @@ switch (action.type) {
         return{ 
           ...state,
           isLoading: action.payload
-        };
-  case SET_ALL_PRODUCTS:
-        return{ 
-          ...state,
-          products: action.payload
         };
   case SET_ALL_USERS:
         return{ 
@@ -165,29 +155,7 @@ case SET_IS_LOGIN_FALSE:
         return{ 
             ...state,
           isLogin: false,
-        }; 
-case SET_MENU_SEARCH_QUERY:
-
-        return{
-            ...state,
-          menuSearchQuery:action.payload
-         };
-case SET_ADMIN_SEARCH_QUERY:
-
-        return{
-            ...state,
-          adminSearchQuery:action.payload
-         };
-case SET_MENU_SORT_PREFERENCE:
-        return{
-            ...state,
-          menuSortPreference:action.payload
-         };
-case SET_PRODUCT_STATE_FILTER_PREFERENCE:
-        return{
-            ...state,
-          productStateFilterPreference:action.payload
-         };         
+        };      
 case SET_FORM_DATA_SUCCESFULLY_SEND:
         return{
             ...state,

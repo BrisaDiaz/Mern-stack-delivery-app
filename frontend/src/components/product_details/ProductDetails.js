@@ -1,6 +1,6 @@
 import styled  from 'styled-components'
 import AppContext from '../../context/app-context'
-import {  useContext} from 'react'
+import {  useContext,useEffect,useState} from 'react'
 import {useParams} from 'react-router-dom'
 import {CartButton,CartIcon} from '../menu/MenuItem'
 import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
@@ -38,7 +38,8 @@ max-height: 800px;
 }
 @media screen and (min-width:850px){
  width:50vw;
-}@media screen and (min-width:1200px){
+}
+@media screen and (min-width:1200px){
     width: 70vw;
     height: 100%;
     max-height: 800px;
@@ -97,12 +98,55 @@ text-transform:none;
 
 ` 
 export default function ProductDetailsPage(){
-    const {products,cartProducts,addToCart,addToTotalCost,isLoading}  = useContext(AppContext);
+
+    const {cartProducts,addToCart,addToTotalCost,setIsLoading,isLoading}  = useContext(AppContext);
+ const [thisProductInfo,setThisProductInf] = useState({})
  const {productId}=  useParams()
 
- const thisProductInfo = products.find(product => product._id === productId )
 
-const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProductInfo,cartProducts,addToCart,addToTotalCost)
+ useEffect(()=>{
+    setIsLoading(true)
+  const controller = new AbortController()
+ const signal = controller.signal
+
+  const fechProducts = async () =>{
+  try{
+
+     let res = await fetch(`/api/products/${productId}`,{signal,})
+     let json = await res.json()
+
+    setThisProductInf(json.data)
+     setIsLoading(false)
+
+  }catch(err){
+    if(err.name === 'AbortError'){
+   console.log('Fetch Canseled: caught abort')
+ }else{
+
+     console.log(err)
+    for(let i = 0; i < 6 ;i++){
+    fechProducts()
+
+        }
+
+ 
+  }
+}
+  }
+  fechProducts()
+   window.scrollTo(0, 0)
+  return () =>{
+     controller.abort()
+   }   
+   
+ },[productId])
+
+let isInShoppingCart = cartProducts.find(product => product.info._id === thisProductInfo?._id) ? true : false
+console.log(isInShoppingCart)
+
+ const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProductInfo,cartProducts,addToCart,addToTotalCost)
+
+
   return(
       isLoading ? null :   
       
@@ -110,18 +154,21 @@ const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProdu
   
              <GoBackLink to= "/menu" > Regresar</GoBackLink>
        
-  <PrductImg src={thisProductInfo.img}  alt={thisProductInfo.name}/>
+  <PrductImg src={thisProductInfo?.img}  alt={thisProductInfo?.name}/>
     <Line/>
-  <Name>{thisProductInfo.name}</Name><ThisCartButton isAdded={isAdded}
+  <Name>{thisProductInfo?.name}</Name>
+  {(!isInShoppingCart) ? 
+  <ThisCartButton isAdded={isAdded}
        onClick={ () =>
-        {handlerAddToCartAndAddToTotalCost(thisProductInfo,thisProductInfo.price)}
+        {handlerAddToCartAndAddToTotalCost(thisProductInfo,thisProductInfo?.price)}
         }><CartIcon style={{  position:'absolute'}} src={shoopingCartIcon} alt="add-to-cart"/></ThisCartButton>
-
+        : null
+}
     <Line/>
-     <Deltail><b>Categoría:</b>{thisProductInfo.category}</Deltail>
-   <Deltail><b>Porción:</b>{thisProductInfo.size}</Deltail>
-   <Deltail><b>Precio:</b>${thisProductInfo.price}</Deltail>
-  <Description><b>Ingredientes:</b>{thisProductInfo.description}</Description>
+     <Deltail><b>Categoría:</b>{thisProductInfo?.category}</Deltail>
+   <Deltail><b>Porción:</b>{thisProductInfo?.size}</Deltail>
+   <Deltail><b>Precio:</b>${thisProductInfo?.price}</Deltail>
+  <Description><b>Ingredientes:</b>{thisProductInfo?.description}</Description>
     
   
 </ProductDetails>

@@ -1,4 +1,4 @@
-async function deleteProductAPI(productsAPI,token,id){
+async function deleteProductAPI(token,id,setProducts){
 
      const headers = new Headers();
         headers.append('Accept', 'application/json');
@@ -23,8 +23,14 @@ try {
   let res = await fetch(`/api/products/${id}`, setting);
 
 
-        if(res.status  ===204 ) return await productsAPI()
-  
+        if(res.status  === 204 ) {
+
+          let productsFetch = await fetch('/api/products?page=1&limit=6')
+          let {data} = await productsFetch.json()
+          setProducts(data)
+        }
+       
+   
         if(res.status === 403) return   alert('Se require rol de Administrador') 
 
       } catch (err) {

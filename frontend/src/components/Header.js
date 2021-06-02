@@ -110,7 +110,7 @@ bottom:0;
 color:#fff;
 font-size:14px;
 background:${props => props.theme.orange};
-text-shadow: ${props => props.theme.lihgtTextShadow};
+text-shadow: ${props => props.theme.darckTextShadow};
 transition:all 0.3s ease;
 &:hover{
   transform: scale(1.1);

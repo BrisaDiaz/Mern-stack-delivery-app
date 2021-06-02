@@ -30,12 +30,11 @@ transform:scale(0.75);
 
 export default function UpdateNewProductForm() {
 
-    const {productsAPI,token,productToEdit,setIsSuccessfullySend,categories}  = useContext(AppContext);
+    const {token,productToEdit,setIsSuccessfullySend,categories}  = useContext(AppContext);
 const {register ,handleSubmit, errors, onSubmit,setNameValue,setCategoryValue,setPriceValue,setSizeValue,setDescriptionValue,nameValue,categoryValue,
 priceValue,sizeValue,descriptionValue,formIsLoading
 } = useEditProductForm({token,
 productToEdit,
-productsAPI,
 setIsSuccessfullySend})
  
   return(

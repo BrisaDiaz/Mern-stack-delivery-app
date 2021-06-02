@@ -1,6 +1,6 @@
 import styled  from 'styled-components'
 import {useForm} from 'react-hook-form'
-import {ErrorMessage} from '../auth/SingupForm'
+import {ErrorMessage} from './ContactForm';
 import {useContext} from 'react';
 import AppContext from '../../context/app-context'
 import newsletterSubscribtionAPI from '../../API/newsletterSubscribtionAPI'

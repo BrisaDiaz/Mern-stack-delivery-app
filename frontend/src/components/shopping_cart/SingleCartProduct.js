@@ -10,7 +10,7 @@ const StyledSingleCartProduct= styled.li`
 display :flex;
 flex-flow:column;
 list-style:none;
-padding: 10px 5px 10px;
+padding: 10px 5px 0;
 
 `;
 const ProductHeader= styled.div`
@@ -26,7 +26,7 @@ margin: 0 5px;
 `
 const PoductName = styled.h4`
 font-size: 25px;
-line-height:25px;
+line-height:30px;
 
 margin: 0;
 margin-bottom:5px;
@@ -87,7 +87,7 @@ transition:all 0.5s ease;
 
 &:hover{
   transform:rotate(90deg);
-    transform :scale(0.8);
+    transform :scale(0.7);
 }
 
 

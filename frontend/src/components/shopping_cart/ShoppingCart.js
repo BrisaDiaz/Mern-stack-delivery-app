@@ -17,11 +17,10 @@ z-index:1000;
 right: ${(props) =>(props.isCartOpen === true  ? "0" : "-100vw")};
 
 transition: all 0.5s ;
-
   margin: 0 auto;
   background:#fff;
     border-radius: 0 0 15px 15px;
-    box-shadow: :${props => props.theme.lightBoxShadow};
+    box-shadow: ${props => props.theme.lightBoxShadow};
 
   `;
   const CartHeader = styled.div`

@@ -1,16 +1,16 @@
   
 import styled  from 'styled-components'
 import {useHistory} from 'react-router-dom'
+import {LoaderSpinner} from './../LoaderSpinner'
+import {ButtonsWrapper} from '../menu/Menu'
 import AppContext from '../../context/app-context'
+import {   useContext,useEffect,useState,Fragment } from 'react'
+import SearchBar from '../MenuSearchBar'
 import deleteProductAPI from '../../API/deleteProductAPI'
 import DashboardNav from '../DashboardNav'
-import useMenuProductsDispayer from '../../hooks/useMenuProductsDispayer'
 import FilerProductsOptions from '../FilerProductsOptions'
-import {   useContext , Fragment} from 'react'
-import useProductStateFilter from '../../hooks/useProductStateFilter'
 import {SectionTitle,ProductsSection,NotFaundMessage} from '../menu/Menu'
 import Item, {CartButton,CartIcon} from '../menu/MenuItem'
-import SearchBar from '../SearchBar'
 import editIcone from '../../img/pencil-alt-solid.svg'
 import DeleteIcone from '../../img/trash-alt-regular.svg'
 
@@ -20,8 +20,7 @@ margin-bottom:40px;
 const StyledSection = styled.main`
 min-height:100vh;
 width:100vw;
-    margin-left: -6px;
-padding-top:60px;
+padding:60px 15px;
 `
 const FiltersBoard = styled.div`
     padding: 0 20px;
@@ -56,10 +55,77 @@ margin: 20px auto;
 
  export default function DashboardProducts(){
 
-    let {adminSearchQuery,products,productsAPI,token,setProductToEdit,productStateFilterPreference,setMenuSortPreference}  = useContext(AppContext);
-  const {toDisplayProducts} =useMenuProductsDispayer(adminSearchQuery,products)
+  let fetchCounter = 0
+    let {token,setProductToEdit}  = useContext(AppContext);
 
-   let { FilteredProducts} =useProductStateFilter(productStateFilterPreference,toDisplayProducts,setMenuSortPreference)
+ let query = new URLSearchParams();
+    let sizeLimit = 6
+
+  const[isLoading,setIsLoading] = useState(false)
+    const [page, setPage] = useState(1)
+    const [maxPage, setMaxPage] = useState(1)
+    const [products, setProducts] = useState([])
+    const [activeProducts,setActiveProducts] =useState(null)
+   const [title,setTitle] =useState("")
+
+   query.append('page',page)
+   query.append('limit',sizeLimit)
+
+
+  
+
+
+useEffect(() => {
+  const controller = new AbortController()
+ const signal = controller.signal
+const productsAPI = async () =>{
+    setIsLoading(true)
+  try{
+   if(title !== ""){ 
+      query.append('title',title)
+    }
+    if(activeProducts !== "all" && activeProducts !== null){
+query.append('active',activeProducts)
+    }
+     let res = await fetch(`/api/products?${query}`,{signal,})
+     let json = await res.json()
+
+    setProducts(json.data)
+
+    let total = parseInt(json.total)
+
+     setMaxPage(Math.ceil(total/sizeLimit))
+
+     fetchCounter+=1
+
+     setIsLoading(false)
+  }catch(err){
+    if(err.name === 'AbortError'){
+   console.log('Fetch Canseled: caught abort')
+ }else{
+
+     console.log(err)
+    for(let i = 0; i < 6 ;i++){
+    productsAPI()
+
+        }
+
+  }
+}
+  }
+
+  productsAPI()
+   window.scrollTo(0, 0)
+     return () =>{
+     controller.abort()
+   }   
+ }, [title,activeProducts,page])
+
+
+const resetQuery = () =>{
+setPage(1)
+setActiveProducts(null)
+}
 
 const history = useHistory()
 
@@ -81,16 +147,19 @@ setProductToEdit(product);
 
 
 
-<SearchBar/>
+<SearchBar setSearch={setTitle} resetQuery={resetQuery}/>
 <FiltersBoard>
-<FilerProductsOptions setSortPreferece={setMenuSortPreference}/>
+<FilerProductsOptions setStatePreferece={setActiveProducts} />
 </FiltersBoard>
 
 <StyledProductsSection>
 
-  {   FilteredProducts?.length !== 0 ?
+  {   ( products?.length === 0 && fetchCounter > 1) ?
   
-FilteredProducts?.map( product => 
+  <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
+
+  :
+products?.map( product => 
  <Fragment key={product._id+"abc"}>
  <Item  key={product._id} item={product}>
    <Fragment>
@@ -98,7 +167,7 @@ FilteredProducts?.map( product =>
      <EditIcone src={editIcone} alt="edit"></EditIcone>
    </EditButton>
 
-   <DeleteOfDatabaseButton  onClick={ () =>deleteProductAPI(productsAPI,token,product._id)}>
+   <DeleteOfDatabaseButton  onClick={ () =>deleteProductAPI(token,product._id,setProducts)}>
    <TrashIcone src={DeleteIcone} alt="delete"/>
    </DeleteOfDatabaseButton>
    </Fragment>
@@ -107,10 +176,23 @@ FilteredProducts?.map( product =>
     
  </Fragment>
   )
-       :
-  <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
+       
+  
 }
 </StyledProductsSection>
+
+{isLoading ? <LoaderSpinner small/> : 
+<ButtonsWrapper>
+{
+(page > 1) ?  <button onClick={(e) => setPage(page -1)} >
+Prev</button> : null
+}
+{
+(page < maxPage) ?  <button onClick={(e) => setPage(page + 1)} >
+Next</button> : null
+}
+</ButtonsWrapper>
+}
 </StyledSection>
   )
 }

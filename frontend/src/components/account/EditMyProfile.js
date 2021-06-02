@@ -7,7 +7,7 @@ import {ErrorMessage} from '../contact/ContactForm';
 import {UserNameInput,UserLastNameInput,UserPasswordInput,UserNewPasswordInput,ErrorServerMessage} from '../auth/SingupForm'
 import {OptionList,Option,CheckboxWrapper} from '../dashboard/CreateNewProductForm'
 import {FormButtons } from '../dashboard/CreateNewProductForm'
-import {NameInput } from '../contact/ContactForm';
+import {TextInput } from '../contact/ContactForm';
 import {GoBackLink} from '../product_details/ProductDetails'
 import userEditIcone from '../../img/user-edit-solid.svg'
 
@@ -34,6 +34,9 @@ align-items:center;
 }
 &> label {
   margin: 0 auto 20px
+}
+&> small {
+margin: -10px auto 4px 0;
 }
 & >${OptionList} {
   min-width: 100%
@@ -76,9 +79,10 @@ function CellphoneInput({register,errors,placeholder}) {
 <Fragment>
     {errors.userNumber && <ErrorMessage  role="alert">{errors.userNumber.message}</ErrorMessage>}
 
-<NameInput
+<TextInput
 placeholder={placeholder}
  name="userNumber"
+ type='text'
           ref={register({
               required: '*El campo es requrido',
                   minLength: {
@@ -118,7 +122,7 @@ function StreetAddressInput({errors,placeholder,register}) {
 <Fragment>
     {errors.userStreetAddress && <ErrorMessage  role="alert">{errors.userStreetAddress.message}</ErrorMessage>}
 
-<NameInput
+<TextInput
 placeholder={placeholder}
  name="userStreetAddress" 
           ref={register({
@@ -135,7 +139,7 @@ function StreetNumberInput({errors,placeholder,register}) {
 <Fragment>
     {errors.userStreetNumber && <ErrorMessage  role="alert">{errors.userStreetNumber.message}</ErrorMessage>}
 
-<NameInput
+<TextInput
 placeholder={placeholder}
  name="userStreetNumber" 
           ref={register({

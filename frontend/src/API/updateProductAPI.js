@@ -9,7 +9,6 @@ descriptionValue,
 priceValue,
 setIsSuccessfullySend,
 setFormIsLoading,
-productsAPI,
 history,
 
 }
@@ -35,14 +34,14 @@ let url =`/api/products/${id}`
        setFormIsLoading(false)
 
       if(res.status === 200){
-         
            setIsSuccessfullySend(true)
- await productsAPI()
-      }
-   setTimeout(() => {
-  setIsSuccessfullySend(false)
-  return history.push('/dashboard/myProducts')
+          setTimeout(() => {
+           setIsSuccessfullySend(false)
+        return history.push('/dashboard/myProducts')
 }, 2000);
+      }
+ 
+
 
       if(res.status === 403) return   alert('Se require rol de Administrador') 
       } catch (err) {
