@@ -22,9 +22,9 @@ import ProductsDetails from './components/product_details/ProductDetails'
 import Contact  from './components/contact/Contact'
 import ShooppingCart from './components/shopping_cart/ShoppingCart'
 import EditMyProfile from './components/account/EditMyProfile'
-import MyOrdersPage from './components/account/MyOrdersPage'
+import MyOrders from './components/account/MyOrders'
 import OrderDetails from './components/account/OrderDetails'
-import MyProfile from './components/account/MyProfile'
+import MyProfile from './components/account/MyProfileInfo'
 import {
   BrowserRouter as Router,
   Switch,
@@ -78,7 +78,7 @@ function App() {
 
         <PublicRoute path = "/myAccount/editProfile"
         component={EditMyProfile}/>
-             <PublicRoute   path = "/myAccount/myOrders" exact component={ MyOrdersPage }  />
+             <PublicRoute   path = "/myAccount/myOrders" exact component={ MyOrders }  />
                <PublicRoute path = "/myAccount/myOrders/:orderID"   component={ OrderDetails } />
 
           <Route path = "/menu/:productId" component={ ProductsDetails } />
