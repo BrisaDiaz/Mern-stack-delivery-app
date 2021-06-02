@@ -54,7 +54,7 @@ const checkAllowedUpdates = async (req,res,next) => {
      const orderFound = await Order.findById(req.orderId);
 
   
-     console.log( orderFound.states)
+
 
  const findAlreadySetState = orderFound.states.find(state =>( (state.confirmed === true) &&(state.name === req.confirmedState)  )
 )

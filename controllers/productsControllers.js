@@ -5,9 +5,47 @@ const fs = require("fs")
 
 const getAllProducts = async (req,res) => {
   try{
-    
-    const products = await Product.find({});
-    res.status(200).json(products);
+    console.log(req.query)
+
+    let query = {}
+     let sort = '-createdAt'
+    let page = 1
+    let limit = 6 
+
+   if(req.query.title){
+
+    query.name={$regex: `${req.query.title}`, $options: 'i'}
+
+    }
+    if(req.query.category){
+      query.category = req.query.category
+    }
+    if(req.query.active){
+
+      if(req.query.active==='active'){
+      query.active = true
+      }
+      if(req.query.active==='inactive'){
+              query.active = false
+      }
+
+    }
+    if(req.query.sort){
+        sort = req.query.sort
+      }
+    if(req.query.page){
+      page = parseInt(req.query.page)
+    }
+     if(req.query.limit){
+      limit = parseInt(req.query.limit)
+    }
+   
+     let skip = (page - 1 ) * limit
+
+         const products = await Product.find(query).sort(sort).limit(limit).skip(skip).exec()
+     const totalResults = await Product.find(query)
+
+    res.status(200).json({success:true,data:products,total:totalResults.length});
   }catch(error){
     console.log(error)
     res.status(500).json({success:false, message:error.mesage})
@@ -17,7 +55,7 @@ const getAllProducts = async (req,res) => {
 const getProductById= async (req,res) => {
   try{
     const product = await Product.findById(req.params.id);
-    res.status(200).json(product);
+    res.status(200).json({success:true,data:product});
   }catch(error){
     console.log(error)
     res.status(500).json({success:false,message:error.mesage})
@@ -28,7 +66,7 @@ const postNewProduct = async (req,res) =>{
 try{
 
 const { name, category, size ,description ,active} = req.body
-const price = Number(req.body.price);
+const price = parseInt(req.body.price);
 const  img = req.file.filename 
 
  const product =    new Product({
@@ -42,7 +80,7 @@ const  img = req.file.filename
 product.setImgUrl(img)
 
 
-const actualizedQuantity = req.categoryQuantity + 1
+const actualizedQuantity = req.categoryQuantity+1
 
 await Category.findByIdAndUpdate( req.categoryId,{$set:{ quantity: actualizedQuantity }},{new : true}  )
 
@@ -51,6 +89,7 @@ const newProduct = await product.save( )
  res.status(201).json({success: true , data: newProduct})
  
    }catch(error){
+
 console.log(error)
      res.status(400).json({success:false,  message:error.mesage})
 
@@ -60,7 +99,7 @@ console.log(error)
 const updateProductById= async (req,res) => {
 
 const { name, category, size ,description ,active} = req.body
-const price = Number(req.body.price);
+const price = parseInt(req.body.price);
 
   try{
  let product = await Product.findById(req.params.id).exec();
@@ -127,11 +166,17 @@ fs.unlink(oldImgPath, (err) => {
  
 const productFound = await Product.findById(req.params.id);
 
-  await Product.findByIdAndRemove(req.params.id);
+const categoryFound = await Category.findOne({name: productFound.category})
+console.log(categoryFound)
 
-const actualizedQuantity = req.categoryQuantity - 1
+const actualizedQuantity = categoryFound.quantity - 1
+console.log(actualizedQuantity)
+console.log(categoryFound.quantity)
+await Category.findByIdAndUpdate(categoryFound._id,{$set:{ quantity: actualizedQuantity }},{new : true} )
 
-await Category.findOneAndUpdate( {name: productFound.categorye},{$set:{ quantity: actualizedQuantity }},{new : true} )
+await Product.findByIdAndRemove(req.params.id);
+
+    
 
 
     res.status(204).json({success:true , message:"Product has been deleted"});
@@ -139,7 +184,7 @@ await Category.findOneAndUpdate( {name: productFound.categorye},{$set:{ quantity
   }catch(error){
     console.log(error)
 
-    res.status(500).json({success:false,message:error.mesage})
+    res.status(500).json({success:false,message:error})
   }
 }
 module.exports = {

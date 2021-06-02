@@ -38,7 +38,7 @@ router.get('/', getAllProducts);
 
 router.get('/:id', getProductById);
 
-router.post('/',[verifyToken,isAdminOrIsModerator,checkCategoryExist,upload.single('img')],postNewProduct);
+router.post('/',[verifyToken,isAdminOrIsModerator,upload.single('img'),checkCategoryExist],postNewProduct);
 
 router.put('/:id',[verifyToken,isAdmin,upload.single('img')],updateProductById);
 

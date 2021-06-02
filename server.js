@@ -7,8 +7,9 @@ const path = require('path');
 const morgan = require('morgan');
 const { createRoles,createAdmin,createModerator,creatCategorys} = require('./libs/initialSetUp');
 
-app.use(express.json());
+
 app.use(express.urlencoded({ extended: false })); 
+app.use(express.json());
 app.use(cors());
 app.use(morgan('tiny'));
 
@@ -37,7 +38,6 @@ const categoriesRouter =  require('./routes/categories.js')
 if ( process.env.NODE_ENV === 'production'){
   
   app.use(express.static(path.join(__dirname, 'frontend','build'))); 
-
   app.get( ' * ' , (req,res) => {
     res.sendFile(path.join(__dirname, 'frontend','build','index.html'))
   } )
@@ -54,6 +54,7 @@ app.use('/api/contact',contactRouter)
 app.use('/api/newsletter',newsletterRouter)
 app.use('/api/orders',ordersRouter)
 app.use('/api/categories',categoriesRouter)
+
 
 
 app.listen(port, () => {

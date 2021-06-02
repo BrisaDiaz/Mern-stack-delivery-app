@@ -6,7 +6,7 @@ const {Order,STATES}  = require('../models/order.model');
 
 const getAllOrders = async (req,res) =>{
   try {
-   const orders = await Order.find({}) .populate('client').exec()
+   const orders = await Order.find({}) .populate('client').sort('-createdAt').exec()
    
    res.status(200).json({successful:true, data: orders })
 
@@ -158,6 +158,7 @@ const order = await Order.findById(req.params.orderId)
  return
   }
  
+  console.log(order.client[0])
   res.status(200).json({success:false , message:'order satate updated successfully'}) 
 
 

@@ -1,15 +1,18 @@
 const {Category} = require('../models/category.model')
 
-const checkCategoryExist = async(req,res,next) =>{
+const checkCategoryExist = async (req,res,next) =>{
+
   try{
 
-  const categoryFound = await Category.find({name: req.body.category}).exec()
+  const categoryFound = await Category.findOne({name: req.body.category})
 
-  if(!categoryFound) return  req.status(404).json({successful:false, message:'Not category found'})
+
+
+  if(!categoryFound) return  res.status(404).json({successful:false, message:'Not category found'})
 
  req.categoryId = categoryFound._id
  req.categoryQuantity = categoryFound.quantity
- 
+
   next()
   }catch(err){
     console.log(err)
