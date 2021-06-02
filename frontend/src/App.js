@@ -24,7 +24,7 @@ import ShooppingCart from './components/shopping_cart/ShoppingCart'
 import EditMyProfile from './components/account/EditMyProfile'
 import MyOrdersPage from './components/account/MyOrdersPage'
 import OrderDetails from './components/account/OrderDetails'
-import MyProfile from './components/account/MyProfileInfo'
+import MyProfile from './components/account/MyProfile'
 import {
   BrowserRouter as Router,
   Switch,
