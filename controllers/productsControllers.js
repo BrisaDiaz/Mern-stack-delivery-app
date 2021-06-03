@@ -106,12 +106,8 @@ const price = parseInt(req.body.price);
 let img;
 
 if(req.file){
-  img = req.file.filename
-}else{
-  img = productFound.img
-}
 
-let oldImgPath ="./storage/media/"+productFound.img.split("/").reverse()[0]
+  let oldImgPath ="./storage/media/"+productFound.img.split("/").reverse()[0]
 
  if(req.file){
    
@@ -122,6 +118,15 @@ fs.unlink(oldImgPath, (err) => {
   }
  })
  }
+
+  img = req.file.filename
+
+}else{
+  img = productFound.img
+  
+}
+
+
 
 
 if(category && (category !== productFound.category )){

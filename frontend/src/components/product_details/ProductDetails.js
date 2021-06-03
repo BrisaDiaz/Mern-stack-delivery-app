@@ -99,7 +99,9 @@ text-transform:none;
 ` 
 export default function ProductDetailsPage(props){
 let location = useLocation()
-let goBackPath = location.query.from
+let search = new URLSearchParams(location.search);
+let goBackPath = search.get("from");
+
 
     const {cartProducts,addToCart,addToTotalCost,setIsLoading,isLoading}  = useContext(AppContext);
  const [thisProductInfo,setThisProductInf] = useState({})
@@ -143,6 +145,7 @@ let goBackPath = location.query.from
    
  },[productId])
 
+ 
 let isInShoppingCart = cartProducts.find(product => product.info._id === thisProductInfo?._id) ? true : false
 console.log(isInShoppingCart)
 

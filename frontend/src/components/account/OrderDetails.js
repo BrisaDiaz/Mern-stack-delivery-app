@@ -2,6 +2,7 @@ import styled  from 'styled-components'
 import {useParams} from 'react-router-dom'
 import AppContext from '../../context/app-context'
 import {   useContext } from 'react'
+import {GoBackLink} from '../product_details/ProductDetails'
 
 export const Page = styled.main`
     padding: 60px 15px;
@@ -13,7 +14,7 @@ text-transform: capitalize;
 
 @media screen and (max-width: 440px){
   & > h3 {
-    font-size: 20px;
+    font-size: 10px;
 }
 & > h3 span{
   display:block;
@@ -28,20 +29,18 @@ export const CenterTitle = styled.h3`
 width:90%;
 max-width:900px;
 margin: 0 auto;
-    border-spacing: 15px;
-    border-collapse: collapse;
-    border: 2px solid #171717;
-        text-transform: capitalize;
+border-spacing: 15px;
+border-collapse: collapse;
+border: 2px solid ${props=> props.theme.black};
+ text-transform: capitalize;
 &> thead ,tfoot{
-  background-color: #171717;
-color: #fcba1c;
-
+background-color:${props=> props.theme.black};
+color: ${props=> props.theme.darckYellow};
 }
 &>  tfoot td h4{
 margin: 10px 0;
 text-align:center;
 }
-
 & >tfoot td h4 span{
   margin-right:5px;
   color: #f3f3f3;
@@ -58,11 +57,11 @@ text-align:center;
 @media screen and (max-width: 400px){
       border-spacing: 0;
           width: 100%;
-  & >  thead th {
+& >  thead th {
   
        font-size:16px;
 }    
- & >  tbody{
+& >  tbody{
   font-size: 12px;
 }
 }
@@ -70,8 +69,8 @@ text-align:center;
 export const ClientInfo = styled.div`
 margin: 0 auto;
 max-width:900px;
-    display: flex;
-    gap: 15px;
+display: flex;
+  gap: 15px;
     justify-content: space-between;
     flex-wrap: wrap;
 }
@@ -83,7 +82,7 @@ gap:15px;
   width:100%;
 max-width:max-content;
 min-height: 30px;
-  background-color: #171717;
+  background-color:${props=> props.theme.black};
   display:flex;
   justify-content:center;
   align-items:center;
@@ -97,7 +96,7 @@ min-height: 30px;
 }
 `
 export const ProcessInfo = styled.div`
-color: #fcba1c;
+color: ${props=> props.theme.darckYellow};
 display:flex;
 text-align:center;
 & > h4 {
@@ -142,6 +141,7 @@ let userOrders = currentUser?.orders
 
   return(
 <Page>
+      <GoBackLink to="/myAccount/myOrders">Regresar</GoBackLink>
   <CenterTitle>Nº ID:<span>{orderID}</span></CenterTitle>
 
 

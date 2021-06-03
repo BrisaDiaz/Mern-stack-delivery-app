@@ -2,7 +2,7 @@ import styled  from 'styled-components'
 import useAddToCartButton from '../../hooks/useAddToCartButton'
 import AppContext from '../../context/app-context'
 import {  useContext} from 'react'
-import {Link,useLocation} from 'react-router-dom';
+import {useHistory,useLocation} from 'react-router-dom';
 import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
 
 const Item = styled.figure `
@@ -24,23 +24,23 @@ display:flex;
 align-items:center;
 padding-bottom:5px;
 `;
-const Name =styled.h3`
-margin-bottom:0;
+const ProductLink =styled.h3`
+text-decoration:none;
+margin-bottom:2px;
+  color: #272727;
 letter-spasing:0;
+cursor:pointer;
 line-height:35px;
 text-transform:capitalize ;
 transition: all 0.5s;
-
+  font-family: "Oswald", sans-serif;
+  font-size: 25px;
 &:hover {
       color: color: rgb(0 0 0 / 50%);
 
 }
 `
-const ProductLink = styled(Link)`
-text-decoration:none;
-margin-bottom:2px;
-  color: #272727;
-`;
+
 const Size = styled.small`
 align-self: flex-start;
     color: rgba(0,0,0,0.8);
@@ -105,12 +105,20 @@ transition: all 05s ease;
 
 `;
 export default function MenuItem(props){
-  let location = useLocation()
+  let history = useHistory()
+ let location = useLocation()
   const item = props.item;
   const {cartProducts,addToCart,addToTotalCost}  = useContext(AppContext);
 const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(item,cartProducts,addToCart,addToTotalCost)
 
 
+const handleRedirect = (id) =>{
+  return  history.push({
+  pathname: '/menu/'+id,
+  search: '?from='+location.pathname,
+
+})
+}
 
 
 
@@ -127,10 +135,10 @@ const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(item,cart
 
 </ImgContainer>
 
-      <ProductLink to={ pathname:`/menu/${item._id}`, query:{ from: location.pathname }}><Name>{item.name}</Name></ProductLink>  
-   <Figcaption><Price >   {item.price}</Price> <Size>{item.size}  </Size>  </Figcaption> 
+      <ProductLink onClick={ () => handleRedirect(item._id)}>{item.name}</ProductLink>  
+   <Figcaption><Price >{item.price}</Price> <Size>{item.size}  </Size>  </Figcaption> 
         
-        {  location.pathname === "/dashboard/myProducts" ?
+        { ( location.pathname === "/dashboard/myProducts") ?
           props.children
          :
          <CartButton isAdded={isAdded}
