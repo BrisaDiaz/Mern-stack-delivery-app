@@ -142,7 +142,7 @@ let userOrders = currentUser?.orders
 
   return(
 <Page>
-  <CenterTitle>Nº de Pedido:<span>{orderID}</span></CenterTitle>
+  <CenterTitle>Nº ID:<span>{orderID}</span></CenterTitle>
 
 
 <UserOrderStateChart  
@@ -152,7 +152,7 @@ states={thisOrder?.states?.filter(state => state?.confirmed === true)}
 
 
 
-
+      <hr></hr>
     <CenterTitle>Detalles de envio</CenterTitle>
 
     <ClientInfo>

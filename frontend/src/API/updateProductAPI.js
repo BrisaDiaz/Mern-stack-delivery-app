@@ -1,3 +1,5 @@
+ import getCategoriesAPI from './getCategoriesAPI'
+ 
  async function updateProductAPI(
 {    token,
     formData,
@@ -10,7 +12,7 @@ priceValue,
 setIsSuccessfullySend,
 setFormIsLoading,
 history,
-
+setAllCategories
 }
 ){
      
@@ -34,6 +36,9 @@ let url =`/api/products/${id}`
        setFormIsLoading(false)
 
       if(res.status === 200){
+
+       await getCategoriesAPI(setAllCategories)
+
            setIsSuccessfullySend(true)
           setTimeout(() => {
            setIsSuccessfullySend(false)

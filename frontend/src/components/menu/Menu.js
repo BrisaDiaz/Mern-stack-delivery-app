@@ -107,7 +107,7 @@ const FiltersBoard = styled.div`
 
 export default function Menu() {
 
-  let fetchCounter = 0
+
 
   const { categories } = useContext(AppContext);
   let populatedCategories = categories?.filter(category => category?.quantity > 0)
@@ -118,7 +118,7 @@ export default function Menu() {
   const [isLoading, setIsLoading] = useState(false)
   const [page, setPage] = useState(1)
   const [maxPage, setMaxPage] = useState(1)
-  const [products, setProducts] = useState([])
+  let [products, setProducts] = useState(null)
   const [category, setCategory] = useState("all")
   const [sorting, setSorting] = useState("-createdAt")
   const [title, setTitle] = useState("")
@@ -178,7 +178,7 @@ export default function Menu() {
     }
   }, [title, sorting,page,category])
 
-        fetchCounter = 1
+
 
   const resetQuery = () => {
     setPage(1)
@@ -218,7 +218,7 @@ export default function Menu() {
 
         <ProductsSection >
 
-          {(products?.length === 0 && fetchCounter > 0) ?
+          {   ( (products)   &&  products?.length === 0) ?
             <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
             :
             products?.map(product =>

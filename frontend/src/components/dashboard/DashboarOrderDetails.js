@@ -79,7 +79,7 @@ const {orders} = useContext(AppContext)
 
     <GoBackLink to="/dashboard/orders" >Regresar</GoBackLink>
 
-  <CenterTitle>Nº de Pedido:<span>{orderID}</span></CenterTitle>
+  <CenterTitle>Nº ID:<span>{orderID}</span></CenterTitle>
 
 <AdminOrderStateChart  
 states={thisOrder?.states}
@@ -87,7 +87,7 @@ orderId={thisOrder?._id}
 />
 
 
-
+      <hr></hr>
    <CenterTitle>Detalles de envio</CenterTitle>
 
     <ClientInfo>

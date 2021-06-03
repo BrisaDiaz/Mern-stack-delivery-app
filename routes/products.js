@@ -40,7 +40,7 @@ router.get('/:id', getProductById);
 
 router.post('/',[verifyToken,isAdminOrIsModerator,upload.single('img'),checkCategoryExist],postNewProduct);
 
-router.put('/:id',[verifyToken,isAdmin,upload.single('img')],updateProductById);
+router.put('/:id',[verifyToken,isAdmin,upload.single('img'),checkCategoryExist],updateProductById);
 
 router.delete('/:id',[verifyToken,isAdmin], deleteProductById);
 

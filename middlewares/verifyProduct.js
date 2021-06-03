@@ -11,7 +11,7 @@ const checkCategoryExist = async (req,res,next) =>{
   if(!categoryFound) return  res.status(404).json({successful:false, message:'Not category found'})
 
  req.categoryId = categoryFound._id
- req.categoryQuantity = categoryFound.quantity
+
 
   next()
   }catch(err){

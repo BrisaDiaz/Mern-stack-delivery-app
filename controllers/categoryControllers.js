@@ -59,7 +59,7 @@ res.status(200).json({successful:false ,message:`Category ${req.categoryName} su
 }catch(err){
 console.log(err)
 
-res.status(500).json({successful:false ,message:'Something went wrong, could delate category'})
+res.status(500).json({successful:false ,message:'Something went wrong, could not delate category'})
 }
 }
  

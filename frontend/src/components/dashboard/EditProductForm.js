@@ -30,12 +30,12 @@ transform:scale(0.75);
 
 export default function UpdateNewProductForm() {
 
-    const {token,productToEdit,setIsSuccessfullySend,categories}  = useContext(AppContext);
+    const {token,productToEdit,setIsSuccessfullySend,categories,setAllCategories}  = useContext(AppContext);
 const {register ,handleSubmit, errors, onSubmit,setNameValue,setCategoryValue,setPriceValue,setSizeValue,setDescriptionValue,nameValue,categoryValue,
 priceValue,sizeValue,descriptionValue,formIsLoading
 } = useEditProductForm({token,
 productToEdit,
-setIsSuccessfullySend})
+setIsSuccessfullySend,setAllCategories})
  
   return(
     <StyledSection>
@@ -159,10 +159,13 @@ selected = {categoryValue?.toLowerCase() === cat?.name ? true : false}
           })}></DropZone>  
 
 <ProductState state={productToEdit.active ? "checked" : null } />
+
+   {formIsLoading  &&  <LoaderSpinner small /> }
+   
          <ButtonsWrapper>
 <LoadButton as="input" type="submit" value="Cargar"/>
 <ResetButton as="input" type="reset" value="Abortar"/>
-   {formIsLoading &&  <LoaderSpinner small /> }
+
           </ButtonsWrapper>
       
 

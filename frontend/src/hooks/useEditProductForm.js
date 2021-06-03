@@ -6,7 +6,8 @@ import {useHistory} from 'react-router-dom';
 export default function useEditProductForm({
 token,
 productToEdit,
-setIsSuccessfullySend
+setIsSuccessfullySend,
+setAllCategories
 }){
         const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
@@ -60,6 +61,7 @@ descriptionValue,
 priceValue,
 setIsSuccessfullySend,
 setFormIsLoading,
+setAllCategories,
 history
 })
 

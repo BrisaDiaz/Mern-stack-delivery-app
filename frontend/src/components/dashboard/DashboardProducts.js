@@ -57,7 +57,7 @@ margin: 20px auto;
 
  export default function DashboardProducts(){
 
-  let fetchCounter = 0
+
   
     let {categories,token,setProductToEdit}  = useContext(AppContext);
 
@@ -71,8 +71,8 @@ margin: 20px auto;
   const[isLoading,setIsLoading] = useState(false)
     const [page, setPage] = useState(1)
     const [maxPage, setMaxPage] = useState(1)
-    const [products, setProducts] = useState([])
-    const [activeProducts,setActiveProducts] =useState(null)
+    let [products, setProducts] = useState(null)
+    let [activeProducts,setActiveProducts] =useState('all')
    const [title,setTitle] =useState("")
 
    query.append('page',page)
@@ -95,7 +95,7 @@ const productsAPI = async () =>{
         query.append('category', category)
       }
 
-    if(activeProducts !== "all" && activeProducts !== null){
+    if(activeProducts !== "all"){
 query.append('active',activeProducts)
     }
      let res = await fetch(`/api/products?${query}`,{signal,})
@@ -128,7 +128,7 @@ query.append('active',activeProducts)
    }   
  }, [title,activeProducts,page,category])
 
-  fetchCounter=1
+
      
 const resetQuery = () =>{
 setPage(1)
@@ -165,7 +165,7 @@ setProductToEdit(product);
 
 <StyledProductsSection>
 
-  {   ( products?.length === 0 && fetchCounter > 0) ?
+  {   ( (products)   &&  products?.length === 0) ?
   
   <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
 

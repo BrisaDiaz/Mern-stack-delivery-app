@@ -80,10 +80,7 @@ const  img = req.file.filename
 product.setImgUrl(img)
 
 
-const actualizedQuantity = req.categoryQuantity+1
-
-await Category.findByIdAndUpdate( req.categoryId,{$set:{ quantity: actualizedQuantity }},{new : true}  )
-
+await Category.findByIdAndUpdate( req.categoryId,{$inc:{ quantity: 1 }},{new : true}  )
 const newProduct = await product.save( )
 
  res.status(201).json({success: true , data: newProduct})
@@ -102,8 +99,8 @@ const { name, category, size ,description ,active} = req.body
 const price = parseInt(req.body.price);
 
   try{
- let product = await Product.findById(req.params.id).exec();
-  if (!product) return res.status(404).json({success:false, message:'product not faund'});
+ let productFound = await Product.findById(req.params.id)
+  if (!productFound) return res.status(404).json({success:false, message:'product not faund'});
 
 
 let img;
@@ -111,10 +108,10 @@ let img;
 if(req.file){
   img = req.file.filename
 }else{
-  img = product.img
+  img = productFound.img
 }
 
-let oldImgPath ="./storage/media/"+product.img.split("/").reverse()[0]
+let oldImgPath ="./storage/media/"+productFound.img.split("/").reverse()[0]
 
  if(req.file){
    
@@ -127,15 +124,26 @@ fs.unlink(oldImgPath, (err) => {
  }
 
 
+if(category && (category !== productFound.category )){
+  
+await Category.findOneAndUpdate({name: productFound.category },{$inc:{ quantity: -1 }},{new : true} )
+
+await Category.findByIdAndUpdate( req.categoryId,{$inc:{ quantity: 1 }},{new : true}  )
+
+
+
+ 
+}
+
 
             product = await Product.findByIdAndUpdate(req.params.id, {
-                name: name || product.name,
-                description: description || product.description,
-                category: category || product.category,
-                price: price || product.price,
-               size: size || product.size,
+                name: name || productFound.name,
+                description: description || productFound.description,
+                category: category || productFound.category,
+                price: price || productFound.price,
+               size: size || productFound.size,
                 img: img ,
-                active: active || product.active
+                active: active || productFound.active
             }, { new: true });
             
             updatedProduct = await product.save();
@@ -166,13 +174,7 @@ fs.unlink(oldImgPath, (err) => {
  
 const productFound = await Product.findById(req.params.id);
 
-const categoryFound = await Category.findOne({name: productFound.category})
-console.log(categoryFound)
-
-const actualizedQuantity = categoryFound.quantity - 1
-console.log(actualizedQuantity)
-console.log(categoryFound.quantity)
-await Category.findByIdAndUpdate(categoryFound._id,{$set:{ quantity: actualizedQuantity }},{new : true} )
+await Category.findOneAndUpdate( {name:productFound.category},{$inc:{ quantity: -1 }},{new : true}  )
 
 await Product.findByIdAndRemove(req.params.id);
 
