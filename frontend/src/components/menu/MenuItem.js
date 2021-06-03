@@ -2,7 +2,7 @@ import styled  from 'styled-components'
 import useAddToCartButton from '../../hooks/useAddToCartButton'
 import AppContext from '../../context/app-context'
 import {  useContext} from 'react'
-import {Link} from 'react-router-dom';
+import {Link,useLocation} from 'react-router-dom';
 import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
 
 const Item = styled.figure `
@@ -10,11 +10,10 @@ display:flex;
 box-sizing:border-box;
 border-radius:5px;
 position:relative;
-    max-width: 250px;
-    min-width: 250px;
+max-width: 250px;
+min-width: 250px;
 height:350px;
 flex-flow:column;
-
 over-flow:hidden;
 padding:20px;
 border: 1px solid #00000026;
@@ -60,7 +59,7 @@ const Price = styled.h4 `
 export const CartButton = styled.button`
 margin-left:auto;
 margin-top:auto;
-    box-shadow: ${props=> props.theme.lightBoxShadow};
+box-shadow: ${props=> props.theme.lightBoxShadow};
 padding:20px 0;
 width:50px;
 display:flex;
@@ -106,6 +105,7 @@ transition: all 05s ease;
 
 `;
 export default function MenuItem(props){
+  let location = useLocation()
   const item = props.item;
   const {cartProducts,addToCart,addToTotalCost}  = useContext(AppContext);
 const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(item,cartProducts,addToCart,addToTotalCost)
@@ -127,10 +127,10 @@ const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(item,cart
 
 </ImgContainer>
 
-      <ProductLink to={`/menu/${item._id}`}><Name>{item.name}</Name></ProductLink>  
+      <ProductLink to={ pathname:`/menu/${item._id}`, query:{ from: location.pathname }}><Name>{item.name}</Name></ProductLink>  
    <Figcaption><Price >   {item.price}</Price> <Size>{item.size}  </Size>  </Figcaption> 
         
-        {  window.location.pathname === "/dashboard/myProducts" ?
+        {  location.pathname === "/dashboard/myProducts" ?
           props.children
          :
          <CartButton isAdded={isAdded}

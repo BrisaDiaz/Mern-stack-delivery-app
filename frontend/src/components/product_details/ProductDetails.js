@@ -1,7 +1,7 @@
 import styled  from 'styled-components'
 import AppContext from '../../context/app-context'
 import {  useContext,useEffect,useState} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams,useLocation} from 'react-router-dom'
 import {CartButton,CartIcon} from '../menu/MenuItem'
 import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
 import useAddToCartButton from '../../hooks/useAddToCartButton'
@@ -97,7 +97,9 @@ const Description = styled(Deltail)`
 text-transform:none;
 
 ` 
-export default function ProductDetailsPage(){
+export default function ProductDetailsPage(props){
+let location = useLocation()
+let goBackPath = location.query.from
 
     const {cartProducts,addToCart,addToTotalCost,setIsLoading,isLoading}  = useContext(AppContext);
  const [thisProductInfo,setThisProductInf] = useState({})
@@ -151,9 +153,9 @@ console.log(isInShoppingCart)
       isLoading ? null :   
       
 <ProductDetails>
-  
-             <GoBackLink to= "/menu" > Regresar</GoBackLink>
-       
+    
+             <GoBackLink to={goBackPath} > Regresar</GoBackLink>
+
   <PrductImg src={thisProductInfo?.img}  alt={thisProductInfo?.name}/>
     <Line/>
   <Name>{thisProductInfo?.name}</Name>

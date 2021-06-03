@@ -26,7 +26,7 @@ import MyOrdersPage from './components/account/MyOrdersPage'
 import OrderDetails from './components/account/OrderDetails'
 import MyProfile from './components/account/MyProfile'
 import {
-  BrowserRouter as Router,
+  HashRouter  as Router,
   Switch,
   Route
 

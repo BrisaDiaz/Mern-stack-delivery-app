@@ -61,7 +61,7 @@ const verifyAccountConfirmartion = async (req,res,next) =>{
 
     const temporaUser = await TemporalUser.findOne({email: req.body.email})
 
-     if (temporaUser) return res.status(302).json({successful:false,message:"Email unverified" ,redirect:`/authentication/confirmation`,id: temporaUser._id } ) ;
+     if (temporaUser) return res.status(302).json({successful:false,message:"Email unverified" ,redirect:`/#/authentication/confirmation`,id: temporaUser._id } ) ;
 
 
     return res.status(404).json({success:false ,message:"No user faund"} )
