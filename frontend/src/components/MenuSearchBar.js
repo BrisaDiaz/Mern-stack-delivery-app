@@ -4,6 +4,7 @@ import loupe from '../img/loupe.svg'
 const StyledSearchBar = styled.form`
 width:max-content;
 margin:0 auto;
+position:relative;
 `;
 const SearchInput = styled.input`
 position:relative;
@@ -16,6 +17,7 @@ box-shadow: ${props => props.theme.lightBoxShadow};
 transition: all 0.5s ease;
 border:none;
 margin-left: -6px;
+position: relative;
 &:focus{
   width:250px;
 box-shadow: 0 0 10px rgba(0,0,0,0.2);

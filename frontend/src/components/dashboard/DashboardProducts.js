@@ -8,7 +8,8 @@ import {   useContext,useEffect,useState,Fragment } from 'react'
 import SearchBar from '../MenuSearchBar'
 import deleteProductAPI from '../../API/deleteProductAPI'
 import DashboardNav from '../DashboardNav'
-import FilerProductsOptions from '../FilerProductsOptions'
+import FilterProductsStateOptions from '../FilterProductsStateOptions'
+import FilterCategoryOptions from '../FilterCategoryOptions'
 import {SectionTitle,ProductsSection,NotFaundMessage} from '../menu/Menu'
 import Item, {CartButton,CartIcon} from '../menu/MenuItem'
 import editIcone from '../../img/pencil-alt-solid.svg'
@@ -23,10 +24,11 @@ width:100vw;
 padding:60px 15px;
 `
 const FiltersBoard = styled.div`
-    padding: 0 20px;
-    padding-top: 40px;
+      padding: 40px 0 0;
     display: flex;
+    width: fit-content;
     align-items: center;
+    justify-content: flex-start;
 `;
 const EditButton = styled(CartButton)`
     height: 50px;
@@ -56,11 +58,16 @@ margin: 20px auto;
  export default function DashboardProducts(){
 
   let fetchCounter = 0
-    let {token,setProductToEdit}  = useContext(AppContext);
+  
+    let {categories,token,setProductToEdit}  = useContext(AppContext);
+
+ let populatedCategories = categories?.filter(category => category?.quantity > 0)
 
  let query = new URLSearchParams();
     let sizeLimit = 6
 
+ 
+  const [category, setCategory] = useState("all")
   const[isLoading,setIsLoading] = useState(false)
     const [page, setPage] = useState(1)
     const [maxPage, setMaxPage] = useState(1)
@@ -84,6 +91,10 @@ const productsAPI = async () =>{
    if(title !== ""){ 
       query.append('title',title)
     }
+      if (category !== "all") {
+        query.append('category', category)
+      }
+
     if(activeProducts !== "all" && activeProducts !== null){
 query.append('active',activeProducts)
     }
@@ -96,7 +107,7 @@ query.append('active',activeProducts)
 
      setMaxPage(Math.ceil(total/sizeLimit))
 
-     fetchCounter+=1
+
 
      setIsLoading(false)
   }catch(err){
@@ -105,10 +116,6 @@ query.append('active',activeProducts)
  }else{
 
      console.log(err)
-    for(let i = 0; i < 6 ;i++){
-    productsAPI()
-
-        }
 
   }
 }
@@ -119,9 +126,10 @@ query.append('active',activeProducts)
      return () =>{
      controller.abort()
    }   
- }, [title,activeProducts,page])
+ }, [title,activeProducts,page,category])
 
-
+  fetchCounter=1
+     
 const resetQuery = () =>{
 setPage(1)
 setActiveProducts(null)
@@ -149,12 +157,15 @@ setProductToEdit(product);
 
 <SearchBar setSearch={setTitle} resetQuery={resetQuery}/>
 <FiltersBoard>
-<FilerProductsOptions setStatePreferece={setActiveProducts} />
+  <FilterCategoryOptions categories={populatedCategories} setCategoryPreferece={setCategory} setPage={setPage} />
+
+<FilterProductsStateOptions setPage={setPage} setStatePreferece={setActiveProducts} />
+
 </FiltersBoard>
 
 <StyledProductsSection>
 
-  {   ( products?.length === 0 && fetchCounter > 1) ?
+  {   ( products?.length === 0 && fetchCounter > 0) ?
   
   <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
 

@@ -381,7 +381,7 @@ export default  function UpdateNewProductForm() {
 
 
       <ImageUploader  register={register} errors={errors}/>     
-   {formIsLoading &&  <LoaderSpinner small /> }
+   {formIsLoading  &&  <LoaderSpinner small /> }
  <FormButtons/>
       
 

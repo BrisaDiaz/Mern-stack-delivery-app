@@ -10,10 +10,10 @@ display:flex;
 justify-content:center;
 align-items: center;
 margin:0;
-height:100%;
+min-height:100vh;
 width:100vw;
 padding:60px 15px 40px;
-max-height:700px;
+
 `;
 const UserCard =styled.article`
 margin:30px auto;

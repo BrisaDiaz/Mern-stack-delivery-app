@@ -1,14 +1,14 @@
-import styled  from 'styled-components'
-import {LoaderSpinner} from './../LoaderSpinner'
+import styled from 'styled-components'
+import { LoaderSpinner } from './../LoaderSpinner'
 import AppContext from '../../context/app-context'
-import {   useContext,useEffect,useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import SearchBar from '../MenuSearchBar'
-
 import SortProductsOptions from '../SortProductsOptions'
-import Item  from './MenuItem'
+import FilterCategoryOptions from '../FilterCategoryOptions'
+import Item from './MenuItem'
 
 
-const StyledMenu= styled.main`
+const StyledMenu = styled.main`
 min-height:100vh;
 width:100vw;
 padding: 65px 15px 20px;
@@ -17,13 +17,13 @@ margin-bottom:20px;
 text-aling:center;
 
 `;
-export const SectionTitle= styled.h2`
+export const SectionTitle = styled.h2`
 text-align:center;
 text-transform: uppercase;
-color:${(props) =>(props.light ? "#fff" : "#fcba1c")};
+color:${(props) => (props.light ? "#fff" : "#fcba1c")};
  text-shadow: ${props => props.theme.darckTextShadow};
 `;
-const MenuWrapper= styled.section`
+const MenuWrapper = styled.section`
 display:flex;
 flex-wrap: wrap;
 padding-bottom: 20px ;
@@ -31,7 +31,7 @@ padding-bottom: 20px ;
 width:100%;
 
 `;
-const CategoryTitle = styled.h4 `
+const CategoryTitle = styled.h4`
     text-align: center;
     line-height: 15px;
     color: #fcba1c;
@@ -97,146 +97,156 @@ box-shadow:${props => props.theme.ligthBoxShadow};
   }
 }
 `;
+
+const FiltersBoard = styled.div`
+
+    padding: 20px 15px 10px;
+    display: flex;
+    align-items: center;
+`;
+
 export default function Menu() {
 
-let fetchCounter = 0
+  let fetchCounter = 0
 
-    const {categories}  = useContext(AppContext);
+  const { categories } = useContext(AppContext);
+  let populatedCategories = categories?.filter(category => category?.quantity > 0)
 
-   let query = new URLSearchParams();
-    let sizeLimit = 6
-    let activeProducts = true
-  const[isLoading,setIsLoading] = useState(false)
-    const [page, setPage] = useState(1)
-    const [maxPage, setMaxPage] = useState(1)
-    const [products, setProducts] = useState([])
-    const [sorting,setSorting] =useState("-createdAt")
-   const [title,setTitle] =useState("")
+  let query = new URLSearchParams();
+  let sizeLimit = 6
+  let activeProducts = true
+  const [isLoading, setIsLoading] = useState(false)
+  const [page, setPage] = useState(1)
+  const [maxPage, setMaxPage] = useState(1)
+  const [products, setProducts] = useState([])
+  const [category, setCategory] = useState("all")
+  const [sorting, setSorting] = useState("-createdAt")
+  const [title, setTitle] = useState("")
 
-query.append('active',activeProducts)
-   query.append('sort',sorting)
-   query.append('page',page)
-   query.append('limit',sizeLimit)
+  query.append('active', activeProducts)
+  query.append('sort', sorting)
+  query.append('page', page)
+  query.append('limit', sizeLimit)
 
-useEffect(()=>{
-setPage(1)
-},[sorting])
-  
+  useEffect(() => {
+    setPage(1)
+  }, [sorting])
 
-useEffect(() => {
-  const controller = new AbortController()
-   const signal = controller.signal
-  setIsLoading(true)
-  const fechProducts = async () =>{
 
-    if(title !== ""){ 
-      query.append('title',title)
-    }
-  try{
+  useEffect(() => {
+    const controller = new AbortController()
+    const signal = controller.signal
+    setIsLoading(true)
+    const fechProducts = async () => {
 
-     let res = await fetch(`/api/products?${query}`,{signal,})
-     let json = await res.json()
+      if (title !== "") {
+        query.append('title', title)
+      }
+      if (category !== "all") {
+        query.append('category', category)
+      }
+      try {
 
-    setProducts(json.data)
+        let res = await fetch(`/api/products?${query}`, { signal, })
+        let json = await res.json()
 
-    let total = parseInt(json.total)
+        setProducts(json.data)
 
-     setMaxPage(Math.ceil(total/sizeLimit))
+        let total = parseInt(json.total)
 
-     fetchCounter+=1
+        setMaxPage(Math.ceil(total / sizeLimit))
 
-     setIsLoading(false)
-  }catch(err){
-    if(err.name === 'AbortError'){
-   console.log('Fetch Canseled: caught abort')
- }else{
 
-     console.log(err)
-    for(let i = 0; i < 6 ;i++){
-    fechProducts()
+
+        setIsLoading(false)
+      } catch (err) {
+        if (err.name === 'AbortError') {
+          console.log('Fetch Canseled: caught abort')
+        } else {
+
+          console.log(err)
+          
+
 
         }
+      }
+    }
+    fechProducts()
+    window.scrollTo(0, 0)
+    return () => {
+      controller.abort()
+    }
+  }, [title, sorting,page,category])
 
- 
-  }
-}
-  }
-  fechProducts()
- window.scrollTo(0, 0)
-     return () =>{
-     controller.abort()
-   }   
- }, [title,sorting,page])
+        fetchCounter = 1
 
-
-
-const resetQuery = () =>{
-setPage(1)
-setSorting('-createdAt')
-}
-
-
-  return(
-
-
-  <StyledMenu>
-
-    <SectionTitle>Menú</SectionTitle>
-
-
-<MenuWrapper>
-
-
-
- <CategoryWrapper >
-   {categories?.map((category, index) =>
-   (category?.quantity > 0) ?
-   <CategoryTitle key={index}>{category.name}</CategoryTitle>
-   :null
-)}
-</CategoryWrapper >
-
-
-<SearchBarWrapper>
-
-  <SearchBar setSearch={setTitle} resetQuery={resetQuery}/>
-</SearchBarWrapper>
-
-<SortProductsOptions setSortPreferece={setSorting} sortPreference={sorting} />
-
-
-  <ProductsSection >
-
-    {  ( products?.length === 0 && fetchCounter > 1)?
-<NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
-    :
-       products?.map(product =>
-
-<Item key={product._id } item={product}  />)
- 
-  
+  const resetQuery = () => {
+    setPage(1)
+    setSorting('-createdAt')
   }
 
-    
-    </ProductsSection>
+
+  return (
 
 
-</MenuWrapper>
+    <StyledMenu>
 
-{isLoading ? <LoaderSpinner small/> : 
-<ButtonsWrapper>
-{
-(page > 1) ?  <button onClick={(e) => setPage(page -1)} >
-Prev</button> : null
+      <SectionTitle>Menú</SectionTitle>
+
+
+      <MenuWrapper>
+
+
+
+        <CategoryWrapper >
+          {populatedCategories?.map((category, index) =>
+
+            <CategoryTitle key={index}>{category.name}</CategoryTitle>
+
+          )}
+        </CategoryWrapper >
+
+
+        <SearchBarWrapper>
+
+          <SearchBar setSearch={setTitle} resetQuery={resetQuery} />
+        </SearchBarWrapper>
+        <FiltersBoard>
+          <FilterCategoryOptions categories={populatedCategories} setCategoryPreferece={setCategory} setPage={setPage} />
+          <SortProductsOptions setSortPreferece={setSorting} sortPreference={sorting} />
+        </FiltersBoard>
+
+        <ProductsSection >
+
+          {(products?.length === 0 && fetchCounter > 0) ?
+            <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
+            :
+            products?.map(product =>
+
+              <Item key={product._id} item={product} />)
+
+
+          }
+
+
+        </ProductsSection>
+
+
+      </MenuWrapper>
+
+      {isLoading ? <LoaderSpinner small /> :
+        <ButtonsWrapper>
+          {
+            (page > 1) ? <button onClick={(e) => setPage(page - 1)} >
+              Prev</button> : null
+          }
+          {
+            (page < maxPage) ? <button onClick={(e) => setPage(page + 1)} >
+              Next</button> : null
+          }
+        </ButtonsWrapper>
+      }
+    </StyledMenu>
+
+  );
 }
-{
-(page < maxPage) ?  <button onClick={(e) => setPage(page + 1)} >
-Next</button> : null
-}
-</ButtonsWrapper>
-}
-</StyledMenu>
-  
-);
-}
-  

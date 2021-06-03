@@ -13,6 +13,7 @@ setIsSuccessfullySend
 });
 
    const history = useHistory()
+
   const [formIsLoading,setFormIsLoading] = useState(false);
 const [nameValue, setNameValue] = useState(productToEdit.name)
 const [categoryValue, setCategoryValue] = useState(productToEdit.category)
@@ -33,7 +34,7 @@ setDescriptionValue(productToEdit.description)
 }, [productToEdit])
  
  function onSubmit(data,e) {
-
+setFormIsLoading(true)
   e.preventDefault()
 
    const formData = new FormData()

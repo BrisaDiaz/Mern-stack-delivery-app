@@ -161,7 +161,7 @@ export default function MyOrders(){
   const history = useHistory()
   const {currentUser,token,setCurrentUser,setIsLoading} = useContext(AppContext)
 
-let userOrders = currentUser?.orders.reverse()
+let userOrders = currentUser?.orders
 
 
 const deleteOrder = (e,id) =>{
@@ -203,7 +203,7 @@ useEffect(()=>{
             </tr>
   </TableHead>
   <tbody>
-    {userOrders?.map(order => 
+    {userOrders?.reverse().map(order => 
 
     <tr key={order?._id} onClick={(e) => seeDetails(order?.orderID)}>
     <td>{order?.orderID}</td>
