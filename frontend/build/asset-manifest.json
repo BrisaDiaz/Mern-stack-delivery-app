@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.cf87824f.chunk.css",
-    "main.js": "/static/js/main.d2d2df23.chunk.js",
-    "main.js.map": "/static/js/main.d2d2df23.chunk.js.map",
+    "main.js": "/static/js/main.1eaa58da.chunk.js",
+    "main.js.map": "/static/js/main.1eaa58da.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.1a77d0ad.js",
     "runtime-main.js.map": "/static/js/runtime-main.1a77d0ad.js.map",
     "static/js/2.6a249d44.chunk.js": "/static/js/2.6a249d44.chunk.js",
@@ -17,6 +17,7 @@
     "static/media/check-circle-solid.07d81c3d.svg": "/static/media/check-circle-solid.07d81c3d.svg",
     "static/media/close.b5d93a6a.svg": "/static/media/close.b5d93a6a.svg",
     "static/media/dashboard.b7777ba1.svg": "/static/media/dashboard.b7777ba1.svg",
+    "static/media/default-image.02bd9b08.png": "/static/media/default-image.02bd9b08.png",
     "static/media/empanadas-slide.9fed3e86.jpg": "/static/media/empanadas-slide.9fed3e86.jpg",
     "static/media/envelope-regular.b63409be.svg": "/static/media/envelope-regular.b63409be.svg",
     "static/media/facebook-f-brands.bb29960c.svg": "/static/media/facebook-f-brands.bb29960c.svg",
@@ -50,6 +51,6 @@
     "static/js/runtime-main.1a77d0ad.js",
     "static/js/2.6a249d44.chunk.js",
     "static/css/main.cf87824f.chunk.css",
-    "static/js/main.d2d2df23.chunk.js"
+    "static/js/main.1eaa58da.chunk.js"
   ]
 }

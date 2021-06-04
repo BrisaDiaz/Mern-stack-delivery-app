@@ -4,6 +4,8 @@ import AppContext from '../../context/app-context'
 import { useState, useContext} from 'react'
 import {useHistory,useLocation} from 'react-router-dom';
 import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
+import defaultImage from '../../img/default-image.png';
+
 
 const Item = styled.figure `
 display:flex;
@@ -90,7 +92,7 @@ justify-content:center;
 margin-bottom:10px;
 border-radius:5px;
 box-shadow: 0 1px 3px #ccc;
-    background-image: ${props => props.isLoaded ? 'none' :  "url( '../../default-image.png')" };
+    background-image: ${props => props.isLoaded ? 'none' : defaultImage};
     background-repeat: no-repeat;
     background-size: auto 100%;
     backface-visibility: hidden;
