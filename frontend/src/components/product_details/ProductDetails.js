@@ -109,7 +109,9 @@ let goBackPath = search.get("from");
 
 
  useEffect(()=>{
+
     setIsLoading(true)
+      window.scrollTo(0, 0)
   const controller = new AbortController()
  const signal = controller.signal
 
@@ -138,7 +140,7 @@ let goBackPath = search.get("from");
 }
   }
   fechProducts()
-   window.scrollTo(0, 0)
+ 
   return () =>{
      controller.abort()
    }   

@@ -14,7 +14,7 @@ text-transform: capitalize;
 
 @media screen and (max-width: 440px){
   & > h3 {
-    font-size: 10px;
+    font-size: 20px;
 }
 & > h3 span{
   display:block;
@@ -129,7 +129,6 @@ function UserOrderStateChart ({states}){
 export default function OrderDetails(){
  let { orderID } = useParams()
 const {currentUser} = useContext(AppContext)
-console.log(parseInt(orderID))
 let userOrders = currentUser?.orders
  let thisOrder =  userOrders.find( order => order.orderID  === parseInt(orderID) ) 
 

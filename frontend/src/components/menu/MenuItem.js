@@ -1,7 +1,7 @@
 import styled  from 'styled-components'
 import useAddToCartButton from '../../hooks/useAddToCartButton'
 import AppContext from '../../context/app-context'
-import {  useContext} from 'react'
+import { useState, useContext} from 'react'
 import {useHistory,useLocation} from 'react-router-dom';
 import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
 
@@ -90,6 +90,11 @@ justify-content:center;
 margin-bottom:10px;
 border-radius:5px;
 box-shadow: 0 1px 3px #ccc;
+    background-image: ${props => props.isLoaded ? 'none' :  "url( '../../default-image.png')" };
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    backface-visibility: hidden;
+    background-position: center;
 `;
 const Img = styled.img`
 transition:all 0.5s ease;
@@ -97,6 +102,7 @@ height:100%;
 &:hover{
   transform:scale(0.8);
 }
+
 `;
 export const CartIcon = styled.img`
 width:20px;
@@ -108,6 +114,7 @@ export default function MenuItem(props){
   let history = useHistory()
  let location = useLocation()
   const item = props.item;
+  const [isLoaded,setIsLoaded] = useState(false)
   const {cartProducts,addToCart,addToTotalCost}  = useContext(AppContext);
 const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(item,cartProducts,addToCart,addToTotalCost)
 
@@ -127,9 +134,9 @@ const handleRedirect = (id) =>{
   return(
   <Item key={item._id}>
 
-<ImgContainer> 
+<ImgContainer isLoaded={isLoaded}> 
 
-<Img src={item?.img} alt={item.name}></Img>
+<Img src={item?.img} onLoad={()=> setIsLoaded(true)} alt={item.name}></Img>
 
 
 

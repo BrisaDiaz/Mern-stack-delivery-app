@@ -123,7 +123,7 @@ fs.unlink(oldImgPath, (err) => {
 
 }else{
   img = productFound.img
-  
+
 }
 
 
@@ -152,7 +152,6 @@ await Category.findByIdAndUpdate( req.categoryId,{$inc:{ quantity: 1 }},{new : t
             }, { new: true });
             
             updatedProduct = await product.save();
-
     res.status(200).json({success: true ,data: updatedProduct});
 
   }catch(error){
