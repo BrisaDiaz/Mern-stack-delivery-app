@@ -52,11 +52,13 @@ align-items:center;
 & > input[type="submit"] {
     box-shadow: none;
 }
-
 & >${LoaderSpinner}{
   margin-bottom: 10px;
 }
-
+& > input:focus, & > textarea:focus{
+  outline: 2px solid ${props => props.theme.darckYellow};
+    outline-style: auto;
+}
 @media screen and  (max-width:500px){
 width: 90%;
 & > input {

@@ -99,7 +99,7 @@ box-shadow:${props => props.theme.ligthBoxShadow};
 `;
 
 const FiltersBoard = styled.div`
-
+    flex-wrap: wrap;
     padding: 20px 15px 10px;
     display: flex;
     align-items: center;

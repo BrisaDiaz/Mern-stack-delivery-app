@@ -45,6 +45,7 @@ transform: scale(1.5);
     margin: 0 10px;
     cursor: pointer;
 }
+
 & > small {
   margin-left: 5%;
 }
@@ -70,6 +71,11 @@ margin: 0 auto;
 & > input {
   background :#f0f0f0;
 
+}
+
+& > input:focus, & > textarea:focus{
+  outline: 2px solid #ccc;
+    outline-style: auto;
 }
 `
  export const TextInput= styled.input.attrs(props => ({

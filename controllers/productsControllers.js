@@ -119,7 +119,7 @@ fs.unlink(oldImgPath, (err) => {
  })
  }
 
-  img = ` ${process.env.HOST || 'http://localhost:7000' }/media/${req.file.filename}`
+  img =`${process.env.HOST||'http://localhost:7000'}/media/${req.file.filename}`
 
 }else{
   img = productFound.img

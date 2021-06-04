@@ -92,7 +92,7 @@ justify-content:center;
 margin-bottom:10px;
 border-radius:5px;
 box-shadow: 0 1px 3px #ccc;
-    background-image: ${props => props.isLoaded ? 'none' : defaultImage};
+    background-image: ${props => props.isLoaded ? 'none' : `url(${defaultImage})`};
     background-repeat: no-repeat;
     background-size: auto 100%;
     backface-visibility: hidden;

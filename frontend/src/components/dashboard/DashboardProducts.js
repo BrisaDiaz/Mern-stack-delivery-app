@@ -28,7 +28,8 @@ const FiltersBoard = styled.div`
     display: flex;
     width: fit-content;
     align-items: center;
-    justify-content: flex-start;
+ justify-content: flex-start;
+flex-wrap: wrap;
 `;
 const EditButton = styled(CartButton)`
     height: 50px;

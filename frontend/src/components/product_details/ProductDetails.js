@@ -6,7 +6,7 @@ import {CartButton,CartIcon} from '../menu/MenuItem'
 import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
 import useAddToCartButton from '../../hooks/useAddToCartButton'
 import {StyledLink } from '../Header'
-
+import defaultImage from '../../img/default-image.png';
 
 export const GoBackLink = styled(StyledLink)`
 
@@ -54,6 +54,17 @@ max-width: 350px;
     height: 100%;
 
 `;
+const ImageWrapper =styled.div`
+    min-height: 300px;
+  background-image: ${props => props.isLoaded ? 'none' : `url(${defaultImage})`};
+      background-repeat: no-repeat;
+    background-size: 100% auto;
+    backface-visibility: hidden;
+    background-position: center;
+   @media screen and (min-width:400px){
+background-size: auto 100%;
+    }
+`;
 const Name =styled.h2`
     margin: 10px 0 ;
 letter-spasing:0;
@@ -75,6 +86,7 @@ background:#fcaf01;
 margin:5px auto;
 `
 ;
+
 const ThisCartButton =styled(CartButton)`
 transform:scale(0.8);
 margin-top:-45px;
@@ -104,6 +116,8 @@ let goBackPath = search.get("from");
 
 
     const {cartProducts,addToCart,addToTotalCost,setIsLoading,isLoading}  = useContext(AppContext);
+
+      const [isLoaded,setIsLoaded] = useState(false)
  const [thisProductInfo,setThisProductInf] = useState({})
  const {productId}=  useParams()
 
@@ -149,7 +163,7 @@ let goBackPath = search.get("from");
 
  
 let isInShoppingCart = cartProducts.find(product => product.info._id === thisProductInfo?._id) ? true : false
-console.log(isInShoppingCart)
+
 
  const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProductInfo,cartProducts,addToCart,addToTotalCost)
 
@@ -160,8 +174,9 @@ console.log(isInShoppingCart)
 <ProductDetails>
     
              <GoBackLink to={goBackPath} > Regresar</GoBackLink>
-
-  <PrductImg src={thisProductInfo?.img}  alt={thisProductInfo?.name}/>
+<ImageWrapper isLoaded={isLoaded}>
+  <PrductImg src={thisProductInfo?.img}  alt={thisProductInfo?.name} onLoad={()=> setIsLoaded(true)} />
+  </ImageWrapper>
     <Line/>
   <Name>{thisProductInfo?.name}</Name>
   {(!isInShoppingCart) ? 

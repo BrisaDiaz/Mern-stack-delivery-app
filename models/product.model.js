@@ -10,7 +10,7 @@ const productSchema= new Schema ( {
  category:{ type: String,required:true ,lowercase:true, trim:true},
  size:{type: String,required:true},
  description:{type: String,required:true,lowercase:true, trim:true},
-img:{type: String},
+img:{type: String,trim:true},
 active:{type: Boolean,required:true ,default: true}
  
 },
@@ -22,7 +22,7 @@ active:{type: Boolean,required:true ,default: true}
 
 productSchema.methods.setImgUrl = function setImgUrl(filename){
 
-  this.img =` ${process.env.HOST || 'http://localhost:7000' }/media/${filename}`
+  this.img =`${process.env.HOST||'http://localhost:7000'}/media/${filename}`
 
 }
 
