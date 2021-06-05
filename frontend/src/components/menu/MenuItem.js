@@ -12,7 +12,7 @@ display:flex;
 box-sizing:border-box;
 border-radius:5px;
 position:relative;
-max-width: 250px;
+
 min-width: 250px;
 height:350px;
 flex-flow:column;

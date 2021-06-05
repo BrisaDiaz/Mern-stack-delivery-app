@@ -59,15 +59,14 @@ const CategoryWrapper = styled.article`
     box-shadow: inset 0 0 20px 0 #1111118c;
 `;
 export const ProductsSection = styled.div`
-display:flex;
-flex-flow:row wrap;
-padding:0 ;
- justify-content:center;
- justify-content:center;
-width: 95%;
-    gap: 15px;
-margin:0 auto;
-
+    width: 100%;
+    gap: 30px;
+    display: grid;
+    padding: 0 15px 30px;
+    grid-template-columns: repeat( auto-fit,minmax(250px,300px) );
+    max-width: 1000px;
+    margin: 0 auto;
+justify-content: center;
 `;
 export const NotFaundMessage = styled.h4`
 margin-top: 20px;
