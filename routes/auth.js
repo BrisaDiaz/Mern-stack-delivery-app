@@ -6,6 +6,8 @@ const {verifyAccountConfirmartion} =  require('../middlewares/authJwt.js');
 
 router.post('/singup',[checkDuplicatedEmail,checkIsValidUser], signUp);
 router.get('/verification/:token',validateEmailToken);
+router.post('/forgotPasword');
+router.get('/resetPasword/:token');
 router.post('/confirmation',sendConfirmationEmail);
 router.post('/login',verifyAccountConfirmartion, login);
 
