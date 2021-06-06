@@ -1,12 +1,18 @@
 const Product = require('../models/product.model');
 const {Category} = require('../models/category.model')
 const fs = require("fs")
+const path = require('path');
 
+const cloudinary = require('cloudinary')
+//cloudinary config
+cloudinary.config({
+  cloud_name:process.env.CLOUDINARY_NAME,
+  api_key:process.env.CLOUDINARY_KEY,
+  api_secret:process.env.CLOUDINARY_SECRET
+})
 
 const getAllProducts = async (req,res) => {
   try{
-    console.log(req.query)
-
     let query = {}
      let sort = '-createdAt'
     let page = 1
@@ -62,12 +68,16 @@ const getProductById= async (req,res) => {
   }
 }
 
+
+
 const postNewProduct = async (req,res) =>{
 try{
 
 const { name, category, size ,description ,active} = req.body
 const price = parseInt(req.body.price);
-const  img = req.file.filename 
+
+
+ const imageUploaded = await  cloudinary.v2.uploader.upload(req.file.path)
 
  const product =    new Product({
    name,
@@ -76,8 +86,17 @@ const  img = req.file.filename
    size,
    description,
   active,
+  img:imageUploaded.secured_url,
+  img_id:imageUploaded.public_id
  })
-product.setImgUrl(img)
+
+ fs.unlink(req.file.path, (err) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+ })
+ 
 
 
 await Category.findByIdAndUpdate( req.categoryId,{$inc:{ quantity: 1 }},{new : true}  )
@@ -104,28 +123,29 @@ const price = parseInt(req.body.price);
 
 
 let img;
+let img_id;
 
 if(req.file){
 
-  let oldImgPath ="./storage/media/"+productFound.img.split("/").reverse()[0]
 
- if(req.file){
-   
-fs.unlink(oldImgPath, (err) => {
+ const imageUploaded = await  cloudinary.v2.uploader.upload(req.file.path)
+
+fs.unlink(req.file.path, (err) => {
   if (err) {
     console.error(err)
     return
   }
  })
- }
 
-  img =`${process.env.HOST||'http://localhost:7000'}/media/${req.file.filename}`
+
+  img =imageUploaded.secure_url
+ img_id = imageUploaded.public_id
 
 }else{
-  img = productFound.img
 
+    img =productFound.secure_url
+ img_id = productFound.public_id
 }
-
 
 
 
@@ -148,7 +168,8 @@ await Category.findByIdAndUpdate( req.categoryId,{$inc:{ quantity: 1 }},{new : t
                 category: category || productFound.category,
                 price: price || productFound.price,
                size: size || productFound.size,
-                img: img ,
+                img,
+                img_id,
                 active: active || productFound.active
             }, { new: true });
             
@@ -168,22 +189,11 @@ const deleteProductById= async (req,res) => {
 
   if (!product) return res.status(404).json({success:false, message:'product not faund'});
 
-let oldImgPath ="./storage/media/"+product.img.split("/").reverse()[0]
-
-fs.unlink(oldImgPath, (err) => {
-  if (err) {
-    console.error(err)
-    return
-  }
- })
- 
-const productFound = await Product.findById(req.params.id);
-
 await Category.findOneAndUpdate( {name:productFound.category},{$inc:{ quantity: -1 }},{new : true}  )
 
 await Product.findByIdAndRemove(req.params.id);
 
-    
+ await  cloudinary.v2.uploader.destroy(product.img_id)
 
 
     res.status(204).json({success:true , message:"Product has been deleted"});

@@ -19,12 +19,16 @@ JWT_SECRET_KEY
 HOST  
 JWT_EMAIL_CONFIRMATION_KEY
 
-### oAuth2 keys
-
+### oAuth2 
 OAUTH_USER  
 OAUTH_CLIENT_ID  
 OAUTH_CLIENT_SECRET  
 OAUTH_REFRESH_TOKEN
+
+### cloudinary
+CLOUDINARY_NAME  
+CLOUDINARY_KEY  
+CLOUDINARY_SECRET  
 
 ## Backend
 
@@ -36,6 +40,7 @@ OAUTH_REFRESH_TOKEN
 - oAuth2
 - Nodemailer
 - Multer
+- Cloudinary
 
 ### Features:
 
@@ -47,8 +52,8 @@ OAUTH_REFRESH_TOKEN
 
 - accesss of routes base athorization and permition
 
-- storage of files on the server using multer library and file deletion system
-
+-  media storage using multer library and cloudinary service
+ 
 - **request supported** : GET, PUT, POST, DELETE
 
 - **rutes:** USERS , PRODUCTS, CATEGORIES, ORDERS,NEWSLETTER, CONTACT, AUTH (Login/Sing Up), ME (client Acount)

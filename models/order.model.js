@@ -24,7 +24,6 @@ description: [
 product : {
 name:{type:String ,require:true ,trim:true, lowercase:true},
 price:{type: Number, default:0},
-
   },
   quantity:{ type: Number, default: 1},
   total:{ type: Number, default: 0},
@@ -39,8 +38,10 @@ name:{type:String, default:''},
 confirmed:{type: Boolean , default:false},
 date: {type : Date}
  },
-]
+],
+finished:{type:Boolean, default:false}
 },
+
 {
   timestamps:true,
   versionKey: false,

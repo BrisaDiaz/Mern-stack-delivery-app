@@ -1,13 +1,16 @@
 import styled  from 'styled-components'
 import {useHistory} from 'react-router-dom'
-import {SectionTitle} from '../menu/Menu'
 import DashboardNav from '../DashboardNav'
 import AppContext from '../../context/app-context'
-import {   useContext } from 'react'
-import getAllOrdersAPI from '../../API/getAllOrdersAPI'
+import {   useContext,useState, useEffect } from 'react'
 import refreshIcone from '../../img/refresh.svg'
-
+import SearchBar from '../MenuSearchBar'
 import {RefreshButton,RefreshIcone} from '../account/MyOrdersPage'
+import {LoaderSpinner} from './../LoaderSpinner'
+import {ButtonsWrapper,NotFaundMessage,SectionTitle} from '../menu/Menu'
+import {FiltersBoard} from './DashboardProducts'
+import FilterOrderStateOptions from './../FilterOrderStateOptions'
+import SortOrdersOptions from './../SortOrdersOptions'
 
 export const Page = styled.main`
     padding: 60px 15px;
@@ -31,7 +34,7 @@ export const OrdersTable = styled.table`
 
 width:90%;
 max-width:900px;
-margin: 0 auto;
+margin: 20px auto 40px;
     border-spacing: 10px;
     border-collapse: collapse;
     border: 2px solid #171717;
@@ -105,24 +108,116 @@ content:"Total";
 `
 export default function DashboardOrders(){
   const history = useHistory()
+const {token,setIsLoading} = useContext(AppContext)
 
 const seeDetails = (orderID) =>{
+      setIsLoading(true)
  history.push(`/dashboard/orders/${orderID}` )
 }
 
-const {orders,setAllOrders,token,setIsLoading} = useContext(AppContext)
+ let query = new URLSearchParams();
+    let sizeLimit = 5
 
+
+
+  const [orderID, setOrderID] = useState("")
+  const[isLoading,setIsLoadingPage] = useState(false)
+    const [page, setPage] = useState(1)
+    const [maxPage, setMaxPage] = useState(1)
+    const [orders, setOrders] = useState(null)
+    const [state,setState] =useState('all')
+  const [sorting, setSorting] = useState("-createdAt")
+
+   query.append('page',page)
+   query.append('limit',sizeLimit)
+   query.append('sort',sorting)
+
+  
+
+
+useEffect(() => {
+  const controller = new AbortController()
+ const signal = controller.signal
+const productsAPI = async () =>{
+    setIsLoadingPage(true)
+  try{
+   if(orderID !==""){ 
+      query.append('orderID',orderID)
+    }
+
+    if(state !=="all"){
+query.append('state',state)
+    }
+
+       const headers = new Headers();
+      headers.append('Accept', 'application/json');
+      headers.append('Authorization', `Bearer ${token}`);
+
+
+    const setting = {
+          method: 'GET',
+          headers: headers,
+signal,
+        }
+
+     let res = await fetch(`/api/orders?${query}`,setting)
+     let json = await res.json()
+
+    setOrders(json.data)
+
+    let total = parseInt(json.total)
+
+     setMaxPage(Math.ceil(total/sizeLimit))
+
+
+
+     setIsLoadingPage(false)
+  }catch(err){
+    if(err.name === 'AbortError'){
+   console.log('Fetch Canseled: caught abort')
+ }else{
+
+     console.log(err)
+
+  }
+}
+  }
+
+  productsAPI()
+   window.scrollTo(0, 0)
+     return () =>{
+     controller.abort()
+   }   
+ }, [orderID,state,page,sorting])
+
+     
+const resetQuery = () =>{
+setPage(1)
+setState('all')
+}
+
+  const handleRefresh = () =>{
+  return history.push(`/dashboard/orders`)
+}
 
   return(
 <Page>
      <DashboardNav/>
      <SectionTitle>Pedidos</SectionTitle>
-     <RefreshButton onClick={(e) =>getAllOrdersAPI({setAllOrders,token,setIsLoading}) }>
+     <RefreshButton onClick={(e) =>handleRefresh()}>
   <RefreshIcone src={refreshIcone} title='Refrescar Página'/>
   </RefreshButton>
+<SearchBar placeholder='Número de orden...' setSearch={setOrderID} resetQuery={resetQuery}/>
+<FiltersBoard>
+          <FilterOrderStateOptions setPage={setPage} setStatePreferece={setState}/>
+          <SortOrdersOptions setSortPreferece={setSorting} sortPreference={sorting} />
+        </FiltersBoard>
 
+  {   ( (orders)   &&  orders?.length === 0) ?
+  
+  <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
 
-
+  :
 <OrdersTable>
   <TableHead>
     <tr>
@@ -134,8 +229,8 @@ const {orders,setAllOrders,token,setIsLoading} = useContext(AppContext)
     </tr>
   </TableHead>
   <tbody>
-{orders?.reverse().map(order => 
-    <tr key={order?.orderID}   onClick={ (e) => seeDetails(order?.orderID)}>
+{orders?.map(order => 
+    <tr key={order?.orderID}   onClick={ (e) => seeDetails(order?._id)}>
     <td>{order?.orderID}</td>
         <td>
           <small>{new Date(order.states[0].date).toLocaleString().split(" ")[0]}</small>
@@ -153,8 +248,20 @@ const {orders,setAllOrders,token,setIsLoading} = useContext(AppContext)
       
   </tbody>
  
-</OrdersTable> 
+</OrdersTable> }
 
+{isLoading ? <LoaderSpinner small/> : 
+<ButtonsWrapper>
+{
+(page > 1) ?  <button onClick={(e) => setPage(page -1)} >
+Prev</button> : null
+}
+{
+(page < maxPage) ?  <button onClick={(e) => setPage(page + 1)} >
+Next</button> : null
+}
+</ButtonsWrapper>
+}
 </Page>
   )
 }

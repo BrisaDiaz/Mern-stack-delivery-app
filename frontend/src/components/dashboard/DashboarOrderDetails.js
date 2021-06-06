@@ -1,89 +1,88 @@
-import styled  from 'styled-components'
+
+import {Fragment} from 'react'
 import {useParams} from 'react-router-dom'
-import updateOrderStateAPI from '../../API/updateOrderStateAPI'
+import AdminOrderStateChart from './AdminOrderStateChart'
 import AppContext from '../../context/app-context'
-import {   useContext } from 'react'
+import {   useContext,useEffect,useState} from 'react'
 import {GoBackLink} from '../product_details/ProductDetails'
-import {Page,CenterTitle,DetailTable,Process,ProcessInfo,ClientInfo} from '../account/OrderDetails'
-
-const ConfirmationButton = styled.button`
-    cursor: pointer;
-    padding: 4px 5px 5px;
-    margin-top: 5px;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    background: #fcba1c;
-    color: white;
-    font-family: 'Oswald';
-    transition: all 0.3s ease;
-    opacity: ${(props) =>(props.disabled ? "0.5" : "1")};
-    &:hover{
-      background:#fcaf01;
-    }
-}
-`
-
-function AdminOrderStateChart ({states,orderId}){
+import {Page,CenterTitle,DetailTable,ClientInfo} from '../account/OrderDetails'
 
 
-
-
- const {setAllOrders,token,setIsLoading} = useContext(AppContext)
-
-  let nextStep = states?.find(state => state?.confirmed === false)
-
-const handleConfirmation = (e,stateName) =>{
-
-if(!e.target.disabled) return updateOrderStateAPI({token,orderId,stateName,setAllOrders,setIsLoading})
-
-return
-}
-
-  return(
-
-   <Process>
-{states?.map( (state,index ) =>
-
-    (state?.confirmed) ?
-  
-     <ProcessInfo  key ={index}>
-           <h4>{state.name}</h4>
-           <small>{new Date(state?.date).toLocaleString()?.split(" ")[0]}</small>
-            <small>{new Date(state?.date).toLocaleString()?.split(" ")[1]}</small>
-         </ProcessInfo>
-  :
-       <ProcessInfo  key ={index}>
-           <h4>{state?.name}</h4>
-           <ConfirmationButton disabled={state !== nextStep && true} onClick={(e) =>{
-             handleConfirmation(e,state?.name)
-           }} >Confirmar</ConfirmationButton>
-         </ProcessInfo>
-  
-  
-  
-  
-  )}
-
-   </Process>    
-  );
-}
 
 export default function OrderDetails(){
 let {orderID}=  useParams()
-const {orders} = useContext(AppContext)
- let thisOrder = orders.find( order => order.orderID === parseInt(orderID) ) 
+
+const {setIsLoading,token,isLoading} = useContext(AppContext)
+
+ const [thisOrder,setThisOrder] = useState({})
+const [isRefreshing,setIsRefreshing] = useState(false)
+
+
+ useEffect(()=>{
+
+    window.scrollTo(0, 0)
+  const controller = new AbortController()
+ const signal = controller.signal
+
+  const fechOrder= async () =>{
+  try{
+
+     const headers = new Headers();
+      headers.append('Accept', 'application/json');
+      headers.append('Authorization', `Bearer ${token}`);
+
+
+    const setting = {
+          method: 'GET',
+          headers: headers,
+signal,
+        }
+
+     let res = await fetch(`/api/orders/${orderID}`,setting)
+     let json = await res.json()
+
+    setThisOrder(json.data)
+
+     setIsLoading(false)
+
+  }catch(err){
+    if(err.name === 'AbortError'){
+   console.log('Fetch Canseled: caught abort')
+ }else{
+
+     console.log(err)
+    for(let i = 0; i < 6 ;i++){
+    fechOrder()
+
+        }
+ 
+  }
+}
+  }
+
+  fechOrder()
+ 
+  return () =>{
+     controller.abort()
+   }   
+   
+ },[orderID,isRefreshing])
 
   return(
+    
 <Page>
-
+{(isLoading) ? null 
+:
+ <Fragment>
     <GoBackLink to="/dashboard/orders" >Regresar</GoBackLink>
 
-  <CenterTitle>Nº ID:<span>{orderID}</span></CenterTitle>
+  <CenterTitle>Nº ID:<span>{thisOrder?.orderID}</span></CenterTitle>
 
 <AdminOrderStateChart  
 states={thisOrder?.states}
 orderId={thisOrder?._id}
+makeRefresh={setIsRefreshing}
+refreshState={isRefreshing}
 />
 
 
@@ -91,9 +90,9 @@ orderId={thisOrder?._id}
    <CenterTitle>Detalles de envio</CenterTitle>
 
     <ClientInfo>
-      <p><b>Destinatario:</b>{thisOrder?.client[0].name}</p>
-    <p><b>Dirrección:</b>{thisOrder?.client[0].address}</p>
-       <p><b>Teléfono:</b>{thisOrder?.client[0].number}</p>
+      <p><b>Destinatario:</b>{thisOrder?.client[0]?.name}</p>
+    <p><b>Dirrección:</b>{thisOrder?.client[0]?.address}</p>
+       <p><b>Teléfono:</b>{thisOrder?.client[0]?.number}</p>
       </ClientInfo>
       <br></br>
           <hr></hr>
@@ -134,7 +133,10 @@ orderId={thisOrder?._id}
        </tr>
    </tfoot>
  </DetailTable>
+ </Fragment>
+}
 </Page>
 
+     
   );
 }

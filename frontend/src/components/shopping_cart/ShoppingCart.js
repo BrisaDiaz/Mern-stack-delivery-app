@@ -15,7 +15,6 @@ z-index:1000;
   max-height:100vh;
   max-width:100vh;
 right: ${(props) =>(props.isCartOpen === true  ? "0" : "-100vw")};
-
 transition: all 0.5s ;
   margin: 0 auto;
   background:#fff;
@@ -31,7 +30,8 @@ transition: all 0.5s ;
   text-shadow: ${props => props.theme.lightTextShadow};
   padding-top: 10px ;
     margin-bottom: 10px ;
-color: #fcba1c;
+color: ${props => props.theme.darckYellow};
+font-size: 40px;
   `;
   const CartProductsList = styled.ul `
    list-style:none;

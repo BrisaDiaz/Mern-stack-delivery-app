@@ -3,7 +3,7 @@
 #### post one user singup
 
 
-GET  http://localhost:7000/api/products?title=nuggets&active=true
-content-type: application/json
+GET  http://localhost:7000/api/orders/60b6c6b5bf7e71211cc1cbc8
+Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJpZCI6IjYwYjY4MWQ2OWYzN2ZiMWY5MDZjMDcyZCIsImlhdCI6MTYyMjkzOTA0MiwiZXhwIjoxNjIzMDI1NDQyfQLbLeI6ti-3XPtHHwITOMXK89X023iZ_0d9C4S_DQJGc"
 
 

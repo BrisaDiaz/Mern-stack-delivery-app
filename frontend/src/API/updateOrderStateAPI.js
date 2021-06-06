@@ -1,8 +1,8 @@
 
-import getAllOrdersAPI from './getAllOrdersAPI'
 
 
-export default async function updateOrderState({token,orderId,stateName,setAllOrders,setIsLoading}){
+
+export default async function updateOrderState({token,orderId,stateName,setIsLoading,history}){
 
 try{
 setIsLoading(true)
@@ -26,10 +26,12 @@ headers.append('Content-Type', 'application/json');
        let res =  await fetch(`/api/orders/${orderId}`, setting);
    
        if(res.status === 200){
-          await  getAllOrdersAPI({setAllOrders,token,setIsLoading})
-       }
 
-              
+       setIsLoading(false)
+
+
+       return  
+       }
 
 
  

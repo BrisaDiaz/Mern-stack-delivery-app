@@ -5,10 +5,43 @@ const {Order,STATES}  = require('../models/order.model');
 
 
 const getAllOrders = async (req,res) =>{
-  try {
-   const orders = await Order.find({}) .populate('client').sort('-createdAt').exec()
+
+let query = {}
+     let sort = '-createdAt'
+    let page = 1
+    let limit = 5
+
+
+    if(req.query.orderID){
+      query.orderID = req.query.orderID
+    }
+    if(req.query.state){
+
+      if(req.query.state==='finish'){
+      query.finished= true
+      }
+      if(req.query.state==='unfinish'){
+ query.finished= false
+      }
+
+    }
+    if(req.query.sort){
+        sort = req.query.sort
+      }
+    if(req.query.page){
+      page = parseInt(req.query.page)
+    }
+     if(req.query.limit){
+      limit = parseInt(req.query.limit)
+    }
    
-   res.status(200).json({successful:true, data: orders })
+     let skip = (page - 1 ) * limit
+
+  try {
+          const orders = await Order.find(query).sort(sort).limit(limit).skip(skip).populate('client').exec()
+     const totalResults = await Order.find(query)
+
+   res.status(200).json({successful:true, data:orders ,total:totalResults.length})
 
   }catch(err){
     console.log(err)
@@ -20,9 +53,9 @@ const getAllOrders = async (req,res) =>{
 
 const getOrderById =  async (req,res) =>{
 try{
-  const orderFound =  await Order.findById(req.orderId).populate('client').exec()
-
-    res.status(200).json({successfull:true, data: orderFound})
+  const orderFound =  await Order.findById(req.params.orderId).populate('client').exec()
+console.log(orderFound)
+    res.status(200).json({successfull:true, data:orderFound})
 
 
 }catch(err){
@@ -32,6 +65,8 @@ try{
 
      
 }
+
+
 const getAllUserOrders =  async (req,res) =>{
 try{
   const user = await User.findById(req.paramas.userId)
@@ -48,6 +83,7 @@ try{
 
      
 }
+
  const createOrder = async (req,res) =>{
    try{
 
@@ -119,7 +155,7 @@ cosole.log(id)
 
  }
 
- const actualizeOrderState = async(req,res)  =>{
+ const actualizeOrderState = async (req,res)  =>{
   try{
   
 const order = await Order.findById(req.params.orderId)
@@ -134,19 +170,12 @@ const order = await Order.findById(req.params.orderId)
    }
   })
 
- await Order.findByIdAndUpdate(req.orderId,{$set:{
-   states: updatedStates,
- }})
 
 
 
- 
 
 
-
- await order.save()
-
-  if(req.confirmedState ==='liquidado'){
+ if(req.confirmedState ==='liquidado'){
 
   await  User.findByIdAndUpdate(order.client[0],{
   $set: {
@@ -154,10 +183,31 @@ const order = await Order.findById(req.params.orderId)
   }
 
 },{new:true})
+ await Order.findByIdAndUpdate(req.orderId,{$set:{
+     states: updatedStates,
+   finished:true,
 
- return
+ }},{new:true})
+
+order.description.forEach(async item =>{
+try{
+  await Product.findOneAndUpdate({name: item.product.name},{$inc: {sold: item.quantity},$set:{finished:true},},{new:true})
+
+}catch(err){
+  console.log(err)
+      res.status(500).json({success:false , message:"Something went wrong, the product sold quantity could not be updated"})
+}
+
+})
+
+
+  }else{
+     await Order.findByIdAndUpdate(req.orderId,{$set:{
+   states: updatedStates,
+ }},{new:true})
   }
  
+
   console.log(order.client[0])
   res.status(200).json({success:false , message:'order satate updated successfully'}) 
 

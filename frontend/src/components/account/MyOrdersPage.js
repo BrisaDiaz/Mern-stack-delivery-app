@@ -1,9 +1,9 @@
 import styled  from 'styled-components'
 import {Link,useHistory} from 'react-router-dom'
 import {ButtonPrimary} from '../Buttons'
-import {SectionTitle} from '../menu/Menu'
+import {SectionTitle,ButtonsWrapper} from '../menu/Menu'
 import AppContext from '../../context/app-context'
-import {  useContext ,useEffect} from 'react'
+import {  useState,useContext ,useEffect} from 'react'
 import deleteOrderAPI from '../../API/deleteOrderAPI'
 import currentUserAPI from '../../API/currentUserAPI'
 import refreshIcone from '../../img/refresh.svg'
@@ -31,7 +31,7 @@ color: ${props => props.theme.darckYellow};
 export const OrdersTable = styled.table`
 width:90%;
 max-width:900px;
-margin: 0 auto;
+margin: 0 auto 30px;
     border-spacing: 10px;
     border-collapse: collapse;
     border: 2px solid ${props => props.theme.black};
@@ -136,8 +136,8 @@ align-items: center;
     height: 40px;
       box-shadow: ${props => props.theme.lihgtBoxShadow};
     background:${props => props.theme.black};
-    margin-left: auto;
-    margin-bottom: 30px;
+
+    margin: -20px 0 10px auto;
     width: max-content;
 display: flex;
     transform: scale(0.7);
@@ -155,13 +155,23 @@ cursor:pointer;
 
 
 export default function MyOrders(){
-
-
-
   const history = useHistory()
   const {currentUser,token,setCurrentUser,setIsLoading} = useContext(AppContext)
+     
+    let limit = 5
+    const [page, setPage] = useState(1)
+    const [maxPage, setMaxPage] = useState(1)
+     const [orders,setOrders] = useState([])
 
-let userOrders = currentUser?.orders
+let userOrders =[...currentUser?.orders].sort((a, b)=>{
+    return    b.createdAt -a.createdAt
+});
+useEffect(() => {
+setMaxPage(Math.ceil(userOrders.length/limit))
+
+ setOrders(userOrders.splice( (page-1)*limit  , ((page-1)*limit)+limit))
+
+}, [page])
 
 
 const deleteOrder = (e,id) =>{
@@ -190,7 +200,7 @@ useEffect(()=>{
   <RefreshIcone   src={refreshIcone} title='Refrescar Página'/>
   </RefreshButton>
 
-  { (userOrders?.length > 0 )?
+  { (orders?.length > 0 )?
 <OrdersTable>
   <TableHead>
     <tr>
@@ -203,7 +213,7 @@ useEffect(()=>{
             </tr>
   </TableHead>
   <tbody>
-    {userOrders?.reverse().map(order => 
+    {orders?.map(order => 
 
     <tr key={order?._id} onClick={(e) => seeDetails(order?.orderID)}>
     <td>{order?.orderID}</td>
@@ -239,7 +249,16 @@ Cancelar Pedido
 
 }
 
-
+<ButtonsWrapper>
+{
+(page > 1) ?  <button onClick={(e) => setPage(page -1)} >
+Prev</button> : null
+}
+{
+(page < maxPage) ?  <button onClick={(e) => setPage(page + 1)} >
+Next</button> : null
+}
+</ButtonsWrapper>
 </Page>
   )
 }

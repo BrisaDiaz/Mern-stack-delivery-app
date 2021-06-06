@@ -9,12 +9,10 @@ import {StyledLink } from '../Header'
 import defaultImage from '../../img/default-image.png';
 
 export const GoBackLink = styled(StyledLink)`
-
-
-
+position:absolute;
+left:15px;
 margin: 0 ;
 font-size:15px;
-
 padding: 10px 0;
 &:before{
   content : "<-- ";
@@ -190,7 +188,7 @@ let isInShoppingCart = cartProducts.find(product => product.info._id === thisPro
      <Deltail><b>Categoría:</b>{thisProductInfo?.category}</Deltail>
    <Deltail><b>Porción:</b>{thisProductInfo?.size}</Deltail>
    <Deltail><b>Precio:</b>${thisProductInfo?.price}</Deltail>
-  <Description><b>Ingredientes:</b>{thisProductInfo?.description}</Description>
+  <Description><b>Descripción:</b>{thisProductInfo?.description}</Description>
     
   
 </ProductDetails>

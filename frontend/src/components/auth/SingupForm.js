@@ -49,15 +49,17 @@ align-items:center;
       border:none;
     box-shadow: ${props => props.theme.inputShadow};
 }
-& > input[type="submit"] {
-    box-shadow: none;
-}
+
 & >${LoaderSpinner}{
   margin-bottom: 10px;
 }
 & > input:focus, & > textarea:focus{
   outline: 2px solid ${props => props.theme.darckYellow};
     outline-style: auto;
+}
+& > input[type="submit"] {
+    box-shadow: none;
+      outline: none;
 }
 @media screen and  (max-width:500px){
 width: 90%;

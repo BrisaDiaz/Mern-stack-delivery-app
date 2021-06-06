@@ -4,7 +4,6 @@ import appReducer from  './app-reducer';
 import {
   SET_IS_LOADING,
   SET_ALL_USERS,
-  SET_ALL_ORDERS,
   SET_ALL_CATEGORIES,
   SET_CURRENT_USER,
   SET_TOKEN,
@@ -80,7 +79,6 @@ const initialState =  {
 products:[],
 users:[],
 categories:[],
-orders:[],
 currentUser: {},
 token:"",
 isLoading:true,
@@ -117,12 +115,7 @@ const setAllUsers = (data)=>{
     payload: data
   })
 }
-const setAllOrders = (data)=>{
-  dispatch({
-    type: SET_ALL_ORDERS,
-    payload: data
-  })
-}
+
  const setAllCategories = (data) =>{
   dispatch({
     type:SET_ALL_CATEGORIES,
@@ -257,7 +250,6 @@ isSuccessfullySend:state.isSuccessfullySend,
 setIsLoading,
 setToken,
 setAllUsers,
-setAllOrders,
 setCurrentUser,
 emptyCart,
 setAllCategories,

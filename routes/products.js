@@ -6,7 +6,10 @@ const path = require('path');
 const { getAllProducts,getProductById,postNewProduct,updateProductById,deleteProductById} =require(
   '../controllers/productsControllers')
   const {verifyToken,isAdmin,isAdminOrIsModerator } =require('../middlewares/authJwt')
+
 const  checkCategoryExist = require('../middlewares/verifyProduct');
+
+//multer config
 const storage = multer.diskStorage({
   destination: function(req,file,cb){
     cb(null,'./storage/media')
@@ -30,7 +33,6 @@ const upload = multer({
   limits: { fieldSize: 10 * 1024 * 1024 },
   fileFilter: filefilter
 });
-
 
 
 

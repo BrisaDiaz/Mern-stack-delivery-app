@@ -1,7 +1,6 @@
 import {
   SET_IS_LOADING,
   SET_ALL_USERS,
-  SET_ALL_ORDERS,
   SET_ALL_CATEGORIES,
   SET_CURRENT_USER,
   SET_TOKEN,
@@ -37,11 +36,6 @@ switch (action.type) {
           ...state,
           users: action.payload
         };
-  case SET_ALL_ORDERS:
-        return{ 
-          ...state,
-          orders: action.payload
-        };        
   case SET_ALL_CATEGORIES:
         return{ 
           ...state,

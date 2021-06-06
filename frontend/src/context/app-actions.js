@@ -1,7 +1,6 @@
 export const SET_IS_LOADING = 'SET_IS_LOADING';
 export const SET_TOKEN = 'SET_TOKEN';
 export const SET_ALL_USERS = 'SET_ALL_USERS';
-export const SET_ALL_ORDERS = 'SET_ALL_ORDERS';
 export const SET_ALL_CATEGORIES = 'SET_ALL_CATEGORIES';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const SET_PRODUCT_TO_EDIT = 'SET_PRODUCT_TO_EDIT';

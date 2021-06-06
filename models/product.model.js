@@ -9,10 +9,11 @@ const productSchema= new Schema ( {
  price:{type:Number,required:true,default:0},
  category:{ type: String,required:true ,lowercase:true, trim:true},
  size:{type: String,required:true},
- description:{type: String,required:true,lowercase:true, trim:true},
+description:{type: String,required:true,lowercase:true, trim:true},
 img:{type: String,trim:true},
-active:{type: Boolean,required:true ,default: true}
- 
+img_id:{type: String,trim:true},
+active:{type: Boolean,required:true ,default: true},
+sold:{type:Number,default:0},
 },
 {
   timestamps:true,
@@ -20,11 +21,6 @@ active:{type: Boolean,required:true ,default: true}
 }
 );
 
-productSchema.methods.setImgUrl = function setImgUrl(filename){
-
-  this.img =`${process.env.HOST||'http://localhost:7000'}/media/${filename}`
-
-}
 
 
 const Product = mongoose.model('Product',productSchema)

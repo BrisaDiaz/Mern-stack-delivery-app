@@ -2,7 +2,6 @@
 import styled  from 'styled-components'
 import {useHistory} from 'react-router-dom'
 import {LoaderSpinner} from './../LoaderSpinner'
-import {ButtonsWrapper} from '../menu/Menu'
 import AppContext from '../../context/app-context'
 import {   useContext,useEffect,useState,Fragment } from 'react'
 import SearchBar from '../MenuSearchBar'
@@ -10,7 +9,7 @@ import deleteProductAPI from '../../API/deleteProductAPI'
 import DashboardNav from '../DashboardNav'
 import FilterProductsStateOptions from '../FilterProductsStateOptions'
 import FilterCategoryOptions from '../FilterCategoryOptions'
-import {SectionTitle,ProductsSection,NotFaundMessage} from '../menu/Menu'
+import {SectionTitle,ProductsSection,NotFaundMessage,ButtonsWrapper} from '../menu/Menu'
 import Item, {CartButton,CartIcon} from '../menu/MenuItem'
 import editIcone from '../../img/pencil-alt-solid.svg'
 import DeleteIcone from '../../img/trash-alt-regular.svg'
@@ -23,13 +22,17 @@ min-height:100vh;
 width:100vw;
 padding:60px 15px;
 `
-const FiltersBoard = styled.div`
-      padding: 40px 0 0;
+export const FiltersBoard = styled.div`
+      padding: 30px 0 0;
     display: flex;
     width: fit-content;
     align-items: center;
  justify-content: flex-start;
 flex-wrap: wrap;
+& > select {
+      margin: 0 10px 10px auto;
+   
+}
 `;
 const EditButton = styled(CartButton)`
     height: 50px;
@@ -133,7 +136,7 @@ query.append('active',activeProducts)
      
 const resetQuery = () =>{
 setPage(1)
-setActiveProducts(null)
+setActiveProducts('null')
 }
 
 const history = useHistory()

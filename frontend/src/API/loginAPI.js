@@ -1,6 +1,6 @@
 import usersAPI from './usersAPI'
 import currentUserAPI from './currentUserAPI'
-import getAllOrdersAPI from './getAllOrdersAPI'
+
 async function loginAPI({
 info,
 setIsLoading,
@@ -11,7 +11,6 @@ setIsAdmin,
 history,
 setCurrentUser,
 setAllUsers,
-setAllOrders,
 setIsFormLoading,
 setIsModerator,
 
@@ -46,7 +45,7 @@ headers.append('Content-Type', 'application/json');
       if(res.status === 200) {
               setServerError("")
     
-        
+        setIsLoading(true)
        const {token,roles,user} = json
          setToken(token) ;
 
@@ -56,24 +55,25 @@ headers.append('Content-Type', 'application/json');
 
         setIsLogin()
         
-    
+
              
      if ( roles[0].name === 'admin') {
          setIsAdmin(true)
-         setIsLoading(true)
+
         
         await usersAPI({setAllUsers,token})
-   await getAllOrdersAPI({token,setAllOrders,setIsLoading})
+ 
+setIsLoading(false)
 
            return  history.push("/dashboard/orders")
       }
      if(roles[0].name === 'moderator'){
       setIsModerator(true)
-    await getAllOrdersAPI({token,setAllOrders,setIsLoading})
+      setIsLoading(false)
        return history.push("/dashboard/myProducts")
        
       }
-
+setIsLoading(false)
    return history.push("/menu")
 
      }
@@ -86,6 +86,7 @@ if(res.status === 302){
     let {redirect,id} = json
 
   localStorage.setItem('toConfirmUser', id)
+  
   console.log(redirect)
   setTimeout(() => {
 

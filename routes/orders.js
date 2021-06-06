@@ -7,12 +7,12 @@ const {createOrder, getAllOrders,getAllUserOrders,getOrderById,actualizeOrderSta
 
 
 router.get('/',[verifyToken,isAdminOrIsModerator],getAllOrders)
-router.get('/my',[verifyToken],getAllUserOrders)
+
 router.post('/',[verifyToken,checkProfileState],createOrder)
 router.get('/:orderId',[verifyToken],getOrderById)
 router.put('/:orderId',[verifyToken,isAdminOrIsModerator,checkOrderExist,checkAllowedUpdates],actualizeOrderState)
-
 router.delete('/:orderId',[verifyToken,checkAllowedDelete],deleteOrderById)
+router.get('/my',[verifyToken],getAllUserOrders)
 
 
 module.exports = router

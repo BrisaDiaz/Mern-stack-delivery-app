@@ -47,7 +47,7 @@ transform:scale(0.7);
 const SearchIcone = styled.img` 
 height: 100%;
 `;
-export default function SearchBar({setSearch,resetQuery}){
+export default function SearchBar({setSearch,resetQuery ,placeholder}){
 
 const resetFilter = (e) =>{
   if(e.target.value ===""){
@@ -63,7 +63,7 @@ setSearch(searchString)
 }
   return(
 <StyledSearchBar onSubmit={handelSubmit}>
-<SearchInput name="search" placeholder="Buscar..." type="search" onChange={resetFilter}/>
+<SearchInput name="search" placeholder={placeholder || 'Buscar...'} type="search" onChange={resetFilter}/>
 <SerchIconeWrapper ><SearchIcone src={loupe} alt="search"/></SerchIconeWrapper>
 </StyledSearchBar>
   );
