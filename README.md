@@ -14,10 +14,11 @@ password : moderator
 
 ## Environment variables
 
+HOST
 MONGODB_URI  
 JWT_SECRET_KEY  
-HOST  
 JWT_EMAIL_CONFIRMATION_KEY
+JWT_RESET_FORGOTEN_PASSWORD_KEY
 
 ### oAuth2
 
@@ -58,7 +59,7 @@ CLOUDINARY_SECRET
 
 - **request supported** : GET, PUT, POST, DELETE
 
-- **rutes:** USERS , PRODUCTS, CATEGORIES, ORDERS,NEWSLETTER, CONTACT, AUTH (Login/Sing Up),
+- **rutes:** USERS , PRODUCTS, CATEGORIES, ORDERS,NEWSLETTER, CONTACT, AUTH (Login/Sing Up/forgotPassword/resetPassword),
 
 - initial mongoose set up with : default categories , roles and admin and moderator users.
 
@@ -77,7 +78,7 @@ CLOUDINARY_SECRET
 - Interaction with the backend through API Rest .
 - Auto-played sliders with dot indicators and controls.
 - Navbar responsive and animated .
-- Singup/Login system.
+- Singup/Login/forgotPassword system.
 - Access to Public and Private routes base on roles.
 - Funtional contact section with form validation.
 - Loading modal and loading form indicators.

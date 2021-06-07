@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.cf87824f.chunk.css",
-    "main.js": "/static/js/main.19567642.chunk.js",
-    "main.js.map": "/static/js/main.19567642.chunk.js.map",
+    "main.js": "/static/js/main.c150b67c.chunk.js",
+    "main.js.map": "/static/js/main.c150b67c.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.1a77d0ad.js",
     "runtime-main.js.map": "/static/js/runtime-main.1a77d0ad.js.map",
     "static/js/2.6a249d44.chunk.js": "/static/js/2.6a249d44.chunk.js",
@@ -34,6 +34,7 @@
     "static/media/pencil-alt-solid.40dde303.svg": "/static/media/pencil-alt-solid.40dde303.svg",
     "static/media/pencil-edit-form.1d2432a8.svg": "/static/media/pencil-edit-form.1d2432a8.svg",
     "static/media/phone-alt-solid.fa3dafdc.svg": "/static/media/phone-alt-solid.fa3dafdc.svg",
+    "static/media/pizza-background.9e7cb026.jpg": "/static/media/pizza-background.9e7cb026.jpg",
     "static/media/pizza-slide.e9d29dd4.jpg": "/static/media/pizza-slide.e9d29dd4.jpg",
     "static/media/products.b4b63cee.svg": "/static/media/products.b4b63cee.svg",
     "static/media/refresh.f1c42ba5.svg": "/static/media/refresh.f1c42ba5.svg",
@@ -51,6 +52,6 @@
     "static/js/runtime-main.1a77d0ad.js",
     "static/js/2.6a249d44.chunk.js",
     "static/css/main.cf87824f.chunk.css",
-    "static/js/main.19567642.chunk.js"
+    "static/js/main.c150b67c.chunk.js"
   ]
 }
