@@ -17,6 +17,7 @@ import Header from './components/Header'
 import NotFound404Page from './components/NotFound404Page'
 import SuccessfullFormModal from './components/SuccessfullFormModal'
 import InitSession from './components/auth/Auth'
+import ResetPassword from'./components/auth/ResetPassword'
 import Confimation from './components/auth/Confirmation'
 import ProductsDetails from './components/product_details/ProductDetails'
 import Contact  from './components/contact/Contact'
@@ -72,6 +73,7 @@ function App() {
     
         <Route path = "/authentication" exact component={ InitSession }  />
      <PublicRoute path = "/authentication/confirmation" component={ Confimation }  />
+          <Route path = "/authentication/resetPassword/:token" component={ ResetPassword }  />
         <Route path = "/contact" component={ Contact } />
        
     <PublicRoute path = "/myAccount/myProfile" component ={MyProfile}/>

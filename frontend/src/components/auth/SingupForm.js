@@ -72,9 +72,9 @@ width: 90%;
 export const ErrorServerMessage = styled(ErrorMessage)`
 text-align:center;
 font-size:20px;
-margin: 5px 0;
+margin: 5px 0 15px;
 `
-const LoginLink = styled.a`
+export const FormLink = styled.a`
 margin-bottom: 20px;
 cursor:pointer;
 transition:all 0.5s esea;
@@ -150,16 +150,16 @@ export function UserEmailInput({register,errors}){
     </Fragment>
   );
 }
- export function UserPasswordInput({register,errors,placeholder,}){
+ export function UserPasswordInput({register,errors,placeholder,name = 'userPassword'}){
 
   return(
     <Fragment>
-       {errors.userPassword && <ErrorMessage  role="alert">{errors.userPassword.message}</ErrorMessage>}
+       {errors[name] && <ErrorMessage  role="alert">{errors[name].message}</ErrorMessage>}
 
 <TextInput
 placeholder={placeholder}
 type='password'
-name ='userPassword'  
+name ={name}
           ref={register({
                   required: '*El campo es requrido' ,
                      minLength: {
@@ -167,7 +167,7 @@ name ='userPassword'
             message: "*El largo mínimo es de 5 carácteres"
           } 
           })}
-           style={{ borderColor: errors.userPassword && "#bf0000" }}/>
+           style={{ borderColor: errors[name] && "#bf0000" }}/>
     </Fragment>
   );
 }
@@ -214,7 +214,7 @@ export default function SingupForm(){
          <ErrorServerMessage>{serverError}</ErrorServerMessage>
           }    
  
-           <LoginLink onClick={redirectToLogin}>¿Ya tienes una cuenta? <b>Login</b> </LoginLink>
+           <FormLink onClick={redirectToLogin}>¿Ya tienes una cuenta? <b>Login</b> </FormLink>
  <ButtonPrimary as="input" type="submit" value="Sing Up"/>
       </Form>
     </FormCard>

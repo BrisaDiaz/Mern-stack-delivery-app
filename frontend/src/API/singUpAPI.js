@@ -10,11 +10,6 @@ info
 try{
   setIsFormLoading(true)
 
-
-  
-
-
-
      const headers = new Headers();
         headers.append('Accept', 'application/json');
 headers.append('Content-Type', 'application/json');

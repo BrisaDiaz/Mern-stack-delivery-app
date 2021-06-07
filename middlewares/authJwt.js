@@ -118,4 +118,6 @@ try{
   }
 
 }
+
+
 module.exports = {verifyToken,isAdmin,isModerator,verifyAccountConfirmartion,isAdminOrIsModerator}

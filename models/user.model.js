@@ -53,9 +53,13 @@ orders:[
         ref: "Order",
       },
 ],
-client:{type:Boolean , default:false}
-},
+client:{type:Boolean , default:false},
+passwordToken:{ type:String},
+passwordTokenExpiration:{ type:Date}
 
+
+
+},
 {
  timestamps: true ,
       versionKey: false,

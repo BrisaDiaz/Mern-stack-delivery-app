@@ -6,7 +6,10 @@ const {Role} =require('../models/role.model');
  require('dotenv').config({path: '.env'})
 const jwt =require('jsonwebtoken');
 
+
 const sendConfirmationEmailFunction = require('../libs/sendConfirmationEmail') ;
+const sendResetPasswordEmailFunction = require('../libs/sendResetPasswordEmail')
+
 
  const signUp = async (req, res) => {
   try {
@@ -45,7 +48,7 @@ const sendConfirmationEmailFunction = require('../libs/sendConfirmationEmail') ;
 
 
 
-    return res.status(201).json({successful: true ,message:"User creacted successfully",redirect:'/authentication/confirmation' ,id: id })
+    return res.status(201).json({successful: true ,message:"User creacted successfully",redirect:'/#/authentication/confirmation' ,id: id })
 
   } catch (error) {
     console.log(error);
@@ -64,7 +67,7 @@ const sendConfirmationEmail = async(req,res) => {
 
 
 
-  const url = `${process.env.HOST || 'localhost:7000'}/api/auth/verification/${token}`
+  const url = `${process.env.HOST||'localhost:7000'}/api/auth/verification/${token}`
 
    await sendConfirmationEmailFunction(url,userFound.email)
 
@@ -95,9 +98,7 @@ const id  =  decoded.id
 
  const user = await TemporalUser.findById(id)
 
-
-
- if(!user) return res.status(404).json({message:"No user faund"} )
+ if(!user) return res.status(404).json({message:"User not faund"} )
 
 const newUser = new User({
       name: user.name,
@@ -112,7 +113,7 @@ const newUser = new User({
 
 
 
- res.redirect(`${process.env.HOST || 'localhost:3000'}/#/authentication`)
+ res.redirect(`${process.env.HOST||'localhost:3000'}/#/authentication`)
 
 
 
@@ -120,9 +121,6 @@ const newUser = new User({
 
 console.log(err)
   
-
-
-
 }
 
 }
@@ -158,4 +156,74 @@ console.log(err)
   }
 };
 
-module.exports = {signUp,login,validateEmailToken,sendConfirmationEmail}
+const sendResetPasswordEmail = async (req,res) =>{
+  try{
+    const userFound = await User.findOne({email: req.body.email})
+    if(!userFound)  return res.status(422).json({successful:false , message:"Dosen't exits user  account link with that email"})
+ 
+    const id = userFound._id
+
+   const token = jwt.sign({ 
+    id, 
+  }, process.env.JWT_RESET_FORGOTEN_PASSWORD_KEY);
+
+ userFound.passwordToken = token
+userFound.passwordTokenExpiretion= Date.now() + 10*60*60*1000 
+
+    await userFound.save();
+
+  const url = `${process.env.HOST||'localhost:3000'}/#/authentication/resetPassword/${token}`
+
+await sendResetPasswordEmailFunction(url,req.body.email)
+
+res.status(200).json({success:true, message:"Reset password email has been send successfully"})
+
+
+  }catch(err){
+    console.log(err)
+
+ res.status(500).json({successful:false , message:"Something went wrong, fail to to send reset password email"})
+  }
+}
+
+const resetPassword = async (req,res) =>{
+  try{
+    const {newPassword,confirmPassword} = req.body
+
+ const token = req.params.token
+
+  if(!token) return res.status(403).json({success:false ,message:"No token provided"})
+
+ const decoded =   jwt.verify(token, process.env.JWT_RESET_FORGOTEN_PASSWORD_KEY)
+
+if(!decoded) return res.status(404).json({message:"Invalid request, token not provided"} )
+
+const id  =  decoded.id
+
+ const userFound= await User.findById(id)
+
+ if(!userFound) return res.status(404).json({message:"User not faund"} )
+
+ if(Date.now() > userFound.passwordTokenExpiretion) return res.status(422).json({successful:false , message:"Time to reset password exceeded"})
+ 
+ 
+  if(newPassword !== confirmPassword ) res.status(400).json({successful:false , message:"Passwords dosen't match"})
+
+    if(newPassword.length < 5 ) res.status(400).json({successful:false , message:"Passwords min length is 5"})
+ 
+
+   const encodedPassword = await User.encryptPassword(newPassword)
+
+userFound.password=encodedPassword
+
+   await userFound.save()
+res.status(200).json({success: true , message:"Password updated successfully"})
+
+  }catch(err){
+    console.log(err)
+
+    res.status(500).json({successful:false , message:"Something went wrong, fail to update password"})
+  }
+}
+
+module.exports = {signUp,login,validateEmailToken,sendConfirmationEmail,sendResetPasswordEmail,resetPassword}

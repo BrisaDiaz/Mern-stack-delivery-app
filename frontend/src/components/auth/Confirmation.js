@@ -25,7 +25,6 @@ margin: 30px 0;
     border: 3px solid #fcba1c;
     box-shadow: 1px 1px 17px #1111112b;
     display: flex;
-
     flex-direction: column;
 & > h4 {
   text-align:center;
