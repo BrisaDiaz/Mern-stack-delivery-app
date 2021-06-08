@@ -135,9 +135,6 @@ let userOrders = currentUser?.orders
 
 
 
-
-
-
   return(
 <Page>
       <GoBackLink to="/myAccount/myOrders">Regresar</GoBackLink>

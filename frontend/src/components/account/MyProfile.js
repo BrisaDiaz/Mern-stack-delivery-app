@@ -22,11 +22,11 @@ height:max-content;
 flex-wrap:wrap;
 min-height: 250px;
     border-radius: 5px;
-         background:${props => props.theme.darckYellow};
+     background: ${props => props.theme.lighYellow};
   box-shadow :${props => props.theme.lightBoxShadow};
 `;
 const CardImg = styled.div`
-     background:${props => props.theme.darckYellow};
+     background: ${props => props.theme.lighYellow};
     min-height: 100%;
     border-radius: 5px;
     padding:10px 0;

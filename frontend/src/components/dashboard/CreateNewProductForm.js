@@ -5,12 +5,7 @@ import {Fragment ,useContext} from 'react'
 import {LoaderSpinner} from './../LoaderSpinner'
 import {ErrorMessage} from '../contact/ContactForm';
 import trayIcon from '../../img/tray.svg';
-
-import {
-  FormCard,
-Form,
-Logo
-} from '../auth/SingupForm'
+import {FormCard,Form,Logo} from '../auth/SingupForm'
 import {ButtonPrimary,Button} from '../Buttons'
 
 
@@ -35,7 +30,6 @@ margin-top: -10px;
   font-size: 45px;
 }
 `;
-
 export  const CheckboxWrapper = styled.div`
 display:flex;
 margin: 10px auto;
@@ -111,7 +105,6 @@ width:100%;
 export const LoadButton = styled(ButtonPrimary)`
 transform:scale(0.9);
 `
-
 export const ResetButton = styled(Button)
 `
   box-shadow: 0 0 4px rgba(0,0,0,0.5);
@@ -120,7 +113,6 @@ outline:none;
 border:none;
 `
  export const Description =styled.textarea`
-
 min-width:90%;
 max-width:90%;
   border:none;

@@ -1,10 +1,8 @@
 import styled  from 'styled-components'
-import {useState} from 'react'
-import {useForm} from 'react-hook-form'
 import {LoaderSpinner} from '../LoaderSpinner'
 import {ButtonPrimary} from '../Buttons'
 import {FormCard,Form,  UserEmailInput,ErrorServerMessage} from './SingupForm'
-import forgotPasswordAPI from '../../API/forgotPasswordAPI'
+import useForgotPasswordModal from '../../hooks/useForgotPasswordModal'
 
 const Modal = styled.section` 
 position:absolute;
@@ -48,28 +46,8 @@ const CloseModalButton = styled.button`
 `
 export default function ForgotPasswordModal({setIsModalOpened,isModalOpened}){
 
-const [isFormLoading,setIsFormLoading]= useState(false)
-const [serverError, setServerError] = useState("")
+  const  {isFormLoading,serverError,register, handleSubmit,onSubmit, errors} = useForgotPasswordModal({setIsModalOpened})
 
-  const { register, handleSubmit, formState: { errors } }= useForm({
-  mode: "onBlur",
-});
-
- async function onSubmit(data,e) {
-    
-const info ={
-email:e.target.userEmail.value,
-}
-
-await forgotPasswordAPI({
-setServerError,
-info,
-setIsFormLoading,
-setIsModalOpened
-})
-
-
-  }
 return(
   <Modal isModalOpened={isModalOpened}>
 
@@ -77,7 +55,7 @@ return(
       <CloseModalButton onClick={ () => setIsModalOpened(false)}>x</CloseModalButton>
   <Form onSubmit={handleSubmit(onSubmit)}>
     <h2>📬</h2>
-    <p>Igresa tu email y se te será enviado un link  válido por los siguientes 10 minutos para que puedas restaurar contraseña.</p>
+    <p>Igresa tu email y se te será enviado un link  válido por los siguientes 10 minutos para que puedas restaurar tu contraseña.</p>
 
     <UserEmailInput errors={errors} register={register}/>
 

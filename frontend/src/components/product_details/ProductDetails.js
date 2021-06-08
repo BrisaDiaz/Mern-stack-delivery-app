@@ -1,10 +1,10 @@
 import styled  from 'styled-components'
 import AppContext from '../../context/app-context'
-import {  useContext,useEffect,useState} from 'react'
-import {useParams,useLocation} from 'react-router-dom'
+import {  useContext} from 'react'
 import {CartButton,CartIcon} from '../menu/MenuItem'
 import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
 import useAddToCartButton from '../../hooks/useAddToCartButton'
+import useProductDetails from '../../hooks/useProductDetails'
 import {StyledLink } from '../Header'
 import defaultImage from '../../img/default-image.png';
 
@@ -107,61 +107,12 @@ const Description = styled(Deltail)`
 text-transform:none;
 
 ` 
-export default function ProductDetailsPage(props){
-let location = useLocation()
-let search = new URLSearchParams(location.search);
-let goBackPath = search.get("from");
+export default function ProductDetailsPage(){
 
 
     const {cartProducts,addToCart,addToTotalCost,setIsLoading,isLoading}  = useContext(AppContext);
 
-      const [isLoaded,setIsLoaded] = useState(false)
- const [thisProductInfo,setThisProductInf] = useState({})
- const {productId}=  useParams()
-
-
- useEffect(()=>{
-
-    setIsLoading(true)
-      window.scrollTo(0, 0)
-  const controller = new AbortController()
- const signal = controller.signal
-
-  const fechProducts = async () =>{
-  try{
-
-     let res = await fetch(`/api/products/${productId}`,{signal,})
-     let json = await res.json()
-
-    setThisProductInf(json.data)
-     setIsLoading(false)
-
-  }catch(err){
-    if(err.name === 'AbortError'){
-   console.log('Fetch Canseled: caught abort')
- }else{
-
-     console.log(err)
-    for(let i = 0; i < 6 ;i++){
-    fechProducts()
-
-        }
-
- 
-  }
-}
-  }
-  fechProducts()
- 
-  return () =>{
-     controller.abort()
-   }   
-   
- },[productId])
-
- 
-let isInShoppingCart = cartProducts.find(product => product.info._id === thisProductInfo?._id) ? true : false
-
+const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded} = useProductDetails({cartProducts,setIsLoading})
 
  const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProductInfo,cartProducts,addToCart,addToTotalCost)
 

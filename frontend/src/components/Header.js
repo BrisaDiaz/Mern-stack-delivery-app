@@ -1,7 +1,8 @@
 import styled from 'styled-components'
-import {  useState ,useContext,Fragment} from 'react'
+import {useContext,Fragment} from 'react'
 import AppContext from '../context/app-context'
 import {Link} from 'react-router-dom'
+import useHeader from '../hooks/useHeader'
 import SocialsMenu from './SocialsMenu'
 import logo from '../img/logo.png' 
 import menu from '../img/menu.svg'
@@ -165,29 +166,8 @@ display:none;
 
 export default function Header(){
 const { numberOfProductsInCart, isLogin,toggleCart,setIsSingUp,setIsNotSingup,isAdmin,isModerator}  = useContext(AppContext);
-const [navIsOpened, setNavIsOpened ]= useState(false)
 
-
-
-const handelNavClick = () =>{
-setNavIsOpened(!navIsOpened)
-}
-
-const closeNav = ( ) =>{
-  setNavIsOpened(false)
-}
-
-
-const handleLogin = () =>{
-  closeNav();
-setIsSingUp() ;
-  }
-
-  const handleSingUp= () =>{
-  closeNav();
-setIsNotSingup() ;
-  }
-
+const {handelNavClick, closeNav, handleLogin, handleSingUp,navIsOpened} = useHeader({setIsSingUp,setIsNotSingup})
 
 
   return(

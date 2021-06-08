@@ -1,11 +1,10 @@
   
 import styled  from 'styled-components'
-import {useHistory} from 'react-router-dom'
-import {LoaderSpinner} from './../LoaderSpinner'
+import useDashboardProducts from '../../hooks/useDashboardProducts'
 import AppContext from '../../context/app-context'
-import {   useContext,useEffect,useState,Fragment } from 'react'
+import {   useContext,Fragment } from 'react'
 import SearchBar from '../MenuSearchBar'
-import deleteProductAPI from '../../API/deleteProductAPI'
+import {LoaderSpinner} from './../LoaderSpinner'
 import DashboardNav from '../DashboardNav'
 import FilterProductsStateOptions from '../FilterProductsStateOptions'
 import FilterCategoryOptions from '../FilterCategoryOptions'
@@ -61,94 +60,11 @@ margin: 20px auto;
 
  export default function DashboardProducts(){
 
-
   
     let {categories,token,setProductToEdit}  = useContext(AppContext);
 
- let populatedCategories = categories?.filter(category => category?.quantity > 0)
-
- let query = new URLSearchParams();
-    let sizeLimit = 6
-
- 
-  const [category, setCategory] = useState("all")
-  const[isLoading,setIsLoading] = useState(false)
-    const [page, setPage] = useState(1)
-    const [maxPage, setMaxPage] = useState(1)
-    let [products, setProducts] = useState(null)
-    let [activeProducts,setActiveProducts] =useState('all')
-   const [title,setTitle] =useState("")
-
-   query.append('page',page)
-   query.append('limit',sizeLimit)
-
-
-  
-
-
-useEffect(() => {
-  const controller = new AbortController()
- const signal = controller.signal
-const productsAPI = async () =>{
-    setIsLoading(true)
-  try{
-   if(title !== ""){ 
-      query.append('title',title)
-    }
-      if (category !== "all") {
-        query.append('category', category)
-      }
-
-    if(activeProducts !== "all"){
-query.append('active',activeProducts)
-    }
-     let res = await fetch(`/api/products?${query}`,{signal,})
-     let json = await res.json()
-
-    setProducts(json.data)
-
-    let total = parseInt(json.total)
-
-     setMaxPage(Math.ceil(total/sizeLimit))
-
-
-
-     setIsLoading(false)
-  }catch(err){
-    if(err.name === 'AbortError'){
-   console.log('Fetch Canseled: caught abort')
- }else{
-
-     console.log(err)
-
-  }
-}
-  }
-
-  productsAPI()
-   window.scrollTo(0, 0)
-     return () =>{
-     controller.abort()
-   }   
- }, [title,activeProducts,page,category])
-
-
-     
-const resetQuery = () =>{
-setPage(1)
-setActiveProducts('null')
-}
-
-const history = useHistory()
-
-
-  const handelEdit = (product) =>{
-  
-
-setProductToEdit(product);
-
- return history.push("/dashboard/editProduct")
-  }
+  let {populatedCategories,isLoading,page,maxPage,products,setCategory,setTitle,resetQuery,
+handleEdit,handleDelete,setPage,setActiveProducts,setProducts} = useDashboardProducts({categories,token,setProductToEdit} )
 
 
   return(
@@ -178,11 +94,11 @@ products?.map( product =>
  <Fragment key={product._id+"abc"}>
  <Item  key={product._id} item={product}>
    <Fragment>
-<EditButton  onClick={ () =>handelEdit(product)} >
+<EditButton  onClick={ () =>handleEdit(product)} >
      <EditIcone src={editIcone} alt="edit"></EditIcone>
    </EditButton>
 
-   <DeleteOfDatabaseButton  onClick={ () =>deleteProductAPI(token,product._id,setProducts)}>
+   <DeleteOfDatabaseButton  onClick={ () =>handleDelete(token,product._id,setProducts)}>
    <TrashIcone src={DeleteIcone} alt="delete"/>
    </DeleteOfDatabaseButton>
    </Fragment>

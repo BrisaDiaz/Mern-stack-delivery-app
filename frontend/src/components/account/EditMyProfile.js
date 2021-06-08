@@ -21,7 +21,7 @@ const EditProfileForm = styled.form`
 
   max-width:400px;
   width:100%;
-      padding: 50px 30px;
+      padding: 10px 25px 40px;
     border-radius: 10px;
     background: #fff;
 margin: 50px auto;
@@ -40,6 +40,10 @@ margin: -10px auto 4px 0;
 }
 & >${OptionList} {
   min-width: 100%
+}
+& > input:focus {
+  outline: 2px solid #ccc;
+    outline-style: auto;
 }
   `
 
@@ -113,6 +117,7 @@ function CityAddressOptions({register}){
    
    >
 <Option value="Córdoba" >Córdoba</Option>
+<Option value="Buenos Aires" >Buenos Aires</Option>
 </OptionList>
   );
 }
@@ -160,14 +165,9 @@ placeholder={placeholder}
 } 
 export default function EditMyProfile() {
   
-
-
 const {token,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} = useContext(AppContext);
 
-   const { 
- register,handleSubmit,errors,onSubmit ,serverError,formIsLoading,isChangingPassword,setIsChangingPassword
-} = useEditProfileForm(
-  {token,setCurrentUser,setAllUsers,setIsSuccessfullySend,isAdmin})
+const { register,handleSubmit,errors,onSubmit ,serverError,formIsLoading,isChangingPassword,setIsChangingPassword} = useEditProfileForm({token,setCurrentUser,setAllUsers,setIsSuccessfullySend,isAdmin})
 
   return(
 <EditProfilePage>
@@ -198,6 +198,7 @@ const {token,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} = useCont
                <CellphoneInput  errors={errors} register={register}  placeholder="Tu telèfono..."/>
 
 <CityAddressOptions register={register} />
+
          <StreetAddressInput  errors={errors} register={register} placeholder="Calle..."/>
 
          <StreetNumberInput  errors={errors} register={register} placeholder="Número de puerta..."/>

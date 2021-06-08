@@ -1,73 +1,20 @@
 
-import {Fragment} from 'react'
+import useDashboarOrderDetails from '../../hooks/useDashboarOrderDetails'
 import {useParams} from 'react-router-dom'
 import AdminOrderStateChart from './AdminOrderStateChart'
 import AppContext from '../../context/app-context'
-import {   useContext,useEffect,useState} from 'react'
+import {Fragment,useContext,useEffect,useState} from 'react'
 import {GoBackLink} from '../product_details/ProductDetails'
 import {Page,CenterTitle,DetailTable,ClientInfo} from '../account/OrderDetails'
 
 
 
 export default function OrderDetails(){
-let {orderID}=  useParams()
 
 const {setIsLoading,token,isLoading} = useContext(AppContext)
+ const {thisOrder,isRefreshing,setIsRefreshing} = useDashboarOrderDetails({setIsLoading,token})
 
- const [thisOrder,setThisOrder] = useState({})
-const [isRefreshing,setIsRefreshing] = useState(false)
-
-
- useEffect(()=>{
-
-    window.scrollTo(0, 0)
-  const controller = new AbortController()
- const signal = controller.signal
-
-  const fechOrder= async () =>{
-  try{
-
-     const headers = new Headers();
-      headers.append('Accept', 'application/json');
-      headers.append('Authorization', `Bearer ${token}`);
-
-
-    const setting = {
-          method: 'GET',
-          headers: headers,
-signal,
-        }
-
-     let res = await fetch(`/api/orders/${orderID}`,setting)
-     let json = await res.json()
-
-    setThisOrder(json.data)
-
-     setIsLoading(false)
-
-  }catch(err){
-    if(err.name === 'AbortError'){
-   console.log('Fetch Canseled: caught abort')
- }else{
-
-     console.log(err)
-    for(let i = 0; i < 6 ;i++){
-    fechOrder()
-
-        }
  
-  }
-}
-  }
-
-  fechOrder()
- 
-  return () =>{
-     controller.abort()
-   }   
-   
- },[orderID,isRefreshing])
-
   return(
     
 <Page>

@@ -7,6 +7,7 @@ import {TableTitle} from './DashboardUsers'
 import {LoaderSpinner} from './../LoaderSpinner'
 import {ErrorServerMessage} from '../auth/SingupForm'
 import {OptionList,Option} from '../SortProductsOptions'
+
 const EditModal = styled.div`
 position:absolute;
 top:0;
@@ -54,9 +55,6 @@ background: ${props => props.theme.orange};
     box-shadow: inset 0 0 20px 5px rgb(23 23 23 / 15%);
 `
 
-
-
-
 const EditForm= styled.form`
 display:flex;
 flex-flow:column;
@@ -74,8 +72,7 @@ align-items:center;
 `;
 
 
- export default function EditUserForm({user,isEditing
-,setIsEditing}) {
+ export default function EditUserForm({user,isEditing,setIsEditing}) {
 
 const {token,setAllUsers} = useContext(AppContext);
 

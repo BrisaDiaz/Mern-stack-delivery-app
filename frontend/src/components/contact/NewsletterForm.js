@@ -1,9 +1,8 @@
 import styled  from 'styled-components'
-import {useForm} from 'react-hook-form'
-import {ErrorMessage} from './ContactForm';
-import {useContext} from 'react';
+import {ErrorMessage} from './ContactForm'
+import {useContext} from 'react'
 import AppContext from '../../context/app-context'
-import newsletterSubscribtionAPI from '../../API/newsletterSubscribtionAPI'
+import useNewsletterForm from '../../hooks/useNewsletterForm'
 import {Button} from '../Buttons'
 
 const StyledNewsletter = styled.article`
@@ -82,16 +81,9 @@ padding: 17px 10px 17px 20px;
 
 export default function NewsletterForm(){
   const {isLogin,setIsSuccessfullySend} = useContext(AppContext)
-    const { register, handleSubmit, formState: { errors } }= useForm({
-  mode: "onBlur",
-});
-  function onSubmit(e,data) {
-    e.preventDefault()
-      const email = data.userEmail.value()
-    isLogin ? 
-    newsletterSubscribtionAPI({email,setIsSuccessfullySend})
-: alert('Para poder subscribirse es necesario que inicie seción')
-  }
+const {register,handleSubmit,errors,onSubmit} =useNewsletterForm({setIsSuccessfullySend,isLogin})
+
+
   return(
 <StyledNewsletter>
   <Wrapper>

@@ -1,11 +1,7 @@
 import styled  from 'styled-components'
-import {useState,useEffect} from 'react' 
-import {useParams,useHistory} from 'react-router-dom'
-import {useForm} from 'react-hook-form'
-import resetPasswordAPI from '../../API/resetPasswordAPI'
+import useResetPassword from '../../hooks/useResetPassword'
 import {ButtonPrimary} from '../Buttons'
 import {LoaderSpinner} from '../LoaderSpinner'
-
 import pizzaBackgroun from'../../img/pizza-background.jpg'
 import {FormCard, Form,UserPasswordInput,ErrorServerMessage} from './SingupForm'
 
@@ -38,44 +34,9 @@ text-aling:center;
 }
 `;
 
-
 export default function ForgotPassword(){
-  let {token} = useParams()
-const history = useHistory()
 
-
-const [isFormLoading,setIsFormLoading]= useState(false)
-const [serverError, setServerError] = useState("")
-
-
-
-
-  
-
-  const { register, handleSubmit, formState: { errors } }= useForm({
-  mode: "onBlur",
-});
-
- async function onSubmit(data,e) {
-
-const newPassword =e.target.userPassword.value,
-confirmPassword = e.target.confirmPassword.value
-
-if(newPassword!== confirmPassword ) return  setServerError("Passwords dosen't match")
-setIsFormLoading(true)
-const info ={
-newPassword,
-confirmPassword,
-}
-
-await resetPasswordAPI({
-  setIsFormLoading,
-setServerError,
-info,
-token,
-history
-  })
-}
+const {isFormLoading,serverError,register, handleSubmit,onSubmit, errors}=useResetPassword()
   return(
 
         <StyledInitSession>

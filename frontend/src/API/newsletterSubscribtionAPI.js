@@ -1,6 +1,6 @@
-const newsletterSubscribtionAPI = async ({email,setIsSuccessfullySend}) =>{
+const newsletterSubscribtionAPI = async ({info,setIsSuccessfullySend}) =>{
 
-  const info =  {email: email}
+
 
   const headers = new Headers();
         headers.append('Accept', 'application/json');

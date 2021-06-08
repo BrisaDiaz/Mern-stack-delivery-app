@@ -1,8 +1,8 @@
 import styled  from 'styled-components'
-import {useHistory} from 'react-router-dom'
-import DashboardNav from '../DashboardNav'
 import AppContext from '../../context/app-context'
-import {   useContext,useState, useEffect } from 'react'
+import {   useContext} from 'react'
+import useDashboardOrders from '../../hooks/useDashboardOrders'
+import DashboardNav from '../DashboardNav'
 import refreshIcone from '../../img/refresh.svg'
 import SearchBar from '../MenuSearchBar'
 import {RefreshButton,RefreshIcone} from '../account/MyOrdersPage'
@@ -13,7 +13,7 @@ import FilterOrderStateOptions from './../FilterOrderStateOptions'
 import SortOrdersOptions from './../SortOrdersOptions'
 
 export const Page = styled.main`
-    padding: 60px 15px;
+    padding: 60px 0;
 min-height:100vh;
 width:100%;
 max-width: 1250px;
@@ -31,7 +31,6 @@ color: #fcba1c;
 }
 `;
 export const OrdersTable = styled.table`
-
 width:90%;
 max-width:900px;
 margin: 20px auto 40px;
@@ -107,98 +106,12 @@ content:"Total";
 }
 `
 export default function DashboardOrders(){
-  const history = useHistory()
+ 
 const {token,setIsLoading} = useContext(AppContext)
 
-const seeDetails = (orderID) =>{
-      setIsLoading(true)
- history.push(`/dashboard/orders/${orderID}` )
-}
 
- let query = new URLSearchParams();
-    let sizeLimit = 5
+const {seeDetails,resetQuery,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLoading,maxPage,orders,sorting} = useDashboardOrders({token,setIsLoading})
 
-
-
-  const [orderID, setOrderID] = useState("")
-  const[isLoading,setIsLoadingPage] = useState(false)
-    const [page, setPage] = useState(1)
-    const [maxPage, setMaxPage] = useState(1)
-    const [orders, setOrders] = useState(null)
-    const [state,setState] =useState('all')
-  const [sorting, setSorting] = useState("-createdAt")
-
-   query.append('page',page)
-   query.append('limit',sizeLimit)
-   query.append('sort',sorting)
-
-  
-
-
-useEffect(() => {
-  const controller = new AbortController()
- const signal = controller.signal
-const productsAPI = async () =>{
-    setIsLoadingPage(true)
-  try{
-   if(orderID !==""){ 
-      query.append('orderID',orderID)
-    }
-
-    if(state !=="all"){
-query.append('state',state)
-    }
-
-       const headers = new Headers();
-      headers.append('Accept', 'application/json');
-      headers.append('Authorization', `Bearer ${token}`);
-
-
-    const setting = {
-          method: 'GET',
-          headers: headers,
-signal,
-        }
-
-     let res = await fetch(`/api/orders?${query}`,setting)
-     let json = await res.json()
-
-    setOrders(json.data)
-
-    let total = parseInt(json.total)
-
-     setMaxPage(Math.ceil(total/sizeLimit))
-
-
-
-     setIsLoadingPage(false)
-  }catch(err){
-    if(err.name === 'AbortError'){
-   console.log('Fetch Canseled: caught abort')
- }else{
-
-     console.log(err)
-
-  }
-}
-  }
-
-  productsAPI()
-   window.scrollTo(0, 0)
-     return () =>{
-     controller.abort()
-   }   
- }, [orderID,state,page,sorting])
-
-     
-const resetQuery = () =>{
-setPage(1)
-setState('all')
-}
-
-  const handleRefresh = () =>{
-  return history.push(`/dashboard/orders`)
-}
 
   return(
 <Page>

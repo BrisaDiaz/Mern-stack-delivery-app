@@ -1,18 +1,17 @@
 import styled  from 'styled-components'
-import {Link,useHistory} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import { useContext } from 'react'
+import useMyOrdersPage from '../../hooks/useMyOrdersPage'
 import {ButtonPrimary} from '../Buttons'
 import {SectionTitle,ButtonsWrapper} from '../menu/Menu'
 import AppContext from '../../context/app-context'
-import {  useState,useContext ,useEffect} from 'react'
-import deleteOrderAPI from '../../API/deleteOrderAPI'
-import currentUserAPI from '../../API/currentUserAPI'
 import refreshIcone from '../../img/refresh.svg'
 
 
 
 
 const Page = styled.main`
-    padding: 65px 15px;
+    padding: 65px 0;
 min-height:100vh;
 width:100%;
 margin: 0 auto;
@@ -155,41 +154,10 @@ cursor:pointer;
 
 
 export default function MyOrders(){
-  const history = useHistory()
+
   const {currentUser,token,setCurrentUser,setIsLoading} = useContext(AppContext)
-     
-    let limit = 5
-    const [page, setPage] = useState(1)
-    const [maxPage, setMaxPage] = useState(1)
-     const [orders,setOrders] = useState([])
 
-let userOrders =[...currentUser?.orders].sort((a, b)=>{
-    return    b.createdAt -a.createdAt
-});
-useEffect(() => {
-setMaxPage(Math.ceil(userOrders.length/limit))
-
- setOrders(userOrders.splice( (page-1)*limit  , ((page-1)*limit)+limit))
-
-}, [page])
-
-
-const deleteOrder = (e,id) =>{
- e.stopPropagation();
-if (!e.target.disabled ) return deleteOrderAPI({token,id,setCurrentUser})
-}
-const seeDetails = (orderID) =>{
- return history.push(`/myAccount/myOrders/${orderID}` )
-}
-
-const handelRefresh = () =>{
-  setIsLoading(true)
-  currentUserAPI({token,setCurrentUser})
-
-}
-useEffect(()=>{
- setIsLoading(false)
-},[currentUser])
+const {page,setPage,maxPage,orders,deleteOrder,seeDetails,handelRefresh} = useMyOrdersPage({currentUser,token,setCurrentUser,setIsLoading})
 
   return(
 <Page>

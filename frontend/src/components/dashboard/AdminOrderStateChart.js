@@ -1,9 +1,8 @@
 import styled  from 'styled-components'
-import {Process,ProcessInfo} from '../account/OrderDetails'
+import useAdminOrderStateChart from '../../hooks/useAdminOrderStateChart'
 import AppContext from '../../context/app-context'
-import {   useContext} from 'react'
-import updateOrderStateAPI from '../../API/updateOrderStateAPI'
-import {useHistory} from 'react-router-dom'
+import {  useContext} from 'react'
+import {Process,ProcessInfo} from '../account/OrderDetails'
 
 const ConfirmationButton = styled.button`
     cursor: pointer;
@@ -26,26 +25,8 @@ const ConfirmationButton = styled.button`
 export default  function AdminOrderStateChart({states,orderId,makeRefresh,refreshState}){
 
  const {token,setIsLoading} = useContext(AppContext)
+const  {handleConfirmation,nextStep} = useAdminOrderStateChart({token,setIsLoading,orderId,makeRefresh,refreshState,states})
 
- const history = useHistory()
-  let nextStep = states?.find(state => state?.confirmed === false)
-
-const handleConfirmation = async (e,stateName) =>{
-
-if(!e.target.disabled) {
-  try{
- await updateOrderStateAPI({token,orderId,stateName,setIsLoading,history})
-makeRefresh(!refreshState)
-
-
-  }catch(err){
-    console.log(err)
-  }
-
-} 
-
-return
-}
 
   return(
 
@@ -65,9 +46,7 @@ return
            <ConfirmationButton disabled={state !== nextStep && true} onClick={(e) =>
              handleConfirmation(e,state?.name)} >Confirmar</ConfirmationButton>
          </ProcessInfo>
-  
-  
-  
+
   
   )}
 
