@@ -12,7 +12,7 @@ import Item from './MenuItem'
 const StyledMenu = styled.main`
 min-height:100vh;
 width:100vw;
-padding: 65px 15px 20px;
+padding: 65px 0 20px;
 margin:0;
 margin-bottom:20px;
 text-aling:center;
@@ -100,9 +100,14 @@ box-shadow:${props => props.theme.ligthBoxShadow};
 
 const FiltersBoard = styled.div`
     flex-wrap: wrap;
-    padding: 20px 15px 10px;
+    padding: 0px 15px 20px;
     display: flex;
     align-items: center;
+    & > select {
+      margin: 0 10px 10px auto;
+   
+}
+
 `;
 
 export default function Menu() {

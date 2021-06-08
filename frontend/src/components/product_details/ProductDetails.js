@@ -14,6 +14,7 @@ left:15px;
 margin: 0 ;
 font-size:15px;
 padding: 10px 0;
+z-index:800;
 &:before{
   content : "<-- ";
   margin-right:3px;

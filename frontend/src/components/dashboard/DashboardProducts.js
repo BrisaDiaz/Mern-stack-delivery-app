@@ -19,10 +19,10 @@ margin-bottom:40px;
 const StyledSection = styled.main`
 min-height:100vh;
 width:100vw;
-padding:60px 15px;
+padding:60px 0;
 `
 export const FiltersBoard = styled.div`
-      padding: 30px 0 0;
+padding: 30px 15px 0;
     display: flex;
     width: fit-content;
     align-items: center;
