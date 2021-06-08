@@ -142,7 +142,7 @@ const {deleteOfCartAndTotalCostHandler} = useCartProductDeleteButton(deleteOfCar
               deleteOfCartAndTotalCostHandler(product.info._id,quantity*product.info.price)}>
                <DeleteProductIcone src={DeleteIcone} alt="delete-of-cart"/>
                 </DeleteProductButton>
-<ProductInfo>  
+<ProductInfo id='productInf'>  
   <PoductName>{product.info.name}  </PoductName>   <Price >{product.info.price} x {product.info.size}</Price>
   </ProductInfo>
     <ProductControls>

@@ -26,9 +26,10 @@ color:${(props) => (props.light ? "#fff" : "#fcba1c")};
 `;
 const MenuWrapper = styled.section`
 display:flex;
+flex-direction: column;
 flex-wrap: wrap;
 padding-bottom: 20px ;
-   margin-left: -6px;
+margin-left: -6px;
 width:100%;
 
 `;
@@ -103,6 +104,7 @@ const FiltersBoard = styled.div`
     padding: 0px 15px 20px;
     display: flex;
     align-items: center;
+    max-width: max-content;
     & > select {
       margin: 0 10px 10px auto;
    
@@ -141,6 +143,7 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
 
           <SearchBar setSearch={setTitle} resetQuery={resetQuery} />
         </SearchBarWrapper>
+
         <FiltersBoard>
           <FilterCategoryOptions categories={populatedCategories} setCategoryPreferece={setCategory} setPage={setPage} />
           <SortProductsOptions setSortPreferece={setSorting} sortPreference={sorting} />
