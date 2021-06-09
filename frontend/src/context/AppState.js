@@ -1,6 +1,7 @@
 import  {useReducer,useEffect} from 'react';
 import AppContext from  './app-context';
 import appReducer from  './app-reducer';
+
 import {
   SET_IS_LOADING,
   SET_ALL_USERS,
@@ -76,7 +77,6 @@ getCategoriesAPI()
 
 
 const initialState =  {
-products:[],
 users:[],
 categories:[],
 currentUser: {},
@@ -90,10 +90,6 @@ isSingUp:false,
 isLogin:false,
 isAdmin:false,
 isModerator:false,
-menuSearchQuery:"",
-adminSearchQuery:"",
-menuSortPreference:"default",
-productStateFilterPreference:"default",
 isSuccessfullySend: false,
 }
 
@@ -231,7 +227,6 @@ payload: bulean,
     <AppContext.Provider 
     value= {{
 isLoading: state.isLoading,
-products: state.products,
 users: state.users,
 orders:state.orders,
 categories: state.categories,

@@ -138,22 +138,22 @@ const {deleteOfCartAndTotalCostHandler} = useCartProductDeleteButton(deleteOfCar
   <StyledSingleCartProduct >
 
        <ProductHeader>
-             <DeleteProductButton onClick={ ()=> 
+             <DeleteProductButton data-testid='deleteProduct' onClick={ ()=> 
               deleteOfCartAndTotalCostHandler(product.info._id,quantity*product.info.price)}>
                <DeleteProductIcone src={DeleteIcone} alt="delete-of-cart"/>
                 </DeleteProductButton>
-<ProductInfo id='productInf'>  
+<ProductInfo>  
   <PoductName>{product.info.name}  </PoductName>   <Price >{product.info.price} x {product.info.size}</Price>
   </ProductInfo>
     <ProductControls>
                     <Counter>
               
              <DecreaseButton onClick={() => decreaseQuantityAndActualizeTotalCost()}>-</DecreaseButton>
-             <Quantity>{quantity}</Quantity>
+             <Quantity data-testid='quantity'>{quantity}</Quantity>
              <IncreaseButton onClick={() =>increaseQuantityAndActualizeTotalCost()}>+
              </IncreaseButton>
       </Counter>
-             <TotalPrice>{quantity*product.info.price }</TotalPrice>
+             <TotalPrice >{quantity*product.info.price }</TotalPrice>
        </ProductControls>
     </ProductHeader>
        

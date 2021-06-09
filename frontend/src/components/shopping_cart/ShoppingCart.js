@@ -90,12 +90,13 @@ const {emptyCartAndResetTotalCost,handelOrden} = useShoppingCart(
       </CartHeader>
       
       <CartProductsList>
-            {cartProducts.map( (product)=>  
+            {cartProducts.map( (product,index)=>  
 
       
        
-           <SingleCartProduct 
-         key={product.info._id}
+           <SingleCartProduct
+
+         key={index}
           product={product}>  
       
       </SingleCartProduct>
