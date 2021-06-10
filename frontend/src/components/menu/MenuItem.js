@@ -112,7 +112,7 @@ height:20px;
 transition: all 05s ease;
 
 `;
-export default function MenuItem(props){
+export default function MenuItem({props}){
   let history = useHistory()
  let location = useLocation()
   const item = props.item;
@@ -120,6 +120,7 @@ export default function MenuItem(props){
   const {cartProducts,addToCart,addToTotalCost}  = useContext(AppContext);
 const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(item,cartProducts,addToCart,addToTotalCost)
 
+let isInDashboard = location.pathname === "/dashboard/myProducts"? true : false ;
 
 const handleRedirect = (id) =>{
   return  history.push({
@@ -147,7 +148,7 @@ const handleRedirect = (id) =>{
       <ProductLink onClick={ () => handleRedirect(item._id)}>{item.name}</ProductLink>  
    <Figcaption><Price >{item.price}</Price> <Size>{item.size}  </Size>  </Figcaption> 
         
-        { ( location.pathname === "/dashboard/myProducts") ?
+        { ( isInDashboard) ?
           props.children
          :
          <CartButton isAdded={isAdded}

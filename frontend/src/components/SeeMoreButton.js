@@ -25,7 +25,7 @@ export default function SeeMoreButton({trigger}){
     setIsoggledDetails(!isToggledDetails)
  }
   return(
- <MoreButton onClick={ handleClick}>{isToggledDetails ? "x" :  "+"}
+ <MoreButton onClick={handleClick}>{isToggledDetails ? "x" :  "+"}
      </MoreButton>
 
   );
