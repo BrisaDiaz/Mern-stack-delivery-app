@@ -11,7 +11,7 @@ export default function useMenu({categories}){
   const [isLoading, setIsLoading] = useState(false)
   const [page, setPage] = useState(1)
   const [maxPage, setMaxPage] = useState(1)
-  let [products, setProducts] = useState(null)
+  let [products, setProducts] = useState([])
   const [category, setCategory] = useState("all")
   const [sorting, setSorting] = useState("-createdAt")
   const [title, setTitle] = useState("")
@@ -65,7 +65,7 @@ export default function useMenu({categories}){
       }
     }
     fechProducts()
-    window.scrollTo(0, 0)
+ 
     return () => {
       controller.abort()
     }

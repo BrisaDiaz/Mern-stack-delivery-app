@@ -76,6 +76,7 @@ CLOUDINARY_SECRET
 ### Features:
 
 - Interaction with the backend through API Rest .
+- Some unit test
 - Auto-played sliders with dot indicators and controls.
 - Navbar responsive and animated .
 - Singup/Login/forgotPassword system.

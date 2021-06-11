@@ -151,12 +151,10 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
 
         <ProductsSection >
 
-          {   ( (products)   &&  products?.length === 0) ?
+          {   ( (!isLoading)   && (!products?.length > 0)) ?
             <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
             :
-            products?.map(product =>
-
-              <Item key={product._id} item={product} />)
+            products?.map(product =><Item data-testid='productItem' key={product._id} item={product} />)
 
 
           }

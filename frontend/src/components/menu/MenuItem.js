@@ -112,12 +112,13 @@ height:20px;
 transition: all 05s ease;
 
 `;
-export default function MenuItem({props}){
+export default function MenuItem(props){
   let history = useHistory()
  let location = useLocation()
   const item = props.item;
   const [isLoaded,setIsLoaded] = useState(false)
   const {cartProducts,addToCart,addToTotalCost}  = useContext(AppContext);
+  
 const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(item,cartProducts,addToCart,addToTotalCost)
 
 let isInDashboard = location.pathname === "/dashboard/myProducts"? true : false ;

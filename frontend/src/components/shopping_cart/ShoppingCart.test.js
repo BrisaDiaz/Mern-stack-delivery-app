@@ -1,6 +1,7 @@
 import React from 'react';
-import { render,  screen } from '@testing-library/react'
+import { render,  screen ,act} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { MemoryRouter } from "react-router-dom";
 import AppContext from '../../context/app-context'
 import ShoppingCart from './ShoppingCart'
 
@@ -52,8 +53,8 @@ import ShoppingCart from './ShoppingCart'
 const emptyCartButton = screen.getByRole('button', {
   name: /vaciar carrito/i})
 
-
  userEvent.click(emptyCartButton)
+
 
  expect(emptyCart.mock.calls.length).toBe(1)
   expect(resetTotalCost.mock.calls.length).toBe(1)

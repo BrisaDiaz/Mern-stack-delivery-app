@@ -1,5 +1,5 @@
 import React from 'react';
-import { render,  screen } from '@testing-library/react'
+import { render,  screen,act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import AppContext from '../../context/app-context'
 import SingleCartProduct from './SingleCartProduct'
@@ -43,18 +43,18 @@ size:'400 gr'
             </AppContext.Provider>
         )
 
- userEvent.click(screen.getByTestId('deleteProduct'))
+userEvent.click(screen.getByTestId('deleteProduct'))
 
  expect(deleteOfCart.mock.calls.length).toBe(1)
  expect(deleteOfTotalCost.mock.calls.length).toBe(1)
 
-
+ 
 
  })
 
   it('trigger increment and decrement counter and display correct quantity', ()=>{
 
-   render(
+  render(
          <AppContext.Provider value={{deleteOfCart,deleteOfTotalCost,addToTotalCost,actualizeCart}}>
                 <SingleCartProduct product={product}/>
             </AppContext.Provider>
@@ -83,6 +83,8 @@ expect(actualizeCart.mock.calls.length).toBe(2)
 expect(actualizeCart.mock.calls.length).toBe(3)
 
   expect(screen.getByTestId('quantity')).toHaveTextContent('2')
+
+
   })
        
 

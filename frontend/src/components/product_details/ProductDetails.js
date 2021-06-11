@@ -121,10 +121,10 @@ const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded} = usePr
   return(
       isLoading ? null :   
       
-<ProductDetails>
+<ProductDetails >
     
              <GoBackLink to={goBackPath} > Regresar</GoBackLink>
-<ImageWrapper isLoaded={isLoaded}>
+<ImageWrapper  isLoaded={isLoaded}>
   <PrductImg src={thisProductInfo?.img}  alt={thisProductInfo?.name} onLoad={()=> setIsLoaded(true)} />
   </ImageWrapper>
     <Line/>
@@ -133,7 +133,9 @@ const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded} = usePr
   <ThisCartButton isAdded={isAdded}
        onClick={ () =>
         {handlerAddToCartAndAddToTotalCost(thisProductInfo,thisProductInfo?.price)}
-        }><CartIcon style={{  position:'absolute'}} src={shoopingCartIcon} alt="add-to-cart"/></ThisCartButton>
+        }>
+          <CartIcon style={{  position:'absolute'}} src={shoopingCartIcon} alt="add-to-cart"/>
+          </ThisCartButton>
         : null
 }
     <Line/>
