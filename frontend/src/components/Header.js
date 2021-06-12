@@ -53,7 +53,7 @@ const StyledHeader = styled.header`
 position:fixed;
 box-sizing:border-box;
 width:100vw;
-padding: 0 25px;
+padding: 0 15px;
 margin:0;
 height:58px;
 z-index:999;
@@ -85,7 +85,8 @@ width: 40px;
 heght:40px;
 text-decoretion:none;
 cursor:pointer;
-margin-right: 35px;
+    margin-left: auto;
+    margin-right: 20px;
 position:relative;
 `
 const CartIcone = styled.img`
@@ -99,7 +100,7 @@ heght:100%;
 `
 const ProfileIcone = styled(CartIcone)`
     width: 135%;
-    margin-left: 25%;
+
 
 `;
 const CartNumber = styled.span`
@@ -111,7 +112,7 @@ bottom:0;
 color:#fff;
 font-size:14px;
 background:${props => props.theme.orange};
-text-shadow: ${props => props.theme.darckTextShadow};
+
 transition:all 0.3s ease;
 &:hover{
   transform: scale(1.1);
@@ -154,7 +155,7 @@ const Menubtn = styled.img`
 cursor:pointer;
 width: 25px;
 cursor:pointer;
-margin-right:20px;
+margin-right:10px;
 
 display:none;
 @media screen and (max-width:990px){
@@ -199,8 +200,8 @@ const {handelNavClick, closeNav, handleLogin, handleSingUp,navIsOpened} = useHea
  
 <SocialsMenu primary></SocialsMenu>
 </NavWrapper>
-<IconeButton>
-  <CartIcone  onClick={() =>toggleCart()} src={cartIcone} alt="Cart-button"/>
+<IconeButton onClick={() =>toggleCart()} >
+  <CartIcone  src={cartIcone} alt="Cart-button"/>
   <CartNumber>{numberOfProductsInCart}</CartNumber>
   </IconeButton>
 <Menubtn src={ (navIsOpened) ? (clouseMenu) : (menu)} alt="menu" onClick={handelNavClick}></Menubtn>

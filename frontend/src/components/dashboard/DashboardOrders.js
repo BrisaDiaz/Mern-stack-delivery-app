@@ -126,11 +126,13 @@ const {seeDetails,resetQuery,handleRefresh,setOrderID,setSorting,setPage,setStat
           <SortOrdersOptions setSortPreferece={setSorting} sortPreference={sorting} />
         </FiltersBoard>
 
-  {   ( (orders)   &&  orders?.length === 0) ?
+  {isLoading ? <LoaderSpinner small/> :  null }
+  {   ( (!isLoading)   &&  orders?.length === 0) ?
   
   <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
 
   :
+
 <OrdersTable>
   <TableHead>
     <tr>
@@ -163,18 +165,18 @@ const {seeDetails,resetQuery,handleRefresh,setOrderID,setSorting,setPage,setStat
  
 </OrdersTable> }
 
-{isLoading ? <LoaderSpinner small/> : 
+
 <ButtonsWrapper>
 {
 (page > 1) ?  <button onClick={(e) => setPage(page -1)} >
-Prev</button> : null
+{'<< '}Prev</button> : null
 }
 {
 (page < maxPage) ?  <button onClick={(e) => setPage(page + 1)} >
-Next</button> : null
+Next{' >>'}</button> : null
 }
 </ButtonsWrapper>
-}
+
 </Page>
   )
 }

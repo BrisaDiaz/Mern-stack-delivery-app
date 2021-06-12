@@ -1,8 +1,9 @@
 import { useEffect,useState} from 'react'
-import {useParams,useLocation} from 'react-router-dom'
+import {useParams,useLocation,useHistory} from 'react-router-dom'
 
 export default function useProductDetails({cartProducts,setIsLoading}){
 let location = useLocation()
+let history = useHistory()
 let search = new URLSearchParams(location.search);
 
 let goBackPath = search.get("from");
@@ -23,6 +24,11 @@ const [isLoaded,setIsLoaded] = useState(false)
   try{
 
      let res = await fetch(`/api/products/${productId}`,{signal,})
+
+   if(res.status === 404) {
+            setIsLoading(false)
+      return history.push('/notFound')
+     }
      let json = await res.json()
 
     setThisProductInf(json.data)

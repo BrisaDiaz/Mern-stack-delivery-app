@@ -87,19 +87,21 @@ width:80%;
 display:flex;
 flex-flow:column;
 justify-content: flex-end;
-
+@media screen and (max-width:500px){
+& > a{
+      margin-left: -15px;
+}
+}
 `;
 export const Span = styled.h4`
 font-size: 22px;
 text-transform: uppercase;
-text-align:center;
+text-align:justify;
 color:#fff;
 text-shadow: 1px 1px 2px #000;
-margin-bottom:60px;
+margin-bottom:40px;
 color:#fcba1c;
-@media screen and (min-width:500px){
-text-align:left;
-}
+
 `
 const SliderTitle = styled.h3`
 font-size: 30px;

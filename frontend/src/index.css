@@ -85,12 +85,18 @@ li {
 
   flex-direction: column-reverse;
 }
-.grid {
-  display: grid;
-  grid-template-columns: auto-fit (minmax(290px, 300px));
-}
+
 b {
   margin-right: 5px;
   font-family: "Oswald", sans-serif;
   font-size: 16px;
+}
+
+.error {
+    border: 1px solid red;
+    color: red;
+    background-color: rgba(255, 0, 0, 0.1);
+    padding: 1rem;
+    width: 250px;
+    text-align: center;
 }

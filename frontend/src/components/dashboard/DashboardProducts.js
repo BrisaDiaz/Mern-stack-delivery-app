@@ -9,7 +9,8 @@ import DashboardNav from '../DashboardNav'
 import FilterProductsStateOptions from '../FilterProductsStateOptions'
 import FilterCategoryOptions from '../FilterCategoryOptions'
 import {SectionTitle,ProductsSection,NotFaundMessage,ButtonsWrapper} from '../menu/Menu'
-import Item, {CartButton,CartIcon} from '../menu/MenuItem'
+import Item from '../menu/MenuItem'
+import {CartButton,CartIcon} from '../AddToCartButton'
 import editIcone from '../../img/pencil-alt-solid.svg'
 import DeleteIcone from '../../img/trash-alt-regular.svg'
 
@@ -47,12 +48,10 @@ margin-top:-50px;
     margin-left: auto;
     margin-right: 50px;
 `
-const EditIcone = styled(CartIcon)`
+const Icone = styled(CartIcon)`
 transform:scale(1.2);
 `;
-const TrashIcone = styled(EditIcone)`
 
-`
 const StyledProductsSection = styled(ProductsSection)`
 margin: 20px auto;
 `;
@@ -82,48 +81,45 @@ handleEdit,handleDelete,setPage,setActiveProducts,setProducts} = useDashboardPro
 <FilterProductsStateOptions setPage={setPage} setStatePreferece={setActiveProducts} />
 
 </FiltersBoard>
-
-<StyledProductsSection>
-
-  {   ( (products)   &&  products?.length === 0) ?
+  {isLoading ? <LoaderSpinner small/> :  null }
+  {   ( (!isLoading)   &&  products?.length === 0) ?
   
   <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
 
   :
-products?.map( product => 
+<StyledProductsSection>
+
+{products?.map( product => 
  <Fragment key={product._id+"abc"}>
  <Item  key={product._id} item={product}>
    <Fragment>
 <EditButton  onClick={ () =>handleEdit(product)} >
-     <EditIcone src={editIcone} alt="edit"></EditIcone>
-   </EditButton>
-
+     <Icone src={editIcone} alt="edit"/>
+</EditButton>
    <DeleteOfDatabaseButton  onClick={ () =>handleDelete(token,product._id,setProducts)}>
-   <TrashIcone src={DeleteIcone} alt="delete"/>
+   <Icone src={DeleteIcone} alt="delete"/>
    </DeleteOfDatabaseButton>
    </Fragment>
    
    </Item>
     
  </Fragment>
-  )
-       
-  
-}
-</StyledProductsSection>
+  ) }
 
-{isLoading ? <LoaderSpinner small/> : 
+</StyledProductsSection>
+}
+
 <ButtonsWrapper>
 {
 (page > 1) ?  <button onClick={(e) => setPage(page -1)} >
-Prev</button> : null
+{'<< '}Prev</button> : null
 }
 {
 (page < maxPage) ?  <button onClick={(e) => setPage(page + 1)} >
-Next</button> : null
+Next{' >>'}</button> : null
 }
 </ButtonsWrapper>
-}
+
 </StyledSection>
   )
 }

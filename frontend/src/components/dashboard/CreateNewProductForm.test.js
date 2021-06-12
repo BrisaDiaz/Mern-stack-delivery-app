@@ -1,0 +1,1 @@
+import CreateNewProductForm from './CreateNewProductForm'

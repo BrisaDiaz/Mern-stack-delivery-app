@@ -17,7 +17,7 @@ const ProductHeader= styled.div`
 padding: 0 5px;
 display :flex;
 align-items:center;
-
+    align-items: flex-start;
 `;
 const ProductInfo = styled.div`
 display :flex;
@@ -34,8 +34,7 @@ margin-bottom:5px;
 letter-spacing:0;
 `;
 const Price = styled.small `
-margin: 0 5px;
-
+margin-left: 0;
 font-weight:600;
 &:before{
   content:"$";
@@ -74,11 +73,11 @@ align-items:center;
 justify-content:center;
 min-width:35px;
 min-height:30px;
-transform:scale(0.65);
+transform:scale(0.55);
 border-radius:50%;
 cursor:pointer;
 background: ${props => props.theme.orange};
-margin-bottom: 10px;
+margin-top: 5px;
 margin-left:5px;
 box-shadow:inset 0 0 4px rgb(0 0 0 / 50%);
 transition:all 0.5s ease;
@@ -87,7 +86,7 @@ transition:all 0.5s ease;
 
 &:hover{
   transform:rotate(90deg);
-    transform :scale(0.7);
+    transform :scale(0.65);
 }
 
 
@@ -105,6 +104,7 @@ displey:flex;
 flex-flow:column;
 min-width:85px;
 margin-left: auto;
+margin-top: -8px;
 `;
 const ProductControls = styled.div`
 margin-left: auto;

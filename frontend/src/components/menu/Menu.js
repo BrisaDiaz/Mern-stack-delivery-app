@@ -72,6 +72,8 @@ justify-content: center;
 `;
 export const NotFaundMessage = styled.h4`
 margin-top: 20px;
+display:block;
+width:100%;
 `;
 
 export const ButtonsWrapper = styled.div`
@@ -148,10 +150,10 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
           <FilterCategoryOptions categories={populatedCategories} setCategoryPreferece={setCategory} setPage={setPage} />
           <SortProductsOptions setSortPreferece={setSorting} sortPreference={sorting} />
         </FiltersBoard>
-
+  {isLoading ? <LoaderSpinner small/> :  null }
         <ProductsSection >
 
-          {   ( (!isLoading)   && (!products?.length > 0)) ?
+          {   ( (!isLoading)   && (products?.length ===  0)) ?
             <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
             :
             products?.map(product =><Item data-testid='productItem' key={product._id} item={product} />)
@@ -165,18 +167,18 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
 
       </MenuWrapper>
 
-      {isLoading ? <LoaderSpinner small /> :
+
         <ButtonsWrapper>
           {
             (page > 1) ? <button onClick={(e) => setPage(page - 1)} >
-              Prev</button> : null
+           {'<< '}Prev</button> : null
           }
           {
             (page < maxPage) ? <button onClick={(e) => setPage(page + 1)} >
-              Next</button> : null
+              Next{' >>'}</button> : null
           }
         </ButtonsWrapper>
-      }
+      
     </StyledMenu>
 
   );

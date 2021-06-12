@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.cf87824f.chunk.css",
-    "main.js": "/static/js/main.aa049560.chunk.js",
-    "main.js.map": "/static/js/main.aa049560.chunk.js.map",
+    "main.css": "/static/css/main.600a162b.chunk.css",
+    "main.js": "/static/js/main.4ad225eb.chunk.js",
+    "main.js.map": "/static/js/main.4ad225eb.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.1a77d0ad.js",
     "runtime-main.js.map": "/static/js/runtime-main.1a77d0ad.js.map",
-    "static/js/2.6a249d44.chunk.js": "/static/js/2.6a249d44.chunk.js",
-    "static/js/2.6a249d44.chunk.js.map": "/static/js/2.6a249d44.chunk.js.map",
+    "static/js/2.f9d3336b.chunk.js": "/static/js/2.f9d3336b.chunk.js",
+    "static/js/2.f9d3336b.chunk.js.map": "/static/js/2.f9d3336b.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.cf87824f.chunk.css.map": "/static/css/main.cf87824f.chunk.css.map",
-    "static/js/2.6a249d44.chunk.js.LICENSE.txt": "/static/js/2.6a249d44.chunk.js.LICENSE.txt",
+    "static/css/main.600a162b.chunk.css.map": "/static/css/main.600a162b.chunk.css.map",
+    "static/js/2.f9d3336b.chunk.js.LICENSE.txt": "/static/js/2.f9d3336b.chunk.js.LICENSE.txt",
     "static/media/People-Eating-And-Drinking-90673271.265692fe.jpg": "/static/media/People-Eating-And-Drinking-90673271.265692fe.jpg",
     "static/media/about-background.fd4c3f69.png": "/static/media/about-background.fd4c3f69.png",
     "static/media/burger-icon.4ba9750a.png": "/static/media/burger-icon.4ba9750a.png",
@@ -44,14 +44,14 @@
     "static/media/trash-alt-regular.617dd641.svg": "/static/media/trash-alt-regular.617dd641.svg",
     "static/media/tray.fe877925.svg": "/static/media/tray.fe877925.svg",
     "static/media/twitter-brands.a3f5953c.svg": "/static/media/twitter-brands.a3f5953c.svg",
-    "static/media/user-circle-solid.5acc5122.svg": "/static/media/user-circle-solid.5acc5122.svg",
+    "static/media/user-circle-solid.aa894e66.svg": "/static/media/user-circle-solid.aa894e66.svg",
     "static/media/user-edit-solid.3b6cccdd.svg": "/static/media/user-edit-solid.3b6cccdd.svg",
     "static/media/users.93b18c33.svg": "/static/media/users.93b18c33.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.1a77d0ad.js",
-    "static/js/2.6a249d44.chunk.js",
-    "static/css/main.cf87824f.chunk.css",
-    "static/js/main.aa049560.chunk.js"
+    "static/js/2.f9d3336b.chunk.js",
+    "static/css/main.600a162b.chunk.css",
+    "static/js/main.4ad225eb.chunk.js"
   ]
 }

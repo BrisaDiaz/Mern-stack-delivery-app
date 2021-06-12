@@ -55,7 +55,7 @@ return(
       <CloseModalButton onClick={ () => setIsModalOpened(false)}>x</CloseModalButton>
   <Form onSubmit={handleSubmit(onSubmit)}>
     <h2>📬</h2>
-    <p>Igresa tu email y se te será enviado un link  válido por los siguientes 10 minutos para que puedas restaurar tu contraseña.</p>
+    <p>Igresa tu email y se te será enviado un link para que puedas restaurar tu contraseña.</p>
 
     <UserEmailInput errors={errors} register={register}/>
 

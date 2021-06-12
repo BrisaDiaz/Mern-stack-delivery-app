@@ -8,7 +8,6 @@ box-sizing:border-box;
 min-height:100vh;
 width:100vw;
 padding-top: 58px ;
-margin-left:-6px;
 text-aling:center;
 
 `;

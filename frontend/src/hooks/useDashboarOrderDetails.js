@@ -1,8 +1,8 @@
-import {useParams} from 'react-router-dom'
+import {useParams,useHistory} from 'react-router-dom'
 import {useEffect,useState} from 'react'
 
 export default function useDashboarOrderDetails({setIsLoading,token}){
-  
+let history = useHistory()
 let {orderID}=  useParams()
 
 
@@ -31,8 +31,13 @@ signal,
         }
 
      let res = await fetch(`/api/orders/${orderID}`,setting)
-     let json = await res.json()
+    
 
+   if(res.status === 404) {
+            setIsLoading(false)
+      return history.push('/notFound')
+     }
+      let json = await res.json()
     setThisOrder(json.data)
 
      setIsLoading(false)

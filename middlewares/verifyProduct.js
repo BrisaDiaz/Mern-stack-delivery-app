@@ -1,5 +1,6 @@
 const {Category} = require('../models/category.model')
 
+
 const checkCategoryExist = async (req,res,next) =>{
 
   try{
@@ -21,5 +22,6 @@ const checkCategoryExist = async (req,res,next) =>{
   }
 
 }
+
 
 module.exports = checkCategoryExist

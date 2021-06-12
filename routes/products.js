@@ -7,8 +7,8 @@ const { getAllProducts,getProductById,postNewProduct,updateProductById,deletePro
   '../controllers/productsControllers')
   const {verifyToken,isAdmin,isAdminOrIsModerator } =require('../middlewares/authJwt')
 
-const  checkCategoryExist = require('../middlewares/verifyProduct');
-
+const  checkCategoryExist= require('../middlewares/verifyProduct');
+const checkIsValidId = require('../middlewares/checkIsValidId');
 //multer config
 const storage = multer.diskStorage({
   destination: function(req,file,cb){
@@ -38,7 +38,7 @@ const upload = multer({
 
 router.get('/', getAllProducts);
 
-router.get('/:id', getProductById);
+router.get('/:id',[checkIsValidId],getProductById);
 
 router.post('/',[verifyToken,isAdmin,upload.single('img'),checkCategoryExist],postNewProduct);
 

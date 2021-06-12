@@ -6,7 +6,6 @@ import AppContext from '../../context/app-context'
 
   const StyledCart = styled.article`
   position:fixed;
-
 z-index:1000;
   right:0;
   top:58px;

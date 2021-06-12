@@ -220,11 +220,11 @@ Cancelar Pedido
 <ButtonsWrapper>
 {
 (page > 1) ?  <button onClick={(e) => setPage(page -1)} >
-Prev</button> : null
+{'<< '}Prev</button> : null
 }
 {
 (page < maxPage) ?  <button onClick={(e) => setPage(page + 1)} >
-Next</button> : null
+Next{' >>'}</button> : null
 }
 </ButtonsWrapper>
 </Page>

@@ -1,12 +1,11 @@
 import styled  from 'styled-components'
 import AppContext from '../../context/app-context'
 import {  useContext} from 'react'
-import {CartButton,CartIcon} from '../menu/MenuItem'
-import shoopingCartIcon from '../../img/shopping-cart-solid.svg';
 import useAddToCartButton from '../../hooks/useAddToCartButton'
 import useProductDetails from '../../hooks/useProductDetails'
 import {StyledLink } from '../Header'
 import defaultImage from '../../img/default-image.png';
+import AddToCartButton from '../AddToCartButton'
 
 export const GoBackLink = styled(StyledLink)`
 position:absolute;
@@ -20,9 +19,9 @@ z-index:800;
   margin-right:3px;
 }
 `;
-const ProductDetails = styled.main`
+const ProductDetails = styled.section`
     width: 90vw;
-    padding: 58px 15px 20px;
+    padding: 60px 15px 20px;
     margin: 0px auto;
     display: flex;
   height: 100%;
@@ -54,6 +53,7 @@ max-width: 350px;
 
 `;
 const ImageWrapper =styled.div`
+padding-top:40px;
     min-height: 300px;
   background-image: ${props => props.isLoaded ? 'none' : `url(${defaultImage})`};
       background-repeat: no-repeat;
@@ -86,7 +86,7 @@ margin:5px auto;
 `
 ;
 
-const ThisCartButton =styled(CartButton)`
+const ThisCartButton =styled(AddToCartButton)`
 transform:scale(0.8);
 margin-top:-45px;
 margin-bottom:10px;
@@ -108,7 +108,7 @@ const Description = styled(Deltail)`
 text-transform:none;
 
 ` 
-export default function ProductDetailsPage(){
+function ProductDetailsPage(){
 
 
     const {cartProducts,addToCart,addToTotalCost,setIsLoading,isLoading}  = useContext(AppContext);
@@ -130,12 +130,8 @@ const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded} = usePr
     <Line/>
   <Name>{thisProductInfo?.name}</Name>
   {(!isInShoppingCart) ? 
-  <ThisCartButton isAdded={isAdded}
-       onClick={ () =>
-        {handlerAddToCartAndAddToTotalCost(thisProductInfo,thisProductInfo?.price)}
-        }>
-          <CartIcon style={{  position:'absolute'}} src={shoopingCartIcon} alt="add-to-cart"/>
-          </ThisCartButton>
+   <ThisCartButton isAdded={isAdded}
+       onClick={ () => handlerAddToCartAndAddToTotalCost(thisProductInfo,parseInt(thisProductInfo?.price))}/>
         : null
 }
     <Line/>
@@ -148,3 +144,5 @@ const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded} = usePr
 </ProductDetails>
   );
 }
+
+export default ProductDetailsPage
