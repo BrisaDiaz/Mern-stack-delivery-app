@@ -1,7 +1,11 @@
 import styled  from 'styled-components'
+import useAddToCartButton from '../hooks/useAddToCartButton'
+import AppContext from '../context/app-context'
+import {  useContext} from 'react'
 import shoopingCartIcon from '../img/shopping-cart-solid.svg';
 
 export const CartButton = styled.button`
+position:relative;
 margin-left:auto;
 margin-top:auto;
 box-shadow: ${props=> props.theme.lightBoxShadow};
@@ -20,7 +24,6 @@ font-size:20px;
 color:#fff;
 transition: all 0.3s ease;
 &:hover{
-
   background:${props => props.theme.darckYellow};
 }`
 export const CartIcon = styled.img`
@@ -29,10 +32,15 @@ height:20px;
 transition: all 05s ease;
 
 `;
-export default function AddToCartButton({isAdded,onClick}){
+export default function AddToCartButton({thisProductInfo}){
+
+      const {cartProducts,addToCart,addToTotalCost}  = useContext(AppContext);
+
+ const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProductInfo,cartProducts,addToCart,addToTotalCost)
 
   return(
-           <CartButton isAdded={isAdded} onClick={ ()=> onClick()}>
+           <CartButton  isAdded={isAdded}
+       onClick={ () => handlerAddToCartAndAddToTotalCost(thisProductInfo,parseInt(thisProductInfo?.price))}>
          <CartIcon style={{  position:'absolute'}} src={shoopingCartIcon} alt="add-to-cart"/>
        </CartButton>
   );

@@ -1,11 +1,9 @@
 import styled  from 'styled-components'
-import useAddToCartButton from '../../hooks/useAddToCartButton'
-import AppContext from '../../context/app-context'
-import { useState, useContext} from 'react'
+import { useState} from 'react'
 import {useHistory,useLocation} from 'react-router-dom';
 import defaultImage from '../../img/default-image.png';
 import AddToCartButton from '../AddToCartButton'
-import { withError } from  './../withError'
+
 
 const Item = styled.figure `
 display:flex;
@@ -88,9 +86,8 @@ height:100%;
  let location = useLocation()
   const item = props.item;
   const [isLoaded,setIsLoaded] = useState(false)
-  const {cartProducts,addToCart,addToTotalCost}  = useContext(AppContext);
-  
-const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(item,cartProducts,addToCart,addToTotalCost)
+
+
 
 let isInDashboard = location.pathname === "/dashboard/myProducts"? true : false ;
 
@@ -123,8 +120,7 @@ const handleRedirect = (id) =>{
         { ( isInDashboard) ?
           props.children
          :
-         <AddToCartButton isAdded={isAdded}
-       onClick={ () => handlerAddToCartAndAddToTotalCost(item,parseInt(item.price))}/>
+          <AddToCartButton thisProductInfo={item}/>
       }
    
       

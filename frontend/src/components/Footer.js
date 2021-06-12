@@ -87,20 +87,23 @@ export default function Footer() {
 < FooterSection >
 <h4>NUESTROS LOCALES
 </h4>
+<address>
 <List>
 
   <ListItem><Icone><img src={locationIcone} alt="location"></img></Icone> <Link> 984 Calle, Barrio, Córdoba</Link></ListItem>
     <ListItem><Icone><img src={locationIcone} alt="location"></img></Icone> <Link>295 Calle, Barrio, Córdoba</Link></ListItem>
     
 </List>
+</address>
 </FooterSection>
 < FooterSection >
 <h4>CONTACTO</h4>
+<address>
   <List>
-<ListItem><Icone><img src={phoneIcone} alt="phone"></img></Icone> <Link>+54 15 555 5787</Link></ListItem>
-<ListItem><Icone><img src={emailcone} alt="email"></img></Icone> <Link>brisaabiaildiaz2000@gmial.com</Link></ListItem>
+<ListItem><Icone><img src={phoneIcone} alt="phone"></img></Icone> <Link href='tel://3513850064'>351  3850064</Link></ListItem>
+<ListItem><Icone><img src={emailcone} alt="email"></img></Icone> <Link href='mailto:brisaabiaildiaz2000@gmial.com'>brisaabiaildiaz2000@gmial.com</Link></ListItem>
   </List>
-  
+  </address>
 
 
 </FooterSection>

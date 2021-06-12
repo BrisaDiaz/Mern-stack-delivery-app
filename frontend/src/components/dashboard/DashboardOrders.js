@@ -12,7 +12,7 @@ import {FiltersBoard} from './DashboardProducts'
 import FilterOrderStateOptions from './../FilterOrderStateOptions'
 import SortOrdersOptions from './../SortOrdersOptions'
 
-export const Page = styled.main`
+export const Page = styled.section`
     padding: 60px 0;
 min-height:100vh;
 width:100%;

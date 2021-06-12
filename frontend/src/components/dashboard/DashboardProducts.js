@@ -17,7 +17,7 @@ import DeleteIcone from '../../img/trash-alt-regular.svg'
 const Title = styled(SectionTitle)`
 margin-bottom:40px;
 `
-const StyledSection = styled.main`
+const StyledSection = styled.section`
 min-height:100vh;
 width:100vw;
 padding:60px 0;

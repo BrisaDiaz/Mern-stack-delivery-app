@@ -8,7 +8,7 @@ import {LoaderSpinner} from './../LoaderSpinner'
 import {ErrorServerMessage} from '../auth/SingupForm'
 import {OptionList,Option} from '../SortProductsOptions'
 
-const EditModal = styled.div`
+const EditModal = styled.section`
 position:absolute;
 top:0;
 left:0;

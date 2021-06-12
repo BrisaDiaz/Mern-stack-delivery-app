@@ -46,17 +46,13 @@ min-height: 250px;
 flex:1 1 400px;
 background:${props => props.theme.black};
     border-radius: 5px;
-    & > small{
-    font-style: italic;
-}
+
 `;
-const UserInfo = styled.p` 
+const UserInfo = styled.dd` 
 margin: 5px 0;
 text-transform:capitalize;
 
-& > b{
-  color:${props => props.theme.darckYellow};
-}
+
 `;
 
 const EditButton = styled(Link)`
@@ -115,15 +111,17 @@ localStorage.removeItem('userId');
         <CardImg><Img src={FormImg} alt="user"/></CardImg>
  <CardInfo>
    <EditButton to="/myAccount/editProfile">Editar</EditButton>
-      <UserInfo><b>Nombre: </b>{currentUser.name}</UserInfo>
-      <UserInfo><b>Email: </b>{currentUser.email}</UserInfo>
+        <dl>
+    <dt>Nombre: </dt>  <UserInfo>{currentUser.name}</UserInfo>
+   <dt>Email:  </dt><UserInfo>{currentUser.email}</UserInfo>
+</dl>
 
-
- <small>Permitenos contactarnos inmediatamente ante cualquier duda o inprevisto.</small>
-          <UserInfo><b>Teléfono: </b>{currentUser.number || null }</UserInfo>
-               <small>Su orden será enviada a la dirección suministrada.</small>
-              <UserInfo><b>Dirección: </b>{currentUser.address || null }</UserInfo>
-
+<i><small>Permitenos contactarnos inmediatamente ante cualquier duda o inprevisto.</small></i>
+     <dl>
+          <dt>Teléfono: </dt><UserInfo>{currentUser.number || null }</UserInfo>
+               <i><small>Su orden será enviada a la dirección suministrada.</small></i>
+         <dt>Dirección: </dt><UserInfo>{currentUser.address || null }</UserInfo>
+</dl>
              <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
     </CardInfo>
       </UserCard>

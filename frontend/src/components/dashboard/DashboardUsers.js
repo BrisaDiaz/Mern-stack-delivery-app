@@ -6,7 +6,7 @@ import {SectionTitle} from '../menu/Menu'
 import EditUserModal from './EditUserModal'
 import SeeMoreButton from "./../SeeMoreButton"
 
-const Page = styled.main`
+const Page = styled.section`
 position:relative;
 width:100vw;
 min-height:100vh;

@@ -1,7 +1,8 @@
 
 const User = require('../models/user.model');
-
 const {Order,STATES}  = require('../models/order.model');
+const ObjectId = require('mongoose').Types.ObjectId;
+
 
 const checkProfileState = async (req,res,next) => {
   try{
@@ -101,4 +102,15 @@ const checkAllowedDelete  = async (req,res,next) => {
   }
 }
 
-module.exports = {checkOrderExist,checkAllowedUpdates,checkProfileState,checkAllowedDelete} 
+const checkIsValidId =  (req,res,next) =>{
+
+ const isValid = ObjectId.isValid(req.params.orderId)
+
+ if(!isValid){
+res.status(404).json({successful:false, message:'Not found, invalid id'})
+ }
+
+ next()
+}
+
+module.exports = {checkOrderExist,checkAllowedUpdates,checkProfileState,checkAllowedDelete,checkIsValidId} 

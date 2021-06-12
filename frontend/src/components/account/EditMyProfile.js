@@ -48,7 +48,11 @@ margin: -10px auto 4px 0;
   `
 
   const InputWrapper = styled.div`
-  margin-top:-10px;
+  margin-top:-15px;
+  & > label{
+font-size:16px;
+  }
+
   `;
 const FormIcone = styled.img`
 width:120px;

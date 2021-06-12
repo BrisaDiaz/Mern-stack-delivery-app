@@ -3,8 +3,8 @@ const router = require('express').Router();
 const {createOrder, getAllOrders,getAllUserOrders,getOrderById,actualizeOrderState,deleteOrderById} = require('../controllers/ordersControllers')
 
   const {verifyToken,isAdmin,isAdminOrIsModerator } =require('../middlewares/authJwt')
-  const {checkOrderExist,checkProfileState,checkAllowedDelete,checkAllowedUpdates} =require('../middlewares/verifyOrder')
-const checkIsValidId = require('../middlewares/checkIsValidId');
+  const {checkOrderExist,checkProfileState,checkAllowedDelete,checkAllowedUpdates,checkIsValidId} =require('../middlewares/verifyOrder')
+
 
 router.get('/',[verifyToken,isAdminOrIsModerator],getAllOrders)
 

@@ -33,10 +33,10 @@ const bounce = keyframes `
     padding: 20px;
     }
   `;
-const DashboarToggleTrigger= styled.div `
+const DashboarToggleTrigger= styled.aside `
 position:fixed;
    z-index:900;
-  left:0;
+  left:5px;
   top:58px;
 display:flex;
 flex-direction:column;

@@ -1,8 +1,8 @@
 import AppState  from './context/AppState'
+import    ScrollToTop from './components/ScrollToTop'
 import {ThemeProvider} from 'styled-components'
 import PrivateRoute from './components/PrivateRoute'
 import PublicRoute from './components/PublicRoute'
-import ScrollToTop  from './components/ScrollToTop'
 import Footer from './components/Footer'
 import LoadingPage from './components/LoadingPage'
 import Home from './components/home/Home'
@@ -45,8 +45,9 @@ function App() {
        
 
       
-      <Router>
-        <ScrollToTop/>
+      <Router >
+      <ScrollToTop />
+
         <AppState>
      <ThemeProvider theme={
        {

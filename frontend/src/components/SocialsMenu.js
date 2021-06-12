@@ -2,7 +2,7 @@ import styled  from 'styled-components'
 import facebook from '../img/facebook-f-brands.svg'
 import instagram from '../img/instagram-brands.svg'
 import twitter from '../img/twitter-brands.svg'
-const StyledSocialsMenu = styled.article`
+const StyledSocialsMenu = styled.address`
 display:flex;
 padding:20px 0;
 justify-content:center;

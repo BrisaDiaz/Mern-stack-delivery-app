@@ -1,10 +1,9 @@
 import React from 'react';
-import { render,  screen,act } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render,  screen } from '@testing-library/react'
 import AppContext from '../../context/app-context'
 import { MemoryRouter,Route } from "react-router-dom";
 import MenuItem from './MenuItem'
-import { Children } from 'react';
+
 
 const item = {    
  _id:20,
@@ -14,8 +13,7 @@ const item = {
     size:'700 gr',
 }
 
-let addToCart =jest.fn(),
-addToTotalCost =jest.fn();
+
 
 describe('menu item', ()=>{
 
@@ -24,7 +22,7 @@ describe('menu item', ()=>{
    render( 
      <MemoryRouter initialEntries={['/menu']}>
       <Route  path="/menu"  >
-            <AppContext.Provider value={{cartProducts:[],addToCart,addToTotalCost}}>
+            <AppContext.Provider value={{cartProducts:[]}}>
                 <MenuItem  item={item}/>
                 
             </AppContext.Provider>
@@ -42,7 +40,7 @@ it('renders add to cart button when is in menu',() =>{
 render( 
      <MemoryRouter initialEntries={['/menu']}>
       <Route  path="/menu"  >
-            <AppContext.Provider value={{cartProducts:[],addToCart,addToTotalCost}}>
+            <AppContext.Provider value={{cartProducts:[]}}>
                 <MenuItem  item={item} children={[<button key='2' />,<button key='3'/>]}/>
   
             </AppContext.Provider>
@@ -61,7 +59,7 @@ expect(screen.getAllByRole('button')).toHaveLength(1)
 render( 
      <MemoryRouter initialEntries={['/dashboard/myProducts']}>
       <Route  path="/dashboard/myProducts"  >
-            <AppContext.Provider value={{cartProducts:[],addToCart,addToTotalCost}}>
+            <AppContext.Provider value={{cartProducts:[]}}>
                 <MenuItem  item={item} children={[<button key='2' />,<button key='3'/>]}>
     
                 </MenuItem>

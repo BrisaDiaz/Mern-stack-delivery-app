@@ -1,12 +1,16 @@
-import styled  from 'styled-components'
+import styled, {keyframes}  from 'styled-components'
 import AppContext from '../../context/app-context'
 import {  useContext} from 'react'
-import useAddToCartButton from '../../hooks/useAddToCartButton'
 import useProductDetails from '../../hooks/useProductDetails'
 import {StyledLink } from '../Header'
 import defaultImage from '../../img/default-image.png';
 import AddToCartButton from '../AddToCartButton'
 
+export const bounceLeft = keyframes `
+  0% { left:15px;}
+  50% { left:20px;}
+   100% { left:15px;}
+`
 export const GoBackLink = styled(StyledLink)`
 position:absolute;
 left:15px;
@@ -14,6 +18,7 @@ margin: 0 ;
 font-size:15px;
 padding: 10px 0;
 z-index:800;
+  animation: ${bounceLeft} 1.2s linear infinite;
 &:before{
   content : "<-- ";
   margin-right:3px;
@@ -42,15 +47,26 @@ max-height: 800px;
     height: 100%;
     max-height: 800px;
 }
+& >button {
+transform:scale(0.8);
+margin-top:-45px;
+margin-bottom:10px;
+@media screen and (min-width:600px){
+margin-top:-50px;
+transform:scale(1);
+}
 `
 const PrductImg = styled.img`
 position:relative;
 left:50%;
 transform:translate(-50%, 0);
+   height: 100%;
+    max-width: 90%;
+    max-height: 250px;
+@media screen and (min-width:500px){
+ max-height: 350px;
 max-width: 350px;
-    max-height: 350px;
-    height: 100%;
-
+}
 `;
 const ImageWrapper =styled.div`
 padding-top:40px;
@@ -65,7 +81,7 @@ background-size: auto 100%;
     }
 `;
 const Name =styled.h2`
-    margin: 10px 0 ;
+margin: 10px 0 ;
 letter-spasing:0;
 line-height:35px;
 max-width:200px;
@@ -86,23 +102,17 @@ margin:5px auto;
 `
 ;
 
-const ThisCartButton =styled(AddToCartButton)`
-transform:scale(0.8);
-margin-top:-45px;
-margin-bottom:10px;
-@media screen and (min-width:600px){
-margin-top:-50px;
-transform:scale(1);
-}
 
-`;
-const Deltail = styled.p`
+
+const Deltail = styled.dd`
 line-height:25px;
 text-transform:capitalize ;
-& > b {
+`;
+const Leyend= styled.dt`
 color: ${props => props.theme.darckYellow};
-
-}
+line-height:25px;
+text-transform:capitalize ;
+    float: left;
 `;
 const Description = styled(Deltail)`
 text-transform:none;
@@ -111,11 +121,9 @@ text-transform:none;
 function ProductDetailsPage(){
 
 
-    const {cartProducts,addToCart,addToTotalCost,setIsLoading,isLoading}  = useContext(AppContext);
+    const {setIsLoading,isLoading,cartProducts}  = useContext(AppContext);
 
 const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded} = useProductDetails({cartProducts,setIsLoading})
-
- const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProductInfo,cartProducts,addToCart,addToTotalCost)
 
 
   return(
@@ -130,16 +138,16 @@ const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded} = usePr
     <Line/>
   <Name>{thisProductInfo?.name}</Name>
   {(!isInShoppingCart) ? 
-   <ThisCartButton isAdded={isAdded}
-       onClick={ () => handlerAddToCartAndAddToTotalCost(thisProductInfo,parseInt(thisProductInfo?.price))}/>
+   <AddToCartButton thisProductInfo={thisProductInfo}/>
         : null
 }
     <Line/>
-     <Deltail><b>Categoría:</b>{thisProductInfo?.category}</Deltail>
-   <Deltail><b>Porción:</b>{thisProductInfo?.size}</Deltail>
-   <Deltail><b>Precio:</b>${thisProductInfo?.price}</Deltail>
-  <Description><b>Descripción:</b>{thisProductInfo?.description}</Description>
-    
+    <dl>
+    <Leyend>Categoría:</Leyend> <Deltail>{thisProductInfo?.category}</Deltail>
+<Leyend>Porción:</Leyend> <Deltail>{thisProductInfo?.size}</Deltail>
+<Leyend>Precio:</Leyend> <Deltail>${thisProductInfo?.price}</Deltail>
+ <Leyend>Descripción:</Leyend> <Description>{thisProductInfo?.description}</Description>
+    </dl>
   
 </ProductDetails>
   );

@@ -36,7 +36,7 @@ margin: 10px auto;
 align-items:center;
 &> input{
 transform: scale(1.5);
-    margin: 0 10px;
+margin: 5px 10px 0;
     cursor: pointer;
 }
 

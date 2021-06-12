@@ -208,14 +208,14 @@ export default function SingupForm(){
           <UserLastNameInput  errors={errors} register={register}/>
      <UserEmailInput  errors={errors} register={register}/>
      <UserPasswordInput  errors={errors} register={register} placeholder="Tu contraseña..."  />
-      
-   {isFormLoading ?  <LoaderSpinner small /> :
+
 
          <ErrorServerMessage>{serverError}</ErrorServerMessage>
-          }    
+
  
            <FormLink onClick={redirectToLogin}>¿Ya tienes una cuenta? <b>Login</b> </FormLink>
  <ButtonPrimary as="input" type="submit" value="Sing Up"/>
+     {isFormLoading && <LoaderSpinner small />}
       </Form>
     </FormCard>
   );

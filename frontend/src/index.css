@@ -31,12 +31,14 @@ body {
   color: #272727;
 }
 p,
+dd,
 input,
 textarea,
 textarea::placeholder,
 input::placeholder {
   font-family: "Open Sans", sans-serif;
 }
+
 textarea::placeholder,
 input::placeholder {
   font-family: "Open Sans", sans-serif;
@@ -86,17 +88,22 @@ li {
   flex-direction: column-reverse;
 }
 
-b {
+b,
+dt {
   margin-right: 5px;
   font-family: "Oswald", sans-serif;
   font-size: 16px;
 }
+dt {
+  float: left;
+  color: #fcaf01;
+}
 
 .error {
-    border: 1px solid red;
-    color: red;
-    background-color: rgba(255, 0, 0, 0.1);
-    padding: 1rem;
-    width: 250px;
-    text-align: center;
+  border: 1px solid red;
+  color: red;
+  background-color: rgba(255, 0, 0, 0.1);
+  padding: 1rem;
+  width: 250px;
+  text-align: center;
 }

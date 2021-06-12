@@ -121,6 +121,7 @@ const  {handleRenameSubmit,handleCreateSubmit ,handleDelete,setEditingCategory,e
 
   <form name="editCategory"  onSubmit={handleRenameSubmit}>
 
+
   <OptionList name="category" onChange={(e) =>setEditingCategory(e.target.value)}>
  
   {categories?.map(cat =>
@@ -128,16 +129,20 @@ const  {handleRenameSubmit,handleCreateSubmit ,handleDelete,setEditingCategory,e
 <Option key={cat?._id } value={cat?.name} >{cat?.name}</Option>
 
   )}
+
 </OptionList>
-          
+
                   <DeleteButton onClick={handleDelete}>Eliminar</DeleteButton>
-                  
+     
 <hr></hr>
+
+
                         <h4>Remombrar categoría</h4>
 
   <Input placeholder={`Renombrar ${editingCategory}`} name="categoryNewName"   />
       {isRenameFormLoading  && <LoaderSpinner small />  }
 <LoadButton as="input" type="submit" value="Editar"/>
+
 
 </form>
 

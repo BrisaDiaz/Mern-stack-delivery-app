@@ -7,7 +7,6 @@ import { SliderContainer,IndicatorWrapper,IndicatorDot,SliderContent,Slide} from
 const StyledTestimonialSlider = styled.div`
 width:100%;
 min-height:360px;
-
 position:relative;
 
 `;
@@ -24,7 +23,7 @@ const ThisIndicatorDot = styled(IndicatorDot)`
 border:2px solid ${props => props.theme.darckYellow};
 background: ${(props)=>(( props.slide === parseInt(props.index )) ? "#fcba1c" : "transparent")} ;
 `;
-const Comment = styled.p`
+const Comment = styled.q`
 color: #fff;
 text-align:center;
 
@@ -66,7 +65,16 @@ const res = await fetch('https://jsonplaceholder.typicode.com/comments');
 
     }catch(err){
       console.log(err)
+      
+      let i = 0
+
+      if(i < 6){
+  fetchData()
+        return i += 1
+      }
+
     }
+
 
   };
 fetchData()

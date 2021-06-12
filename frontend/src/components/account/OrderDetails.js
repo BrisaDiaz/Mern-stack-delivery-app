@@ -69,6 +69,7 @@ text-align:center;
 export const ClientInfo = styled.div`
 margin: 0 auto;
 max-width:900px;
+    padding-bottom: 10px;
 display: flex;
   gap: 15px;
     justify-content: space-between;
@@ -115,8 +116,10 @@ function UserOrderStateChart ({states}){
   
      <ProcessInfo  key ={state?.date}>
            <h4>{state?.name}</h4>
+           <date>
            <small>{new Date(state?.date).toLocaleString()?.split(" ")[0]}</small>
             <small>{new Date(state?.date).toLocaleString()?.split(" ")[1]}</small>
+            </date>
          </ProcessInfo>
   
   )}
