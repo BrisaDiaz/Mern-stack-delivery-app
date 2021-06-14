@@ -75,6 +75,7 @@ export default function useMenu({categories}){
   const resetQuery = () => {
     setPage(1)
     setSorting('-createdAt')
+    setCategory('all')
   }
 
 
