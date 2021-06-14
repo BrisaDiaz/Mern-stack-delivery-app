@@ -76,7 +76,7 @@ query.append('active',activeProducts)
      
 const resetQuery = () =>{
 setPage(1)
-setActiveProducts('null')
+setActiveProducts('all')
 }
 
 const history = useHistory()
