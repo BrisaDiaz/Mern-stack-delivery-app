@@ -223,7 +223,7 @@ export function ProductNameInput({register,errors}){
  <TextInput 
  style={{ borderColor: errors.productName && "#bf0000" }  }
           placeholder="Nombre..."
-
+    data-testid="name"
                        name="name"
           ref={register({
              required: '*El campo es requrido',
@@ -247,8 +247,8 @@ export function ProductSizeInput({register,errors}){
           <TextInput 
            style={{ borderColor: errors.size && "#bf0000" }  }
           placeholder="Cantidad/Tamaño..."
-                      name="size"
-                
+                 data-testid="size"
+                name='size'
           ref={register({
               required:'*El campo es requerido' ,
              pattern:{
@@ -273,9 +273,9 @@ export function ProductDescriptionTextArea({register,errors}){
        style={{ borderColor: errors.description && "#bf0000" }  }
           
                       name="description"
-                
+              data-testid="description"  
           ref={register({
-              required:'*El campo es requerido' ,
+      required:'*El campo es requerido' ,
           
           })}
       >
@@ -295,6 +295,7 @@ export function ProductPriceInput({register,errors}){
              <TextInput placeholder="Precio..."
            style={{ borderColor: errors.productPrice && "#bf0000" }  }
                  name="price"
+                     data-testid="price"  
                   ref={register({ 
                     required:'*El campo es requerido' ,
                   pattern:{
@@ -360,7 +361,7 @@ export default  function UpdateNewProductForm() {
    
       <ThisFormCard>
   <Logo src = {trayIcon} alt="new-product"></Logo>
-        <ThisForm name='productsFactory' onSubmit={handleSubmit(onSubmit)}>
+        <ThisForm id='productsFactory' name='productsFactory' onSubmit={handleSubmit(onSubmit)}>
              <FormTitle>Cargar nuevos productos</FormTitle>
                    
   <ProductNameInput register={register} errors={errors}/>
@@ -379,7 +380,7 @@ export default  function UpdateNewProductForm() {
 
 
       <ImageUploader  register={register} errors={errors}/>     
-   {formIsLoading  &&  <LoaderSpinner small /> }
+   {formIsLoading  &&  <LoaderSpinner small  data-testid='spinner'/> }
  <FormButtons/>
       
 

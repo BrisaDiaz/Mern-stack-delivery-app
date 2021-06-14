@@ -47,7 +47,6 @@ function App() {
       
       <Router >
       <ScrollToTop />
-
         <AppState>
      <ThemeProvider theme={
        {

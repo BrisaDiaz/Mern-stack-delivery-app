@@ -13,6 +13,9 @@ jest.mock( './MenuItem', () => (props) => {
   return <mock-childComponent />;
 });
 
+
+
+
 describe('Menu with considences on search',()=>{
 
 
@@ -116,17 +119,18 @@ render(
         )
   )
 
-  expect(screen.getByRole('button',{name:'Next'})).toBeInTheDocument()
-   expect(screen.queryByRole('button',{name:'Prev'})).not.toBeInTheDocument()
- await act(async ()=>  userEvent.click(screen.getByRole('button',{name:'Next'})) )
+  expect(screen.getByRole('button',{name:'Next >>'})).toBeInTheDocument()
+   expect(screen.queryByRole('button',{name:'<< Prev'})).not.toBeInTheDocument()
+ await act(async ()=>  userEvent.click(screen.getByRole('button',{name:'Next >>'})) )
 
 
-   expect(screen.getByRole('button',{name:'Prev'})).toBeInTheDocument()
-  expect(screen.getByRole('button',{name:'Next'})).toBeInTheDocument()
-    await act(async ()=>  userEvent.click(screen.getByRole('button',{name:'Prev'})) )
+   expect(screen.queryByRole('button',{name:'<< Prev'})).toBeInTheDocument()
+  expect(screen.getByRole('button',{name:'Next >>'})).toBeInTheDocument()
 
-    expect(screen.getByRole('button',{name:'Next'})).toBeInTheDocument()
-})
+    await act(async ()=>  userEvent.click(screen.getByRole('button',{name:'<< Prev'})) )
+
+  expect(screen.getByRole('button',{name:'Next >>'})).toBeInTheDocument()
+}, 10000)
 
 
 })
@@ -171,7 +175,7 @@ render(
   )
 
 expect(screen.getByText('No se han encontrado coincidencias, intenta de nuevo!!')).toBeInTheDocument()
-  expect(screen.queryByRole('button',{name:'Next'})).not.toBeInTheDocument()
+  expect(screen.queryByRole('button',{name:'Next>>'})).not.toBeInTheDocument()
 
 })
 
