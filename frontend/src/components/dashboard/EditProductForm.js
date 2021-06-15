@@ -1,6 +1,4 @@
 import styled  from 'styled-components'
-import {  useContext} from 'react'
-import AppContext from '../../context/app-context'
 import useEditProductForm from '../../hooks/useEditProductForm'
 import {ErrorMessage} from '../contact/ContactForm';
 import {LoaderSpinner} from './../LoaderSpinner'
@@ -30,12 +28,9 @@ transform:scale(0.75);
 
 export default function UpdateNewProductForm() {
 
-    const {token,productToEdit,setIsSuccessfullySend,categories,setAllCategories}  = useContext(AppContext);
-const {register ,handleSubmit, errors, onSubmit,setNameValue,setCategoryValue,setPriceValue,setSizeValue,setDescriptionValue,nameValue,categoryValue,
+const {categories,register ,handleSubmit, errors, onSubmit,productToEdit,setNameValue,setCategoryValue,setPriceValue,setSizeValue,setDescriptionValue,nameValue,categoryValue,
 priceValue,sizeValue,descriptionValue,formIsLoading
-} = useEditProductForm({token,
-productToEdit,
-setIsSuccessfullySend,setAllCategories})
+} = useEditProductForm()
  
   return(
     <StyledSection>
@@ -43,7 +38,7 @@ setIsSuccessfullySend,setAllCategories})
       <ThisFormCard>
         <EditIcone src = {editIcone} alt="new-product"></EditIcone>
         <ThisForm enctype="multipart/form-data" onSubmit={handleSubmit(onSubmit)}>
-             <FormTitle>Editar {productToEdit.name}</FormTitle>
+             <FormTitle>Editar {productToEdit?.name}</FormTitle>
 
                {errors.productName && <ErrorMessage  role="alert">*El campo es obligario</ErrorMessage>}
 
@@ -158,7 +153,7 @@ selected = {categoryValue?.toLowerCase() === cat?.name ? true : false}
               
           })}></DropZone>  
 
-<ProductState state={productToEdit.active ? "checked" : null } />
+<ProductState state={productToEdit?.active ? "checked" : null } />
 
    {formIsLoading  &&  <LoaderSpinner small /> }
    

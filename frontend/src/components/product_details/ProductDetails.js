@@ -1,6 +1,4 @@
 import styled, {keyframes}  from 'styled-components'
-import AppContext from '../../context/app-context'
-import {  useContext} from 'react'
 import useProductDetails from '../../hooks/useProductDetails'
 import {StyledLink } from '../Header'
 import defaultImage from '../../img/default-image.png';
@@ -121,13 +119,13 @@ text-transform:none;
 function ProductDetailsPage(){
 
 
-    const {setIsLoading,isLoading,cartProducts}  = useContext(AppContext);
 
-const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded} = useProductDetails({cartProducts,setIsLoading})
+
+const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded} = useProductDetails()
 
 
   return(
-      isLoading ? null :   
+
       
 <ProductDetails >
     

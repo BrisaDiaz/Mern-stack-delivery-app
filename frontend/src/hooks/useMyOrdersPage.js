@@ -1,12 +1,17 @@
 import {useHistory} from 'react-router-dom'
 import {  useState,useEffect} from 'react'
+import {useStorage} from '../context/useStorage'
 import deleteOrderAPI from '../API/deleteOrderAPI'
 import currentUserAPI from '../API/currentUserAPI'
 
-export default function useMyOrdersPage({currentUser,token,setCurrentUser,setIsLoading}){
+
+
+export default function useMyOrdersPage(){
+
+    const {currentUser,token,setCurrentUser,setIsLoading}= useStorage()
+    
   const history = useHistory()
 
-     
     let limit = 5
     const [page, setPage] = useState(1)
     const [maxPage, setMaxPage] = useState(1)

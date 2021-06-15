@@ -1,7 +1,5 @@
 import styled  from 'styled-components'
 import useAddToCartButton from '../hooks/useAddToCartButton'
-import AppContext from '../context/app-context'
-import {  useContext} from 'react'
 import shoopingCartIcon from '../img/shopping-cart-solid.svg';
 
 export const CartButton = styled.button`
@@ -34,9 +32,9 @@ transition: all 05s ease;
 `;
 export default function AddToCartButton({thisProductInfo}){
 
-      const {cartProducts,addToCart,addToTotalCost}  = useContext(AppContext);
 
- const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProductInfo,cartProducts,addToCart,addToTotalCost)
+
+ const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProductInfo)
 
   return(
            <CartButton  isAdded={isAdded}

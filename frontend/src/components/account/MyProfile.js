@@ -1,6 +1,5 @@
 import styled  from 'styled-components'
-import AppContext from '../../context/app-context'
-import {   useContext } from 'react'
+import useMyProfile from '../../hooks/useMyProfile'
 import {Link} from 'react-router-dom'
 
 import FormImg from '../../img/user-circle-solid.svg'
@@ -13,7 +12,6 @@ margin:0;
 min-height:100vh;
 width:100vw;
 padding:60px 15px 40px;
-
 `;
 const UserCard =styled.article`
 margin:30px auto;
@@ -21,15 +19,13 @@ display:flex;
 height:max-content;
 flex-wrap:wrap;
 min-height: 250px;
-    border-radius: 5px;
-
-  box-shadow :${props => props.theme.lightBoxShadow};
+ border-radius: 5px;
+box-shadow :${props => props.theme.lightBoxShadow};
 `;
 const CardImg = styled.div`
-
-    min-height: 100%;
-    border-radius: 5px;
-    padding:10px 0;
+min-height: 100%;
+border-radius: 5px;
+ padding:10px 0;
 display:flex;
 flex:1 1 150px;
 width:100%;
@@ -45,31 +41,27 @@ padding:15px;
 min-height: 250px;
 flex:1 1 400px;
 background:${props => props.theme.black};
-    border-radius: 5px;
-
+border-radius: 5px;
 `;
 const UserInfo = styled.dd` 
 margin: 5px 0;
 text-transform:capitalize;
-
-
 `;
 
 const EditButton = styled(Link)`
 padding:5px 8px;
 cursor:pointer;
 text-decoration:none;
-    border-radius: 5px;
+ border-radius: 5px;
 font-weight:600;
-
-    margin-left: 80%;
-    border: none;
-    background: #fff;
-       color:${props => props.theme.black};
-    transition:all 0.3s ease;
-    &:hover{
-       box-shadow: inset 0 0 8px 2px #cdc8c8;
-    }
+margin-left: 80%;
+border: none;
+background: #fff;
+color:${props => props.theme.black};
+transition:all 0.3s ease;
+&:hover{
+box-shadow: inset 0 0 8px 2px #cdc8c8;
+ }
 `
 const LogoutButton = styled.button`
 padding: 4px 8px;
@@ -91,18 +83,9 @@ padding: 4px 8px;
 `;
 function MyProfile() {
 
-  const {currentUser,setIsAdmin,setToken,setIsNotLogin,emptyCart,resetTotalCost} = useContext(AppContext)
-
+  const {handleLogout,currentUser}=  useMyProfile()
   
-const handleLogout = () =>{
-emptyCart()
-setIsNotLogin() ;
-setToken("");
- setIsAdmin(false);
- resetTotalCost()
-localStorage.removeItem('userId');
 
-}
 
 
   return (

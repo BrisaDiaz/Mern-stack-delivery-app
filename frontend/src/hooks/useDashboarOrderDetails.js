@@ -1,7 +1,13 @@
 import {useParams,useHistory} from 'react-router-dom'
 import {useEffect,useState} from 'react'
+import {useStorage} from '../context/useStorage'
 
-export default function useDashboarOrderDetails({setIsLoading,token}){
+
+  
+export default function useDashboarOrderDetails(){
+
+    const {setIsLoading,token,isLoading} = useStorage()
+    
 let history = useHistory()
 let {orderID}=  useParams()
 
@@ -59,7 +65,7 @@ signal,
 
   fechOrder()
 
-   window.scrollTo(0, 0)
+
   return () =>{
      controller.abort()
    }   
@@ -67,6 +73,6 @@ signal,
  },[orderID,isRefreshing])
 
 
-return {thisOrder,isRefreshing,setIsRefreshing}
+return {thisOrder,isRefreshing,setIsRefreshing,isLoading}
 
 }

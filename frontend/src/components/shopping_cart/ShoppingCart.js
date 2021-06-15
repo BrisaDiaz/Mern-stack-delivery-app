@@ -1,14 +1,13 @@
 import styled  from 'styled-components';
 import SingleCartProduct from './SingleCartProduct';
 import useShoppingCart from '../../hooks/useShoppingCart'
-import {useContext} from 'react';
-import AppContext from '../../context/app-context'
+
 
   const StyledCart = styled.aside`
   position:fixed;
 z-index:1000;
   right:0;
-  top:58px;
+  top:57px;
   width: 300px;
   min-height:max-content;
   max-height:100vh;
@@ -75,10 +74,9 @@ align-items:center;
 
 export default   function ShooppingCart() {
 
-let {cartProducts,totalCost,emptyCart,resetTotalCost,isCartOpen,isLogin,currentUser,setCurrentUser,token,setAllOrders,setIsLoading,toggleCart}  = useContext(AppContext)
 
-const {emptyCartAndResetTotalCost,handelOrden} = useShoppingCart(
-{  emptyCart,resetTotalCost,isLogin,cartProducts,currentUser,setCurrentUser,token,setAllOrders,setIsLoading,toggleCart})
+
+const {emptyCartAndResetTotalCost,handelOrden,totalCost,isCartOpen,cartProducts} = useShoppingCart()
 
 
   return(
@@ -89,7 +87,9 @@ const {emptyCartAndResetTotalCost,handelOrden} = useShoppingCart(
       </CartHeader>
       
       <CartProductsList>
-            {cartProducts.map( (product,index)=>  
+            {cartProducts?.length > 0 ?
+
+             cartProducts.map( (product,index)=>  
 
       
        
@@ -100,7 +100,11 @@ const {emptyCartAndResetTotalCost,handelOrden} = useShoppingCart(
       
       </SingleCartProduct>
          
-          )}
+          )
+
+          :null
+          
+      }
 </CartProductsList>
 <CartResume>
        <h2>Total: ${totalCost}</h2>

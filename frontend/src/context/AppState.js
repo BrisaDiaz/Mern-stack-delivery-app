@@ -2,6 +2,8 @@ import  {useReducer,useEffect} from 'react';
 import AppContext from  './app-context';
 import appReducer from  './app-reducer';
 
+
+
 import {
   SET_IS_LOADING,
   SET_ALL_USERS,
@@ -68,7 +70,6 @@ getCategoriesAPI()
     useEffect( ()=>{
 getCategoriesAPI()
   },[])
-
 
 
 

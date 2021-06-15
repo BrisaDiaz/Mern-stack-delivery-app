@@ -1,7 +1,5 @@
 import styled  from 'styled-components'
 import {ErrorMessage} from './ContactForm'
-import {useContext} from 'react'
-import AppContext from '../../context/app-context'
 import useNewsletterForm from '../../hooks/useNewsletterForm'
 import {Button} from '../Buttons'
 
@@ -80,8 +78,8 @@ padding: 17px 10px 17px 20px;
 `;
 
 export default function NewsletterForm(){
-  const {isLogin,setIsSuccessfullySend} = useContext(AppContext)
-const {register,handleSubmit,errors,onSubmit} =useNewsletterForm({setIsSuccessfullySend,isLogin})
+
+const {register,handleSubmit,errors,onSubmit} =useNewsletterForm()
 
 
   return(

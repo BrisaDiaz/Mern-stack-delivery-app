@@ -1,7 +1,6 @@
 import styled  from 'styled-components'
-import AppContext from '../../context/app-context'
 import usePostNewProductForm from '../../hooks/usePostNewProductForm'
-import {Fragment ,useContext} from 'react'
+import {Fragment } from 'react'
 import {LoaderSpinner} from './../LoaderSpinner'
 import {ErrorMessage} from '../contact/ContactForm';
 import trayIcon from '../../img/tray.svg';
@@ -59,8 +58,8 @@ background:#fff;
 box-shadow:none;
 `
 export const  ThisForm = styled(Form)`
-max-width:90%;
-width:90%;
+max-width:95%;
+width:95%;
 margin: 0 auto;
 & > input {
   background :#f0f0f0;
@@ -113,8 +112,8 @@ outline:none;
 border:none;
 `
  export const Description =styled.textarea`
-min-width:90%;
-max-width:90%;
+max-width: 90%;
+    width: 90%;
   border:none;
   outline:none;
 box-shadow: inset 1px 1px 6px 0px #ccc;
@@ -352,9 +351,9 @@ id="state" type="checkbox" defaultChecked={state} name="state" />
   }
 export default  function UpdateNewProductForm() {
  
-    const {token,setIsSuccessfullySend,productsAPI,categories,formIsLoading}  = useContext(AppContext);
+  
     
-      const  {register,handleSubmit,errors,onSubmit } =   usePostNewProductForm({token,productsAPI,setIsSuccessfullySend})
+      const  {register,handleSubmit,errors,onSubmit,formIsLoading,categories} =   usePostNewProductForm()
 
   return(
     <StyledSection>

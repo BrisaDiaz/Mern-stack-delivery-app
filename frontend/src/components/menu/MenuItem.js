@@ -5,7 +5,7 @@ import defaultImage from '../../img/default-image.png';
 import AddToCartButton from '../AddToCartButton'
 
 
-const Item = styled.figure `
+const Item = styled.article `
 display:flex;
 box-sizing:border-box;
 border-radius:5px;

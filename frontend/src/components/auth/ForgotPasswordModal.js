@@ -46,7 +46,7 @@ const CloseModalButton = styled.button`
 `
 export default function ForgotPasswordModal({setIsModalOpened,isModalOpened}){
 
-  const  {isFormLoading,serverError,register, handleSubmit,onSubmit, errors} = useForgotPasswordModal({setIsModalOpened})
+  const  {isFormLoading,serverError,register, handleSubmit,onSubmit, errors} =useForgotPasswordModal({setIsModalOpened})
 
 return(
   <Modal isModalOpened={isModalOpened}>

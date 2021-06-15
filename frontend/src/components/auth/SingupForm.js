@@ -1,6 +1,5 @@
 import styled  from 'styled-components'
-import {useContext ,Fragment} from 'react' 
-import AppContext from '../../context/app-context'
+import {Fragment} from 'react' 
 import useSingupForm from '../../hooks/useSingupForm'
 import {ButtonPrimary} from '../Buttons'
 import burgerIcon from '../../img/burger-icon.png'
@@ -196,9 +195,9 @@ type='password'
 }
 export default function SingupForm(){
 
-    const {setIsSingUp} = useContext(AppContext);
 
-   const {register,handleSubmit,errors,onSubmit,redirectToLogin,isFormLoading,serverError} = useSingupForm(setIsSingUp)
+
+   const {register,handleSubmit,errors,onSubmit,redirectToLogin,isFormLoading,serverError} = useSingupForm()
   return(
     <FormCard>
              <Logo src={burgerIcon} alt="LogoBrand"></Logo>

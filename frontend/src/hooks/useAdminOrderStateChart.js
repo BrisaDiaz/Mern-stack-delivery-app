@@ -1,7 +1,12 @@
 import updateOrderStateAPI from '../API/updateOrderStateAPI'
 import {useHistory} from 'react-router-dom'
+import {useStorage} from '../context/useStorage'
 
-export default function useAdminOrderStateChart({token,setIsLoading,orderId,makeRefresh,refreshState,states}){
+
+  
+export default function useAdminOrderStateChart({orderId,makeRefresh,refreshState,states}){
+
+  const {token,setIsLoading} = useStorage()
 
   const history = useHistory()
 

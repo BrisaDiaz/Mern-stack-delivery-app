@@ -1,6 +1,5 @@
 import styled  from 'styled-components'
-import AppContext from './../context/app-context'
-import {   useContext } from 'react'
+import {useStorage} from '../context/useStorage'
 import {LoaderSpinner} from './LoaderSpinner'
 const Page = styled.main`
 position:fixed;
@@ -16,11 +15,11 @@ z-index:2000;
 background: #fff;
 
 `;
-export default function LoadingPage(){
-      const {isLoading}  = useContext(AppContext);
+export default function LoadingPage(props){
+      let {isLoading}  = useStorage()
   return(
 
-   isLoading ?
+   (isLoading || props.isLoading) ?
    <Page ><LoaderSpinner/></Page>
  : null
 

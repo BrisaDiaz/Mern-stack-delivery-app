@@ -1,18 +1,16 @@
 
 import useDashboarOrderDetails from '../../hooks/useDashboarOrderDetails'
-import {useParams} from 'react-router-dom'
 import AdminOrderStateChart from './AdminOrderStateChart'
-import AppContext from '../../context/app-context'
-import {Fragment,useContext,useEffect,useState} from 'react'
+import {Fragment} from 'react'
 import {GoBackLink} from '../product_details/ProductDetails'
-import {Page,CenterTitle,DetailTable,ClientInfo} from '../account/OrderDetails'
+import {Page,OrderId,DetailTable,ClientInfo} from '../account/OrderDetails'
 
 
 
 export default function OrderDetails(){
 
-const {setIsLoading,token,isLoading} = useContext(AppContext)
- const {thisOrder,isRefreshing,setIsRefreshing} = useDashboarOrderDetails({setIsLoading,token})
+
+ const {thisOrder,isRefreshing,isLoading,setIsRefreshing} = useDashboarOrderDetails()
 
  
   return(
@@ -23,7 +21,7 @@ const {setIsLoading,token,isLoading} = useContext(AppContext)
  <Fragment>
     <GoBackLink to="/dashboard/orders" >Regresar</GoBackLink>
 
-  <CenterTitle>Nº ID:<span>{thisOrder?.orderID}</span></CenterTitle>
+  <OrderId>Nº ID:<span>{thisOrder?.orderID}</span></OrderId>
 
 <AdminOrderStateChart  
 states={thisOrder?.states}
@@ -34,7 +32,7 @@ refreshState={isRefreshing}
 
 
       <hr></hr>
-   <CenterTitle>Detalles de envio</CenterTitle>
+   <h3>Detalles de envio</h3>
 
     <ClientInfo>
       <p><b>Destinatario:</b>{thisOrder?.client[0]?.name}</p>
@@ -43,7 +41,7 @@ refreshState={isRefreshing}
       </ClientInfo>
       <br></br>
           <hr></hr>
-           <CenterTitle>Detalles del pedido</CenterTitle>
+           <h3>Detalles del pedido</h3>
  <DetailTable>
    <thead>
      <th>Producto</th>

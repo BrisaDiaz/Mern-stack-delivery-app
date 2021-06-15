@@ -1,11 +1,12 @@
 import {useHistory} from 'react-router-dom'
 import postOrderAPI from '../API/postOrderAPI'
+import {useStorage} from '../context/useStorage'
 
 
 
-export default   function  useShoppingCart({  emptyCart,resetTotalCost,isLogin,cartProducts,currentUser,setCurrentUser,token,setAllOrders,setIsLoading,toggleCart}) {
+export default   function  useShoppingCart() {
 
- 
+ const {cartProducts,totalCost,emptyCart,resetTotalCost,isCartOpen,isLogin,currentUser,setCurrentUser,token,setAllOrders,setIsLoading,toggleCart}  = useStorage()
 
  
 const emptyCartAndResetTotalCost = () =>{
@@ -29,7 +30,7 @@ if(cartProducts.length !== 0){
 
 
 
-  postOrderAPI({cartProducts,token,emptyCart,setAllOrders,resetTotalCost,setCurrentUser,setIsLoading,toggleCart,history})
+   postOrderAPI({cartProducts,token,emptyCart,setAllOrders,resetTotalCost,setCurrentUser,setIsLoading,toggleCart,history})
 
 
 
@@ -39,5 +40,5 @@ if(cartProducts.length !== 0){
 }
 
 
-  return {emptyCartAndResetTotalCost ,handelOrden}
+  return { emptyCartAndResetTotalCost,handelOrden,totalCost,isCartOpen,cartProducts} 
 }

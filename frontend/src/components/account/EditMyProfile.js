@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import {useContext,Fragment} from 'react' 
-import AppContext from '../../context/app-context'
+import {Fragment} from 'react' 
 import useEditProfileForm from '../../hooks/useEditProfileForm'
 import {LoaderSpinner} from './../LoaderSpinner'
 import {ErrorMessage} from '../contact/ContactForm';
@@ -41,6 +40,7 @@ margin: -10px auto 4px 0;
 & >${OptionList} {
   min-width: 100%
 }
+
 & > input:focus {
   outline: 2px solid #ccc;
     outline-style: auto;
@@ -169,9 +169,9 @@ placeholder={placeholder}
 } 
 export default function EditMyProfile() {
   
-const {token,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} = useContext(AppContext);
 
-const { register,handleSubmit,errors,onSubmit ,serverError,formIsLoading,isChangingPassword,setIsChangingPassword} = useEditProfileForm({token,setCurrentUser,setAllUsers,setIsSuccessfullySend,isAdmin})
+
+const { register,handleSubmit,errors,onSubmit ,serverError,formIsLoading,isChangingPassword,setIsChangingPassword} = useEditProfileForm()
 
   return(
 <EditProfilePage>
@@ -185,7 +185,17 @@ const { register,handleSubmit,errors,onSubmit ,serverError,formIsLoading,isChang
     <FormIcone src={userEditIcone} alt="edit-profile"/>
 <UserNameInput  errors={errors} register={register}/>
    <UserLastNameInput  errors={errors} register={register}/>
-   <InputWrapper >
+  
+     
+ 
+               <CellphoneInput  errors={errors} register={register}  placeholder="Tu telèfono..."/>
+
+<CityAddressOptions register={register} />
+
+         <StreetAddressInput  errors={errors} register={register} placeholder="Calle..."/>
+
+         <StreetNumberInput  errors={errors} register={register} placeholder="Número de puerta..."/>
+ <InputWrapper >
    <NewPasswordCheckbox setIsChangingPassword ={setIsChangingPassword} value={isChangingPassword} />
    </InputWrapper>
 
@@ -197,16 +207,6 @@ const { register,handleSubmit,errors,onSubmit ,serverError,formIsLoading,isChang
 </Fragment>
 : null
 }
-     
- 
-               <CellphoneInput  errors={errors} register={register}  placeholder="Tu telèfono..."/>
-
-<CityAddressOptions register={register} />
-
-         <StreetAddressInput  errors={errors} register={register} placeholder="Calle..."/>
-
-         <StreetNumberInput  errors={errors} register={register} placeholder="Número de puerta..."/>
-
      
 
        

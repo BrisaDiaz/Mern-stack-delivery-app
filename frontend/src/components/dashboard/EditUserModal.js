@@ -1,6 +1,4 @@
 import styled  from 'styled-components';
-import {useContext} from 'react' 
-import AppContext from '../../context/app-context'
 import {FormButtons } from './CreateNewProductForm'
 import useEditUserModal from '../../hooks/useEditUserModal'
 import {TableTitle} from './DashboardUsers'
@@ -28,6 +26,7 @@ height:max-content;
 margin: 0 auto;
 position:absolute;
 top:50%;
+
 border-radius: 5px;
 left:50%;
 transform:translate(-50%,-50%);
@@ -50,6 +49,7 @@ margin-bottom: 10px;
 const EditTableHeader = styled.div`
 background: ${props => props.theme.orange};
     width: 100%;
+    
     padding: 8px 15px;
   text-shadow: ${props => props.theme.darckTextShadow};
     box-shadow: inset 0 0 20px 5px rgb(23 23 23 / 15%);
@@ -74,10 +74,9 @@ align-items:center;
 
  export default function EditUserForm({user,isEditing,setIsEditing}) {
 
-const {token,setAllUsers} = useContext(AppContext);
 
 
-const {serverError,isFormLoading,handelReset,handelSubmit} = useEditUserModal({token,setIsEditing,setAllUsers})
+const {serverError,isFormLoading,handelReset,handelSubmit} = useEditUserModal({setIsEditing})
 
 
 

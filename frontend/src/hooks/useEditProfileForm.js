@@ -1,9 +1,14 @@
 import {useForm} from 'react-hook-form';
 import {useHistory} from 'react-router-dom';
 import {useState} from 'react' 
+import {useStorage} from '../context/useStorage'
 import upldateProfileAPI from '../API/upldateProfileAPI'
 
-export default function useEditProfileForm({token,setCurrentUser,setAllUsers,setIsSuccessfullySend,isAdmin}){
+
+
+export default function useEditProfileForm(){
+  
+  const {token,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} = useStorage()
   
   const [serverError,setServerError] = useState("");
     const [isChangingPassword,setIsChangingPassword] = useState(false);
@@ -15,7 +20,7 @@ const [formIsLoading,setFormIsLoading] = useState(false);
   mode: "onBlur",
 });
 
- function onSubmit(data,e) {
+async function onSubmit(data,e) {
 
  e.preventDefault()
 
@@ -35,7 +40,7 @@ city,
 street,
 streetNumber: e.target.userStreetNumber?.value
 }
-upldateProfileAPI({
+ await upldateProfileAPI({
   setFormIsLoading,
 setIsSuccessfullySend,
 setServerError,

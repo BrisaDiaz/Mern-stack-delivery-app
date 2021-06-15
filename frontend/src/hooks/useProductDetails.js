@@ -1,7 +1,13 @@
 import { useEffect,useState} from 'react'
 import {useParams,useLocation,useHistory} from 'react-router-dom'
+import {useStorage} from '../context/useStorage'
 
-export default function useProductDetails({cartProducts,setIsLoading}){
+
+
+export default function useProductDetails(){
+
+  const {setIsLoading,cartProducts} = useStorage()
+  
 let location = useLocation()
 let history = useHistory()
 let search = new URLSearchParams(location.search);

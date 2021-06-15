@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { LoaderSpinner } from './../LoaderSpinner'
-import AppContext from '../../context/app-context'
-import { useContext} from 'react'
+
 import useMenu from '../../hooks/useMenu'
 import SearchBar from '../MenuSearchBar'
 import SortProductsOptions from '../SortProductsOptions'
@@ -29,9 +28,15 @@ display:flex;
 flex-direction: column;
 flex-wrap: wrap;
 padding-bottom: 20px ;
-margin-left: -6px;
 width:100%;
-
+    & >${LoaderSpinner} {
+  position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 500;
+    margin: -60px 0  0 -60px ;
+ 
+}
 `;
 const CategoryTitle = styled.h4`
     text-align: center;
@@ -47,20 +52,31 @@ const CategoryTitle = styled.h4`
 `
 const SearchBarWrapper = styled.div`
 width:100vw;
-margin-bottom: 20px;
+    margin: 30px auto 40px
 `;
-const CategoryWrapper = styled.article`
+const CategoryWrapper = styled.section`
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     background: ${props => props.theme.darckRed};
     justify-content: center;
     margin-bottom: 20px;
-
     padding:  20px 15px;
     box-shadow: inset 0 0 20px 0 #1111118c;
+
 `;
 export const ProductsSection = styled.div`
+    &:before{
+    display: ${props => props.isLoading ? 'block' : 'none'};
+      position:absolute;
+      content:" ";
+      top:0;
+      left:0;
+    right:0;
+    bottom:0;
+    background:#ffffff57;
+    z-index:400;
+    }
     width: 100%;
     gap: 30px;
     display: grid;
@@ -69,6 +85,7 @@ export const ProductsSection = styled.div`
     max-width: 1000px;
     margin: 0 auto;
 justify-content: center;
+
 `;
 export const NotFaundMessage = styled.h4`
 margin-top: 20px;
@@ -115,9 +132,8 @@ const FiltersBoard = styled.div`
 `;
 
 export default function Menu() {
-const { categories } = useContext(AppContext);
-  
-const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, setCategory, setSorting,setTitle,resetQuery} = useMenu({categories})
+
+const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, setCategory, setSorting,setTitle,resetQuery} = useMenu()
 
 
   return (
@@ -150,8 +166,10 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
           <FilterCategoryOptions categories={populatedCategories} setCategoryPreferece={setCategory} setPage={setPage} />
           <SortProductsOptions setSortPreferece={setSorting} sortPreference={sorting} />
         </FiltersBoard>
-  {isLoading ? <LoaderSpinner small/> :  null }
-        <ProductsSection >
+
+  {isLoading ? <LoaderSpinner /> :  null }
+
+        <ProductsSection isLoading={isLoading}>
 
           {   ( (!isLoading)   && (products?.length ===  0)) ?
             <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>

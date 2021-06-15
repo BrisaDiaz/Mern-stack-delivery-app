@@ -1,10 +1,8 @@
 import styled  from 'styled-components'
 import {Link} from 'react-router-dom'
-import { useContext } from 'react'
 import useMyOrdersPage from '../../hooks/useMyOrdersPage'
 import {ButtonPrimary} from '../Buttons'
 import {SectionTitle,ButtonsWrapper} from '../menu/Menu'
-import AppContext from '../../context/app-context'
 import refreshIcone from '../../img/refresh.svg'
 
 
@@ -17,6 +15,7 @@ width:100%;
 margin: 0 auto;
 text-align:center;
 background:${props => props.theme.lightYellow};
+
 `;
 export const TableHead = styled.thead`
 background-color: ${props => props.theme.black};
@@ -40,7 +39,7 @@ margin: 0 auto 30px;
   background:#fff;
 }
 & > tbody td small {
-    margin: 0 5px;
+       margin-right: 5px;
 }
 & >tbody td {
   padding: 10px 0;
@@ -155,9 +154,9 @@ cursor:pointer;
 
 export default function MyOrders(){
 
-  const {currentUser,token,setCurrentUser,setIsLoading} = useContext(AppContext)
 
-const {page,setPage,maxPage,orders,deleteOrder,seeDetails,handelRefresh} = useMyOrdersPage({currentUser,token,setCurrentUser,setIsLoading})
+
+const {page,setPage,maxPage,orders,deleteOrder,seeDetails,handelRefresh} = useMyOrdersPage()
 
   return(
 <Page>

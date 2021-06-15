@@ -1,20 +1,21 @@
 import {useForm} from 'react-hook-form'
 import {useState} from 'react'
 import postProductAPI from '../API/postProductAPI'
+import {useStorage} from '../context/useStorage'
 
 
-export default function usePostNewProductForm({
-  token,
-setIsSuccessfullySend
-} ){
 
+export default function usePostNewProductForm(){
+
+ const {token,setIsSuccessfullySend,categories} = useStorage()
+ 
   const [formIsLoading,setFormIsLoading] = useState(false);
 
 const { register, handleSubmit, formState: { errors } } = useForm({
   mode: "onBlur",
 });
     
- const onSubmit =  (data,e) =>{
+ const onSubmit =  async(data,e) =>{
 setFormIsLoading(true)
         e.preventDefault()
 
@@ -30,9 +31,9 @@ let price =parseInt(e.target.price.value)
         formData.append('active', active)
 
 
-        postProductAPI({token,e,formData,setIsSuccessfullySend,setFormIsLoading})
+     await   postProductAPI({token,e,formData,setIsSuccessfullySend,setFormIsLoading})
 
 
   }
-return {register,handleSubmit,errors,onSubmit,formIsLoading }
+return   {register,handleSubmit,errors,onSubmit,formIsLoading,categories}
 }

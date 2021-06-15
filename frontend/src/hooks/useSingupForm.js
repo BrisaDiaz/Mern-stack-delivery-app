@@ -2,8 +2,13 @@ import {useForm} from 'react-hook-form';
 import singUpAPI from '../API/singUpAPI'
 import {useState} from 'react' 
 import {useHistory} from 'react-router-dom'
+import {useStorage} from '../context/useStorage'
 
-export default function useSingupForm(setIsSingUp){
+
+
+export default function useSingupForm(){
+  const {setIsSingUp} = useStorage()
+
 const [serverError,setServerError] = useState("")
 const [isFormLoading,setIsFormLoading] = useState(false)
 
@@ -14,7 +19,7 @@ const [isFormLoading,setIsFormLoading] = useState(false)
 
 const history = useHistory()
 
- function onSubmit(data,e) {
+async function onSubmit(data,e) {
 
  e.preventDefault()
 
@@ -25,7 +30,7 @@ email:e.target.userEmail.value,
 password:e.target.userPassword.value
 }
 
-singUpAPI({
+await singUpAPI({
 setServerError,
 setIsSingUp,
 info,

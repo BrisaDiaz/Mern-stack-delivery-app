@@ -1,8 +1,14 @@
 import {useForm} from 'react-hook-form'
+import {useStorage} from '../context/useStorage'
 import newsletterSubscribtionAPI from '../API/newsletterSubscribtionAPI'
 
-export default function useNewsletterForm({setIsSuccessfullySend,isLogin}){
-      const { register, handleSubmit, formState: { errors } }= useForm({
+
+ 
+export default function useNewsletterForm(){
+
+   const {setIsSuccessfullySend,isLogin} = useStorage()
+      
+   const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
 });
 

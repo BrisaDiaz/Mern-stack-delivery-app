@@ -37,7 +37,7 @@ const DashboarToggleTrigger= styled.aside `
 position:fixed;
    z-index:900;
   left:5px;
-  top:58px;
+ top: 60px;
 display:flex;
 flex-direction:column;
 justify-content:center;

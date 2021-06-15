@@ -1,6 +1,4 @@
 import styled  from 'styled-components'
-import AppContext from '../../context/app-context'
-import {   useContext} from 'react'
 import useDashboardOrders from '../../hooks/useDashboardOrders'
 import DashboardNav from '../DashboardNav'
 import refreshIcone from '../../img/refresh.svg'
@@ -19,6 +17,25 @@ width:100%;
 max-width: 1250px;
 margin: 0 auto;
 text-align:center;
+  &:before{
+    display: ${props => props.isLoading ? 'block' : 'none'};
+      position:absolute;
+      content:" ";
+      top:0;
+      left:0;
+    right:0;
+    bottom:0;
+    background:#ffffff57;
+    z-index:400;
+    }
+       & >${LoaderSpinner} {
+  position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 500;
+    margin: -60px 0  0 -60px ;
+ 
+}
 
 `;
 export const TableHead = styled.thead`
@@ -107,14 +124,14 @@ content:"Total";
 `
 export default function DashboardOrders(){
  
-const {token,setIsLoading} = useContext(AppContext)
 
 
-const {seeDetails,resetQuery,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLoading,maxPage,orders,sorting} = useDashboardOrders({token,setIsLoading})
+
+const {seeDetails,resetQuery,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLoading,maxPage,orders,sorting} = useDashboardOrders()
 
 
   return(
-<Page>
+<Page  isLoading={isLoading}>
      <DashboardNav/>
      <SectionTitle>Pedidos</SectionTitle>
      <RefreshButton onClick={(e) =>handleRefresh()}>
@@ -126,7 +143,7 @@ const {seeDetails,resetQuery,handleRefresh,setOrderID,setSorting,setPage,setStat
           <SortOrdersOptions setSortPreferece={setSorting} sortPreference={sorting} />
         </FiltersBoard>
 
-  {isLoading ? <LoaderSpinner small/> :  null }
+  {isLoading ? <LoaderSpinner /> :  null }
   {   ( (!isLoading)   &&  orders?.length === 0) ?
   
   <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>

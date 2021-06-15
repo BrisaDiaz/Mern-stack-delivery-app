@@ -15,18 +15,19 @@ padding:20px 0;
 display:flex;
 flex-wrap:wrap;
 & > * {
-padding:10px  25px;
+padding:10px  15px;
 height:100%;
 }
 `;
 const FormSection = styled.div`
-
 width:100%;
   flex: 1 1 450px;
+
   @media screen and (min-width: 550px){
-    padding:10px  32px ;
-  
+  padding:10px  32px ;
+
   }
+
 `;
 const Form = styled.form`
 width:100%;
@@ -35,6 +36,12 @@ display:flex;
 flex-flow:column;
 & > small {
       margin: -10px auto 4px 0;
+}
+@media screen and (max-width: 550px){
+ & >${ButtonPrimary}{
+        margin-left: auto;
+                margin-right: auto;
+  }
 }
 `;
 

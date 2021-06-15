@@ -1,10 +1,8 @@
 
 import styled  from 'styled-components'
-import useCartProductQuantityCounter from '../../hooks/useCartProductQuantityCounter'
-import useCartProductDeleteButton from '../../hooks/useCartProductDeleteButton'
+import useSingleCartProduct from '../../hooks/useSingleCartProduct'
 import DeleteIcone from '../../img/trash-alt-regular.svg'
-import {  useContext } from 'react'
-import AppContext from '../../context/app-context'
+
 
 const StyledSingleCartProduct= styled.li`
 display :flex;
@@ -122,15 +120,7 @@ border-radius: 5px;
 export default function SingleCartProduct({product}) {
 
 
- const {deleteOfCart, addToTotalCost,deleteOfTotalCost,actualizeCart}  = useContext(AppContext);
-
-const {quantity,increaseQuantityAndActualizeTotalCost,decreaseQuantityAndActualizeTotalCost} = useCartProductQuantityCounter({addToTotalCost ,deleteOfTotalCost,product,actualizeCart})
-
-const {deleteOfCartAndTotalCostHandler} = useCartProductDeleteButton(deleteOfCart,deleteOfTotalCost)
-
-
-
-
+const  { deleteOfCartAndTotalCostHandler,quantity,increaseQuantityAndActualizeTotalCost,decreaseQuantityAndActualizeTotalCost}= useSingleCartProduct(product)
 
 
   return(

@@ -1,7 +1,6 @@
 import correctIcone from '../img/check-circle-solid.svg'
 import styled  from 'styled-components'
-import {useContext} from 'react' 
-import AppContext from '../context/app-context'
+import {useStorage} from '../context/useStorage'
 import { withError } from  './withError'
 const Modal = styled.section`
 position:fixed;
@@ -32,7 +31,8 @@ const OkIcone = styled.img`
 }
 
  function SuccessfullFormModal(){
-const {isSuccessfullySend} = useContext(AppContext);
+
+const {isSuccessfullySend} = useStorage()
 
   return(
    isSuccessfullySend ?

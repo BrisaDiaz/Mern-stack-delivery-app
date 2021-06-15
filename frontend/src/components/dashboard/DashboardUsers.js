@@ -41,14 +41,14 @@ justify-content:center;
 `;
 export const TableHeader = styled.div`
 width:100%;
-padding: 5px 15px;
+    padding: 10px 15px;
 background: #fecb00;
     box-shadow: inset 0 0 20px 5px  ${props => props.theme.darckYellow};
   
 `
 export const TableTitle = styled.h4`
 margin:0;
-font-size:25px;
+font-size: 30px;
 text-align:center;
 text-shadow:${props => props.theme.lightTextShadow};
     color: #ffffff;

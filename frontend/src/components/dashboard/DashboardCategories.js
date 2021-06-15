@@ -1,8 +1,6 @@
 import styled  from 'styled-components'
 import {Page} from './DashboardOrders'
-import AppContext from '../../context/app-context'
-import {useContext} from 'react'
-import useCategoriesForms from '../../hooks/useCategoriesForms'
+import useDashboardCategories from '../../hooks/useDashboardCategories'
 import {SectionTitle} from '../menu/Menu'
 import DashboardNav from '../DashboardNav'
 import {TextInput,LoadButton,OptionList,Option} from './CreateNewProductForm'
@@ -104,9 +102,9 @@ font-size: 15px;
     }
 `
 export default function DashboardCategories(){
-  const {categories,setIsSuccessfullySend,token,setAllCategories} = useContext(AppContext)
 
-const  {handleRenameSubmit,handleCreateSubmit ,handleDelete,setEditingCategory,editingCategory,isRenameFormLoading,isCreateFormLoading}  = useCategoriesForms({categories,setIsSuccessfullySend,token,setAllCategories})
+
+const  {handleRenameSubmit,handleCreateSubmit ,handleDelete,setEditingCategory,editingCategory,isRenameFormLoading,isCreateFormLoading,categories}  = useDashboardCategories()
 
   return(
     <CategoriesPage>

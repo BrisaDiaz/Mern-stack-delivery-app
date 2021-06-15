@@ -1,8 +1,6 @@
 import styled  from 'styled-components'
 import useAdminOrderStateChart from '../../hooks/useAdminOrderStateChart'
-import AppContext from '../../context/app-context'
-import {  useContext} from 'react'
-import {Process,ProcessInfo} from '../account/OrderDetails'
+import {Process,ProcessInfo} from '../account/UserOrderStateChart'
 
 const ConfirmationButton = styled.button`
     cursor: pointer;
@@ -24,8 +22,8 @@ const ConfirmationButton = styled.button`
 
 export default  function AdminOrderStateChart({states,orderId,makeRefresh,refreshState}){
 
- const {token,setIsLoading} = useContext(AppContext)
-const  {handleConfirmation,nextStep} = useAdminOrderStateChart({token,setIsLoading,orderId,makeRefresh,refreshState,states})
+
+const  {handleConfirmation,nextStep} = useAdminOrderStateChart({orderId,makeRefresh,refreshState,states})
 
 
   return(

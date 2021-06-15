@@ -1,7 +1,12 @@
 import {useHistory} from 'react-router-dom'
 import {useState, useEffect } from 'react'
+import {useStorage} from '../context/useStorage'
 
-export default function useDashboardOrders({token,setIsLoading}){
+
+export default function useDashboardOrders(){
+
+  
+const {token,setIsLoading} = useStorage()
 
 const history = useHistory()
 
@@ -75,7 +80,7 @@ signal,
      setMaxPage(Math.ceil(total/sizeLimit))
 
 
-
+document.querySelector('body').scrollTo(0,100)
      setIsLoadingPage(false)
   }catch(err){
     if(err.name === 'AbortError'){
@@ -89,7 +94,7 @@ signal,
   }
 
   productsAPI()
-   window.scrollTo(0, 0)
+ 
      return () =>{
      controller.abort()
    }   

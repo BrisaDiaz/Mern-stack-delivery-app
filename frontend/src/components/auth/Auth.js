@@ -1,8 +1,8 @@
 import styled  from 'styled-components'
 import SingupForm from './SingupForm'
 import LoginForm from './LoginForm'
-import {useContext,useState} from 'react' 
-import AppContext from '../../context/app-context'
+import {useState} from 'react' 
+import {useStorage} from '../../context/useStorage'
 import ForgotPasswordModal from './ForgotPasswordModal'
 import background from '../../img/sing-up-background.jpg'
 
@@ -18,9 +18,12 @@ padding-top:60px;
 text-aling:center;
 
 `;
+
+
+
 export default function Sing() {
- 
-    const {isSingUp} = useContext(AppContext);
+
+     const {isSingUp} = useStorage()
 
  const [isModalOpened,setIsModalOpened]=useState(false)
 

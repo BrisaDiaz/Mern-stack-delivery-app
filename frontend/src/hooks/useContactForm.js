@@ -2,10 +2,13 @@ import {useForm} from 'react-hook-form'
 import contactAPI from '../API/contactAPI.js'
 
 export default function useContactForm(){
+
+
  const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
 });
- function onSubmit(data,e) {
+
+async function onSubmit(data,e) {
     e.preventDefault()
     
 const info = {
@@ -15,7 +18,7 @@ userMessage: data.userMessage,
 subject: data.subject,
 }
 
-    contactAPI(info)
+   await contactAPI(info)
      
 }
 

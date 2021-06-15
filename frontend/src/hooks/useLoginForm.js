@@ -1,9 +1,15 @@
 import {useForm} from 'react-hook-form'
 import {useHistory} from 'react-router-dom';
+import {useStorage} from '../context/useStorage'
 import loginAPI from '../API/loginAPI'
 import {useState} from 'react' 
 
-export default  function useLoginForm({setIsLogin,setIsNotSingup,setIsAdmin,setToken, setCurrentUser,setAllUsers,token,setIsModerator,setIsLoading,setAllOrders}){
+
+
+export default  function useLoginForm(){
+
+let {setIsLogin,setIsNotSingup,setIsAdmin,setToken, setCurrentUser,setAllUsers,setIsModerator,setIsLoading,setAllOrders} = useStorage()
+
 
   const [isFormLoading, setIsFormLoading] = useState(false)
 const [serverError, setServerError] = useState("")

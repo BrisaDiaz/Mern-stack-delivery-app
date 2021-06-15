@@ -1,8 +1,6 @@
 import React from 'react';
-
 import { render,  screen,act } from '@testing-library/react'
 import { MemoryRouter } from "react-router-dom";
-
 import AppContext from '../../context/app-context'
 import ProductDetails from './ProductDetails'
 
@@ -10,7 +8,23 @@ import ProductDetails from './ProductDetails'
 
 const setIsLoading=jest.fn();
 
+  const cartProducts = [
+  {
+    info:{
+      _id:15,
+       name:'lomito de ternera',
+    },
+    quantity:1
+  },
+    {
+    info:{
+      _id:11,
+       name:'pizza',
+    },
+    quantity:1
+  }
 
+]
 
 let productInfo = {
   _id:15,
@@ -20,7 +34,6 @@ let productInfo = {
   size:'700 gr',
   description:'lomito description content'
 }
-
 
 
 
@@ -53,9 +66,11 @@ const {container} =  render(
 
  })
 
- describe('component after fetch', ()=>{
 
-   let originalFecth;
+
+describe('component after fetch', ()=>{
+
+  let originalFecth;
 
 beforeEach(()=>{
 global.fetch = jest.fn( ()=> Promise.resolve({
@@ -117,23 +132,7 @@ render(
 
 it('dose not renders add to cart button if product is already in cart', async()=>{
 
-  const cartProducts = [
-  {
-    info:{
-      _id:15,
-       name:'lomito de ternera',
-    },
-    quantity:1
-  },
-    {
-    info:{
-      _id:11,
-       name:'pizza',
-    },
-    quantity:1
-  }
 
-]
   await act(async ()=> 
 render(
 <MemoryRouter initialEntries={['/menu/productDetails/15?from=/menu']}>

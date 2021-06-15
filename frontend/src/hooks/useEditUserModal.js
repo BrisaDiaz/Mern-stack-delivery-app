@@ -1,23 +1,27 @@
 
 import {useState} from 'react' 
 import updateUserAPI from '../API/updateUserAPI'
+import {useStorage} from '../context/useStorage'
 
-export default  function useEditUserModal({token,setIsEditing,setAllUsers}){
+
+
+export default  function useEditUserModal({setIsEditing}){
+
+  const {token,setAllUsers} = useStorage()
+  
 const [serverError,setServerError] = useState("")
 const [isFormLoading,setFormIsLoading] = useState(false)
 
- function editUser(e,id) {
+ async function editUser(e,id) {
 
-    e.preventDefault();
-const rolesInputs=[e.target.moderator,e.target.admin,e.target.user]
+  e.preventDefault();
+const roles = e.target.role.value
 
- const selectRoles = rolesInputs.filter(role => role.checked === true ).map(role => role.value);
- 
-const roles = (selectRoles.length !== 0) ? selectRoles : ["user"];
 const info ={
 roles,
 }
-updateUserAPI({
+
+await updateUserAPI({
   setFormIsLoading,
 setIsEditing,
 setServerError,

@@ -1,6 +1,4 @@
 import useLoginForm from '../../hooks/useLoginForm'
-import {useContext} from 'react' 
-import AppContext from '../../context/app-context'
 import {LoaderSpinner} from './../LoaderSpinner'
 import {ButtonPrimary} from '../Buttons'
 import burgerIcon from '../../img/burger-icon.png'
@@ -10,11 +8,9 @@ import {FormCard,Logo,Form,FormLink, UserEmailInput,UserPasswordInput,ErrorServe
 export default function SinginForm({setIsModalOpened}){
 
 
-     const {setIsLogin,setIsNotSingup,setIsAdmin,setToken,getUsers,setAllUsers,setCurrentUser,token,setIsLoading,setAllOrders,setIsModerator} = useContext(AppContext);
      
      const {register, handleSubmit, errors, onSubmit ,redirectToSingUp,
-      serverError,isFormLoading} = 
-      useLoginForm({setIsLogin,setIsLoading,setIsNotSingup,setIsAdmin,setToken, getUsers,setAllUsers,setCurrentUser,token,setAllOrders,setIsModerator})
+      serverError,isFormLoading} =  useLoginForm()
 
 
   return(

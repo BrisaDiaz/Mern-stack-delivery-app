@@ -21,6 +21,25 @@ const StyledSection = styled.section`
 min-height:100vh;
 width:100vw;
 padding:60px 0;
+  &:before{
+    display: ${props => props.isLoading ? 'block' : 'none'};
+      position:absolute;
+      content:" ";
+      top:0;
+      left:0;
+    right:0;
+    bottom:0;
+    background:#ffffff57;
+    z-index:400;
+    }
+       & >${LoaderSpinner} {
+  position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 500;
+    margin: -60px 0  0 -60px ;
+ 
+}
 `
 export const FiltersBoard = styled.div`
 padding: 30px 15px 0;
@@ -60,10 +79,10 @@ margin: 20px auto;
  export default function DashboardProducts(){
 
   
-    let {categories,token,setProductToEdit}  = useContext(AppContext);
+
 
   let {populatedCategories,isLoading,page,maxPage,products,setCategory,setTitle,resetQuery,
-handleEdit,handleDelete,setPage,setActiveProducts,setProducts} = useDashboardProducts({categories,token,setProductToEdit} )
+handleEdit,handleDelete,setPage,setActiveProducts} = useDashboardProducts( )
 
 
   return(
@@ -81,22 +100,23 @@ handleEdit,handleDelete,setPage,setActiveProducts,setProducts} = useDashboardPro
 <FilterProductsStateOptions setPage={setPage} setStatePreferece={setActiveProducts} />
 
 </FiltersBoard>
-  {isLoading ? <LoaderSpinner small/> :  null }
+  {isLoading ? <LoaderSpinner /> :  null }
+  
   {   ( (!isLoading)   &&  products?.length === 0) ?
   
   <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
 
   :
-<StyledProductsSection>
+<StyledProductsSection isLoading={isLoading}>
 
 {products?.map( product => 
  <Fragment key={product._id+"abc"}>
  <Item  key={product._id} item={product}>
    <Fragment>
-<EditButton  onClick={ () =>handleEdit(product)} >
+<EditButton  onClick={ () => handleEdit(product)} >
      <Icone src={editIcone} alt="edit"/>
 </EditButton>
-   <DeleteOfDatabaseButton  onClick={ () =>handleDelete(token,product._id,setProducts)}>
+   <DeleteOfDatabaseButton  onClick={ () =>handleDelete(product._id)}>
    <Icone src={DeleteIcone} alt="delete"/>
    </DeleteOfDatabaseButton>
    </Fragment>

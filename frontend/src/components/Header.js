@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import {useContext,Fragment} from 'react'
-import AppContext from '../context/app-context'
+import {Fragment} from 'react'
 import {Link} from 'react-router-dom'
 import useHeader from '../hooks/useHeader'
 import SocialsMenu from './SocialsMenu'
@@ -166,9 +165,9 @@ display:none;
 `;
 
 export default function Header(){
-const { numberOfProductsInCart, isLogin,toggleCart,setIsSingUp,setIsNotSingup,isAdmin,isModerator}  = useContext(AppContext);
 
-const {handelNavClick, closeNav, handleLogin, handleSingUp,navIsOpened} = useHeader({setIsSingUp,setIsNotSingup})
+
+const {handelNavClick, closeNav, handleLogin, handleSingUp,navIsOpened,numberOfProductsInCart, isLogin,toggleCart,isAdmin,isModerator}= useHeader()
 
 
   return(
@@ -179,6 +178,7 @@ const {handelNavClick, closeNav, handleLogin, handleSingUp,navIsOpened} = useHea
     <StyledLink to="/"  onClick={closeNav}>Home</StyledLink>
 <StyledLink to="/menu" onClick={closeNav}>Menu</StyledLink>
 <StyledLink to="/contact" onClick={closeNav}>Contacto</StyledLink>
+
 {(isAdmin === true || isModerator === true ) &&   <StyledLink to="/dashboard/myProducts"  onClick={closeNav}>Dashboard</StyledLink>}
 
 

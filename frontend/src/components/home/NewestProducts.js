@@ -7,6 +7,7 @@ import {LoaderSpinner} from './../LoaderSpinner'
 const StyledNewestProducts= styled.section`
 width:100vw;
 text-aling:center;
+min-height:400px;
 `
 const ProductsWrapper=styled(ProductsSection) `
 height:100%;

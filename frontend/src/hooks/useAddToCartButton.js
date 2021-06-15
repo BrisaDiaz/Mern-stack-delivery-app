@@ -1,6 +1,12 @@
 import { useState,useEffect } from 'react'
+import {useStorage} from '../context/useStorage'
 
-export default   function useAddToCartButton(item,cartProducts,addToCart,addToTotalCost){
+
+
+export default   function useAddToCartButton(item){
+
+  const {cartProducts,addToCart,addToTotalCost} = useStorage()
+
  const [isAdded,setIsAdded] =useState(false)
  
   let products =cartProducts.map( product => product.info._id)
@@ -13,13 +19,13 @@ useEffect(()=>{
   const handlerAddToCartAndAddToTotalCost= (product, cost) =>{
 
   if( products.indexOf(product._id) === -1){
-   
 addToTotalCost(cost)
 addToCart({info: product, quantity: 1})
-  }else{
-  
-  }
 
+return
+  }
+  
+return
 }
 
 

@@ -40,7 +40,7 @@ res.status(200).json(users)
 
 
   
-    let rolesFound = await Role.find({ name: { $in: roles } });
+    let roleFound = await Role.findOne({ name: roles });
 
     let user = await User.findById(req.params.id);
 
@@ -50,7 +50,7 @@ res.status(200).json(users)
                 name: user.name,
                 password: user.password,
                 email: user.email,
-                roles: rolesFound?.map((role) => role._id) || 
+                roles: roleFound._id || 
                 user.roles,
                 address: user.address,
                number: user.number,

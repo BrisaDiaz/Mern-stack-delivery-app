@@ -1,32 +1,16 @@
+import React, { Suspense, lazy } from 'react';
 import AppState  from './context/AppState'
-import    ScrollToTop from './components/ScrollToTop'
+import  ScrollToTop from './components/ScrollToTop'
 import {ThemeProvider} from 'styled-components'
 import PrivateRoute from './components/PrivateRoute'
 import PublicRoute from './components/PublicRoute'
 import Footer from './components/Footer'
 import LoadingPage from './components/LoadingPage'
-import Home from './components/home/Home'
-import Menu from './components/menu/Menu'
-import DashboardNewProduct from './components/dashboard/DashboardNewProduct'
-import DashboardProducts from './components/dashboard/DashboardProducts'
-import DashboardEditProduct from './components/dashboard/DashboardEditProduct'
-import DashboardUsers from './components/dashboard/DashboardUsers'
-import DashboardOrders from './components/dashboard/DashboardOrders'
-import DashboarOrderDetails from  './components/dashboard/DashboarOrderDetails'
-import DashboardCategories from './components/dashboard/DashboardCategories'
 import Header from './components/Header'
 import NotFound404Page from './components/NotFound404Page'
 import SuccessfullFormModal from './components/SuccessfullFormModal'
-import InitSession from './components/auth/Auth'
-import ResetPassword from'./components/auth/ResetPassword'
-import Confimation from './components/auth/Confirmation'
-import ProductsDetails from './components/product_details/ProductDetails'
-import Contact  from './components/contact/Contact'
 import ShooppingCart from './components/shopping_cart/ShoppingCart'
-import EditMyProfile from './components/account/EditMyProfile'
-import MyOrdersPage from './components/account/MyOrdersPage'
-import OrderDetails from './components/account/OrderDetails'
-import MyProfile from './components/account/MyProfile'
+
 import {
   HashRouter  as Router,
   Switch,
@@ -36,6 +20,24 @@ import {
 } from 'react-router-dom'
 
 
+const Home = lazy(() => import('./components/home/Home'));
+const Menu = lazy(() => import('./components/menu/Menu' ));
+const Contact = lazy(() => import('./components/contact/Contact'));
+const Athentication = lazy(() => import( './components/auth/Auth'));
+const MyProfile = lazy(() => import( './components/account/MyProfile'));
+const EditMyProfile = lazy(() => import('./components/account/EditMyProfile'));
+const MyOrdersPage = lazy(() => import( './components/account/MyOrdersPage'));
+const OrderDetails = lazy(() => import( './components/account/OrderDetails'));
+const EmailConfirmationModal = lazy(() => import( './components/auth/EmailConfirmationModal'));
+const ProductsDetails = lazy(() => import( './components/product_details/ProductDetails'));
+const ResetPassword = lazy(() => import('./components/auth/ResetPassword'));
+const DashboardCategories = lazy(() => import('./components/dashboard/DashboardCategories'));
+const DashboarOrderDetails = lazy(() => import( './components/dashboard/DashboarOrderDetails'));
+const DashboardOrders = lazy(() => import( './components/dashboard/DashboardOrders'));
+const DashboardUsers = lazy(() => import(  './components/dashboard/DashboardUsers'));
+const DashboardEditProduct = lazy(() => import( './components/dashboard/DashboardEditProduct'));
+const DashboardProducts = lazy(() => import('./components/dashboard/DashboardProducts'));
+const DashboardNewProduct = lazy(() => import('./components/dashboard/DashboardNewProduct'));
 function App() {
 
 
@@ -67,14 +69,15 @@ function App() {
           <SuccessfullFormModal/>
           <LoadingPage/>
         <Header/>
+         <Suspense fallback={ <LoadingPage isLoading={true} />}>
   <Switch>
         <Route path = "/" exact component={ Home } />
     
         <Route path = "/menu" exact component={ Menu } />
     
     
-        <Route path = "/authentication" exact component={ InitSession }  />
-     <PublicRoute path = "/authentication/confirmation" component={ Confimation }  />
+        <Route path = "/authentication" exact component={ Athentication }  />
+     <PublicRoute path = "/authentication/confirmation" component={ EmailConfirmationModal }  />
           <Route path = "/authentication/resetPassword/:token" component={ ResetPassword }  />
         <Route path = "/contact" component={ Contact } />
        
@@ -100,7 +103,7 @@ function App() {
           
  
       </Switch>
-
+</Suspense>
 
      <ShooppingCart/>
         <Footer/>

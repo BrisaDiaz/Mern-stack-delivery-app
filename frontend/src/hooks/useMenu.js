@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react'
+import {useStorage} from '../context/useStorage'
 
 
 
-export default function useMenu({categories}){
+export default function useMenu(){
+
+    const {categories} = useStorage()
+    
  let populatedCategories = categories?.filter(category => category?.quantity > 0)
 
   let query = new URLSearchParams();
@@ -50,7 +54,7 @@ export default function useMenu({categories}){
         setMaxPage(Math.ceil(total / sizeLimit))
 
 
-
+document.querySelector('body').scrollTo(0,100)
         setIsLoading(false)
       } catch (err) {
         if (err.name === 'AbortError') {

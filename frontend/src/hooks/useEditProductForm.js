@@ -1,14 +1,15 @@
 import  updateProductAPI from '../API/updateProductAPI'
 import {useForm} from 'react-hook-form'
+import {useStorage} from '../context/useStorage'
 import {  useState,useEffect} from 'react'
 import {useHistory} from 'react-router-dom';
 
-export default function useEditProductForm({
-token,
-productToEdit,
-setIsSuccessfullySend,
-setAllCategories
-}){
+
+  
+export default function useEditProductForm(){
+
+  const {token,productToEdit,setIsSuccessfullySend,setAllCategories,categories} = useStorage()
+
         const { register, handleSubmit, formState: { errors } }= useForm({
   mode: "onBlur",
 });
@@ -77,12 +78,14 @@ setCategoryValue,
 setPriceValue,
 setSizeValue,
 setDescriptionValue,
+categories,
 nameValue,
 categoryValue,
 priceValue,
 sizeValue,
 descriptionValue,
-formIsLoading
+formIsLoading,
+productToEdit,
 }
 
 }

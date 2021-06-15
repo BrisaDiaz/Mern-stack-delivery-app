@@ -1,21 +1,28 @@
 import {useState} from 'react'
+import {useStorage} from '../context/useStorage'
  import updateCategoryNameAPI from '../API/updateCategoryNameAPI'
 import deleteCategoryAPI  from '../API/deleteCategoryAPI'
 import createCategoryAPI from '../API/createCategoryAPI'
-export default function useCategoriesForms({categories,setIsSuccessfullySend,token,setAllCategories}){
-    
+
+
+ 
+export default function useCategoriesForms(){
+
+   const {categories,setIsSuccessfullySend,token,setAllCategories} = useStorage()
+
  const [editingCategory,setEditingCategory] = useState('categoria')
    const [isRenameFormLoading, setIsRenameFormLoading] = useState(false)
       const [isCreateFormLoading, setIsCreateFormLoading] = useState(false)
+
  let categorySelectId = categories?.find(category => category.name === editingCategory )?._id
 
-const handleDelete = (e) =>{
+const handleDelete =async (e) =>{
   e.preventDefault()
  e.stopPropagation()
  const confirmation =window.confirm('Al eliminar la categoría se eliminarn todos los productos de la misma, está deguro?')
 
 if(confirmation) {
-  deleteCategoryAPI({categorySelectId,token,setAllCategories})
+  await deleteCategoryAPI({categorySelectId,token,setAllCategories})
   setEditingCategory('category')
   return
 }
@@ -41,6 +48,6 @@ createCategoryAPI({token,info,setAllCategories,setIsCreateFormLoading,setIsSucce
 
 }
   return {handleRenameSubmit,handleCreateSubmit,setEditingCategory,editingCategory,
-handleDelete,isRenameFormLoading,isCreateFormLoading} 
+handleDelete,isRenameFormLoading,isCreateFormLoading,categories} 
   
 }

@@ -1,9 +1,12 @@
 import {useHistory} from 'react-router-dom'
 import { useEffect,useState } from 'react'
+import {useStorage} from '../context/useStorage'
 import deleteProductAPI from '../API/deleteProductAPI'
 
-export default function useDashboarProducts({categories,token,setProductToEdit}){
 
+export default function useDashboarProducts(){
+
+const {categories,token,setProductToEdit}= useStorage()
   
  let populatedCategories = categories?.filter(category => category?.quantity > 0)
 
@@ -52,7 +55,7 @@ query.append('active',activeProducts)
      setMaxPage(Math.ceil(total/sizeLimit))
 
 
-
+document.querySelector('body').scrollTo(0,100)
      setIsLoading(false)
   }catch(err){
     if(err.name === 'AbortError'){
@@ -66,11 +69,11 @@ query.append('active',activeProducts)
   }
 
   productsAPI()
-   window.scrollTo(0, 0)
+ 
      return () =>{
      controller.abort()
    }   
- }, [title,activeProducts,page,category])
+ }, [title,activeProducts,page,category,sizeLimit])
 
 
      
@@ -84,12 +87,13 @@ const history = useHistory()
 
 
   const handleEdit = (product) =>{
-  
+  console.log(product)
 setProductToEdit(product);
 
  return history.push("/dashboard/editProduct")
   }
-const handleDelete = async(token,id,setProducts) =>{
+
+const handleDelete = async(id) =>{
 await deleteProductAPI(token,id,setProducts)
 
 }

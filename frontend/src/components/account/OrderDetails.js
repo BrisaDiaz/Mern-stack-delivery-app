@@ -1,8 +1,7 @@
 import styled  from 'styled-components'
-import {useParams} from 'react-router-dom'
-import AppContext from '../../context/app-context'
-import {   useContext } from 'react'
 import {GoBackLink} from '../product_details/ProductDetails'
+import UserOrderStateChart from './UserOrderStateChart'
+import useOrderDetails from '../../hooks/useOrderDetails'
 
 export const Page = styled.main`
     padding: 60px 15px;
@@ -11,19 +10,24 @@ width:100%;
 max-width: 1250px;
 margin: 0 auto;
 text-transform: capitalize;
-
+  & > h3 {
+        text-align: center;
+    margin-top: 20px;
+}
 @media screen and (max-width: 440px){
   & > h3 {
     font-size: 20px;
+        text-align: center;
+    margin-top: 20px;
 }
+  
 & > h3 span{
   display:block;
 }
 }
 `;
-export const CenterTitle = styled.h3`
-    text-align: center;
-    margin-top: 20px;
+export const OrderId = styled.h3`
+ margin-top: 40px;
 `;
  export const DetailTable = styled.table`
 width:90%;
@@ -76,64 +80,14 @@ display: flex;
     flex-wrap: wrap;
 }
 `;
-export const Process = styled.div`
-margin:20px auto;
-padding:15px;
-gap:15px;
-  width:100%;
-max-width:max-content;
-min-height: 30px;
-  background-color:${props=> props.theme.black};
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-wrap:wrap;
-      border-radius: 10px;
-@media screen and(max-width:600px){
-
-  max-width:280px;
 
 
-}
-`
-export const ProcessInfo = styled.div`
-color: ${props=> props.theme.darckYellow};
-display:flex;
-text-align:center;
-& > h4 {
-  margin: 0;
-}
-    align-items: center;
-    flex-direction: column;
-`
 
-function UserOrderStateChart ({states}){
-
-  return(
-
-   <Process>
-{states?.map(state =>
-  
-     <ProcessInfo  key ={state?.date}>
-           <h4>{state?.name}</h4>
-           <date>
-           <small>{new Date(state?.date).toLocaleString()?.split(" ")[0]}</small>
-            <small>{new Date(state?.date).toLocaleString()?.split(" ")[1]}</small>
-            </date>
-         </ProcessInfo>
-  
-  )}
-
-   </Process>    
-  );
-}
 
 
 export default function OrderDetails(){
- let { orderID } = useParams()
-const {currentUser} = useContext(AppContext)
-let userOrders = currentUser?.orders
- let thisOrder =  userOrders.find( order => order.orderID  === parseInt(orderID) ) 
+
+ let {thisOrder,orderID} =  useOrderDetails() 
 
 
 
@@ -141,7 +95,7 @@ let userOrders = currentUser?.orders
   return(
 <Page>
       <GoBackLink to="/myAccount/myOrders">Regresar</GoBackLink>
-  <CenterTitle>Nº ID:<span>{orderID}</span></CenterTitle>
+  <OrderId>Nº ID:<span>{orderID}</span></OrderId>
 
 
 <UserOrderStateChart  
@@ -152,7 +106,7 @@ states={thisOrder?.states?.filter(state => state?.confirmed === true)}
 
 
       <hr></hr>
-    <CenterTitle>Detalles de envio</CenterTitle>
+    <h3>Detalles de envio</h3>
 
     <ClientInfo>
       <p><b>Destinatario:</b>{thisOrder?.client[0]?.name}</p>
@@ -161,7 +115,7 @@ states={thisOrder?.states?.filter(state => state?.confirmed === true)}
       </ClientInfo>
       <br></br>
       <hr></hr>
-           <CenterTitle>Detalles del pedido</CenterTitle>
+           <h3>Detalles del pedido</h3>
  <DetailTable>
    <thead>
      <th>Producto</th>
