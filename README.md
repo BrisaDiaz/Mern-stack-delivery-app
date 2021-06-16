@@ -68,9 +68,9 @@ CLOUDINARY_SECRET
 ### Tecnologies and tools:
 
 - React.js
-- style-components
-- react-dom-form
-- react-dom-router
+- style-components  
+- react-hook-form  
+- react-router-dom  
 - react hooks
 
 ### Features:
