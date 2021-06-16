@@ -1,31 +1,28 @@
-import {useHistory} from 'react-router-dom'
+import {useHistory,useLocation} from 'react-router-dom'
+
 import {useState, useEffect } from 'react'
 import {useStorage} from '../context/useStorage'
 
 
 export default function useDashboardOrders(){
+const history = useHistory()
+const location = useLocation()
 
   
 const {token,setIsLoading} = useStorage()
 
-const history = useHistory()
 
 const seeDetails = (orderID) =>{
       setIsLoading(true)
  history.push(`/dashboard/orders/${orderID}` )
 }
 
-const resetQuery = () =>{
-setPage(1)
-setState('all')
-}
-
-const handleRefresh = () =>{
-  return history.push(`/dashboard/orders`)
-}
 
 
- let query = new URLSearchParams();
+
+
+  let query = new URLSearchParams();
+
     let sizeLimit = 5
 
 
@@ -34,10 +31,11 @@ const handleRefresh = () =>{
   const[isLoading,setIsLoadingPage] = useState(false)
     const [page, setPage] = useState(1)
     const [maxPage, setMaxPage] = useState(1)
-    const [orders, setOrders] = useState(null)
+    const [orders, setOrders] = useState([])
     const [state,setState] =useState('all')
   const [sorting, setSorting] = useState("-createdAt")
-
+const [isFirstRender, setIsFirstRender] = useState(true)
+const [isRefreshing, setIsRefreshing] = useState(false)
    query.append('page',page)
    query.append('limit',sizeLimit)
    query.append('sort',sorting)
@@ -48,15 +46,34 @@ const handleRefresh = () =>{
 useEffect(() => {
   const controller = new AbortController()
  const signal = controller.signal
+ 
 const productsAPI = async () =>{
+
     setIsLoadingPage(true)
+
   try{
+
+      if( isFirstRender && location.search !==""){
+
+        query=location.search.split('?')[1]
+        
+        setIsFirstRender(false)
+      }
+
    if(orderID !==""){ 
-      query.append('orderID',orderID)
+ query.append('orderID',orderID)
+
+setPage(1)
+setState('all')
+
+
+     
     }
 
     if(state !=="all"){
+
 query.append('state',state)
+
     }
 
        const headers = new Headers();
@@ -79,6 +96,7 @@ signal,
 
      setMaxPage(Math.ceil(total/sizeLimit))
 
+  history.push(`/dashboard/orders?${query}`)
 
 document.querySelector('body').scrollTo(0,100)
      setIsLoadingPage(false)
@@ -98,11 +116,15 @@ document.querySelector('body').scrollTo(0,100)
      return () =>{
      controller.abort()
    }   
- }, [orderID,state,page,sorting])
+ }, [orderID,state,page,sorting,isRefreshing])
 
-     
 
-return {seeDetails,resetQuery,handleRefresh,setOrderID,setSorting,setState,setPage,page,isLoading,maxPage,orders,sorting}
+ const handleRefresh = () =>{
+  setIsRefreshing(!isRefreshing)
+}
+
+
+return {seeDetails,handleRefresh,setOrderID,setSorting,setState,setPage,page,isLoading,maxPage,orders,sorting,isFirstRender}
 
 
 }

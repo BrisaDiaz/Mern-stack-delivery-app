@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
+import {useHistory,useLocation} from 'react-router-dom'
 import {useStorage} from '../context/useStorage'
 
 
 
 export default function useMenu(){
-
+const history = useHistory()
+const location = useLocation()
     const {categories} = useStorage()
     
  let populatedCategories = categories?.filter(category => category?.quantity > 0)
@@ -19,11 +21,17 @@ export default function useMenu(){
   const [category, setCategory] = useState("all")
   const [sorting, setSorting] = useState("-createdAt")
   const [title, setTitle] = useState("")
+const [isFirstRender, setIsFirstRender] = useState(true)
 
   query.append('active', activeProducts)
   query.append('sort', sorting)
   query.append('page', page)
   query.append('limit', sizeLimit)
+    
+  
+
+
+
 
   useEffect(() => {
     setPage(1)
@@ -31,17 +39,38 @@ export default function useMenu(){
 
 
   useEffect(() => {
+
     const controller = new AbortController()
     const signal = controller.signal
     setIsLoading(true)
+
+   
+
     const fechProducts = async () => {
 
+     if( isFirstRender && location.search !==""){
+
+        query =location.search.split('?')[1]
+
+        setIsFirstRender(false)
+      }
+ 
       if (title !== "") {
         query.append('title', title)
+        setPage(1)
+    setSorting('-createdAt')
+    setCategory('all')
       }
+
       if (category !== "all") {
         query.append('category', category)
+        setPage(1)
       }
+
+
+  
+
+     
       try {
 
         let res = await fetch(`/api/products?${query}`, { signal, })
@@ -53,6 +82,7 @@ export default function useMenu(){
 
         setMaxPage(Math.ceil(total / sizeLimit))
 
+  history.push(`/menu?${query}`)
 
 document.querySelector('body').scrollTo(0,100)
         setIsLoading(false)
@@ -63,8 +93,6 @@ document.querySelector('body').scrollTo(0,100)
 
           console.log(err)
           
-
-
         }
       }
     }
@@ -76,13 +104,8 @@ document.querySelector('body').scrollTo(0,100)
   }, [title,sorting,page,category])
 
 
-  const resetQuery = () => {
-    setPage(1)
-    setSorting('-createdAt')
-    setCategory('all')
-  }
 
 
-return {isLoading, maxPage, products,populatedCategories,page,setPage,  setCategory, setSorting,setTitle,resetQuery}
+return {isLoading, maxPage, products,populatedCategories,page,setPage,  setCategory, setSorting,setTitle}
 
 }

@@ -35,10 +35,10 @@ res.status(500).json({successful:false ,message:'Something went wrong, could cre
 const deleteCategory= async  (req,res)=>{
 try{
 
-await Category.findByIdAndRemove(req.categoryId)
+  await Category.findByIdAndRemove(req.categoryId )
 await Products.deleteMany({category:req.categoryName})
 
-res.status(204).json({successful:false ,message:`Category ${categoryName} successfully deleted`})
+res.status(204).json({successful:false ,message:`Category ${req.categoryName} successfully deleted`})
 
 }catch(err){
 console.log(err)

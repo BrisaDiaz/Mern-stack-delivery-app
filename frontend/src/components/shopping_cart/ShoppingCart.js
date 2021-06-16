@@ -7,7 +7,7 @@ import useShoppingCart from '../../hooks/useShoppingCart'
   position:fixed;
 z-index:1000;
   right:0;
-  top:57px;
+  top:58px;
   width: 300px;
   min-height:max-content;
   max-height:100vh;
@@ -17,7 +17,7 @@ transition: all 0.5s ;
   margin: 0 auto;
   background:#fff;
     border-radius: 0 0 15px 15px;
-    box-shadow: ${props => props.theme.lightBoxShadow};
+    box-shadow: 1px 3px 5px #00000057;
 
   `;
   const CartHeader = styled.div`

@@ -13,7 +13,7 @@ let query = {}
 
 
     if(req.query.orderID){
-      query.orderID = req.query.orderID
+      query.orderID = parseInt(req.query.orderID)
     }
     if(req.query.state){
 
@@ -53,7 +53,7 @@ let query = {}
 
 const getOrderById =  async (req,res) =>{
 try{
-  const orderFound =  await Order.findById(req.params.orderId).populate('client').exec()
+  const orderFound =  await Order.findById(req.params.id).populate('client').exec()
 
     res.status(200).json({successfull:true, data:orderFound})
 
@@ -158,7 +158,7 @@ cosole.log(id)
  const actualizeOrderState = async (req,res)  =>{
   try{
   
-const order = await Order.findById(req.params.orderId)
+const order = await Order.findById(req.params.id)
 
   const updatedStates = order.states.map(state => {
 

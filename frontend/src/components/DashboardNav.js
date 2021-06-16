@@ -55,12 +55,11 @@ gap:5px;
  
   const LinksModal = styled.div`
 
-    transition: all 0.5s ;
+    transition: all 1s ;
 margin-left: ${(props) =>(props.isNavOpen === true  ? "0" : "-150px")};
-display:flex;
-flex-direction:column;
 gap:5px;
-
+display: ${(props) =>(props.isNavOpen === true  ? "flex" : "none")};
+flex-direction:column;
   `;
 
   export default function DashboardNav(){

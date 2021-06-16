@@ -23,7 +23,8 @@ import {
 const Home = lazy(() => import('./components/home/Home'));
 const Menu = lazy(() => import('./components/menu/Menu' ));
 const Contact = lazy(() => import('./components/contact/Contact'));
-const Athentication = lazy(() => import( './components/auth/Auth'));
+const Login = lazy(() => import( './components/auth/Login'));
+const SingUp = lazy(() => import( './components/auth/SingUp'));
 const MyProfile = lazy(() => import( './components/account/MyProfile'));
 const EditMyProfile = lazy(() => import('./components/account/EditMyProfile'));
 const MyOrdersPage = lazy(() => import( './components/account/MyOrdersPage'));
@@ -76,7 +77,8 @@ function App() {
         <Route path = "/menu" exact component={ Menu } />
     
     
-        <Route path = "/authentication" exact component={ Athentication }  />
+        <Route path = "/authentication/login" exact component={ Login }  />
+                <Route path="/authentication/singUp" exact component={ SingUp }  />
      <PublicRoute path = "/authentication/confirmation" component={ EmailConfirmationModal }  />
           <Route path = "/authentication/resetPassword/:token" component={ ResetPassword }  />
         <Route path = "/contact" component={ Contact } />

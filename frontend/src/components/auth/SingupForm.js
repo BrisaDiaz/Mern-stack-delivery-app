@@ -1,4 +1,5 @@
 import styled  from 'styled-components'
+import {Link} from 'react-router-dom'
 import {Fragment} from 'react' 
 import useSingupForm from '../../hooks/useSingupForm'
 import {ButtonPrimary} from '../Buttons'
@@ -73,11 +74,14 @@ text-align:center;
 font-size:20px;
 margin: 5px 0 15px;
 `
-export const FormLink = styled.a`
+export const FormLink = styled(Link)`
 margin-bottom: 20px;
 cursor:pointer;
+text-decoration:none;
 transition:all 0.5s esea;
+  color:${props=> props.theme.black};
 &:hover{
+
   color:#fff;
 }
 `;
@@ -197,7 +201,7 @@ export default function SingupForm(){
 
 
 
-   const {register,handleSubmit,errors,onSubmit,redirectToLogin,isFormLoading,serverError} = useSingupForm()
+   const {register,handleSubmit,errors,onSubmit,isFormLoading,serverError} = useSingupForm()
   return(
     <FormCard>
              <Logo src={burgerIcon} alt="LogoBrand"></Logo>
@@ -212,7 +216,7 @@ export default function SingupForm(){
          <ErrorServerMessage>{serverError}</ErrorServerMessage>
 
  
-           <FormLink onClick={redirectToLogin}>¿Ya tienes una cuenta? <b>Login</b> </FormLink>
+           <FormLink to= "/authentication/login" >¿Ya tienes una cuenta? <b>Login</b> </FormLink>
  <ButtonPrimary as="input" type="submit" value="Sing Up"/>
      {isFormLoading && <LoaderSpinner small />}
       </Form>

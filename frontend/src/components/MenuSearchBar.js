@@ -47,7 +47,7 @@ transform:scale(0.7);
 const SearchIcone = styled.img` 
 height: 100%;
 `;
-export default function SearchBar({setSearch,resetQuery ,placeholder}){
+export default function SearchBar({setSearch ,placeholder}){
 
 const resetFilter = (e) =>{
   if(e.target.value ===""){
@@ -58,8 +58,7 @@ setSearch("")
 const handelSubmit = (e) =>{
  e.preventDefault()
 
-     resetQuery()
-  let searchString = e.target?.search?.value?.trim()?.toLowerCase()?.split(" ")?.join("+")
+  let searchString = e.target?.search?.value
 setSearch(searchString)
 }
   return(

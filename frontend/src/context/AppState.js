@@ -19,8 +19,6 @@ ACTUALIZE_CART,
 DELETE_PRODUCT_OF_CART,
 EMPTY_CART,
 RESET_TOTAL_COST,
-SET_IS_SING_UP_TRUE,
-SET_IS_SING_UP_FALSE,
 SET_IS_LOGIN_TRUE,
 SET_IS_LOGIN_FALSE,
 SET_IS_ADMIN,
@@ -38,7 +36,12 @@ export default  function AppState(props) {
 
 
 
-  const getCategoriesAPI = async () => {
+  
+
+
+  
+    useEffect( ()=>{
+      const getCategoriesAPI = async () => {
 
    const headers = new Headers();
         headers.append('Accept', 'application/json');
@@ -65,9 +68,6 @@ getCategoriesAPI()
 }
 }  
 
-
-  
-    useEffect( ()=>{
 getCategoriesAPI()
   },[])
 
@@ -182,16 +182,8 @@ dispatch ({
    type: TOGGLE_CART
 })
 }
-const setIsSingUp = () =>{
-  dispatch({
-    type: SET_IS_SING_UP_TRUE,
-  })
-}
-const setIsNotSingup = () =>{
-   dispatch({
-    type: SET_IS_SING_UP_FALSE,
-  })
-}
+
+
 const setIsLogin= () =>{
   dispatch({
     type: SET_IS_LOGIN_TRUE
@@ -238,7 +230,6 @@ cartProducts: state.cartProducts,
 totalCost:state.totalCost,
 numberOfProductsInCart,
 isCartOpen:state.isCartOpen,
-isSingUp:state.isSingUp,
 isLogin:state.isLogin,
 isAdmin: state.isAdmin,
 isModerator: state.isModerator,
@@ -257,8 +248,6 @@ addToTotalCost,
 deleteOfTotalCost,
 resetTotalCost,
 toggleCart,
-setIsSingUp,
-setIsNotSingup,
 setIsLogin,
 setIsNotLogin,
 setIsAdmin,

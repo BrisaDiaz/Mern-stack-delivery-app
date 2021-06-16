@@ -1,6 +1,6 @@
 import getCategoriesAPI from './getCategoriesAPI'
 
-async function createCategoryAPI({token,info,setAllCategories,setIsCreateFormLoading,setIsSuccessfullySend}){
+async function createCategoryAPI({token,info,setAllCategories,setIsCreateFormLoading,setIsSuccessfullySend,e}){
 
 
   setIsCreateFormLoading(true)
@@ -29,6 +29,7 @@ headers.append('Content-Type', 'application/json');
       if(res.status === 201) {
 
       await getCategoriesAPI(setAllCategories)
+      e.target.newCategory.value = ""
       setIsSuccessfullySend(true)
       setTimeout(() => {
               setIsSuccessfullySend(false)

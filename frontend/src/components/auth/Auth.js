@@ -1,9 +1,4 @@
 import styled  from 'styled-components'
-import SingupForm from './SingupForm'
-import LoginForm from './LoginForm'
-import {useState} from 'react' 
-import {useStorage} from '../../context/useStorage'
-import ForgotPasswordModal from './ForgotPasswordModal'
 import background from '../../img/sing-up-background.jpg'
 
 const StyledInitSession = styled.main`
@@ -13,7 +8,7 @@ display: flex;
 justify-content:center;
 align-items: center;
 width:100vw;
-padding:15px;
+padding:5px;
 padding-top:60px;
 text-aling:center;
 
@@ -21,21 +16,12 @@ text-aling:center;
 
 
 
-export default function Sing() {
+export default function Auth(props) {
 
-     const {isSingUp} = useStorage()
-
- const [isModalOpened,setIsModalOpened]=useState(false)
-
-
+  
   return(
   <StyledInitSession>
-
-    { isSingUp ?
-    <LoginForm setIsModalOpened={setIsModalOpened} /> :
-    <SingupForm/ >  }
-
-<ForgotPasswordModal  setIsModalOpened={setIsModalOpened}  isModalOpened={isModalOpened}/>
+{props.children}
   </StyledInitSession>
 
 

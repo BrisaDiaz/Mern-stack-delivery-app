@@ -23,7 +23,7 @@ const handelOrden = () =>{
  
 if(cartProducts.length !== 0){
 
-  if(!isLogin) return history.push("/authentication")
+  if(!isLogin) return history.push("/authentication/login")
 
   if(currentUser?.profileState !=="complited") return alert('Se require que complete su  perfil en la cuenta para poder realizar la orden')
 

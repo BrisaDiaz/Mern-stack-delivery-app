@@ -1,11 +1,10 @@
 
 import {Option,OptionList} from './SortProductsOptions'
 
-export default function FilerCategoryOptions({categories,setCategoryPreferece,setPage}){
+export default function FilerCategoryOptions({categories,setCategoryPreferece}){
 
   const handelChange = (e) =>{
  e.preventDefault()
-     setPage(1)
  setCategoryPreferece(e.target.value)
 }
 

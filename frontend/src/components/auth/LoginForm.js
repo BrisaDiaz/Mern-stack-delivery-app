@@ -9,7 +9,7 @@ export default function SinginForm({setIsModalOpened}){
 
 
      
-     const {register, handleSubmit, errors, onSubmit ,redirectToSingUp,
+     const {register, handleSubmit, errors, onSubmit,
       serverError,isFormLoading} =  useLoginForm()
 
 
@@ -26,8 +26,8 @@ export default function SinginForm({setIsModalOpened}){
      
 
 
-            <FormLink onClick={redirectToSingUp}>¿Todavía no tienes una cuenta? <b>Sing Up</b> </FormLink>
-            <FormLink onClick={() => setIsModalOpened(true)}>Olvidaste tu contraseña?</FormLink>
+            <FormLink to="/authentication/singUp" >¿Todavía no tienes una cuenta? <b>Sing Up</b> </FormLink>
+            <FormLink as='a' onClick={() => setIsModalOpened(true)}>Olvidaste tu contraseña?</FormLink>
  <ButtonPrimary as="input" type="submit" value="Login"/>
     {isFormLoading && <LoaderSpinner small />}
       </Form>

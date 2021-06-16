@@ -31,6 +31,7 @@ setIsRenameFormLoading(false)
 
          setIsSuccessfullySend(true);
          setTimeout(() => {
+
                   setIsSuccessfullySend(false)
          }, 3000);
 

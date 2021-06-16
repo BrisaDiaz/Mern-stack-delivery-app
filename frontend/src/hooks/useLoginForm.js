@@ -8,7 +8,7 @@ import {useState} from 'react'
 
 export default  function useLoginForm(){
 
-let {setIsLogin,setIsNotSingup,setIsAdmin,setToken, setCurrentUser,setAllUsers,setIsModerator,setIsLoading,setAllOrders} = useStorage()
+let {setIsLogin,setIsAdmin,setToken, setCurrentUser,setAllUsers,setIsModerator,setIsLoading,setAllOrders} = useStorage()
 
 
   const [isFormLoading, setIsFormLoading] = useState(false)
@@ -46,10 +46,8 @@ setIsModerator
     
  
   }
-const redirectToSingUp = () =>{
-setIsNotSingup()
-  }
+
  
-  return {register, handleSubmit, errors, onSubmit ,redirectToSingUp,isFormLoading,
-serverError} 
+  return {register, handleSubmit, errors, onSubmit ,isFormLoading,serverError} 
+
      }

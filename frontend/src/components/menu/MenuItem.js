@@ -2,7 +2,7 @@ import styled  from 'styled-components'
 import { useState} from 'react'
 import {useHistory,useLocation} from 'react-router-dom';
 import defaultImage from '../../img/default-image.png';
-import AddToCartButton from '../AddToCartButton'
+
 
 
 const Item = styled.article `
@@ -88,9 +88,6 @@ height:100%;
   const [isLoaded,setIsLoaded] = useState(false)
 
 
-
-let isInDashboard = location.pathname === "/dashboard/myProducts"? true : false ;
-
 const handleRedirect = (id) =>{
   return  history.push({
   pathname: '/menu/'+id,
@@ -117,12 +114,10 @@ const handleRedirect = (id) =>{
       <ProductLink onClick={ () => handleRedirect(item._id)}>{item.name}</ProductLink>  
    <Figcaption><Price >{item.price}</Price> <Size>{item.size}  </Size>  </Figcaption> 
         
-        { ( isInDashboard) ?
+          {
           props.children
-         :
-          <AddToCartButton thisProductInfo={item}/>
-      }
-   
+          }
+        
       
    </Item>
    );

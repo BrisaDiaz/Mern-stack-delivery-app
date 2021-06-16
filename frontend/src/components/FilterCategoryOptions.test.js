@@ -5,10 +5,9 @@ import FilterCategoryOptions from './FilterCategoryOptions'
 
 
 const categories =[{name:'burgers',_id:1},{name:'pizzas',_id:2},{name:'hot dogs',_id:3}],
-setCategoryPreferece =jest.fn(),
-setPage=jest.fn();
+setCategoryPreferece =jest.fn();
 
-beforeEach(() => render( <FilterCategoryOptions setPage={setPage} setCategoryPreferece={setCategoryPreferece} categories={categories}/>) )
+beforeEach(() => render( <FilterCategoryOptions  setCategoryPreferece={setCategoryPreferece} categories={categories}/>) )
 
 
 it('has "all categorys" as a default value', ()=>{
@@ -35,7 +34,7 @@ fireEvent.change(screen.getByRole('combobox'), {
   },
 })
  expect(setCategoryPreferece.mock.calls.length).toBe(1)
- expect(setPage.mock.calls.length).toBe(1)
+
 
  expect(screen.getByRole('combobox')).toHaveDisplayValue('pizzas')
 
@@ -46,7 +45,7 @@ fireEvent.change(screen.getByRole('combobox'), {
 })
 
  expect(setCategoryPreferece.mock.calls.length).toBe(2)
- expect(setPage.mock.calls.length).toBe(2)
+
  
  expect(screen.getByRole('combobox')).toHaveDisplayValue('burgers')
   

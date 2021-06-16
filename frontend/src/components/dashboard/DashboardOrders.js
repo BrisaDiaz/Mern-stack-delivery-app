@@ -36,6 +36,9 @@ text-align:center;
     margin: -60px 0  0 -60px ;
  
 }
+& > ${NotFaundMessage} {
+  padding: 0 5px;
+}
 
 `;
 export const TableHead = styled.thead`
@@ -48,7 +51,7 @@ color: #fcba1c;
 }
 `;
 export const OrdersTable = styled.table`
-width:90%;
+    width: 100%;
 max-width:900px;
 margin: 20px auto 40px;
     border-spacing: 10px;
@@ -70,16 +73,16 @@ margin: 20px auto 40px;
   border-bottom: 1px solid ;
 }
 & >tbody tr td small {
-  padding: 0  5px ;
+  margin-left:   5px ;
 
 }
 @media screen and (max-width: 750px){
 
-    max-width: 350px;
+    max-width: 400px;
 
   & > ${TableHead}{
   display: none;
-  max-width: 300px;
+  max-width: 400px;
 }
 & tbody tr {
 display: flex;
@@ -127,7 +130,7 @@ export default function DashboardOrders(){
 
 
 
-const {seeDetails,resetQuery,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLoading,maxPage,orders,sorting} = useDashboardOrders()
+const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLoading,maxPage,orders,sorting,isFirstRender} = useDashboardOrders()
 
 
   return(
@@ -137,14 +140,14 @@ const {seeDetails,resetQuery,handleRefresh,setOrderID,setSorting,setPage,setStat
      <RefreshButton onClick={(e) =>handleRefresh()}>
   <RefreshIcone src={refreshIcone} title='Refrescar Página'/>
   </RefreshButton>
-<SearchBar placeholder='Número de orden...' setSearch={setOrderID} resetQuery={resetQuery}/>
+<SearchBar placeholder='Número de orden...' setSearch={setOrderID} />
 <FiltersBoard>
           <FilterOrderStateOptions setPage={setPage} setStatePreferece={setState}/>
           <SortOrdersOptions setSortPreferece={setSorting} sortPreference={sorting} />
         </FiltersBoard>
 
   {isLoading ? <LoaderSpinner /> :  null }
-  {   ( (!isLoading)   &&  orders?.length === 0) ?
+  {   ( (!isLoading) && (!isFirstRender)  &&  orders?.length === 0) ?
   
   <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
 

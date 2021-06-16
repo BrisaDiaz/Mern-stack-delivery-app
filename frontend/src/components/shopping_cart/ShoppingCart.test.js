@@ -40,7 +40,7 @@ import ShoppingCart from './ShoppingCart'
     emptyCart=  jest.fn(),
     resetTotalCost=  jest.fn();
 
-   render(
+render(
             <AppContext.Provider value={{cartProducts,totalCost:1600,emptyCart,resetTotalCost}}>
                 <ShoppingCart />
             </AppContext.Provider>
@@ -54,10 +54,8 @@ const emptyCartButton = screen.getByRole('button', {
 
 await  act(async() =>userEvent.click(emptyCartButton)) 
 
-
  expect(emptyCart.mock.calls.length).toBe(1)
   expect(resetTotalCost.mock.calls.length).toBe(1)
-
 
 
 

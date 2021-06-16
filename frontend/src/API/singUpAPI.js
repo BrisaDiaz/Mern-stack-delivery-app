@@ -3,7 +3,7 @@
 async function singUpAPI({
 setIsFormLoading,
 setServerError,
-setIsSingUp,
+
 history,
 info
 }){
@@ -30,7 +30,7 @@ setIsFormLoading(false)
          if(res.status === 201 || 302) {
       setServerError("")
 
-       setIsSingUp()
+    
 
         const {redirect,id} = json 
 

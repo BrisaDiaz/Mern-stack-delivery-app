@@ -113,7 +113,7 @@ const newUser = new User({
 
 
 
- res.redirect(`${process.env.HOST||'localhost:3000'}/#/authentication`)
+ res.redirect(`${process.env.HOST||'localhost:3000'}/#/authentication/login`)
 
 
 

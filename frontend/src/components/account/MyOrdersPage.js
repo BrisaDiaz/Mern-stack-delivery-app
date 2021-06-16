@@ -27,9 +27,9 @@ color: ${props => props.theme.darckYellow};
 }
 `;
 export const OrdersTable = styled.table`
-width:90%;
+    width: 100%;
 max-width:900px;
-margin: 0 auto 30px;
+margin: 20px auto 30px;
     border-spacing: 10px;
     border-collapse: collapse;
     border: 2px solid ${props => props.theme.black};
@@ -49,10 +49,10 @@ margin: 0 auto 30px;
       border-bottom: 1px solid;
 }
 @media screen and (max-width: 750px){
-    max-width: 350px;
+   max-width: 400px;
   & > ${TableHead}{
   display: none;
-  max-width: 300px;
+    max-width: 400px;
 }
 & tbody tr {
 display: flex;
@@ -135,7 +135,7 @@ align-items: center;
       box-shadow: ${props => props.theme.lihgtBoxShadow};
     background:${props => props.theme.black};
 
-    margin: -20px 0 10px auto;
+    margin: -40px 0 10px auto;
     width: max-content;
 display: flex;
     transform: scale(0.7);

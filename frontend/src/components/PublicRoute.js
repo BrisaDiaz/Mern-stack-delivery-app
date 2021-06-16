@@ -11,7 +11,7 @@ export default function PublicRoute  ({component: Component, ...rest}) {
         <Route {...rest} render={props => (
              localStorage.getItem('toConfirmUser') ?
                 <Component {...props} />
-            : <Redirect to="/authentication" />
+            : <Redirect to="/authentication/login" />
         )} />
     )
 
@@ -22,7 +22,7 @@ export default function PublicRoute  ({component: Component, ...rest}) {
         <Route {...rest} render={props => (
             isLogin ?
                 <Component {...props} />
-            : <Redirect to="/authentication" />
+            : <Redirect to="/authentication/login" />
         )} />
     )
 

@@ -25,7 +25,7 @@ next()
 const checkOrderExist = async (req,res,next) => {
   try{
 
-    const orderFound = await Order.findById(req.params.orderId);
+    const orderFound = await Order.findById(req.params.id);
 
     if(!orderFound) return res.status(404).json({success:false , message:'Not order found'})
   
@@ -81,14 +81,14 @@ const checkAllowedDelete  = async (req,res,next) => {
 
 
 
-    const orderFound = await Order.findById(req.params.orderId);
+    const orderFound = await Order.findById(req.params.id);
 
     if(!orderFound) return res.status(404).json({success:false , message:'Not order found'})
    
     if( orderFound.states[1].confirmed ) return res.status(401).json({success:false , message:"Can't delete order once acepted"})
   
 
-   req.orderId = req.params.orderId
+   req.orderId = req.orderFound._id
 
    next()
   
@@ -102,15 +102,6 @@ const checkAllowedDelete  = async (req,res,next) => {
   }
 }
 
-const checkIsValidId =  (req,res,next) =>{
 
- const isValid = ObjectId.isValid(req.params.orderId)
 
- if(!isValid){
-res.status(404).json({successful:false, message:'Not found, invalid id'})
- }
-
- next()
-}
-
-module.exports = {checkOrderExist,checkAllowedUpdates,checkProfileState,checkAllowedDelete,checkIsValidId} 
+module.exports = {checkOrderExist,checkAllowedUpdates,checkProfileState,checkAllowedDelete} 

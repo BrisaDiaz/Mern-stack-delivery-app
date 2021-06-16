@@ -2,8 +2,8 @@ import styled  from 'styled-components'
 import useNewestProducts from '../../hooks/useNewestProducts'
 import Item  from '../menu/MenuItem'
 import {SectionTitle,ProductsSection} from '../menu/Menu'
-import {LoaderSpinner} from './../LoaderSpinner'
-
+import AddToCartButton from '../AddToCartButton'
+import ProductsSectionSkeletom from '../ProductsSectionSkeletom'
 const StyledNewestProducts= styled.section`
 width:100vw;
 text-aling:center;
@@ -15,7 +15,7 @@ align-items:center;
 margin-bottom: 30px;
 `;
 
-export default function NewestProducts(){
+ function NewestProducts(){
 
 
 const {isLoading,latestProducts} = useNewestProducts()
@@ -28,12 +28,15 @@ const {isLoading,latestProducts} = useNewestProducts()
   <SectionTitle>Últimas Novedades</SectionTitle>
 
 {    
-(isLoading )? <LoaderSpinner small/>
+(isLoading )? <ProductsSectionSkeletom/>
   :
   <ProductsWrapper>
     {latestProducts.map( product => {
  
- return <Item key={product._id} item={product}></Item>
+ return <Item key={product._id} item={product}>
+                  <AddToCartButton thisProductInfo={product}/>
+   
+ </Item>
     }
     
       )}
@@ -46,3 +49,5 @@ const {isLoading,latestProducts} = useNewestProducts()
 
   );
 }
+
+export default NewestProducts

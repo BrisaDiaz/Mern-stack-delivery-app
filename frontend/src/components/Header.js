@@ -167,7 +167,7 @@ display:none;
 export default function Header(){
 
 
-const {handelNavClick, closeNav, handleLogin, handleSingUp,navIsOpened,numberOfProductsInCart, isLogin,toggleCart,isAdmin,isModerator}= useHeader()
+const {handelNavClick, closeNav,navIsOpened,numberOfProductsInCart, isLogin,toggleCart,isAdmin,isModerator}= useHeader()
 
 
   return(
@@ -191,8 +191,8 @@ const {handelNavClick, closeNav, handleLogin, handleSingUp,navIsOpened,numberOfP
 
 :
 <Fragment>
- <StyledLink className="primary" to="/authentication"  onClick={handleSingUp}>Sing Up</StyledLink>
- <StyledLink  to="/authentication"  onClick={handleLogin}>Login</StyledLink>
+ <StyledLink className="primary" to="/authentication/singUp"  onClick={closeNav}>Sing Up</StyledLink>
+ <StyledLink  to="/authentication/login"  onClick={closeNav}>Login</StyledLink>
 </Fragment>}
 
  

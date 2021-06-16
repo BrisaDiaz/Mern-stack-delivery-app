@@ -13,9 +13,7 @@ ACTUALIZE_CART,
 DELETE_PRODUCT_OF_CART,
 EMPTY_CART,
 RESET_TOTAL_COST,
-SET_IS_SING_UP_TRUE,
 SET_IS_LOGIN_TRUE,
-SET_IS_SING_UP_FALSE,
 SET_IS_LOGIN_FALSE,
 SET_IS_ADMIN,
 SET_IS_MODERATOR,
@@ -118,16 +116,6 @@ case TOGGLE_CART:
         return{ 
             ...state,
           isCartOpen: !state.isCartOpen,
-        };
-case SET_IS_SING_UP_FALSE:
-        return{ 
-            ...state,
-          isSingUp: false,
-        };
-case SET_IS_SING_UP_TRUE:
-        return{ 
-            ...state,
-          isSingUp: true,
         };
  case SET_IS_LOGIN_TRUE:
         return{ 

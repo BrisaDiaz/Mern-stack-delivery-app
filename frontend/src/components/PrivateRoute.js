@@ -20,7 +20,7 @@ return (
           
             (isAdmin)?
                 <Component {...props} />
-            : <Redirect to="/authentication" />
+            : <Redirect to="/authentication/login" />
         )} />
     );
 
@@ -33,7 +33,7 @@ return (
           
             (isAdmin  || isModerator)?
                 <Component {...props} />
-            : <Redirect to="/authentication" />
+            : <Redirect to="/authentication/login" />
         )} />
     );
 

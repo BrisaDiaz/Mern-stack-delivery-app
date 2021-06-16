@@ -60,7 +60,8 @@ background: #fff;
 color:${props => props.theme.black};
 transition:all 0.3s ease;
 &:hover{
-box-shadow: inset 0 0 8px 2px #cdc8c8;
+  background: ${props => props.theme.gray};
+
  }
 `
 const LogoutButton = styled.button`
@@ -78,7 +79,7 @@ padding: 4px 8px;
         transition:all 0.5s ease;
     &:hover{
 
-          box-shadow: inset 0 0 8px 2px #9c0101;
+          background: #ef4537;
     }
 `;
 function MyProfile() {

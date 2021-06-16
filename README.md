@@ -76,7 +76,9 @@ CLOUDINARY_SECRET
 ### Features:
 
 - Interaction with the backend through API Rest .
-- Some unit test
+- Some component unit test
+- Lazy Load
+- Products section skeletom display
 - Auto-played sliders with dot indicators and controls.
 - Navbar responsive and animated .
 - Singup/Login/forgotPassword system.
@@ -86,7 +88,8 @@ CLOUDINARY_SECRET
 - Shopping cart.
 - Editable User profile.
 - Products and orders section with sorter, filter and search bar.
-- Backend and frontend pagination.
+- URL able to storage user product seach
+- Backend and frontend side pagination.
 - Product details page.
-- user orders tracker page.
+- User orders tracker page.
 - Dashboard with users, categories, orders and products management system.

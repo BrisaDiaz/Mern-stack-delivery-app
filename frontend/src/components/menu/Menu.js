@@ -1,12 +1,13 @@
 import styled from 'styled-components'
+import {Fragment}from 'react'
 import { LoaderSpinner } from './../LoaderSpinner'
-
+import ProductsSectionSkeletom from '../ProductsSectionSkeletom'
 import useMenu from '../../hooks/useMenu'
 import SearchBar from '../MenuSearchBar'
 import SortProductsOptions from '../SortProductsOptions'
 import FilterCategoryOptions from '../FilterCategoryOptions'
 import Item from './MenuItem'
-
+import AddToCartButton from '../AddToCartButton'
 
 const StyledMenu = styled.main`
 min-height:100vh;
@@ -20,6 +21,7 @@ text-aling:center;
 export const SectionTitle = styled.h2`
 text-align:center;
 text-transform: uppercase;
+    margin-bottom: 40px;
 color:${(props) => (props.light ? "#fff" : "#fcba1c")};
  text-shadow: ${props => props.theme.darckTextShadow};
 `;
@@ -60,7 +62,7 @@ const CategoryWrapper = styled.section`
     flex-wrap: wrap;
     background: ${props => props.theme.darckRed};
     justify-content: center;
-    margin-bottom: 20px;
+    margin: -10px 0 20px;
     padding:  20px 15px;
     box-shadow: inset 0 0 20px 0 #1111118c;
 
@@ -120,20 +122,20 @@ box-shadow:${props => props.theme.ligthBoxShadow};
 
 const FiltersBoard = styled.div`
     flex-wrap: wrap;
-    padding: 0px 15px 20px;
+    margin: 0 15px 20px;
     display: flex;
     align-items: center;
     max-width: max-content;
     & > select {
-      margin: 0 10px 10px auto;
+      margin: 0 10px 10px 0;
    
 }
 
 `;
 
-export default function Menu() {
+function Menu() {
 
-const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, setCategory, setSorting,setTitle,resetQuery} = useMenu()
+const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, setCategory, setSorting,setTitle} = useMenu()
 
 
   return (
@@ -143,7 +145,10 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
 
       <SectionTitle>Menú</SectionTitle>
 
+ <SearchBarWrapper>
 
+          <SearchBar setSearch={setTitle}  />
+        </SearchBarWrapper>
       <MenuWrapper>
 
 
@@ -157,24 +162,30 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
         </CategoryWrapper >
 
 
-        <SearchBarWrapper>
-
-          <SearchBar setSearch={setTitle} resetQuery={resetQuery} />
-        </SearchBarWrapper>
+       
 
         <FiltersBoard>
-          <FilterCategoryOptions categories={populatedCategories} setCategoryPreferece={setCategory} setPage={setPage} />
+          <FilterCategoryOptions categories={populatedCategories} setCategoryPreferece={setCategory}  />
           <SortProductsOptions setSortPreferece={setSorting} sortPreference={sorting} />
         </FiltersBoard>
 
-  {isLoading ? <LoaderSpinner /> :  null }
+  {isLoading  ?
+  <Fragment>
+  <ProductsSectionSkeletom/>
+   <LoaderSpinner />
+</Fragment>
+ :  null }
 
         <ProductsSection isLoading={isLoading}>
 
-          {   ( (!isLoading)   && (products?.length ===  0)) ?
+          {   ( (!isLoading)   &&  (products?.length ===  0)) ?
             <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
             :
-            products?.map(product =><Item data-testid='productItem' key={product._id} item={product} />)
+            products?.map(product =>
+            <Item data-testid='productItem' key={product._id} item={product} >
+                   <AddToCartButton thisProductInfo={product}/>
+            </Item>
+            )
 
 
           }
@@ -201,3 +212,5 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
 
   );
 }
+
+export default Menu

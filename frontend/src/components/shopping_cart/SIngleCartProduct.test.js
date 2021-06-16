@@ -52,7 +52,7 @@ userEvent.click(screen.getByTestId('deleteProduct'))
 
  })
 
-  it('trigger increment and decrement counter and display correct quantity', ()=>{
+  it('display correct quantity while clicking increment and decrement', ()=>{
 
   render(
          <AppContext.Provider value={{deleteOfCart,deleteOfTotalCost,addToTotalCost,actualizeCart}}>
@@ -80,10 +80,21 @@ expect(actualizeCart.mock.calls.length).toBe(2)
  userEvent.click(decreaseButton)
 
   expect(deleteOfTotalCost.mock.calls.length).toBe(1)
-expect(actualizeCart.mock.calls.length).toBe(3)
+     expect(actualizeCart.mock.calls.length).toBe(3)
 
   expect(screen.getByTestId('quantity')).toHaveTextContent('2')
 
+   userEvent.click(decreaseButton)
+
+  expect(deleteOfTotalCost.mock.calls.length).toBe(2)
+     expect(actualizeCart.mock.calls.length).toBe(4)
+
+       expect(screen.getByTestId('quantity')).toHaveTextContent('1')
+
+          userEvent.click(decreaseButton)
+          
+  expect(deleteOfTotalCost.mock.calls.length).toBe(2)
+     expect(actualizeCart.mock.calls.length).toBe(4)
 
   })
        

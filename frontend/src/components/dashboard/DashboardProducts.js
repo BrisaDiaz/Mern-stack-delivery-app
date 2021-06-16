@@ -1,8 +1,8 @@
   
 import styled  from 'styled-components'
 import useDashboardProducts from '../../hooks/useDashboardProducts'
-import AppContext from '../../context/app-context'
-import {   useContext,Fragment } from 'react'
+import ProductsSectionSkeletom from '../ProductsSectionSkeletom'
+import {  Fragment } from 'react'
 import SearchBar from '../MenuSearchBar'
 import {LoaderSpinner} from './../LoaderSpinner'
 import DashboardNav from '../DashboardNav'
@@ -42,14 +42,14 @@ padding:60px 0;
 }
 `
 export const FiltersBoard = styled.div`
-padding: 30px 15px 0;
+margin: 30px 15px 0;
     display: flex;
     width: fit-content;
     align-items: center;
  justify-content: flex-start;
 flex-wrap: wrap;
 & > select {
-      margin: 0 10px 10px auto;
+      margin: 0 10px 10px 0;
    
 }
 `;
@@ -81,7 +81,7 @@ margin: 20px auto;
   
 
 
-  let {populatedCategories,isLoading,page,maxPage,products,setCategory,setTitle,resetQuery,
+  let {populatedCategories,isLoading,page,maxPage,products,setCategory,setTitle,
 handleEdit,handleDelete,setPage,setActiveProducts} = useDashboardProducts( )
 
 
@@ -93,14 +93,21 @@ handleEdit,handleDelete,setPage,setActiveProducts} = useDashboardProducts( )
 
 
 
-<SearchBar setSearch={setTitle} resetQuery={resetQuery}/>
+<SearchBar setSearch={setTitle} />
 <FiltersBoard>
-  <FilterCategoryOptions categories={populatedCategories} setCategoryPreferece={setCategory} setPage={setPage} />
+  <FilterCategoryOptions categories={populatedCategories} setCategoryPreferece={setCategory}  />
 
-<FilterProductsStateOptions setPage={setPage} setStatePreferece={setActiveProducts} />
+<FilterProductsStateOptions  setStatePreferece={setActiveProducts} />
 
 </FiltersBoard>
-  {isLoading ? <LoaderSpinner /> :  null }
+
+  {isLoading  ?
+  <Fragment>
+  <ProductsSectionSkeletom/>
+   <LoaderSpinner />
+</Fragment>
+ :  null }
+
   
   {   ( (!isLoading)   &&  products?.length === 0) ?
   

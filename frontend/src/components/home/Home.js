@@ -3,7 +3,7 @@ import React, { Suspense, lazy } from 'react';
 import HeroSlider from './HeroSlider'
 import Testimonials from './Testimonials'
 import About from './About'
-import MenuScheme from '../menu/MenuScheme' 
+import ProductsSectionSkeletom from '../ProductsSectionSkeletom'
 const NewestProducts = lazy(() => import('./NewestProducts'));
 const StyledHome = styled.main`
 
@@ -15,7 +15,7 @@ export default function Home() {
   return(
   <StyledHome>
 <HeroSlider></HeroSlider>
-  <Suspense fallback={ <MenuScheme/>}>
+  <Suspense fallback={ <ProductsSectionSkeletom/>}>
 <NewestProducts/>
   </Suspense>
   <Testimonials></Testimonials>
