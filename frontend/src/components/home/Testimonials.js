@@ -12,15 +12,14 @@ width:100%;
 min-height:360px;
 displey:flex;
 flex-wrap: wrap;
-
+& > * {
+    width:100%;
+  }
 @media screen and (min-width:960px){
-
   & > * {
     width:50%;
   }
 }
-  
-
 
 
 `; 

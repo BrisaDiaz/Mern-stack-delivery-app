@@ -5,10 +5,11 @@ import refreshIcone from '../../img/refresh.svg'
 import SearchBar from '../MenuSearchBar'
 import {RefreshButton,RefreshIcone} from '../account/MyOrdersPage'
 import {LoaderSpinner} from './../LoaderSpinner'
-import {ButtonsWrapper,NotFaundMessage,SectionTitle} from '../menu/Menu'
+import {NotFaundMessage,SectionTitle} from '../menu/Menu'
 import {FiltersBoard} from './DashboardProducts'
 import FilterOrderStateOptions from './../FilterOrderStateOptions'
 import SortOrdersOptions from './../SortOrdersOptions'
+import PaginationButtons from '../PaginationButtons'
 
 export const Page = styled.section`
     padding: 60px 0;
@@ -186,16 +187,7 @@ const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLo
 </OrdersTable> }
 
 
-<ButtonsWrapper>
-{
-(page > 1) ?  <button onClick={(e) => setPage(page -1)} >
-{'<< '}Prev</button> : null
-}
-{
-(page < maxPage) ?  <button onClick={(e) => setPage(page + 1)} >
-Next{' >>'}</button> : null
-}
-</ButtonsWrapper>
+<PaginationButtons setPage={setPage} page={page} maxPage={maxPage} />
 
 </Page>
   )

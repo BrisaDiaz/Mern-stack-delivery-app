@@ -6,7 +6,7 @@ import {useStorage} from '../context/useStorage'
 
 export default function useProductDetails(){
 
-  const {setIsLoading,cartProducts} = useStorage()
+  const {setIsLoading,cartProducts,isLoading} = useStorage()
   
 let location = useLocation()
 let history = useHistory()
@@ -66,6 +66,6 @@ const [isLoaded,setIsLoaded] = useState(false)
  
 let isInShoppingCart = cartProducts.find(product => product.info._id === thisProductInfo?._id) ? true : false
 
-return{ isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded}
+return{ isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded,isLoading}
 
 }

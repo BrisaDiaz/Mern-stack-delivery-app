@@ -8,9 +8,10 @@ import {LoaderSpinner} from './../LoaderSpinner'
 import DashboardNav from '../DashboardNav'
 import FilterProductsStateOptions from '../FilterProductsStateOptions'
 import FilterCategoryOptions from '../FilterCategoryOptions'
-import {SectionTitle,ProductsSection,NotFaundMessage,ButtonsWrapper} from '../menu/Menu'
+import {SectionTitle,ProductsSection,NotFaundMessage} from '../menu/Menu'
 import Item from '../menu/MenuItem'
 import {CartButton,CartIcon} from '../AddToCartButton'
+import PaginationButtons from '../PaginationButtons'
 import editIcone from '../../img/pencil-alt-solid.svg'
 import DeleteIcone from '../../img/trash-alt-regular.svg'
 
@@ -136,16 +137,7 @@ handleEdit,handleDelete,setPage,setActiveProducts} = useDashboardProducts( )
 </StyledProductsSection>
 }
 
-<ButtonsWrapper>
-{
-(page > 1) ?  <button onClick={(e) => setPage(page -1)} >
-{'<< '}Prev</button> : null
-}
-{
-(page < maxPage) ?  <button onClick={(e) => setPage(page + 1)} >
-Next{' >>'}</button> : null
-}
-</ButtonsWrapper>
+<PaginationButtons setPage={setPage} page={page} maxPage={maxPage} />
 
 </StyledSection>
   )

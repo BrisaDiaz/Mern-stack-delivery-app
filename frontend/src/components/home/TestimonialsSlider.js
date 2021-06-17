@@ -3,12 +3,14 @@ import {useEffect,useState} from 'react'
 import useDinamicDotSlider from '../../hooks/useDinamicDotSlider'
 import quoteIcone from '../../img/left-quote.svg'
 import { SliderContainer,IndicatorWrapper,IndicatorDot,SliderContent,Slide} from './HeroSlider'
+import FailToFectch from '../../img/Error-503-backend-fetch-failed.png'
 
 const StyledTestimonialSlider = styled.div`
-width:100%;
 min-height:360px;
 position:relative;
 
+background:${props => (props.error === true) ? `url(${FailToFectch}) no-repeat center center` : 'none'};
+background-size:contain;
 `;
 const ThisSlide= styled(Slide)`
 background:${props => props.theme.black};
@@ -48,12 +50,15 @@ height: auto;
 margin:0 auto;
 margin-bottom:10px;
 `;
+
 export default function Testimonials(){
 const [testimonials, setTestimonials] = useState([])
+const [error,setError] = useState(false)
 
 useEffect( ()=> {
 
   async function fetchData(){
+      setError(false)
     try{
 
 const res = await fetch('https://jsonplaceholder.typicode.com/comments');
@@ -65,14 +70,9 @@ const res = await fetch('https://jsonplaceholder.typicode.com/comments');
 
     }catch(err){
       console.log(err)
-      
-      let i = 0
 
-      if(i < 6){
-  fetchData()
-        return i += 1
-      }
-
+          setError(true)
+  
     }
 
 
@@ -85,10 +85,12 @@ fetchData()
 
 
 return(
-  <StyledTestimonialSlider>
-  <SliderContainer>
+  <StyledTestimonialSlider error={error}  >
+  <SliderContainer >
 {testimonials.map( (testimonial,index)=>
-     <ThisSlide key={index} slide={slide} index={index}>
+
+
+     <ThisSlide  key={index} slide={slide} index={index}>
        <ThisSlideContent>
 <Name>{testimonial.name}</Name> 
 <QuoteIcon src={quoteIcone} alt="happy-clients"></QuoteIcon>

@@ -8,6 +8,7 @@ import SortProductsOptions from '../SortProductsOptions'
 import FilterCategoryOptions from '../FilterCategoryOptions'
 import Item from './MenuItem'
 import AddToCartButton from '../AddToCartButton'
+import PaginationButtons from '../PaginationButtons'
 
 const StyledMenu = styled.main`
 min-height:100vh;
@@ -95,31 +96,6 @@ display:block;
 width:100%;
 `;
 
-export const ButtonsWrapper = styled.div`
-display:flex;
-justify-content:center;
-width:100%;
-gap:15px;
-&> button{
-  padding: 5px 10px 6px;
-  cursor:pointer;
-  background:${props => props.theme.black};
-    color:${props => props.theme.darckYellow};
-box-shadow:${props => props.theme.ligthBoxShadow};
-    border:transparent;
-    outline:transparent;
-    fornt-size:20px;
-    font-family:oswald;
-    lettter-spacing: 1px;
-    border: 2px solid ${props => props.theme.darckYellow};
-}
-@media screen and (min-width:500px){
-  &> button{
-    transform:scale(1.1);
-  }
-}
-`;
-
 const FiltersBoard = styled.div`
     flex-wrap: wrap;
     margin: 0 15px 20px;
@@ -174,8 +150,7 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
   <ProductsSectionSkeletom/>
    <LoaderSpinner />
 </Fragment>
- :  null }
-
+:
         <ProductsSection isLoading={isLoading}>
 
           {   ( (!isLoading)   &&  (products?.length ===  0)) ?
@@ -193,20 +168,11 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
 
         </ProductsSection>
 
-
+        }
       </MenuWrapper>
 
-
-        <ButtonsWrapper>
-          {
-            (page > 1) ? <button onClick={(e) => setPage(page - 1)} >
-           {'<< '}Prev</button> : null
-          }
-          {
-            (page < maxPage) ? <button onClick={(e) => setPage(page + 1)} >
-              Next{' >>'}</button> : null
-          }
-        </ButtonsWrapper>
+<PaginationButtons setPage={setPage} page={page} maxPage={maxPage} />
+  
       
     </StyledMenu>
 

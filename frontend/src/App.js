@@ -10,6 +10,8 @@ import Header from './components/Header'
 import NotFound404Page from './components/NotFound404Page'
 import SuccessfullFormModal from './components/SuccessfullFormModal'
 import ShooppingCart from './components/shopping_cart/ShoppingCart'
+import ProductsDetails from  './components/product_details/ProductDetails'
+import DashboarOrderDetails from './components/dashboard/DashboarOrderDetails'
 
 import {
   HashRouter  as Router,
@@ -30,10 +32,8 @@ const EditMyProfile = lazy(() => import('./components/account/EditMyProfile'));
 const MyOrdersPage = lazy(() => import( './components/account/MyOrdersPage'));
 const OrderDetails = lazy(() => import( './components/account/OrderDetails'));
 const EmailConfirmationModal = lazy(() => import( './components/auth/EmailConfirmationModal'));
-const ProductsDetails = lazy(() => import( './components/product_details/ProductDetails'));
 const ResetPassword = lazy(() => import('./components/auth/ResetPassword'));
 const DashboardCategories = lazy(() => import('./components/dashboard/DashboardCategories'));
-const DashboarOrderDetails = lazy(() => import( './components/dashboard/DashboarOrderDetails'));
 const DashboardOrders = lazy(() => import( './components/dashboard/DashboardOrders'));
 const DashboardUsers = lazy(() => import(  './components/dashboard/DashboardUsers'));
 const DashboardEditProduct = lazy(() => import( './components/dashboard/DashboardEditProduct'));

@@ -2,7 +2,8 @@ import styled  from 'styled-components'
 import {Link} from 'react-router-dom'
 import useMyOrdersPage from '../../hooks/useMyOrdersPage'
 import {ButtonPrimary} from '../Buttons'
-import {SectionTitle,ButtonsWrapper} from '../menu/Menu'
+import {SectionTitle} from '../menu/Menu'
+import PaginationButtons from '../PaginationButtons'
 import refreshIcone from '../../img/refresh.svg'
 
 
@@ -216,16 +217,7 @@ Cancelar Pedido
 
 }
 
-<ButtonsWrapper>
-{
-(page > 1) ?  <button onClick={(e) => setPage(page -1)} >
-{'<< '}Prev</button> : null
-}
-{
-(page < maxPage) ?  <button onClick={(e) => setPage(page + 1)} >
-Next{' >>'}</button> : null
-}
-</ButtonsWrapper>
+<PaginationButtons setPage={setPage} page={page} maxPage={maxPage} />
 </Page>
   )
 }

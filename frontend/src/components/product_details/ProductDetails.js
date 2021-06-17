@@ -35,13 +35,11 @@ max-height: 800px;
  width:70vw;
 }
 @media screen and (min-width:850px){
- width:50vw;
+width: 70vw;
 }
-@media screen and (min-width:850px){
- width:50vw;
-}
+
 @media screen and (min-width:1200px){
-    width: 70vw;
+
     height: 100%;
     max-height: 800px;
 }
@@ -121,12 +119,13 @@ function ProductDetailsPage(){
 
 
 
-const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded} = useProductDetails()
+const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded,isLoading} = 
+useProductDetails()
 
+if(isLoading)  return null
 
   return(
 
-      
 <ProductDetails >
     
              <GoBackLink to={goBackPath} > Regresar</GoBackLink>
