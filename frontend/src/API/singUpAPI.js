@@ -8,7 +8,7 @@ history,
 info
 }){
 try{
-  setIsFormLoading(true)
+
 
      const headers = new Headers();
         headers.append('Accept', 'application/json');

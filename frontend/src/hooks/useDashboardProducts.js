@@ -35,15 +35,12 @@ const [isFirstRender, setIsFirstRender] = useState(true)
 useEffect(() => {
   const controller = new AbortController()
  const signal = controller.signal
-const productsAPI = async () =>{
-    setIsLoading(true)
-  try{
 
    if( isFirstRender && location.search !==""){
 
         query=location.search.split('?')[1]
 
-        setIsFirstRender(false)
+
       }
 
    if(title !==""){ 
@@ -63,6 +60,12 @@ setCategory('all')
 query.append('active',activeProducts)
 setPage(1)
     }
+
+const productsAPI = async () =>{
+    setIsLoading(true)
+  try{
+
+ 
      let res = await fetch(`/api/products?${query}`,{signal,})
      let json = await res.json()
 
@@ -88,7 +91,7 @@ document.querySelector('body').scrollTo(0,100)
   }
 
   productsAPI()
- 
+setIsFirstRender(false)
      return () =>{
      controller.abort()
    }   
@@ -112,7 +115,7 @@ await deleteProductAPI(token,id,setProducts)
 
 }
   return {populatedCategories,isLoading,page,maxPage,products,setCategory,setTitle,
-handleEdit,handleDelete,setPage,setActiveProducts,setProducts}
+handleEdit,handleDelete,setPage,setActiveProducts,setProducts,isFirstRender}
 
 
 }

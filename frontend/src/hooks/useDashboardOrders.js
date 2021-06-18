@@ -44,20 +44,15 @@ const [isRefreshing, setIsRefreshing] = useState(false)
 
 
 useEffect(() => {
+  
   const controller = new AbortController()
  const signal = controller.signal
- 
-const productsAPI = async () =>{
 
-    setIsLoadingPage(true)
+  if( isFirstRender && location.search !==""){
 
-  try{
-
-      if( isFirstRender && location.search !==""){
-
-        query=location.search.split('?')[1]
+     query=location.search.split('?')[1]
         
-        setIsFirstRender(false)
+    setIsFirstRender(false)
       }
 
    if(orderID !==""){ 
@@ -65,16 +60,20 @@ const productsAPI = async () =>{
 
 setPage(1)
 setState('all')
-
-
      
     }
 
-    if(state !=="all"){
-
+if(state !=="all"){
 query.append('state',state)
-
     }
+
+const productsAPI = async () =>{
+
+    setIsLoadingPage(true)
+
+  try{
+
+     
 
        const headers = new Headers();
       headers.append('Accept', 'application/json');

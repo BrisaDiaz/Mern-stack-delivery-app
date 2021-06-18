@@ -46,7 +46,7 @@ box-shadow: 0 1px 3px #ccc;
 export default function ProductsSectionSkeletom() {
   
   return(
-<Container>
+<Container data-testid='products-skeketom'>
   <Item>
     <ImgContainer/>
     <TextLine/>

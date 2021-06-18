@@ -44,17 +44,12 @@ const [isFirstRender, setIsFirstRender] = useState(true)
     const signal = controller.signal
     setIsLoading(true)
 
-   
-
-    const fechProducts = async () => {
-
-     if( isFirstRender && location.search !==""){
-
+    if( isFirstRender && location.search !==""){
         query =location.search.split('?')[1]
 
-        setIsFirstRender(false)
       }
  
+
       if (title !== "") {
         query.append('title', title)
         setPage(1)
@@ -67,8 +62,8 @@ const [isFirstRender, setIsFirstRender] = useState(true)
         setPage(1)
       }
 
+    const fechProducts = async () => {
 
-  
 
      
       try {
@@ -86,6 +81,8 @@ const [isFirstRender, setIsFirstRender] = useState(true)
 
 document.querySelector('body').scrollTo(0,100)
         setIsLoading(false)
+
+          setIsFirstRender(false)
       } catch (err) {
         if (err.name === 'AbortError') {
           console.log('Fetch Canseled: caught abort')
@@ -106,6 +103,6 @@ document.querySelector('body').scrollTo(0,100)
 
 
 
-return {isLoading, maxPage, products,populatedCategories,page,setPage,  setCategory, setSorting,setTitle}
+return {isLoading, maxPage, products,populatedCategories,page,setPage,  setCategory, setSorting,setTitle,isFirstRender}
 
 }

@@ -1,10 +1,11 @@
 import styled  from 'styled-components'
 import {useStorage} from '../context/useStorage'
 import {LoaderSpinner} from './LoaderSpinner'
+
 const Page = styled.main`
 position:fixed;
 flex-direction:column;
-display:flex;
+display: flex ;
 justify-content:center;
 align-items:center;
 top:0;
@@ -20,7 +21,7 @@ export default function LoadingPage(props){
   return(
 
    (isLoading || props.isLoading) ?
-   <Page ><LoaderSpinner/></Page>
+   <Page  ><LoaderSpinner data-testid='loadingSpinner' /></Page>
  : null
 
   )

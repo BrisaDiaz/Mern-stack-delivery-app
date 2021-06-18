@@ -1,9 +1,12 @@
 import styled  from 'styled-components'
 import useNewestProducts from '../../hooks/useNewestProducts'
 import Item  from '../menu/MenuItem'
-import {SectionTitle,ProductsSection} from '../menu/Menu'
+import {SectionTitle} from '../menu/Menu'
+import {ProductsSection} from '../menu/ProductsSection'
 import AddToCartButton from '../AddToCartButton'
 import ProductsSectionSkeletom from '../ProductsSectionSkeletom'
+
+
 const StyledNewestProducts= styled.section`
 width:100vw;
 text-aling:center;

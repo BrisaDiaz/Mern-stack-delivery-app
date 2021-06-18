@@ -23,12 +23,15 @@ async function onSubmit(data,e) {
 
  e.preventDefault()
 
+await setIsFormLoading(true)
+
 const info ={
-name: e.target.userName.value.toLowerCase(),
-lastName: e.target.userLastName.value.toLowerCase(),
-email:e.target.userEmail.value,
-password:e.target.userPassword.value
+name: data.userName.toLowerCase(),
+lastName: data.userLastName.toLowerCase(),
+email:data.userEmail,
+password:data.userPassword
 }
+
 
 await singUpAPI({
 setServerError,

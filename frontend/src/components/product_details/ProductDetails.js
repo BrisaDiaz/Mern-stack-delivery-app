@@ -122,10 +122,10 @@ function ProductDetailsPage(){
 const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded,isLoading} = 
 useProductDetails()
 
-if(isLoading)  return null
+
 
   return(
-
+(isLoading) ? null : 
 <ProductDetails >
     
              <GoBackLink to={goBackPath} > Regresar</GoBackLink>

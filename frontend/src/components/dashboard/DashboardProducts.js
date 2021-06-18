@@ -5,10 +5,11 @@ import ProductsSectionSkeletom from '../ProductsSectionSkeletom'
 import {  Fragment } from 'react'
 import SearchBar from '../MenuSearchBar'
 import {LoaderSpinner} from './../LoaderSpinner'
+import {NotFaundMessage,ProductsSection} from '../menu/ProductsSection'
 import DashboardNav from '../DashboardNav'
 import FilterProductsStateOptions from '../FilterProductsStateOptions'
 import FilterCategoryOptions from '../FilterCategoryOptions'
-import {SectionTitle,ProductsSection,NotFaundMessage} from '../menu/Menu'
+import {SectionTitle} from '../menu/Menu'
 import Item from '../menu/MenuItem'
 import {CartButton,CartIcon} from '../AddToCartButton'
 import PaginationButtons from '../PaginationButtons'
@@ -83,7 +84,7 @@ margin: 20px auto;
 
 
   let {populatedCategories,isLoading,page,maxPage,products,setCategory,setTitle,
-handleEdit,handleDelete,setPage,setActiveProducts} = useDashboardProducts( )
+handleEdit,handleDelete,setPage,setActiveProducts,isFirstRender} = useDashboardProducts( )
 
 
   return(
@@ -102,14 +103,11 @@ handleEdit,handleDelete,setPage,setActiveProducts} = useDashboardProducts( )
 
 </FiltersBoard>
 
-  {isLoading  ?
-  <Fragment>
-  <ProductsSectionSkeletom/>
-   <LoaderSpinner />
-</Fragment>
- :  null }
+  {isLoading  && <LoaderSpinner />}
 
-  
+{(isLoading  && isFirstRender) ?  <ProductsSectionSkeletom/> : null}
+
+
   {   ( (!isLoading)   &&  products?.length === 0) ?
   
   <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
@@ -135,8 +133,8 @@ handleEdit,handleDelete,setPage,setActiveProducts} = useDashboardProducts( )
   ) }
 
 </StyledProductsSection>
-}
 
+ }
 <PaginationButtons setPage={setPage} page={page} maxPage={maxPage} />
 
 </StyledSection>

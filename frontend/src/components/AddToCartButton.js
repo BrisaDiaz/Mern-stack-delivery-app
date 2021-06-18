@@ -34,7 +34,8 @@ export default function AddToCartButton({thisProductInfo}){
 
 
 
- const {handlerAddToCartAndAddToTotalCost,isAdded} = useAddToCartButton(thisProductInfo)
+ const {handlerAddToCartAndAddToTotalCost,isAdded} = 
+ useAddToCartButton(thisProductInfo)
 
   return(
            <CartButton  isAdded={isAdded}

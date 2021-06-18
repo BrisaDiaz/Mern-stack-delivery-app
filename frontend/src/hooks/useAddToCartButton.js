@@ -18,7 +18,8 @@ useEffect(()=>{
 
   const handlerAddToCartAndAddToTotalCost= (product, cost) =>{
 
-  if( products.indexOf(product._id) === -1){
+  if(!isAdded){
+    
 addToTotalCost(cost)
 addToCart({info: product, quantity: 1})
 

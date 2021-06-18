@@ -1,11 +1,11 @@
 
 import {Option,OptionList} from './SortProductsOptions'
 
-export default function FilterProductsStateOptions({setStatePreferece,setPage}){
+export default function FilterProductsStateOptions({setStatePreferece}){
 
   const handelChange = (e) =>{
  e.preventDefault()
-     setPage(1)
+
  setStatePreferece(e.target.value)
 }
 

@@ -1,14 +1,12 @@
 import styled from 'styled-components'
-import {Fragment}from 'react'
 import { LoaderSpinner } from './../LoaderSpinner'
 import ProductsSectionSkeletom from '../ProductsSectionSkeletom'
 import useMenu from '../../hooks/useMenu'
 import SearchBar from '../MenuSearchBar'
 import SortProductsOptions from '../SortProductsOptions'
 import FilterCategoryOptions from '../FilterCategoryOptions'
-import Item from './MenuItem'
-import AddToCartButton from '../AddToCartButton'
 import PaginationButtons from '../PaginationButtons'
+import  ProductsSectionComponent from './ProductsSection' 
 
 const StyledMenu = styled.main`
 min-height:100vh;
@@ -111,7 +109,7 @@ const FiltersBoard = styled.div`
 
 function Menu() {
 
-const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, setCategory, setSorting,setTitle} = useMenu()
+const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, setCategory, setSorting,setTitle,isFirstRender} = useMenu()
 
 
   return (
@@ -145,30 +143,13 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
           <SortProductsOptions setSortPreferece={setSorting} sortPreference={sorting} />
         </FiltersBoard>
 
-  {isLoading  ?
-  <Fragment>
-  <ProductsSectionSkeletom/>
-   <LoaderSpinner />
-</Fragment>
-:
-        <ProductsSection isLoading={isLoading}>
+  {isLoading &&<LoaderSpinner />}
 
-          {   ( (!isLoading)   &&  (products?.length ===  0)) ?
-            <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
-            :
-            products?.map(product =>
-            <Item data-testid='productItem' key={product._id} item={product} >
-                   <AddToCartButton thisProductInfo={product}/>
-            </Item>
-            )
+{ (isLoading && isFirstRender  )?  <ProductsSectionSkeletom /> :
 
-
-          }
-
-
-        </ProductsSection>
-
-        }
+<ProductsSectionComponent isLoading={isLoading} products={products}/>
+ }
+        
       </MenuWrapper>
 
 <PaginationButtons setPage={setPage} page={page} maxPage={maxPage} />

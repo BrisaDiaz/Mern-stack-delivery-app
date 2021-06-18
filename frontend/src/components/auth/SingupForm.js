@@ -89,11 +89,13 @@ export function UserNameInput({register,errors}){
 
   return(
     <Fragment>
-       {errors.userName && <ErrorMessage>{errors.userName.message }</ErrorMessage>}
+       {errors.userName && <ErrorMessage >{errors.userName.message }</ErrorMessage>}
     <  TextInput 
         placeholder='Tu nombre...'
           name="userName"
           type='text'
+          
+          data-testid='nameInput'
           ref={register({
                required: '*El campo es requrido',
               pattern:{
@@ -116,13 +118,14 @@ export function UserLastNameInput({register,errors}){
     <  TextInput 
     type='text'
         placeholder='Tu apellido ...'
+        data-testid='lastNameInput'
           name="userLastName"
           ref={register({
                required: '*El campo es requrido',
               pattern:{
                         value: /^[A-Za-zñÑáÁéÉíÍóÓúÚÜü]+$/
 ,
-                         message:"*Nombre no valido"
+                         message:"*Apellido no valido"
                       }
             
           })}
@@ -140,6 +143,7 @@ export function UserEmailInput({register,errors}){
           type='email'
           placeholder='Tu email...'
           name="userEmail"
+          data-testid='emailInput'
           ref={register({
                      required: '*El campo es requrido',
                 
@@ -157,12 +161,14 @@ export function UserEmailInput({register,errors}){
 
   return(
     <Fragment>
-       {errors[name] && <ErrorMessage  role="alert">{errors[name].message}</ErrorMessage>}
+       {errors[name] && <ErrorMessage  >{errors[name].message}</ErrorMessage>}
 
 <TextInput
 placeholder={placeholder}
 type='password'
 name ={name}
+data-testid='passwordInput'
+
           ref={register({
                   required: '*El campo es requrido' ,
                      minLength: {
@@ -179,7 +185,7 @@ export function UserNewPasswordInput({register,errors,placeholder,}){
 
   return(
     <Fragment>
-       {errors.userNewPassword && <ErrorMessage  role="alert">{errors.userNewPassword.message}</ErrorMessage>}
+       {errors.userNewPassword && <ErrorMessage  >{errors.userNewPassword.message}</ErrorMessage>}
 
 <TextInput
 placeholder={placeholder}
@@ -205,12 +211,12 @@ export default function SingupForm(){
   return(
     <FormCard>
              <Logo src={burgerIcon} alt="LogoBrand"></Logo>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form data-testid="singUpForm" onSubmit={handleSubmit(onSubmit)}>
      
      <UserNameInput  errors={errors} register={register}/>
           <UserLastNameInput  errors={errors} register={register}/>
      <UserEmailInput  errors={errors} register={register}/>
-     <UserPasswordInput  errors={errors} register={register} placeholder="Tu contraseña..."  />
+     <UserPasswordInput   errors={errors} register={register} placeholder="Tu contraseña..."  />
 
 
          <ErrorServerMessage>{serverError}</ErrorServerMessage>
@@ -218,7 +224,7 @@ export default function SingupForm(){
  
            <FormLink to= "/authentication/login" >¿Ya tienes una cuenta? <b>Login</b> </FormLink>
  <ButtonPrimary as="input" type="submit" value="Sing Up"/>
-     {isFormLoading && <LoaderSpinner small />}
+     {isFormLoading && <LoaderSpinner data-testid="spinner"small />}
       </Form>
     </FormCard>
   );

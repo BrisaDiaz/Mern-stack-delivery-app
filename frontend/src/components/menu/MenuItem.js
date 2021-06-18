@@ -19,7 +19,7 @@ padding:20px;
 border: 1px solid #00000026;
 box-shadow: 1px 1px 5px #00000057;
 `
-const Figcaption =styled.div`
+const Description =styled.div`
 display:flex;
 align-items:center;
 padding-bottom:5px;
@@ -101,7 +101,7 @@ const handleRedirect = (id) =>{
 
 
   return(
-  <Item key={item._id}>
+  <Item data-testid='productItem' key={item._id}>
 
 <ImgContainer isLoaded={isLoaded}> 
 
@@ -112,7 +112,7 @@ const handleRedirect = (id) =>{
 </ImgContainer>
 
       <ProductLink onClick={ () => handleRedirect(item._id)}>{item.name}</ProductLink>  
-   <Figcaption><Price >{item.price}</Price> <Size>{item.size}  </Size>  </Figcaption> 
+   <Description><Price >{item.price}</Price> <Size>{item.size}  </Size>  </Description> 
         
           {
           props.children

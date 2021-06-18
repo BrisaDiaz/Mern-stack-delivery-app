@@ -156,18 +156,18 @@ const  { prevSlide, nextSlide ,moveToSlide, slide} = useStaticInfoSlider()
 
     <SliderContainer>
 
-      <Slide slide={slide} index={1}>
-        <SliderImage src={BurgerSlide} alt= "burger"></SliderImage>
+      <Slide   data-testid='slider1'  slide={slide} index={1}>
+        <SliderImage  src={BurgerSlide} alt= "burger"></SliderImage>
         <SliderContent>
           <Span>las mejores ofertas</Span>
           <SliderTitle>super descuento <br></br>hamburgesa</SliderTitle>
           <ButtonPrimary as={Link} to="/menu">ordenar</ButtonPrimary></SliderContent>
           </Slide>
-         <Slide slide={slide} index={2}>
+         <Slide data-testid='slider2'  slide={slide} index={2}>
            <SliderImage src={PizzaSlide} alt= "pizza"></SliderImage>
            <SliderContent><Span>las mejores ofertas</Span><SliderTitle>super descuento <br></br>Pizza</SliderTitle><ButtonPrimary as={Link} to="/menu">ordenar</ButtonPrimary></SliderContent>
            </Slide>
-            <Slide slide={slide} index={3}>
+            <Slide data-testid='slider3'  slide={slide} index={3}>
               <SliderImage src={EmpanadaSlide} alt= "empanadas" >
 
               </SliderImage>
@@ -177,12 +177,12 @@ const  { prevSlide, nextSlide ,moveToSlide, slide} = useStaticInfoSlider()
               </SliderContent>
               </Slide>
 
-<ControlsWrapper><ControlLeft  onClick={prevSlide} /><ControlRight  onClick={nextSlide}/></ControlsWrapper>
+<ControlsWrapper><ControlLeft data-testid='prevButton' onClick={prevSlide} /><ControlRight  data-testid='nextButton'onClick={nextSlide}/></ControlsWrapper>
 
 <IndicatorWrapper>
-  < IndicatorDot slide={slide}  index={1} onClick={ () => moveToSlide(1)}/>
-  <IndicatorDot  slide={slide} index={2} onClick={ ()=>moveToSlide(2)}/>
-  <IndicatorDot  slide={slide}  index={3} onClick={ ()=>moveToSlide(3)}/>
+  < IndicatorDot data-testid='dot1'  slide={slide}  index={1} onClick={ () => moveToSlide(1)}/>
+  <IndicatorDot  data-testid='dot2'  slide={slide} index={2} onClick={ ()=>moveToSlide(2)}/>
+  <IndicatorDot data-testid='dot3'   slide={slide}  index={3} onClick={ ()=>moveToSlide(3)}/>
   </IndicatorWrapper>
 
     </SliderContainer>
