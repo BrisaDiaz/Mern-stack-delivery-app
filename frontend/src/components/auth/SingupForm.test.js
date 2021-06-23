@@ -3,16 +3,35 @@ import React from 'react';
 import { render,  screen,act,fireEvent} from '@testing-library/react'
 import {MemoryRouter} from 'react-router-dom'
 
+ 
 
+describe('form validations',()=>{
+   let originalFetch;
 
-beforeEach(()=> render(
+   beforeEach(() => {
+        originalFetch = global.fetch;
+        global.fetch = jest.fn(() => Promise.resolve({
+          status:200,
+            json: () => Promise.resolve({
+                message:'sing up successfully',
+        
+            }),
+        }));
+    });
+
+    afterEach(() => {
+        global.fetch = originalFetch;
+    });
+ 
+beforeEach(async()=> 
+
+await act(async() =>
+  render(
       <MemoryRouter initialEntries={['/',"/authentication/singUp"]}>
   <SingupForm/>
     </MemoryRouter>
 
-) )
-
-
+) ))
 it('renders all components correctly', () =>{
 
 expect(screen.getAllByRole('textbox')).toHaveLength(3)
@@ -227,9 +246,81 @@ await act(async()=> fireEvent.blur(screen.getByTestId('emailInput')))
  
 await act(async()=> fireEvent.submit(screen.getByTestId('singUpForm')))
 
-
-const spinner = await screen.findByTestId('spinner')
+setTimeout(async() => {
+  const spinner = await screen.findByTestId('spinner')
 
 expect(spinner).toBeInTheDocument()
+}, 1000);
+
   
 } )
+})
+
+
+describe('handle fetch exeptions', () =>{
+    let originalFetch;
+
+   beforeEach(() => {
+        originalFetch = global.fetch;
+        global.fetch = jest.fn(() => Promise.resolve({
+          status:400,
+            json: () => Promise.resolve({
+                message:'bad request',
+        
+            }),
+        }));
+    });
+
+    afterEach(() => {
+        global.fetch = originalFetch;
+    });
+
+
+it('display custom error messages',async() =>{
+await act(async() =>
+  render(
+      <MemoryRouter initialEntries={['/',"/authentication/singUp"]}>
+  <SingupForm/>
+    </MemoryRouter>
+
+) 
+)
+await act(async()=> fireEvent.blur(screen.getByTestId('nameInput')))    
+
+await act(async()=>fireEvent.change(screen.getByTestId('lastNameInput'),{
+  target:{
+    value: 'Díaz'
+  }
+}))  
+
+await act(async()=> fireEvent.blur(screen.getByTestId('lastNameInput')))    
+
+   await act(async()=>fireEvent.change(screen.getByTestId('passwordInput'),{
+  target:{
+    value: 'wrongUserPasword'
+  }
+}))  
+
+await act(async()=> fireEvent.blur(screen.getByTestId('passwordInput')))    
+
+
+
+await act(async()=>fireEvent.change(screen.getByTestId('emailInput'),{
+  target:{
+    value: 'correctemailexample@gmail.com'
+  }
+}))  
+
+await act(async()=> fireEvent.blur(screen.getByTestId('emailInput')))    
+ 
+await act(async()=> fireEvent.submit(screen.getByTestId('singUpForm')))
+
+setTimeout(async()=>{
+
+await expect(screen.getByText('bad request')).toBeInTheDocument()
+},1000)
+
+
+})
+
+})

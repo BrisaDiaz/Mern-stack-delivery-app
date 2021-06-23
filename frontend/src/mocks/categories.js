@@ -1,95 +1,198 @@
-import { datastore_v1 } from "googleapis"
-import { datacatalog } from "googleapis/build/src/apis/datacatalog"
 
-const data = {
-  "success": true,
-  "data": [
+
+const data =  [
     {
-      "price": 150,
+      "quantity": 2,
       "active": true,
-      "sold": 1,
-      "_id": "60b8456e018ee624481c0ce6",
-      "name": "coca cola",
-      "category": "bebidas",
-      "size": "500 ml",
-      "description": "refrescante coca cola para acompañar a tus comidas favoritas.",
-      "img": "https://res.cloudinary.com/myproyects/image/upload/v1622912250/qld7cwaxilf2biv51i2o.png",
-      "createdAt": "2021-06-03T02:58:54.349Z",
-      "updatedAt": "2021-06-06T01:17:47.347Z",
-      "img_id": "qld7cwaxilf2biv51i2o"
+      "_id": "60a9545fbd5e160f68113479",
+      "name": "pizzas",
+      "createdAt": "2021-05-22T18:58:40.004Z",
+      "updatedAt": "2021-05-22T18:58:40.004Z"
     },
     {
-      "price": 360,
+      "quantity": 2,
       "active": true,
-      "sold": 1,
-      "_id": "60af145ac113720808cb67f8",
-      "name": "empanadas de pollo",
-      "category": "empanadas",
-      "size": "6 unid",
-      "description": "empanadas de pollo desmenuzado, huevo duro y verdura.",
-      "img": "https://res.cloudinary.com/myproyects/image/upload/v1622912132/kis8gvvsnyr8djo9do6s.png",
-      "createdAt": "2021-05-27T03:39:06.686Z",
-      "updatedAt": "2021-06-05T16:55:34.501Z",
-      "img_id": "kis8gvvsnyr8djo9do6s"
+      "_id": "60a9545fbd5e160f6811347a",
+      "name": "hamburguesas",
+      "createdAt": "2021-05-22T18:58:40.005Z",
+      "updatedAt": "2021-06-03T01:47:51.864Z"
     },
     {
-      "price": 360,
+      "quantity": 2,
       "active": true,
-      "sold": 1,
-      "_id": "6098b6ac07be162608594f38",
-      "name": "empanadas arabes",
-      "category": "empanadas",
-      "size": "6 unid",
-      "description": "empanadas árabes jugosas echa con carne molida de bife especial combinada con  una justa cantidad de jugo de limón, cebolla y tomate.",
-      "img": "https://res.cloudinary.com/myproyects/image/upload/v1622912294/av6duku0dg0j1raew0ee.png",
-      "createdAt": "2021-05-10T04:29:32.487Z",
-      "updatedAt": "2021-06-05T16:58:15.710Z",
-      "img_id": "av6duku0dg0j1raew0ee"
+      "_id": "60a9545fbd5e160f6811347d",
+      "name": "empanadas",
+      "createdAt": "2021-05-22T18:58:40.006Z",
+      "updatedAt": "2021-05-22T18:58:40.006Z"
     },
     {
-      "price": 500,
+      "quantity": 2,
       "active": true,
-      "sold": 1,
-      "_id": "60989556d59eaa18d81ba442",
-      "name": "doble and bacon",
-      "category": "hamburguesas",
-      "size": "600 gr",
-      "description": "deliciosa hamburguesa con doble ración de carne de ternera,  bacon y queso queddar.",
-      "img": "https://res.cloudinary.com/myproyects/image/upload/v1622911810/slbcofk1qv0qz3xyu0x4.png",
-      "createdAt": "2021-05-10T02:07:18.119Z",
-      "updatedAt": "2021-06-06T01:17:47.347Z",
-      "img_id": "slbcofk1qv0qz3xyu0x4"
+      "_id": "60a9545fbd5e160f6811347c",
+      "name": "hot dogs",
+      "createdAt": "2021-05-22T18:58:40.006Z",
+      "updatedAt": "2021-06-16T07:48:50.435Z"
     },
     {
-      "price": 400,
+      "quantity": 0,
       "active": true,
-      "sold": 0,
-      "_id": "60982927ef5d4c28442a4b0b",
-      "name": "nuggets de pollo",
-      "category": "acompañantes",
-      "size": "500 gr",
-      "description": "nuggets de pollo xl con rebozado de crujiente y con relleno de queso muzzarella.",
-      "img": "https://res.cloudinary.com/myproyects/image/upload/v1622945526/hpoks3pcjdvzozhny8bg.png",
-      "createdAt": "2021-05-09T18:25:43.240Z",
-      "updatedAt": "2021-06-06T02:12:07.561Z",
-      "img_id": "hpoks3pcjdvzozhny8bg"
+      "_id": "60a9545fbd5e160f6811347b",
+      "name": "sandwiches",
+      "createdAt": "2021-05-22T18:58:40.006Z",
+      "updatedAt": "2021-06-03T04:39:44.988Z"
     },
     {
-      "price": 350,
+      "quantity": 3,
       "active": true,
-      "sold": 0,
-      "_id": "6096b3413f7a62069073676f",
-      "name": "papa's dog",
-      "category": "hot dogs",
-      "size": "350 gr",
-      "description": "hot dog con salsa chili casera, queso cheddar , lluvia de papas con trazos de cebolla caramelizada.",
-      "img": "https://res.cloudinary.com/myproyects/image/upload/v1622912576/wcxlogepzvzj3x0wv9wd.jpg",
-      "createdAt": "2021-05-08T15:50:25.277Z",
-      "updatedAt": "2021-06-16T07:48:50.663Z",
-      "img_id": "wcxlogepzvzj3x0wv9wd"
+      "_id": "60a9545fbd5e160f6811347e",
+      "name": "acompañantes",
+      "createdAt": "2021-05-22T18:58:40.007Z",
+      "updatedAt": "2021-05-22T18:58:40.007Z"
+    },
+    {
+      "quantity": 1,
+      "active": true,
+      "_id": "60a9545fbd5e160f6811347f",
+      "name": "bebidas",
+      "createdAt": "2021-05-22T18:58:40.007Z",
+      "updatedAt": "2021-06-03T02:58:55.985Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60a9545fbd5e160f68113480",
+      "name": "bebidas alcoholicas",
+      "createdAt": "2021-05-22T18:58:40.007Z",
+      "updatedAt": "2021-05-22T18:58:40.007Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60a9545fbd5e160f68113481",
+      "name": "ensaladas",
+      "createdAt": "2021-05-22T18:58:40.007Z",
+      "updatedAt": "2021-05-22T18:58:40.007Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60a9545fbd5e160f68113482",
+      "name": "pollo frito",
+      "createdAt": "2021-05-22T18:58:40.008Z",
+      "updatedAt": "2021-05-22T18:58:40.008Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60a9545fbd5e160f68113484",
+      "name": "picadas",
+      "createdAt": "2021-05-22T18:58:40.008Z",
+      "updatedAt": "2021-06-03T04:56:57.489Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60a9545fbd5e160f68113485",
+      "name": "burritos",
+      "createdAt": "2021-05-22T18:58:40.008Z",
+      "updatedAt": "2021-05-22T18:58:40.008Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60a9545fbd5e160f68113487",
+      "name": "sushi",
+      "createdAt": "2021-05-22T18:58:40.008Z",
+      "updatedAt": "2021-05-22T18:58:40.008Z"
+    },
+    {
+      "quantity": 1,
+      "active": true,
+      "_id": "60a9545fbd5e160f68113489",
+      "name": "lomitos",
+      "createdAt": "2021-05-22T18:58:40.008Z",
+      "updatedAt": "2021-06-03T05:07:39.205Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60a9545fbd5e160f68113488",
+      "name": "postres",
+      "createdAt": "2021-05-22T18:58:40.008Z",
+      "updatedAt": "2021-05-22T18:58:40.008Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60a9545fbd5e160f6811348b",
+      "name": "elaborados",
+      "createdAt": "2021-05-22T18:58:40.009Z",
+      "updatedAt": "2021-05-22T18:58:40.009Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60a9545fbd5e160f6811348c",
+      "name": "otros",
+      "createdAt": "2021-05-22T18:58:40.009Z",
+      "updatedAt": "2021-05-22T18:58:40.009Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60a955cd70bb1921b806ff45",
+      "name": "combos",
+      "createdAt": "2021-05-22T19:04:45.667Z",
+      "updatedAt": "2021-05-22T19:04:45.667Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60c82f001300c2092ce3b090",
+      "name": "sandwiches de miga",
+      "createdAt": "2021-06-15T04:39:28.049Z",
+      "updatedAt": "2021-06-15T04:39:28.049Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60c9a6da651a690494f131b9",
+      "name": "asados",
+      "createdAt": "2021-06-16T07:23:06.917Z",
+      "updatedAt": "2021-06-16T07:23:06.917Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60c9a903603e7229fc414301",
+      "name": "tacos",
+      "createdAt": "2021-06-16T07:32:19.188Z",
+      "updatedAt": "2021-06-16T07:32:19.188Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60c9ac081e5a84173ce4d7b2",
+      "name": "tacos",
+      "createdAt": "2021-06-16T07:45:12.249Z",
+      "updatedAt": "2021-06-16T07:45:12.249Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60c9ac7117b9ba17f019d7fa",
+      "name": "tacos",
+      "createdAt": "2021-06-16T07:46:57.469Z",
+      "updatedAt": "2021-06-16T07:46:57.469Z"
+    },
+    {
+      "quantity": 0,
+      "active": true,
+      "_id": "60c9ac9117b9ba17f019d7fb",
+      "name": "snacks",
+      "createdAt": "2021-06-16T07:47:29.510Z",
+      "updatedAt": "2021-06-16T07:47:29.510Z"
     }
-  ],
-  "total": 13
-}
+  ]
 
-export default datacatalog
+export default data

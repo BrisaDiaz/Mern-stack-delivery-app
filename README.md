@@ -68,15 +68,15 @@ CLOUDINARY_SECRET
 ### Tecnologies and tools:
 
 - React.js
-- style-components  
-- react-hook-form  
-- react-router-dom  
+- style-components
+- react-hook-form
+- react-router-dom
 - react hooks
 
 ### Features:
 
 - Interaction with the backend through API Rest .
-- Some component unit test
+- Unit test examples.
 - Lazy Load
 - Products section skeletom display
 - Auto-played sliders with dot indicators and controls.

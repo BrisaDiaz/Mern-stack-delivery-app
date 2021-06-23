@@ -10,7 +10,7 @@ import {LoaderSpinner} from './../LoaderSpinner'
 
 const CategoriesPage = styled(Page)`
     background:${props => props.theme.lightYellow};
-padding: 65px 15px;
+padding: 65px 5px;
     max-height: max-content;
 min-width:100%;
 `
