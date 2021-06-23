@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState} from 'react'
 import {useHistory,useLocation} from 'react-router-dom'
 import {useStorage} from '../context/useStorage'
 
@@ -37,6 +37,23 @@ const [isFirstRender, setIsFirstRender] = useState(true)
     setPage(1)
   }, [sorting])
 
+useEffect(() => {
+ 
+      if (category !== "all") {
+        query.append('category', category)
+        setPage(1)
+      }
+}, [category])
+
+useEffect(() => {
+ if (title !== "") {
+        query.append('title', title)
+        setPage(1)
+    setSorting('-createdAt')
+    setCategory('all')
+      }
+}, [title])
+
 
   useEffect(() => {
 
@@ -50,22 +67,8 @@ const [isFirstRender, setIsFirstRender] = useState(true)
       }
  
 
-      if (title !== "") {
-        query.append('title', title)
-        setPage(1)
-    setSorting('-createdAt')
-    setCategory('all')
-      }
-
-      if (category !== "all") {
-        query.append('category', category)
-        setPage(1)
-      }
-
     const fechProducts = async () => {
 
-
-     
       try {
 
         let res = await fetch(`/api/products?${query}`, { signal, })
@@ -81,8 +84,7 @@ const [isFirstRender, setIsFirstRender] = useState(true)
 
 document.querySelector('body').scrollTo(0,100)
         setIsLoading(false)
-
-          setIsFirstRender(false)
+        setIsFirstRender(false)
       } catch (err) {
         if (err.name === 'AbortError') {
           console.log('Fetch Canseled: caught abort')
@@ -94,7 +96,7 @@ document.querySelector('body').scrollTo(0,100)
       }
     }
     fechProducts()
- 
+   
     return () => {
       controller.abort()
     }

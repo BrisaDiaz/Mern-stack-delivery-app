@@ -1,9 +1,11 @@
-import {   useEffect,useState} from 'react'
+import {   useEffect,useState,useRef } from 'react'
 
 
-export default function useNewestProducts(){
+function useNewestProducts(){
   const [isLoading,setIsloading] = useState(false);
  const [latestProducts,setLatestProducts] =useState([])
+
+const ref = useRef(0)
 
   useEffect(()=>{
 let controller = new AbortController()
@@ -21,11 +23,14 @@ setIsloading(false)
    console.log('Fetch Canseled: caught abort')
  }else{
 
+let counter = ref.current
    console.log(err)
-    for(let i = 0 ; i < 6 ; i++){
-          fetchLatestProducts()
 
-        }
+     if(counter < 6 ){
+         fetchLatestProducts()
+ref.current += 1
+
+   }
        
 
       }
@@ -41,3 +46,4 @@ setIsloading(false)
 
   return {isLoading,latestProducts}
 }
+export default useNewestProducts

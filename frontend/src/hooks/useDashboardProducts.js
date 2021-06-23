@@ -28,9 +28,31 @@ const [isFirstRender, setIsFirstRender] = useState(true)
    query.append('page',page)
    query.append('limit',sizeLimit)
 
-
+useEffect(() => {
+  if(title !==""){ 
+      query.append('title',title)
+      setPage(1)
+setActiveProducts('all')
+setCategory('all')
+    }
+}, [title])
   
+useEffect(() => {
+   if (category !== "all") {
+        query.append('category', category)
+        setPage(1)
+      }
+}, [category])
 
+useEffect(() => {
+
+    if(activeProducts !== "all"){
+
+query.append('active',activeProducts)
+setPage(1)
+    }
+
+}, [activeProducts])
 
 useEffect(() => {
   const controller = new AbortController()
@@ -40,32 +62,12 @@ useEffect(() => {
 
         query=location.search.split('?')[1]
 
-
       }
-
-   if(title !==""){ 
-      query.append('title',title)
-      setPage(1)
-setActiveProducts('all')
-setCategory('all')
-    }
-
-      if (category !== "all") {
-        query.append('category', category)
-        setPage(1)
-      }
-
-    if(activeProducts !== "all"){
-
-query.append('active',activeProducts)
-setPage(1)
-    }
 
 const productsAPI = async () =>{
     setIsLoading(true)
   try{
 
- 
      let res = await fetch(`/api/products?${query}`,{signal,})
      let json = await res.json()
 
@@ -77,7 +79,8 @@ const productsAPI = async () =>{
 
   history.push(`/dashboard/myProducts?${query}`)
 document.querySelector('body').scrollTo(0,100)
-
+       
+setIsFirstRender(false)
      setIsLoading(false)
   }catch(err){
     if(err.name === 'AbortError'){
@@ -91,7 +94,6 @@ document.querySelector('body').scrollTo(0,100)
   }
 
   productsAPI()
-setIsFirstRender(false)
      return () =>{
      controller.abort()
    }   

@@ -1,9 +1,10 @@
 import Auth from './Auth'
+import { withError } from './../withError'
 import LoginForm from './LoginForm'
 import ForgotPasswordModal from './ForgotPasswordModal'
 import {useState} from 'react' 
 
-export default function Login(){
+function Login(){
 
 const [isModalOpened,setIsModalOpened]=useState(false)
 
@@ -15,3 +16,4 @@ const [isModalOpened,setIsModalOpened]=useState(false)
 </Auth>
   )
 }
+export default withError(Login)

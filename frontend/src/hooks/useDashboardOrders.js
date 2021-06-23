@@ -41,7 +41,26 @@ const [isRefreshing, setIsRefreshing] = useState(false)
    query.append('sort',sorting)
 
   
+useEffect(() => {
 
+if(orderID !==""){ 
+
+query.append('orderID',orderID)
+
+setPage(1)
+setState('all')
+     
+    }
+  
+},[orderID])
+
+useEffect(() => {
+
+if(state !=="all"){
+query.append('state',state)
+    }
+  
+},[state])
 
 useEffect(() => {
   
@@ -51,29 +70,15 @@ useEffect(() => {
   if( isFirstRender && location.search !==""){
 
      query=location.search.split('?')[1]
-        
-    setIsFirstRender(false)
+      
+
       }
 
-   if(orderID !==""){ 
- query.append('orderID',orderID)
-
-setPage(1)
-setState('all')
-     
-    }
-
-if(state !=="all"){
-query.append('state',state)
-    }
-
 const productsAPI = async () =>{
-
     setIsLoadingPage(true)
 
   try{
 
-     
 
        const headers = new Headers();
       headers.append('Accept', 'application/json');
@@ -98,7 +103,9 @@ signal,
   history.push(`/dashboard/orders?${query}`)
 
 document.querySelector('body').scrollTo(0,100)
+        setIsFirstRender(false)
      setIsLoadingPage(false)
+ 
   }catch(err){
     if(err.name === 'AbortError'){
    console.log('Fetch Canseled: caught abort')
@@ -111,11 +118,10 @@ document.querySelector('body').scrollTo(0,100)
   }
 
   productsAPI()
- 
      return () =>{
      controller.abort()
    }   
- }, [orderID,state,page,sorting,isRefreshing])
+ }, [orderID,state,page,sorting])
 
 
  const handleRefresh = () =>{

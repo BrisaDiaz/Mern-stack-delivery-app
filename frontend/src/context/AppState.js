@@ -1,4 +1,4 @@
-import  {useReducer,useEffect} from 'react';
+import  {useReducer,useEffect,useCallback} from 'react';
 import AppContext from  './app-context';
 import appReducer from  './app-reducer';
 
@@ -35,11 +35,6 @@ SET_FORM_DATA_SUCCESFULLY_SEND
 export default  function AppState(props) {
 
 
-
-  
-
-
-  
     useEffect( ()=>{
       const getCategoriesAPI = async () => {
 
@@ -99,13 +94,15 @@ const [state, dispatch] = useReducer(appReducer, initialState)
 const numberOfProductsInCart = state.cartProducts.length;
 
 
-const setIsLoading=(bulean)=>{
+
+
+const setIsLoading = useCallback(
+   (bulean)=>{
   dispatch({
     type:SET_IS_LOADING,
     payload:bulean,
   })
-}
-
+},[])
 const setAllUsers = (data)=>{
   dispatch({
     type: SET_ALL_USERS,

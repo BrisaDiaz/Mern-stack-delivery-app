@@ -131,7 +131,7 @@ console.log(err)
    
     const userFound = await User.findOne({email: req.body.email }).populate(
       "roles"
-    );
+    ).populate('orders');
 
     if (!userFound) return res.status(400).json({ message: "User Not Found"});
 

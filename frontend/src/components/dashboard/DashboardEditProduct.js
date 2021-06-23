@@ -1,4 +1,5 @@
 import styled  from 'styled-components'
+import { withError } from './../withError'
 import EditProductForm from './EditProductForm'
 import {GoBackLink} from '../product_details/ProductDetails'
 import { LinksWrapper} from './DashboardNewProduct'
@@ -19,4 +20,4 @@ const DashboardEditProduct = () =>{
   );
 }
 
-export default  DashboardEditProduct
+export default  withError(DashboardEditProduct)

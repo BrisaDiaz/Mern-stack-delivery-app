@@ -1,5 +1,5 @@
 import styled  from 'styled-components'
-import {useEffect,useState} from 'react'
+import {useEffect,useState,useRef} from 'react'
 import useDinamicDotSlider from '../../hooks/useDinamicDotSlider'
 import quoteIcone from '../../img/left-quote.svg'
 import { SliderContainer,IndicatorWrapper,IndicatorDot,SliderContent,Slide} from './HeroSlider'
@@ -54,6 +54,7 @@ margin-bottom:10px;
 export default function Testimonials(){
 const [testimonials, setTestimonials] = useState([])
 const [error,setError] = useState(false)
+const ref = useRef(0)
 
 useEffect( ()=> {
 
@@ -69,8 +70,16 @@ const res = await fetch('https://jsonplaceholder.typicode.com/comments');
   setTestimonials(data)
 
     }catch(err){
-      console.log(err)
 
+let counter = ref.current
+   console.log(err)
+
+     if(counter < 6 ){
+         fetchData()
+ref.current += 1
+
+   }
+       
           setError(true)
   
     }

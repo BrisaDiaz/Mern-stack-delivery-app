@@ -1,4 +1,5 @@
 import styled  from 'styled-components'
+import { withError } from './../withError'
 import NewsletterForm from './NewsletterForm'
 import ContactForm from './ContactForm'
 import GoogleMap from './GoogleMap'
@@ -46,7 +47,7 @@ z-index:1;
 background-size:100%;
 }
 `;
-export default function Contact () {
+function Contact () {
 
 
   return(
@@ -60,3 +61,4 @@ export default function Contact () {
   </StyledContactSection >
 )
 }
+export default withError(Contact)

@@ -143,8 +143,8 @@ fs.unlink(req.file.path, (err) => {
 
 }else{
 
-    img =productFound.secure_url
- img_id = productFound.public_id
+img =productFound.img
+ img_id = productFound.img_id
 }
 
 

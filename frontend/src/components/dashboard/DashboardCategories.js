@@ -1,4 +1,5 @@
 import styled  from 'styled-components'
+import { withError } from './../withError'
 import {Page} from './DashboardOrders'
 import useDashboardCategories from '../../hooks/useDashboardCategories'
 import {SectionTitle} from '../menu/Menu'
@@ -100,8 +101,8 @@ font-size: 15px;
     &:hover{
   background:${props => props.theme.orange};
     }
-`
-export default function DashboardCategories(){
+ `
+function DashboardCategories(){
 
 
 const  {handleRenameSubmit,handleCreateSubmit ,handleDelete,setEditingCategory,editingCategory,isRenameFormLoading,isCreateFormLoading,categories}  = useDashboardCategories()
@@ -167,3 +168,4 @@ const  {handleRenameSubmit,handleCreateSubmit ,handleDelete,setEditingCategory,e
     </CategoriesPage>
   )
 }
+export default withError(DashboardCategories)
