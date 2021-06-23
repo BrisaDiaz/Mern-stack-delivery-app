@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { withError } from './../withError'
 import {Fragment} from 'react' 
 import useEditProfileForm from '../../hooks/useEditProfileForm'
 import {LoaderSpinner} from './../LoaderSpinner'
@@ -167,7 +168,9 @@ placeholder={placeholder}
 </Fragment>
   )
 } 
-export default function EditMyProfile() {
+
+
+ function EditMyProfile() {
   
 
 
@@ -225,3 +228,5 @@ const { register,handleSubmit,errors,onSubmit ,serverError,formIsLoading,isChang
 
   
 }
+
+export default withError(EditMyProfile)

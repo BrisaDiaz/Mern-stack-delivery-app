@@ -1,4 +1,5 @@
 import styled  from 'styled-components';
+import { withError } from './../withError'
 import {useContext,useState,Fragment} from 'react' 
 import AppContext from '../../context/app-context'
 import DashboardNav from '../DashboardNav'
@@ -128,7 +129,7 @@ function UserInfoCell({user,handelClick}){
 
 }
 
-export  default function DashboardUsers(){
+function DashboardUsers(){
   const [editingUser,setEditingUser] = useState("")
  const [isEditing,setIsEditing] = useState(false)
 
@@ -146,6 +147,7 @@ setIsEditing(true) ;
 
     )
 
+   
   return(
 <Page>
    <DashboardNav/>
@@ -183,3 +185,4 @@ setIsEditing(true) ;
 }
 
 
+export  default  withError(DashboardUsers)

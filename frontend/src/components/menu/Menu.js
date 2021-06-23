@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {withError} from './../withError'
 import { LoaderSpinner } from './../LoaderSpinner'
 import ProductsSectionSkeletom from '../ProductsSectionSkeletom'
 import useMenu from '../../hooks/useMenu'
@@ -160,4 +161,4 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
   );
 }
 
-export default Menu
+export default withError(Menu)

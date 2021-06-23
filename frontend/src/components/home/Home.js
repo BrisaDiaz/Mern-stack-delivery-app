@@ -1,5 +1,6 @@
 import styled  from 'styled-components'
 import React, { Suspense, lazy } from 'react';
+import {withError} from './../withError'
 import HeroSlider from './HeroSlider'
 import Testimonials from './Testimonials'
 import About from './About'
@@ -11,7 +12,7 @@ width:100vw;
 padding: 58px 0  0 0;
 text-aling:center;
 `;
-export default function Home() {
+function Home() {
   return(
   <StyledHome>
 <HeroSlider></HeroSlider>
@@ -23,3 +24,5 @@ export default function Home() {
   </StyledHome>
 )
 }
+
+export default withError(Home)

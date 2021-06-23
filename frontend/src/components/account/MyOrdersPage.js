@@ -10,7 +10,7 @@ import refreshIcone from '../../img/refresh.svg'
 
 
 const Page = styled.main`
-    padding: 65px 0;
+    padding: 65px 5px;
 min-height:100vh;
 width:100%;
 margin: 0 auto;
@@ -136,7 +136,7 @@ align-items: center;
       box-shadow: ${props => props.theme.lihgtBoxShadow};
     background:${props => props.theme.black};
 
-    margin: -40px 0 10px auto;
+    margin: -46px 0 10px auto;
     width: max-content;
 display: flex;
     transform: scale(0.7);

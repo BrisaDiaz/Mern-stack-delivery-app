@@ -1,4 +1,5 @@
 import styled  from 'styled-components'
+import { withError } from './../withError'
 import useMyProfile from '../../hooks/useMyProfile'
 import {Link} from 'react-router-dom'
 
@@ -116,4 +117,4 @@ function MyProfile() {
   )
 }
 
-export default MyProfile
+export default withError(MyProfile)

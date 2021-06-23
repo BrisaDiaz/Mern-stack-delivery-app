@@ -13,7 +13,7 @@ import SortOrdersOptions from './../SortOrdersOptions'
 import PaginationButtons from '../PaginationButtons'
 
 export const Page = styled.section`
-    padding: 60px 0;
+    padding: 60px 05px;
 min-height:100vh;
 width:100%;
 max-width: 1250px;
@@ -40,6 +40,9 @@ text-align:center;
 }
 & > ${NotFaundMessage} {
   padding: 0 5px;
+}
+& > ${FiltersBoard} {
+ margin: 30px 5px 0;
 }
 
 `;
@@ -139,15 +142,15 @@ const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLo
 <Page  isLoading={isLoading}>
      <DashboardNav/>
      <SectionTitle>Pedidos</SectionTitle>
-     <RefreshButton onClick={(e) =>handleRefresh()}>
-  <RefreshIcone src={refreshIcone} title='Refrescar Página'/>
-  </RefreshButton>
+   
 <SearchBar placeholder='Número de orden...' setSearch={setOrderID} />
 <FiltersBoard>
           <FilterOrderStateOptions setPage={setPage} setStatePreferece={setState}/>
           <SortOrdersOptions setSortPreferece={setSorting} sortPreference={sorting} />
         </FiltersBoard>
-
+  <RefreshButton onClick={(e) =>handleRefresh()}>
+  <RefreshIcone src={refreshIcone} title='Refrescar Página'/>
+  </RefreshButton>
   {isLoading ? <LoaderSpinner /> :  null }
   {   ( (!isLoading) && (!isFirstRender)  &&  orders?.length === 0) ?
   

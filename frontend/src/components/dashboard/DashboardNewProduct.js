@@ -1,4 +1,5 @@
 import styled  from 'styled-components'
+import { withError } from './../withError'
 import CreateNewProductForm from './CreateNewProductForm'
 import {StyledSection} from './DashboardEditProduct'
 import {GoBackLink} from '../product_details/ProductDetails'
@@ -10,7 +11,7 @@ margin:5px 0;
 margin-left:15px;
 width:max-content;
 `;
-export default function DashboardNewProduct(){
+ function DashboardNewProduct(){
   return(
     <StyledSection>
           <LinksWrapper>
@@ -22,3 +23,4 @@ export default function DashboardNewProduct(){
 
   )
 }
+export default withError(DashboardNewProduct)

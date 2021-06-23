@@ -87,7 +87,7 @@ if(res.status === 302){
 
   localStorage.setItem('toConfirmUser', id)
   
-  console.log(redirect)
+
   setTimeout(() => {
 
    return history.push(redirect)

@@ -49,8 +49,7 @@ export const withError = (Component) => {
         }
 
         render() {
-            console.log(this.state);
-
+        
             if (this.state.hasError) {
                 return (
                     <div className={styles.error}>

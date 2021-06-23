@@ -1,7 +1,8 @@
 import Auth from './Auth'
 import SingupForm from './SingupForm'
+import { withError } from './../withError'
 
-export default function SingUp(){
+function SingUp(){
 
 
 return(
@@ -11,3 +12,5 @@ return(
 
   )
 }
+
+export default withError(SingUp)

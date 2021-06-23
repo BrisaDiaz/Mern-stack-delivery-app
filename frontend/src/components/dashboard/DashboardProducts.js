@@ -15,6 +15,7 @@ import {CartButton,CartIcon} from '../AddToCartButton'
 import PaginationButtons from '../PaginationButtons'
 import editIcone from '../../img/pencil-alt-solid.svg'
 import DeleteIcone from '../../img/trash-alt-regular.svg'
+import { withError } from './../withError'
 
 const Title = styled(SectionTitle)`
 margin-bottom:40px;
@@ -78,7 +79,7 @@ margin: 20px auto;
 `;
 
 
- export default function DashboardProducts(){
+ function DashboardProducts(){
 
   
 
@@ -141,5 +142,5 @@ handleEdit,handleDelete,setPage,setActiveProducts,isFirstRender} = useDashboardP
   )
 }
 
-
+export default withError(DashboardProducts)
 
