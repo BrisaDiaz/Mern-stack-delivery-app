@@ -1,8 +1,6 @@
 
 
-import currentUserAPI from './currentUserAPI'
-
-async function deleteOrderAPI({token,id,setCurrentUser}){
+async function deleteOrderAPI({token,id}){
 
      const headers = new Headers();
         headers.append('Accept', 'application/json');
@@ -19,13 +17,10 @@ async function deleteOrderAPI({token,id,setCurrentUser}){
 try {
 
         let res = await fetch( `/api/orders/${id}`, setting);
-
-         if(res.status  ===204 ){
-
-   await currentUserAPI({setCurrentUser,token})
-    return 
-    }
-
+        let json = await res.json()
+         if(res!== 204){
+           console.log( json.message)
+         }
 
       } catch (err) { console.log(err)}
 

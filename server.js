@@ -5,6 +5,15 @@ const cors = require('cors');
 const connectDB = require( './config/db.js')
 const path = require('path');
 const morgan = require('morgan');
+const http = require("http").createServer(app);
+const io = require("socket.io")(http,{
+  cors: {
+    origin: ["http://localhost:3000"],
+  methods: ["GET", "POST"],
+  },
+
+});
+
 const { createRoles,createAdmin,createModerator,creatCategorys} = require('./libs/initialSetUp');
 
 
@@ -55,8 +64,27 @@ app.use('/api/newsletter',newsletterRouter)
 app.use('/api/orders',ordersRouter)
 app.use('/api/categories',categoriesRouter)
 
+let ioClients = []
+io.on('connection', (socket) => {
+  
+    console.log('a user connected');
 
+ socket.data.userId = socket.handshake?.auth?.userId 
+ socket.data.userRole =socket.handshake?.auth?.userRole 
 
-app.listen(port, () => {
+ ioClients.push({id:socket.id, userId: socket.data.userId , userRole: socket.data.userRole })
+ 
+   socket.on('disconnect', (socket) => {
+     ioClients.filter(client => client.id === socket.id )
+        console.log('user disconnected');
+
+    });
+  })
+
+http.listen(port, () => {
   console.log(`server is listening from port ${port}`)
 })
+
+
+module.exports.io= io
+module.exports.ioClients= ioClients

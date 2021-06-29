@@ -1,6 +1,7 @@
 async function getCurrentUser({setCurrentUser,token}){
 
     const id = localStorage.getItem('userId')
+    
         const headers = new Headers();
         headers.append('Accept', 'application/json');
       headers.append('Authorization', `Bearer ${token}`);

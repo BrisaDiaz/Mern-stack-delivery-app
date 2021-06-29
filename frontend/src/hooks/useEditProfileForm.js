@@ -8,11 +8,20 @@ import upldateProfileAPI from '../API/upldateProfileAPI'
 
 export default function useEditProfileForm(){
   
-  const {token,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend} = useStorage()
+  const {token,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend,currentUser} = useStorage()
   
   const [serverError,setServerError] = useState("");
     const [isChangingPassword,setIsChangingPassword] = useState(false);
 const [formIsLoading,setFormIsLoading] = useState(false);
+
+const defaultsValues = {
+  name:currentUser.name.split(' ')[0],
+  lastName:currentUser.name.split(' ')[1],
+  street:currentUser.address.split(',')[0].split(' ').slice(0,-1).join(' '),
+  streetNumber:currentUser.address.split(',')[0].split(' ').splice(-1) ,
+  number: currentUser.number,
+city:currentUser.address.split(',')[1].trim(),
+}
 
    const history = useHistory()
 
@@ -48,7 +57,6 @@ info,
 isAdmin,
 setAllUsers,
 token,
-setCurrentUser,
 history,
 })
 
@@ -63,7 +71,9 @@ history,
     errors,
     onSubmit ,
     serverError,
+    setCurrentUser,
 formIsLoading,
+defaultsValues,
 isChangingPassword,
 setIsChangingPassword
 } 

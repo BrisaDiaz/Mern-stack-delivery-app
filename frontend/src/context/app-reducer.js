@@ -47,7 +47,7 @@ switch (action.type) {
     case SET_TOKEN:
         return{ 
           ...state,
-          token: action.payload
+          token:action.payload,
         };
 
    case SET_PRODUCT_TO_EDIT:

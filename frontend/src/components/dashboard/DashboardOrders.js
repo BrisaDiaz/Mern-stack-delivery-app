@@ -3,7 +3,7 @@ import useDashboardOrders from '../../hooks/useDashboardOrders'
 import DashboardNav from '../DashboardNav'
 import refreshIcone from '../../img/refresh.svg'
 import SearchBar from '../MenuSearchBar'
-import {RefreshButton,RefreshIcone} from '../account/MyOrdersPage'
+import {RefreshButton,RefreshIcone} from '../account/UserOrdersPage'
 import {LoaderSpinner} from './../LoaderSpinner'
 import {NotFaundMessage} from '../menu/ProductsSection'
 import {SectionTitle} from '../menu/Menu'
@@ -11,6 +11,7 @@ import {FiltersBoard} from './DashboardProducts'
 import FilterOrderStateOptions from './../FilterOrderStateOptions'
 import SortOrdersOptions from './../SortOrdersOptions'
 import PaginationButtons from '../PaginationButtons'
+import OrdersTableSkeletom from '../OrdersTableSkeletom'
 
 export const Page = styled.section`
     padding: 60px 05px;
@@ -105,13 +106,13 @@ background-color: #171717;
 }
 & >  tbody tr td:first-child:before {
 content:"Nº de Pedido";
-    color: #fcba1c;
+    color: ${props => props.theme.darckYellow};
 }
 & >  tbody tr td:nth-child(2):before {
-content:"Dirección";
+content:"Fecha";
 }
 & >  tbody tr td:nth-child(3):before {
-content:"Fecha";
+content:"Dirección";
 }
 & >  tbody tr td:nth-child(5):before {
 content:"Estado";
@@ -130,34 +131,38 @@ content:"Total";
 
 }
 `
-export default function DashboardOrders(){
+
+export default function DashboardOrders({setNotification}){
  
 
 
 
-const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLoading,maxPage,orders,sorting,isFirstRender} = useDashboardOrders()
+const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLoading,maxPage,orders,sorting,isFirstRender} = useDashboardOrders({setNotification})
 
 
   return(
 <Page  isLoading={isLoading}>
      <DashboardNav/>
      <SectionTitle>Pedidos</SectionTitle>
-   
+
 <SearchBar placeholder='Número de orden...' setSearch={setOrderID} />
 <FiltersBoard>
           <FilterOrderStateOptions setPage={setPage} setStatePreferece={setState}/>
           <SortOrdersOptions setSortPreferece={setSorting} sortPreference={sorting} />
         </FiltersBoard>
-  <RefreshButton onClick={(e) =>handleRefresh()}>
+   
+  <RefreshButton data-testid="refresh-button" onClick={ () => handleRefresh()}>
   <RefreshIcone src={refreshIcone} title='Refrescar Página'/>
   </RefreshButton>
   {isLoading ? <LoaderSpinner /> :  null }
-  {   ( (!isLoading) && (!isFirstRender)  &&  orders?.length === 0) ?
-  
+
+  {( (isLoading) && (isFirstRender))  &&  <OrdersTableSkeletom/>}
+
+  { ( (!isLoading) && (!isFirstRender)  &&  orders?.length === 0) &&
   <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
+  }
 
-  :
-
+  {  (orders?.length !== 0) &&
 <OrdersTable>
   <TableHead>
     <tr>
@@ -173,9 +178,9 @@ const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLo
     <tr key={order?.orderID}   onClick={ (e) => seeDetails(order?._id)}>
     <td>{order?.orderID}</td>
         <td>
-          <small>{new Date(order.states[0].date).toLocaleString().split(" ")[0]}</small>
+          <span>{new Date(order.states[0].date).toLocaleString().split(" ")[0]}</span>
               <br></br>
-            <small>{new Date(order.states[0].date).toLocaleString().split(" ")[1]}</small>
+            <span>{new Date(order.states[0].date).toLocaleString().split(" ")[1]}</span>
 </td>
         <td>{order?.client[0].address}</td>
         <td>${order?.total}</td>
@@ -190,9 +195,9 @@ const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLo
  
 </OrdersTable> }
 
-
 <PaginationButtons setPage={setPage} page={page} maxPage={maxPage} />
 
 </Page>
+
   )
 }

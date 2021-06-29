@@ -11,6 +11,7 @@ top:0;
 bottom:0;
 left:0;
 right:0;
+backdrop-filter:blur(2px);
 z-index:2000;
 `;
 const CorrectlySendedIcone = styled.div`

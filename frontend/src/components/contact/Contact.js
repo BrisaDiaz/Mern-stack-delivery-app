@@ -25,6 +25,7 @@ font-size: 45px;
 
 const ContactBanner = styled.div`
 position:relative;
+ background-color: 2px solid ${props => props.theme.lightYellow};
 background : url(${bannerImg}) no-repeat center center;
 background-size:100% 100%;
 height: 300px;

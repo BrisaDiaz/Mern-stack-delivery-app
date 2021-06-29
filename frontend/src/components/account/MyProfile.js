@@ -101,12 +101,16 @@ function MyProfile() {
    <dt>Email:  </dt><UserInfo>{currentUser.email}</UserInfo>
 </dl>
 
-<i><small>Permitenos contactarnos inmediatamente ante cualquier duda o inprevisto.</small></i>
+
+<p><i><small>Permitenos contactarnos inmediatamente ante cualquier duda o imprevisto.</small></i></p>
+
+
      <dl>
-          <dt>Teléfono: </dt><UserInfo>{currentUser.number || null }</UserInfo>
-               <i><small>Su orden será enviada a la dirección suministrada.</small></i>
-         <dt>Dirección: </dt><UserInfo>{currentUser.address || null }</UserInfo>
+          <dt>Teléfono: </dt><UserInfo>{currentUser.number || "Ningún númrero subministrado" }</UserInfo>
+             <p>  <i><small>Su orden será enviada a la dirección suministrada.</small></i></p>
+         <dt>Dirección: </dt><UserInfo>{currentUser.address || "Ningúna dirección subministrada" }</UserInfo>
 </dl>
+
              <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
     </CardInfo>
       </UserCard>

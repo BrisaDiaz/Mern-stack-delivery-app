@@ -18,9 +18,7 @@ res.status(200).json(users)
 
   const getUserById = async (req,res) =>{
  try{
-    const user = await User.findById(req.params.id,{password:0}).populate('roles').populate({path:'orders',
-  populate:{path:'client'},
-  }).exec()
+    const user = await User.findById(req.params.id,{password:0}).populate('roles')
 
     res.status(200).json( { successful:true ,data:user});
 

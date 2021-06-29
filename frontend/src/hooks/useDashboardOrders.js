@@ -1,12 +1,12 @@
 import {useHistory,useLocation} from 'react-router-dom'
-
 import {useState, useEffect } from 'react'
 import {useStorage} from '../context/useStorage'
 
 
-export default function useDashboardOrders(){
+export default function useDashboardOrders({setNotification}){
 const history = useHistory()
 const location = useLocation()
+
 
   
 const {token,setIsLoading} = useStorage()
@@ -35,12 +35,19 @@ const seeDetails = (orderID) =>{
     const [state,setState] =useState('all')
   const [sorting, setSorting] = useState("-createdAt")
 const [isFirstRender, setIsFirstRender] = useState(true)
-const [isRefreshing, setIsRefreshing] = useState(false)
+let [refreshCount,setRefreshCount] = useState(0)
+   
    query.append('page',page)
    query.append('limit',sizeLimit)
    query.append('sort',sorting)
 
-  
+
+
+
+
+
+
+
 useEffect(() => {
 
 if(orderID !==""){ 
@@ -63,7 +70,7 @@ query.append('state',state)
 },[state])
 
 useEffect(() => {
-  
+    setNotification(0)
   const controller = new AbortController()
  const signal = controller.signal
 
@@ -74,7 +81,7 @@ useEffect(() => {
 
       }
 
-const productsAPI = async () =>{
+const ordersAPI = async () =>{
     setIsLoadingPage(true)
 
   try{
@@ -102,7 +109,7 @@ signal,
 
   history.push(`/dashboard/orders?${query}`)
 
-document.querySelector('body').scrollTo(0,100)
+document.querySelector('body').scrollTo(0,60)
         setIsFirstRender(false)
      setIsLoadingPage(false)
  
@@ -117,15 +124,22 @@ document.querySelector('body').scrollTo(0,100)
 }
   }
 
-  productsAPI()
+  ordersAPI()
+
+
      return () =>{
      controller.abort()
    }   
- }, [orderID,state,page,sorting])
+ }, [orderID,state,page,sorting,refreshCount])
+
+
 
 
  const handleRefresh = () =>{
-  setIsRefreshing(!isRefreshing)
+setRefreshCount(Date.now())
+setPage(1)
+setSorting('-createdAt')
+setState('all')
 }
 
 

@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const Product = require('../models/product.model');
 const User = require('../models/user.model');
 const {Order,STATES}  = require('../models/order.model');
+const ioObj= require('./../server.js')
+
+
 
 
 const getAllOrders = async (req,res) =>{
@@ -68,12 +71,26 @@ try{
 
 
 const getAllUserOrders =  async (req,res) =>{
+
+     let sort = '-createdAt'
+    let page = 1
+    let limit = 5
+
+      if(req.query.page){
+      page = parseInt(req.query.page)
+    }
+     if(req.query.limit){
+      limit = parseInt(req.query.limit)
+    }
+   
+     let skip = (page - 1 ) * limit
+
 try{
-  const user = await User.findById(req.paramas.userId)
+  const user = await User.findById(req.params.userId)
 
-  const ordersFound =  await Order.find({_id: { $in: user.orders } })
+  const ordersFound =  await Order.find({_id: { $in: user.orders } }).sort(sort).limit(limit).skip(skip).populate('client').exec()
 
-    res.status(200).json({successfull:true, data: ordersFound})
+    res.status(200).json({successfull:true, data:ordersFound ,total:user.orders.length })
 
 
 }catch(err){
@@ -121,6 +138,7 @@ for(let i = 0 ; i < products.length ; i++){
                    
 const id =mongoose.Types.ObjectId()
 
+
 const newOrder =  new Order({
   _id: id,
   client: req.userId,
@@ -131,9 +149,9 @@ const newOrder =  new Order({
   
 newOrder.createStates()
 
-  await newOrder.save()
- const clientFound  = await User.findById(req.userId)
+await newOrder.save()
 
+ const clientFound  = await User.findById(req.userId)
 
  await  User.findByIdAndUpdate(req.userId,{
   $set: {
@@ -141,12 +159,21 @@ newOrder.createStates()
   }
 },{new:true})
 
+///socket io notification to admins
+
+let adminsClients = ioObj.ioClients.filter(user => user.userRole ==='admin' || user.userRole ==='moderator' )
+
+
+if(adminsClients !== []){
+  adminsClients.forEach(admin => ioObj.io.to(admin.id).emit('newOrder', newOrder) )
+
+}
 
  res.status(201).json({success: true, message: 'Order creaded successfully'})
  
    }catch(error){
 console.log(error)
-cosole.log(id)
+
 
      res.status(500).json({success:false,  message:"Something went wrong, order couldn't be created"})
 
@@ -173,25 +200,27 @@ const order = await Order.findById(req.params.id)
 
 
 
-
+let actualizedOrder; 
 
  if(req.confirmedState ==='liquidado'){
 
-  await  User.findByIdAndUpdate(order.client[0],{
+actualizedOrder=  await  User.findByIdAndUpdate(order.client[0],{
   $set: {
     client: true,
   }
 
 },{new:true})
+
  await Order.findByIdAndUpdate(req.orderId,{$set:{
      states: updatedStates,
    finished:true,
 
  }},{new:true})
 
+     
 order.description.forEach(async item =>{
 try{
-  await Product.findOneAndUpdate({name: item.product.name},{$inc: {sold: item.quantity},$set:{finished:true},},{new:true})
+  await Product.findOneAndUpdate({name: item.product.name},{$inc: {sold: item.quantity},$set:{finished:true}},{new:true})
 
 }catch(err){
   console.log(err)
@@ -202,13 +231,28 @@ try{
 
 
   }else{
-     await Order.findByIdAndUpdate(req.orderId,{$set:{
+
+
+    actualizedOrder=  await Order.findByIdAndUpdate(req.orderId,{$set:{
    states: updatedStates,
  }},{new:true})
+
+
   }
+
+
+
+
+ let orderClient =ioObj.ioClients.find(user => user.userId == order.client[0])
+
+    if(orderClient){
+      console.log(orderClient)
+ioObj.io.to(orderClient.id).emit('orderActualization',actualizedOrder)
+    } 
+
  
 
-  console.log(order.client[0])
+
   res.status(200).json({success:false , message:'order satate updated successfully'}) 
 
 

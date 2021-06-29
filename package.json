@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server.js ",
     "dev": "nodemon server.js",
-    "app":  "concurrently \"node server.js\" \"cd frontend && npm run start\"", 
+    "app":  "concurrently \"nodemon server.js\" \"cd frontend && npm run start\"", 
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],

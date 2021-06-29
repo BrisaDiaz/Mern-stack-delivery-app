@@ -44,7 +44,7 @@ const CategoryTitle = styled.h4`
     text-align: center;
     line-height: 15px;
     color: #fcba1c;
-    font-size: 28px;
+font-size: 25px;
     margin: 10px 5px;
  text-shadow: ${props => props.theme.darckTextShadow};
     text-transform: capitalize;

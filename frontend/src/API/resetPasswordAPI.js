@@ -4,7 +4,6 @@ setServerError,
 info,
 token,
 history,
-setIsSingUp
 }){
 try{
   setIsFormLoading(true)
@@ -36,8 +35,8 @@ headers.append('Content-Type', 'application/json');
        setServerError(json.message)
        return
       }else{
-               setIsSingUp()
-               return history.push('/authentication')
+       
+               return history.push('/authentication/login')
       }
 
  

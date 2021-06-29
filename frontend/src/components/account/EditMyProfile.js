@@ -82,7 +82,7 @@ id="newPasswordCheckbox" type="checkbox" name="newPasswordCheckbox" />
           </CheckboxWrapper>
     )
   }
-function CellphoneInput({register,errors,placeholder}) {
+function CellphoneInput({register,errors,placeholder,defaultValue}) {
   
   return(
 <Fragment>
@@ -92,6 +92,7 @@ function CellphoneInput({register,errors,placeholder}) {
 placeholder={placeholder}
  name="userNumber"
  type='text'
+      defaultValue={defaultValue || ''}
           ref={register({
               required: '*El campo es requrido',
                   minLength: {
@@ -111,22 +112,21 @@ placeholder={placeholder}
 </Fragment>
   )
 } 
-function CityAddressOptions({register}){
+function CityAddressOptions({register,defaultValue}){
   return(
    <OptionList name="userCityAddress"
    ref={register({
-
            required: '*El campo es requrido',
         
           })}
    
    >
-<Option value="Córdoba" >Córdoba</Option>
-<Option value="Buenos Aires" >Buenos Aires</Option>
+<Option value="Córdoba"  selected={defaultValue === 'córdoba' ? true :false}>Córdoba</Option>
+<Option value="Buenos Aires" selected={defaultValue === 'buenos aires' ? true :false}>Buenos Aires</Option>
 </OptionList>
   );
 }
-function StreetAddressInput({errors,placeholder,register}) {
+function StreetAddressInput({errors,placeholder,register,defaultValue}) {
   
   return(
 <Fragment>
@@ -135,6 +135,7 @@ function StreetAddressInput({errors,placeholder,register}) {
 <TextInput
 placeholder={placeholder}
  name="userStreetAddress" 
+     defaultValue={defaultValue || ''}
           ref={register({
            required: '*El campo es requrido',
         
@@ -143,7 +144,7 @@ placeholder={placeholder}
 </Fragment>
   )
 } 
-function StreetNumberInput({errors,placeholder,register}) {
+function StreetNumberInput({errors,placeholder,register,defaultValue}) {
   
   return(
 <Fragment>
@@ -152,6 +153,7 @@ function StreetNumberInput({errors,placeholder,register}) {
 <TextInput
 placeholder={placeholder}
  name="userStreetNumber" 
+     defaultValue={defaultValue || ''}
           ref={register({
     required: '*El campo es requrido',
             
@@ -174,7 +176,7 @@ placeholder={placeholder}
   
 
 
-const { register,handleSubmit,errors,onSubmit ,serverError,formIsLoading,isChangingPassword,setIsChangingPassword} = useEditProfileForm()
+const { register,handleSubmit,errors,onSubmit ,serverError,formIsLoading,isChangingPassword,setIsChangingPassword,defaultsValues} = useEditProfileForm()
 
   return(
 <EditProfilePage>
@@ -186,18 +188,18 @@ const { register,handleSubmit,errors,onSubmit ,serverError,formIsLoading,isChang
   <EditProfileForm onSubmit={handleSubmit(onSubmit)} novalidate>
 
     <FormIcone src={userEditIcone} alt="edit-profile"/>
-<UserNameInput  errors={errors} register={register}/>
-   <UserLastNameInput  errors={errors} register={register}/>
+<UserNameInput  errors={errors} register={register} defaultValue={defaultsValues.name}/>
+   <UserLastNameInput  errors={errors} register={register} defaultValue={defaultsValues.lastName} />
   
      
  
-               <CellphoneInput  errors={errors} register={register}  placeholder="Tu telèfono..."/>
+               <CellphoneInput defaultValue={defaultsValues.number} errors={errors} register={register}  placeholder="Tu telèfono..." />
 
-<CityAddressOptions register={register} />
+<CityAddressOptions register={register} defaultValue={defaultsValues.city} />
 
-         <StreetAddressInput  errors={errors} register={register} placeholder="Calle..."/>
+         <StreetAddressInput  errors={errors} register={register} placeholder="Calle..." defaultValue={defaultsValues.street}/>
 
-         <StreetNumberInput  errors={errors} register={register} placeholder="Número de puerta..."/>
+         <StreetNumberInput  errors={errors} register={register} placeholder="Número de puerta..." defaultValue={defaultsValues.streetNumber } / >
  <InputWrapper >
    <NewPasswordCheckbox setIsChangingPassword ={setIsChangingPassword} value={isChangingPassword} />
    </InputWrapper>

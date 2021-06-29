@@ -47,7 +47,8 @@ headers.append('Content-Type', 'application/json');
     
         setIsLoading(true)
        const {token,roles,user} = json
-         setToken(token) ;
+
+        await setToken(token) 
 
         localStorage.setItem('userId',user._id);
         
@@ -73,6 +74,9 @@ setIsLoading(false)
        return history.push("/dashboard/myProducts")
        
       }
+ 
+
+
 setIsLoading(false)
    return history.push("/menu")
 

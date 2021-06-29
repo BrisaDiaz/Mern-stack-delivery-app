@@ -1,7 +1,8 @@
 import styled  from 'styled-components';
+import {Fragment} from 'react'
 import SingleCartProduct from './SingleCartProduct';
 import useShoppingCart from '../../hooks/useShoppingCart'
-
+import {LoaderSpinner} from './../LoaderSpinner'
 
   const StyledCart = styled.aside`
   position:fixed;
@@ -75,8 +76,7 @@ align-items:center;
 export default   function ShooppingCart() {
 
 
-
-const {emptyCartAndResetTotalCost,handelOrden,totalCost,isCartOpen,cartProducts} = useShoppingCart()
+const {emptyCartAndResetTotalCost,handelOrden,totalCost,isCartOpen,cartProducts,isCartLoading} = useShoppingCart()
 
 
   return(
@@ -108,8 +108,14 @@ const {emptyCartAndResetTotalCost,handelOrden,totalCost,isCartOpen,cartProducts}
 </CartProductsList>
 <CartResume>
        <h2>Total: ${totalCost}</h2>
+
+            {(isCartLoading) ? <LoaderSpinner data-testid="spinner"small />: 
+            <Fragment>
               <MakeOrdenButton onClick={handelOrden}>Ordenar</MakeOrdenButton>
               <DeleteAllButton onClick={emptyCartAndResetTotalCost} >Vaciar Carrito</DeleteAllButton>
+            </Fragment>
+            }
+            
 </CartResume>
         
   </StyledCart>

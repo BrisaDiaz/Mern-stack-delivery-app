@@ -1,4 +1,5 @@
 import {useHistory} from 'react-router-dom'
+import {useState} from 'react'
 import postOrderAPI from '../API/postOrderAPI'
 import {useStorage} from '../context/useStorage'
 
@@ -6,8 +7,9 @@ import {useStorage} from '../context/useStorage'
 
 export default   function  useShoppingCart() {
 
- const {cartProducts,totalCost,emptyCart,resetTotalCost,isCartOpen,isLogin,currentUser,setCurrentUser,token,setAllOrders,setIsLoading,toggleCart}  = useStorage()
+ const {cartProducts,totalCost,emptyCart,resetTotalCost,isCartOpen,isLogin,currentUser,token,setAllOrders,setIsLoading,toggleCart}  = useStorage()
 
+ let  [isCartLoading,setCartIsLoading] = useState(false)
  
 const emptyCartAndResetTotalCost = () =>{
   emptyCart();
@@ -16,7 +18,7 @@ const emptyCartAndResetTotalCost = () =>{
 
 const history = useHistory()
 
-const handelOrden = () =>{
+const handelOrden = async () =>{
   
 
 
@@ -29,8 +31,9 @@ if(cartProducts.length !== 0){
 
 
 
+setCartIsLoading(true)
 
-   postOrderAPI({cartProducts,token,emptyCart,setAllOrders,resetTotalCost,setCurrentUser,setIsLoading,toggleCart,history})
+   postOrderAPI({cartProducts,token,emptyCart,setAllOrders,resetTotalCost,setIsLoading,toggleCart,history,setCartIsLoading})
 
 
 
@@ -40,5 +43,5 @@ if(cartProducts.length !== 0){
 }
 
 
-  return { emptyCartAndResetTotalCost,handelOrden,totalCost,isCartOpen,cartProducts} 
+  return { emptyCartAndResetTotalCost,handelOrden,totalCost,isCartOpen,cartProducts,isCartLoading} 
 }

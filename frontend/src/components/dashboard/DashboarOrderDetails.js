@@ -3,7 +3,7 @@ import useDashboarOrderDetails from '../../hooks/useDashboarOrderDetails'
 import AdminOrderStateChart from './AdminOrderStateChart'
 import {Fragment} from 'react'
 import {GoBackLink} from '../product_details/ProductDetails'
-import {Page,OrderId,DetailTable,ClientInfo} from '../account/OrderDetails'
+import {Page,OrderId,DetailTable,ClientInfo} from '../account/UserOrderDetailsPage'
 
 
 
@@ -31,7 +31,6 @@ refreshState={isRefreshing}
 />
 
 
-      <hr></hr>
    <h3>Detalles de envio</h3>
 
     <ClientInfo>
@@ -40,7 +39,7 @@ refreshState={isRefreshing}
        <p><b>Teléfono:</b>{thisOrder?.client[0]?.number}</p>
       </ClientInfo>
       <br></br>
-          <hr></hr>
+       
            <h3>Detalles del pedido</h3>
  <DetailTable>
    <thead>

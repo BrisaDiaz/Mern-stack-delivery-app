@@ -1,7 +1,7 @@
 
-import currentUserAPI from '../API/currentUserAPI'
 
-async function postOrderAPI({resetTotalCost,cartProducts,token,emptyCart,setCurrentUser,toggleCart,history}){
+
+async function postOrderAPI({resetTotalCost,cartProducts,token,emptyCart,setCartIsLoading,toggleCart,history}){
 
 try {
 
@@ -35,7 +35,7 @@ headers.append('Content-Type', 'application/json');
 
 
         let res = await fetch("/api/orders", setting);
-
+setCartIsLoading(false)
 
 
       if(res.status === 201) {
@@ -43,7 +43,6 @@ headers.append('Content-Type', 'application/json');
       emptyCart()
       resetTotalCost()
      toggleCart(false)
-      await   currentUserAPI({setCurrentUser,token})
 
       return history.push("/myAccount/myOrders")
       

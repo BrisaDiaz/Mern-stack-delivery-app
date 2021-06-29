@@ -69,9 +69,6 @@ getCategoriesAPI()
 
 
 
-
-
-
 const initialState =  {
 users:[],
 categories:[],
@@ -92,6 +89,7 @@ isSuccessfullySend: false,
 const [state, dispatch] = useReducer(appReducer, initialState)
 
 const numberOfProductsInCart = state.cartProducts.length;
+
 
 
 
@@ -123,15 +121,16 @@ const setCurrentUser = (data)=>{
   })
 }
 const setToken = (token) =>{
+
   dispatch({
     type: SET_TOKEN,
-    payload: token,
+    payload:token
   })
 }
 const addToCart = (productInf) =>{
     dispatch({
     type: ADD_PRODUCT_TO_CART,
-    payload : productInf,
+    payload: productInf,
   })
 }
 const actualizeCart = (productInf) =>{

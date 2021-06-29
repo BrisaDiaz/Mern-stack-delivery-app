@@ -20,7 +20,7 @@ next()
   res.status(500).json({success:false , message:'Something went wrong, profile state verification fail'})
   }
 
-                       
+
 }
 const checkOrderExist = async (req,res,next) => {
   try{
@@ -42,6 +42,15 @@ const checkOrderExist = async (req,res,next) => {
   }
 }
 
+const checkAuthorizedUser =  (req,res,next) => {
+
+ const isOrderOwner = (req.userId === req.params.userId )
+
+ if(!isOrderOwner) return  res.status(403).json({success:false , message:'Unauthorized User'})
+ 
+next()
+
+}
 const checkAllowedUpdates = async (req,res,next) => {
   try{
 
@@ -79,8 +88,6 @@ const checkAllowedUpdates = async (req,res,next) => {
 const checkAllowedDelete  = async (req,res,next) => {
   try{
 
-
-
     const orderFound = await Order.findById(req.params.id);
 
     if(!orderFound) return res.status(404).json({success:false , message:'Not order found'})
@@ -88,7 +95,7 @@ const checkAllowedDelete  = async (req,res,next) => {
     if( orderFound.states[1].confirmed ) return res.status(401).json({success:false , message:"Can't delete order once acepted"})
   
 
-   req.orderId = req.orderFound._id
+   req.orderId =req.params.id
 
    next()
   
@@ -104,4 +111,4 @@ const checkAllowedDelete  = async (req,res,next) => {
 
 
 
-module.exports = {checkOrderExist,checkAllowedUpdates,checkProfileState,checkAllowedDelete} 
+module.exports = {checkOrderExist,checkAllowedUpdates,checkProfileState,checkAllowedDelete,checkAuthorizedUser} 

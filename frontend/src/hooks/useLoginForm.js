@@ -8,7 +8,7 @@ import {useState} from 'react'
 
 export default  function useLoginForm(){
 
-let {setIsLogin,setIsAdmin,setToken, setCurrentUser,setAllUsers,setIsModerator,setIsLoading,setAllOrders} = useStorage()
+const {setIsLogin,setIsAdmin,setToken, setCurrentUser,setAllUsers,setIsModerator,setIsLoading,setAllOrders} = useStorage()
 
 
   const [isFormLoading, setIsFormLoading] = useState(false)
@@ -26,7 +26,7 @@ email:e.target.userEmail.value,
 password:e.target.userPassword.value
 }
     e.preventDefault()
-    loginAPI({
+await loginAPI({
       info,
 setIsLoading,
 setServerError,
@@ -41,6 +41,7 @@ setIsFormLoading,
 setIsModerator
     })
   
+
 
 
     

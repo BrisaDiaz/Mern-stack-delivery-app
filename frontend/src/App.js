@@ -1,11 +1,12 @@
 import React, { Suspense, lazy } from 'react';
-import AppState  from './context/AppState'
+import useApp from './hooks/useApp'
 import  ScrollToTop from './components/ScrollToTop'
 import {ThemeProvider} from 'styled-components'
 import PrivateRoute from './components/PrivateRoute'
 import PublicRoute from './components/PublicRoute'
 import Footer from './components/Footer'
 import LoadingPage from './components/LoadingPage'
+import OrderNotificationPopUp from './components/OrderNotificationPopUp'
 import Header from './components/Header'
 import NotFound404Page from './components/NotFound404Page'
 import SuccessfullFormModal from './components/SuccessfullFormModal'
@@ -29,8 +30,8 @@ const Login = lazy(() => import( './components/auth/Login'));
 const SingUp = lazy(() => import( './components/auth/SingUp'));
 const MyProfile = lazy(() => import( './components/account/MyProfile'));
 const EditMyProfile = lazy(() => import('./components/account/EditMyProfile'));
-const MyOrdersPage = lazy(() => import( './components/account/MyOrdersPage'));
-const OrderDetails = lazy(() => import( './components/account/OrderDetails'));
+const UserOrdersPage = lazy(() => import( './components/account/UserOrdersPage'));
+const UserOrderDetailsPage = lazy(() => import( './components/account/UserOrderDetailsPage'));
 const EmailConfirmationModal = lazy(() => import( './components/auth/EmailConfirmationModal'));
 const ResetPassword = lazy(() => import('./components/auth/ResetPassword'));
 const DashboardCategories = lazy(() => import('./components/dashboard/DashboardCategories'));
@@ -39,9 +40,12 @@ const DashboardUsers = lazy(() => import(  './components/dashboard/DashboardUser
 const DashboardEditProduct = lazy(() => import( './components/dashboard/DashboardEditProduct'));
 const DashboardProducts = lazy(() => import('./components/dashboard/DashboardProducts'));
 const DashboardNewProduct = lazy(() => import('./components/dashboard/DashboardNewProduct'));
+
+
 function App() {
 
 
+let {setOrderActualizationNotification,setNewOrdersNotification,newOrdersNotification,orderActualizationNotification } = useApp()
 
 
     return (
@@ -50,7 +54,7 @@ function App() {
       
       <Router >
       <ScrollToTop />
-        <AppState>
+
      <ThemeProvider theme={
        {
          darckYellow: `#fcaf01`,
@@ -67,6 +71,8 @@ function App() {
          inputShadow:'inset 1px 1px 6px 0px #ccc'
        }
      }>
+       <OrderNotificationPopUp message='Actualización de Pedido' notification={orderActualizationNotification}/>
+           <OrderNotificationPopUp message='Nuevos Pedidos' notification={newOrdersNotification} />
           <SuccessfullFormModal/>
           <LoadingPage/>
         <Header/>
@@ -87,8 +93,9 @@ function App() {
 
         <PublicRoute path = "/myAccount/editProfile"
         component={EditMyProfile}/>
-             <PublicRoute   path = "/myAccount/myOrders" exact component={ MyOrdersPage }  />
-               <PublicRoute path = "/myAccount/myOrders/:orderID"   component={ OrderDetails } />
+             <PublicRoute   path = "/myAccount/myOrders" exact   component={ () => 
+              <  UserOrdersPage  setNotification={setOrderActualizationNotification}  /> }  />
+               <PublicRoute path = "/myAccount/myOrders/:orderID"   component={ UserOrderDetailsPage} />
 
           <Route path = "/menu/:productId" component={ ProductsDetails } />
          <PrivateRoute path = "/dashboard/myProducts" component={ DashboardProducts } />
@@ -96,7 +103,7 @@ function App() {
 <PrivateRoute path = "/dashboard/newProduct" component={ DashboardNewProduct } />
        <PrivateRoute path =  "/dashboard/editProduct"  component={   DashboardEditProduct } />
               <PrivateRoute path = "/dashboard/users"  component={   DashboardUsers } />
-         <PrivateRoute   path = "/dashboard/orders"  exact component={ DashboardOrders } />
+         <PrivateRoute   path = "/dashboard/orders"  exact  component={ () => <DashboardOrders setNotification={setNewOrdersNotification} /> } />
                    <PrivateRoute path = "/dashboard/orders/:orderID" component={DashboarOrderDetails } />
 
                <PrivateRoute   path = "/dashboard/categories" component={ DashboardCategories } />
@@ -110,7 +117,6 @@ function App() {
      <ShooppingCart/>
         <Footer/>
 </ThemeProvider>
-    </AppState>
 
       </Router>
 

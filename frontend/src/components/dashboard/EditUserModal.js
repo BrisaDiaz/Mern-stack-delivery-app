@@ -13,6 +13,7 @@ left:0;
 right:0;
 bottom:0;
 padding:15px;
+backdrop-filter:blur(2px);
 background:#0000002b;
 display: ${(props)=>(props.isEditing === true ? "block" : "none")};
 z-index:1000;

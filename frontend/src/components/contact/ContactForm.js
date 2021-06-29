@@ -64,7 +64,7 @@ export const TextInput= styled.input`
    letter-spacing: 1px;
   font-size:16px;
   }
-
+    text-transform: capitalize;
 border:none;
 border-radius:5px;
 outline:transparent;

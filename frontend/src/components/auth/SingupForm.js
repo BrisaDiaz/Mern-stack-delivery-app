@@ -85,7 +85,7 @@ transition:all 0.5s esea;
   color:#fff;
 }
 `;
-export function UserNameInput({register,errors}){
+export function UserNameInput({register,errors,defaultValue}){
 
   return(
     <Fragment>
@@ -94,7 +94,8 @@ export function UserNameInput({register,errors}){
         placeholder='Tu nombre...'
           name="userName"
           type='text'
-          
+       defaultValue={defaultValue || ''}
+       
           data-testid='nameInput'
           ref={register({
                required: '*El campo es requrido',
@@ -110,7 +111,7 @@ export function UserNameInput({register,errors}){
     </Fragment>
   );
 }
-export function UserLastNameInput({register,errors}){
+export function UserLastNameInput({register,errors,defaultValue}){
 
   return(
     <Fragment>
@@ -119,6 +120,7 @@ export function UserLastNameInput({register,errors}){
     type='text'
         placeholder='Tu apellido ...'
         data-testid='lastNameInput'
+        defaultValue={defaultValue || ''}
           name="userLastName"
           ref={register({
                required: '*El campo es requrido',
@@ -168,7 +170,7 @@ placeholder={placeholder}
 type='password'
 name ={name}
 data-testid='passwordInput'
-
+autocomplete={false}
           ref={register({
                   required: '*El campo es requrido' ,
                      minLength: {

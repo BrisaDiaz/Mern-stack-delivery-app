@@ -44,6 +44,7 @@ CLOUDINARY_SECRET
 - Nodemailer
 - Multer
 - Cloudinary
+  -socket.io
 
 ### Features:
 
@@ -56,6 +57,8 @@ CLOUDINARY_SECRET
 - accesss of routes base athorization and permition
 
 - media storage using multer library and cloudinary service
+
+-real time new orders and order actualization notifications
 
 - **request supported** : GET, PUT, POST, DELETE
 
@@ -72,13 +75,14 @@ CLOUDINARY_SECRET
 - react-hook-form
 - react-router-dom
 - react hooks
+- socket.io-client
 
 ### Features:
 
 - Interaction with the backend through API Rest .
 - Unit test examples.
 - Lazy Load
-- Products section skeletom display
+- Products and orders section skeletom display
 - Auto-played sliders with dot indicators and controls.
 - Navbar responsive and animated .
 - Singup/Login/forgotPassword system.
@@ -88,8 +92,9 @@ CLOUDINARY_SECRET
 - Shopping cart.
 - Editable User profile.
 - Products and orders section with sorter, filter and search bar.
-- URL able to storage user product seach
-- Backend and frontend side pagination.
+- URL able to storage the user seach
+- pagination.
 - Product details page.
 - User orders tracker page.
+- Real time order notifications.
 - Dashboard with users, categories, orders and products management system.

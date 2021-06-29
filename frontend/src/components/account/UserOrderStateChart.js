@@ -22,16 +22,18 @@ min-height: 30px;
 }
 `
 export const ProcessInfo = styled.div`
-color: ${props=> props.theme.darckYellow};
+  color: ${props=> props.theme.gray};
 display:flex;
 text-align:center;
 & > h4 {
   margin: 0;
+  color: ${props=> props.theme.darckYellow};
 }
+
     align-items: center;
     flex-direction: column;
 `
- 
+
  export default function UserOrderStateChart ({states}){
 
   return(
