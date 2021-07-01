@@ -204,18 +204,19 @@ let actualizedOrder;
 
  if(req.confirmedState ==='liquidado'){
 
-actualizedOrder=  await  User.findByIdAndUpdate(order.client[0],{
-  $set: {
-    client: true,
-  }
-
-},{new:true})
-
- await Order.findByIdAndUpdate(req.orderId,{$set:{
+actualizedOrder = await Order.findByIdAndUpdate(req.orderId,{$set:{
      states: updatedStates,
    finished:true,
 
  }},{new:true})
+
+ await  User.findByIdAndUpdate(order.client[0],{
+  $set: {
+    client: true,
+  }
+},{new:true})
+
+ 
 
      
 order.description.forEach(async item =>{
@@ -232,9 +233,9 @@ try{
 
   }else{
 
-
-    actualizedOrder=  await Order.findByIdAndUpdate(req.orderId,{$set:{
+  actualizedOrder=  await Order.findByIdAndUpdate(req.orderId,{$set:{
    states: updatedStates,
+   
  }},{new:true})
 
 

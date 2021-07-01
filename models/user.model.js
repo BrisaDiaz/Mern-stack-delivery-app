@@ -54,8 +54,6 @@ orders:[
       },
 ],
 client:{type:Boolean , default:false},
-passwordToken:{ type:String},
-passwordTokenExpiration:{ type:Date}
 
 
 

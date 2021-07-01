@@ -45,7 +45,7 @@ const DashboardNewProduct = lazy(() => import('./components/dashboard/DashboardN
 function App() {
 
 
-let {setOrderActualizationNotification,setNewOrdersNotification,newOrdersNotification,orderActualizationNotification } = useApp()
+let {setOrderActualizationNotification,setNewOrdersNotification,newOrdersNotification,orderActualizationNotification,orderActualizationMessage} = useApp()
 
 
     return (
@@ -71,7 +71,7 @@ let {setOrderActualizationNotification,setNewOrdersNotification,newOrdersNotific
          inputShadow:'inset 1px 1px 6px 0px #ccc'
        }
      }>
-       <OrderNotificationPopUp message='Actualización de Pedido' notification={orderActualizationNotification}/>
+       <OrderNotificationPopUp message={orderActualizationMessage} notification={orderActualizationNotification}/>
            <OrderNotificationPopUp message='Nuevos Pedidos' notification={newOrdersNotification} />
           <SuccessfullFormModal/>
           <LoadingPage/>

@@ -5,6 +5,7 @@ import {useStorage} from '../context/useStorage'
 export default function useApp(){
   
     let [orderActualizationNotification,setOrderActualizationNotification] =useState(0)
+    let [orderActualizationMessage ,setOrderActualizationMessage]=('')
    let [newOrdersNotification,setNewOrdersNotification] =useState(0)
    const [socket,setSocket] =useState(null)
  const {currentUser,isLogin}= useStorage()
@@ -40,13 +41,15 @@ socket?.on('newOrder', order => {
 
  socket?.on('orderActualization', order => {
 
-  setOrderActualizationNotification(orderActualizationNotification+1)
+const lastUpdateState = order.states.reverse().find(state => state.confirmed === true)
 
+  setOrderActualizationNotification(orderActualizationNotification+1)
+setOrderActualizationMessage(`Pedido ${lastUpdateState.name}` )
       });
 
 }
 
 
 
-  return {setOrderActualizationNotification,setNewOrdersNotification,newOrdersNotification,orderActualizationNotification }
+  return {setOrderActualizationNotification,setNewOrdersNotification,newOrdersNotification,orderActualizationNotification,orderActualizationMessage }
 }

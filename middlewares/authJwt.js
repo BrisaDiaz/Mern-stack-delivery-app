@@ -6,7 +6,17 @@ const TemporalUser =require('../models/temporalUser.model');
 const verifyToken = async (req,res,next) =>{
 
 try{ 
-   let token = req.headers.authorization.split('Bearer ')[1]
+
+     let token;
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+  }
+req.headers
+
 
   if(!token) return res.status(401).json({message:"No token provided"})
 

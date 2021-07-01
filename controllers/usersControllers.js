@@ -30,30 +30,23 @@ res.status(200).json(users)
  }
 
 
-   const UpdateUserById = async (req,res) =>{
-   const { roles } = req.body
+const updateUserRoleById = async (req,res) =>{
+  const { roles } = req.body
 
 
  try{ 
 
-
-  
     let roleFound = await Role.findOne({ name: roles });
 
+  if (!roleFound) return res.status(404).json({success:false, message:'not role provided'});
+  
     let user = await User.findById(req.params.id);
 
   if (!user) return res.status(404).json({success:false, message:'user not found'});
 
-            user = await User.findByIdAndUpdate(req.params.id, {
-                name: user.name,
-                password: user.password,
-                email: user.email,
-                roles: roleFound._id || 
-                user.roles,
-                address: user.address,
-               number: user.number,
-             
-            }, { new: true });
+         
+
+            user = await User.findByIdAndUpdate(req.params.id, {$set:{ roles:roleFound._id}}, { new: true });
             updatedUser = await user.save();
 
     res.status(200).json({success: true ,data: updatedUser});
@@ -64,6 +57,7 @@ res.status(200).json(users)
   }
  
  }
+
  const createUser = async (req,res) =>{
 try{
   const { name, email, password, roles } = req.body;
@@ -160,11 +154,12 @@ let profileState ;
     res.status(500).json({success:false,message:error})
   }
 }
+
 module.exports = {
   getAllUsers,
 getUserById,
 createUser,
-UpdateUserById,
+updateUserRoleById,
 UpdateProfileById,
 }
 

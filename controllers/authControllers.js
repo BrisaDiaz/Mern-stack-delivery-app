@@ -160,16 +160,14 @@ const sendResetPasswordEmail = async (req,res) =>{
   try{
     const userFound = await User.findOne({email: req.body.email})
 
-    if(!userFound)  return res.status(422).json({successful:false , message:"Dosen't exits user  account link with that email"})
+    if(!userFound)  return res.status(422).json({successful:false , message:"Dosen't exits account link with that email"})
  
     const id = userFound._id
 
    const token = jwt.sign({ 
     id, 
-    expiration:Date.now() + 10*60*60*1000,
+    expiration:Date.now() + 10*60*1000,
   }, process.env.JWT_RESET_FORGOTEN_PASSWORD_KEY);
-
-   await User.findByIdAndUpdate(id,{$set:{passwordToken:token}},{upsert:true,new:true})
 
 
   const url = `${process.env.HOST||'localhost:3000'}/#/authentication/resetPassword/${token}`
@@ -188,6 +186,7 @@ res.status(200).json({success:true, message:"Reset password email has been send 
 
 const resetPassword = async (req,res) =>{
   try{
+
     const {newPassword,confirmPassword} = req.body
 
  const token = req.params.token
@@ -196,7 +195,7 @@ const resetPassword = async (req,res) =>{
 
  const decoded =   jwt.verify(token, process.env.JWT_RESET_FORGOTEN_PASSWORD_KEY)
 
-if(!decoded) return res.status(404).json({message:"Invalid request, token not provided"} )
+if(!decoded) return res.status(401).json({message:"Invalid token"} )
 
  if(Date.now() > decoded.expiration) return res.status(422).json({successful:false , message:"Time to reset password exceeded"})
 
