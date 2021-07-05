@@ -1,11 +1,10 @@
 import {  useState } from 'react'
 import {useStorage} from '../context/useStorage'
-
+import {useCartStorage} from '../context/cart_context/useCartStorage'
 export default function useHeader(){
-const { numberOfProductsInCart, isLogin,toggleCart,isAdmin,isModerator}  = useStorage()
-
+const {  isLogin,isAdmin,isModerator}  = useStorage()
+const { toggleCart,numberOfProductsInCart} =useCartStorage()
   const [navIsOpened, setNavIsOpened ]= useState(false)
-
 
 
 const handelNavClick = () =>{

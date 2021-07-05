@@ -25,7 +25,7 @@ await deleteOrderAPI({token,id})
 handleRefresh()
 
 
-} 
+}
 }
 
   let query = new URLSearchParams();
@@ -35,21 +35,20 @@ handleRefresh()
     const [page, setPage] = useState(1)
     const [maxPage, setMaxPage] = useState(1)
     const [orders, setOrders] = useState([])
-  const [sorting, setSorting] = useState("-createdAt")
 const [isFirstRender, setIsFirstRender] = useState(true)
 let [refreshCount,setRefreshCount] = useState(0)
-   
+
 ///add  search params to the url query
 
    query.append('page',page)
    query.append('limit',sizeLimit)
-   query.append('sort',sorting)
+   query.append('sort',"-createdAt")
 
 
 ////get all user orders
 
 useEffect(() => {
-    setNotification(0)
+     setNotification(0)
   const controller = new AbortController()
  const signal = controller.signal
 
@@ -78,14 +77,12 @@ signal,
     let total = parseInt(json.total)
 
      setMaxPage(Math.ceil(total/sizeLimit))
-     
-console.log(total)
-console.log(json.data.length)
 
-document.querySelector('body').scrollTo(0,100)
+
+document.querySelector('body').scrollTo(0,60)
         setIsFirstRender(false)
      setIsLoadingPage(false)
- 
+
   }catch(err){
     if(err.name === 'AbortError'){
    console.log('Fetch Canseled: caught abort')
@@ -101,7 +98,7 @@ document.querySelector('body').scrollTo(0,100)
 
      return () =>{
      controller.abort()
-   }   
+   }
 
  },[page,refreshCount])
 
@@ -113,6 +110,6 @@ setRefreshCount( Date.now())
 setPage(1)
 }
 
-return {seeDetails,handleRefresh,setSorting,setPage,page,isLoading,maxPage,orders,sorting,isFirstRender,deleteOrder}
+return {seeDetails,handleRefresh,setPage,page,isLoading,maxPage,orders,isFirstRender,deleteOrder}
 
 }

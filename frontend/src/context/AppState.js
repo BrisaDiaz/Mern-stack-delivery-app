@@ -1,4 +1,4 @@
-import  {useReducer,useEffect,useCallback} from 'react';
+import  {useReducer,useEffect} from 'react';
 import AppContext from  './app-context';
 import appReducer from  './app-reducer';
 
@@ -11,14 +11,6 @@ import {
   SET_CURRENT_USER,
   SET_TOKEN,
   SET_PRODUCT_TO_EDIT,
-  TOGGLE_CART,
-ADD_TO_TOTAL_COST,
-DELETE_OF_TOTAL_COST,
-ADD_PRODUCT_TO_CART,
-ACTUALIZE_CART,
-DELETE_PRODUCT_OF_CART,
-EMPTY_CART,
-RESET_TOTAL_COST,
 SET_IS_LOGIN_TRUE,
 SET_IS_LOGIN_FALSE,
 SET_IS_ADMIN,
@@ -40,7 +32,7 @@ export default  function AppState(props) {
 
    const headers = new Headers();
         headers.append('Accept', 'application/json');
-     
+
 
     const setting = {
           method: 'GET',
@@ -61,7 +53,7 @@ getCategoriesAPI()
 
   console.log(err)
 }
-}  
+}
 
 getCategoriesAPI()
   },[])
@@ -75,10 +67,7 @@ categories:[],
 currentUser: {},
 token:"",
 isLoading:true,
-cartProducts:[],
 productToEdit:{},
-totalCost:0,
-isCartOpen:false,
 isSingUp:false,
 isLogin:false,
 isAdmin:false,
@@ -88,19 +77,16 @@ isSuccessfullySend: false,
 
 const [state, dispatch] = useReducer(appReducer, initialState)
 
-const numberOfProductsInCart = state.cartProducts.length;
 
 
 
 
-
-const setIsLoading = useCallback(
-   (bulean)=>{
+const setIsLoading = (boolean)=>{
   dispatch({
     type:SET_IS_LOADING,
-    payload:bulean,
+    payload:boolean,
   })
-},[])
+}
 const setAllUsers = (data)=>{
   dispatch({
     type: SET_ALL_USERS,
@@ -127,55 +113,11 @@ const setToken = (token) =>{
     payload:token
   })
 }
-const addToCart = (productInf) =>{
-    dispatch({
-    type: ADD_PRODUCT_TO_CART,
-    payload: productInf,
-  })
-}
-const actualizeCart = (productInf) =>{
-    dispatch({
-    type: ACTUALIZE_CART,
-    payload : productInf,
-  })
-}
+
 const setProductToEdit= (product) =>{
 dispatch({
   type: SET_PRODUCT_TO_EDIT,
   payload: product,
-})
-}
-const deleteOfCart = (id) =>{
-    dispatch({
-      type: DELETE_PRODUCT_OF_CART,
-    payload : id,
-  })
-}
-const addToTotalCost =(productCosts) =>{
-  dispatch({
-    type: ADD_TO_TOTAL_COST,
-    payload: productCosts,
-  })
-}
-const deleteOfTotalCost =(productCosts) =>{
-  dispatch({
-    type: DELETE_OF_TOTAL_COST,
-    payload: productCosts,
-  })
-}
-const resetTotalCost = () =>{
-    dispatch({
-      type: RESET_TOTAL_COST
-  })
-}
-const emptyCart = () =>{
-    dispatch({
-      type: EMPTY_CART
-  })
-}
-const toggleCart = () =>{
-dispatch ({
-   type: TOGGLE_CART
 })
 }
 
@@ -195,14 +137,14 @@ const setIsAdmin = (bulean) =>{
 type: SET_IS_ADMIN,
 payload:bulean
   })
-  
+
 }
 const setIsModerator = (bulean) =>{
   dispatch({
 type: SET_IS_MODERATOR,
 payload:bulean
   })
-  
+
 }
 
 const setIsSuccessfullySend = (bulean) =>{
@@ -213,7 +155,7 @@ payload: bulean,
 }
   return (
 
-    <AppContext.Provider 
+    <AppContext.Provider
     value= {{
 isLoading: state.isLoading,
 users: state.users,
@@ -222,10 +164,6 @@ categories: state.categories,
 currentUser: state.currentUser,
 token:state.token,
 productToEdit:state.productToEdit,
-cartProducts: state.cartProducts,
-totalCost:state.totalCost,
-numberOfProductsInCart,
-isCartOpen:state.isCartOpen,
 isLogin:state.isLogin,
 isAdmin: state.isAdmin,
 isModerator: state.isModerator,
@@ -234,16 +172,8 @@ setIsLoading,
 setToken,
 setAllUsers,
 setCurrentUser,
-emptyCart,
 setAllCategories,
 setProductToEdit,
-addToCart,
-actualizeCart,
-deleteOfCart,
-addToTotalCost,
-deleteOfTotalCost,
-resetTotalCost,
-toggleCart,
 setIsLogin,
 setIsNotLogin,
 setIsAdmin,
@@ -257,6 +187,6 @@ setIsSuccessfullySend,
 
     );
 
-    
+
 }
 

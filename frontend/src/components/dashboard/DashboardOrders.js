@@ -37,7 +37,7 @@ text-align:center;
     left: 50%;
     z-index: 500;
     margin: -60px 0  0 -60px ;
- 
+
 }
 & > ${NotFaundMessage} {
   padding: 0 5px;
@@ -75,7 +75,7 @@ margin: 20px auto 40px;
 
 }
 & >tbody tr {
- 
+
   border-bottom: 1px solid ;
 }
 & >tbody tr td small {
@@ -133,7 +133,7 @@ content:"Total";
 `
 
 export default function DashboardOrders({setNotification}){
- 
+
 
 
 
@@ -150,7 +150,7 @@ const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLo
           <FilterOrderStateOptions setPage={setPage} setStatePreferece={setState}/>
           <SortOrdersOptions setSortPreferece={setSorting} sortPreference={sorting} />
         </FiltersBoard>
-   
+
   <RefreshButton data-testid="refresh-button" onClick={ () => handleRefresh()}>
   <RefreshIcone src={refreshIcone} title='Refrescar Página'/>
   </RefreshButton>
@@ -174,7 +174,7 @@ const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLo
     </tr>
   </TableHead>
   <tbody>
-{orders?.map(order => 
+{orders?.map(order =>
     <tr key={order?.orderID}   onClick={ (e) => seeDetails(order?._id)}>
     <td>{order?.orderID}</td>
         <td>
@@ -187,12 +187,12 @@ const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLo
         <td> <b>{[...order?.states].reverse().find(state => state.confirmed ===true).name}</b></td>
 
 </tr>
-  
-  
+
+
   )}
-      
+
   </tbody>
- 
+
 </OrdersTable> }
 
 <PaginationButtons setPage={setPage} page={page} maxPage={maxPage} />

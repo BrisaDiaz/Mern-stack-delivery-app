@@ -3,7 +3,7 @@ import {Fragment} from 'react'
 import SingleCartProduct from './SingleCartProduct';
 import useShoppingCart from '../../hooks/useShoppingCart'
 import {LoaderSpinner} from './../LoaderSpinner'
-
+import CartState  from '../../context/cart_context/CartState'
   const StyledCart = styled.aside`
   position:fixed;
 z-index:1000;
@@ -79,45 +79,46 @@ export default   function ShooppingCart() {
 const {emptyCartAndResetTotalCost,handelOrden,totalCost,isCartOpen,cartProducts,isCartLoading} = useShoppingCart()
 
 
+
   return(
 
     <StyledCart isCartOpen={isCartOpen}>
       <CartHeader>
              <CartTitle>Mi carrito</CartTitle>
       </CartHeader>
-      
+
       <CartProductsList>
             {cartProducts?.length > 0 ?
 
-             cartProducts.map( (product,index)=>  
+             cartProducts.map( (product,index)=>
 
-      
-       
+
+
            <SingleCartProduct
 
          key={index}
-          product={product}>  
-      
+          product={product}>
+
       </SingleCartProduct>
-         
+
           )
 
           :null
-          
+
       }
 </CartProductsList>
 <CartResume>
        <h2>Total: ${totalCost}</h2>
 
-            {(isCartLoading) ? <LoaderSpinner data-testid="spinner"small />: 
+            {(isCartLoading) ? <LoaderSpinner data-testid="spinner"small />:
             <Fragment>
               <MakeOrdenButton onClick={handelOrden}>Ordenar</MakeOrdenButton>
               <DeleteAllButton onClick={emptyCartAndResetTotalCost} >Vaciar Carrito</DeleteAllButton>
             </Fragment>
             }
-            
+
 </CartResume>
-        
+
   </StyledCart>
 
   );

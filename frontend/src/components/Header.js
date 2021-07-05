@@ -3,10 +3,10 @@ import {Fragment} from 'react'
 import {Link} from 'react-router-dom'
 import useHeader from '../hooks/useHeader'
 import SocialsMenu from './SocialsMenu'
-import logo from '../img/logo.png' 
+import logo from '../img/logo.png'
 import menu from '../img/menu.svg'
-import clouseMenu from '../img/close.svg' 
-import cartIcone from '../img/shopping-cart.svg' 
+import clouseMenu from '../img/close.svg'
+import cartIcone from '../img/shopping-cart.svg'
 import profileIcon from '../img/user-circle-solid.svg'
 
 
@@ -43,7 +43,7 @@ font-size: 25px;
     &.primary{
 
     margin: 20px 0;
-       
+
    }
 }
 
@@ -182,7 +182,7 @@ const {handelNavClick, closeNav,navIsOpened,numberOfProductsInCart, isLogin,togg
 {(isAdmin === true || isModerator === true ) &&   <StyledLink to="/dashboard/myProducts"  onClick={closeNav}>Dashboard</StyledLink>}
 
 
-{isLogin ? 
+{isLogin ?
  <Fragment>
       <StyledLink to="/myAccount/myOrders" onClick={closeNav}>Mis Pedidos</StyledLink>
 <Link to="/myAccount/myProfile" onClick={closeNav} ><IconeButton><ProfileIcone src ={profileIcon} alt="profile"></ProfileIcone></IconeButton></Link>
@@ -195,9 +195,9 @@ const {handelNavClick, closeNav,navIsOpened,numberOfProductsInCart, isLogin,togg
  <StyledLink  to="/authentication/login"  onClick={closeNav}>Login</StyledLink>
 </Fragment>}
 
- 
+
   </NavLinks>
- 
+
 <SocialsMenu primary></SocialsMenu>
 </NavWrapper>
 <IconeButton onClick={() =>toggleCart()} >

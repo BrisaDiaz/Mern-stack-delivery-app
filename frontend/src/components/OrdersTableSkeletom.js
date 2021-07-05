@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 const Table = styled.div`
 width:100%;
+max-width:900px;
 margin:20px auto 0;
 background:gray;
 box-shadow: 1px 1px 5px #00000057;
@@ -25,14 +26,14 @@ margin: 1px 0;
 background:#fff;
 border-bottom:1px solid #ccc;
 box-shadow: 0 1px 3px #ccc;
- 
+
 @media screen and (max-width: 750px){
 height:100px;
 }
 `
 
 export default function OrdersTableSkeletom() {
-  
+
   return(
 <Table>
   <TableHeader/>

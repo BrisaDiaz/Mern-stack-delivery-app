@@ -1,4 +1,5 @@
 import styled  from 'styled-components'
+import React from 'react'
 import {Link} from 'react-router-dom'
 import useUserOrdersPage from '../../hooks/useUserOrdersPage'
 import {ButtonPrimary} from '../Buttons'
@@ -32,7 +33,7 @@ background:${props => props.theme.lightYellow};
     left: 50%;
     z-index: 500;
     margin: -60px 0  0 -60px ;
- 
+
 }
 `;
 export const TableHead = styled.thead`
@@ -145,7 +146,7 @@ margin-bottom:40px;
 const NotFounIcone = styled.h2`
 font-size:50px;
 `;
-export const RefreshButton = styled.div` 
+export const RefreshButton = styled.div`
 cursor:pointer;
 padding:0 10px;
 align-items: center;
@@ -171,10 +172,15 @@ cursor:pointer;
 `;
 
 
-export default function MyOrders({setNotification}){
+
+ export default function UserOrdersPage({setNotification}){
 
 const {seeDetails,handleRefresh,setPage,page,isLoading,maxPage,orders,isFirstRender,deleteOrder} = useUserOrdersPage({setNotification})
+
+
+
   return(
+
 <Page isLoading={isLoading}>
 
   {isLoading ? <LoaderSpinner /> :  null }
@@ -184,9 +190,9 @@ const {seeDetails,handleRefresh,setPage,page,isLoading,maxPage,orders,isFirstRen
 <RefreshButton onClick={ () => handleRefresh()}>
   <RefreshIcone onClick={ () => handleRefresh()}   src={refreshIcone} title='Refrescar Página'/>
   </RefreshButton>
-  
+
   { ((isLoading) && (isFirstRender) ) && <OrdersTableSkeletom/>}
-    
+
  {  ( (!isLoading) && (!isFirstRender)  &&  orders?.length === 0)  &&
   <NotFounMessage>
         <NotFounIcone >👩🏻&zwj;🍳</NotFounIcone>
@@ -209,12 +215,12 @@ const {seeDetails,handleRefresh,setPage,page,isLoading,maxPage,orders,isFirstRen
             </tr>
   </TableHead>
   <tbody>
-    {orders?.map(order => 
+    {orders?.map(order =>
 
     <tr key={order?._id} onClick={(e) => seeDetails(order._id)}>
     <td>{order?.orderID}</td>
         <td>
-  
+
           <span>{new Date(order?.states[0].date).toLocaleString()?.split(" ")[0]}</span>
           <br></br>
             <span>{new Date(order?.states[0].date).toLocaleString()?.split(" ")[1]}</span>
@@ -233,8 +239,8 @@ Cancelar Pedido
     )}
 
   </tbody>
- 
-</OrdersTable> 
+
+</OrdersTable>
 
 }
 

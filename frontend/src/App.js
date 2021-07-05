@@ -1,4 +1,5 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, Fragment } from 'react';
+
 import useApp from './hooks/useApp'
 import  ScrollToTop from './components/ScrollToTop'
 import {ThemeProvider} from 'styled-components'
@@ -49,9 +50,9 @@ let {setOrderActualizationNotification,setNewOrdersNotification,newOrdersNotific
 
 
     return (
-       
 
-      
+
+
       <Router >
       <ScrollToTop />
 
@@ -75,46 +76,48 @@ let {setOrderActualizationNotification,setNewOrdersNotification,newOrdersNotific
            <OrderNotificationPopUp message='Nuevos Pedidos' notification={newOrdersNotification} />
           <SuccessfullFormModal/>
           <LoadingPage/>
-        <Header/>
-         <Suspense fallback={ <LoadingPage isLoading={true} />}>
+         <ShooppingCart/>
+          <Header/>
+   <Suspense fallback={ <LoadingPage isLoading={true} />}>
+
+
   <Switch>
+
         <Route path = "/" exact component={ Home } />
-    
-        <Route path = "/menu" exact component={ Menu } />
-    
-    
-        <Route path = "/authentication/login" exact component={ Login }  />
-                <Route path="/authentication/singUp" exact component={ SingUp }  />
-     <PublicRoute path = "/authentication/confirmation" component={ EmailConfirmationModal }  />
-          <Route path = "/authentication/resetPassword/:token" component={ ResetPassword }  />
-        <Route path = "/contact" component={ Contact } />
-       
-    <PublicRoute path = "/myAccount/myProfile" component ={MyProfile}/>
+        <Route path = "/menu" exact component={ Menu} />
+        <Route path = "/menu/:productId" component={ ProductsDetails} />
 
-        <PublicRoute path = "/myAccount/editProfile"
+<Route path = "/authentication/login" exact component={ Login }  />
+<Route path="/authentication/singUp" exact component={ SingUp }  />
+<Route path = "/authentication/resetPassword/:token" component={ ResetPassword }  />
+<Route path = "/contact" component={ Contact } />
+
+
+<PublicRoute path = "/authentication/confirmation" component={ EmailConfirmationModal }  />
+<PublicRoute path = "/myAccount/myProfile" component ={MyProfile}/>
+<PublicRoute path = "/myAccount/editProfile"
         component={EditMyProfile}/>
-             <PublicRoute   path = "/myAccount/myOrders" exact   component={ () => 
+ <PublicRoute   path = "/myAccount/myOrders" exact   component={ () =>
               <  UserOrdersPage  setNotification={setOrderActualizationNotification}  /> }  />
-               <PublicRoute path = "/myAccount/myOrders/:orderID"   component={ UserOrderDetailsPage} />
+ <PublicRoute path = "/myAccount/myOrders/:orderID"   component={ UserOrderDetailsPage} />
 
-          <Route path = "/menu/:productId" component={ ProductsDetails } />
-         <PrivateRoute path = "/dashboard/myProducts" component={ DashboardProducts } />
-              
+
+
+<PrivateRoute path = "/dashboard/myProducts" component={ DashboardProducts } />
 <PrivateRoute path = "/dashboard/newProduct" component={ DashboardNewProduct } />
-       <PrivateRoute path =  "/dashboard/editProduct"  component={   DashboardEditProduct } />
-              <PrivateRoute path = "/dashboard/users"  component={   DashboardUsers } />
-         <PrivateRoute   path = "/dashboard/orders"  exact  component={ () => <DashboardOrders setNotification={setNewOrdersNotification} /> } />
-                   <PrivateRoute path = "/dashboard/orders/:orderID" component={DashboarOrderDetails } />
+<PrivateRoute path =  "/dashboard/editProduct"  component={   DashboardEditProduct } />
+<PrivateRoute path = "/dashboard/users"  component={   DashboardUsers } />
+<PrivateRoute   path = "/dashboard/orders"  exact  component={ () => <DashboardOrders setNotification={setNewOrdersNotification} /> } />
+<PrivateRoute path = "/dashboard/orders/:orderID" component={DashboarOrderDetails } />
+<PrivateRoute   path = "/dashboard/categories" component={ DashboardCategories } />
 
-               <PrivateRoute   path = "/dashboard/categories" component={ DashboardCategories } />
- 
-            <Route path = "*" component={NotFound404Page} />
-          
- 
+<Route path = "*" component={NotFound404Page} />
+
       </Switch>
 </Suspense>
 
-     <ShooppingCart/>
+
+
         <Footer/>
 </ThemeProvider>
 

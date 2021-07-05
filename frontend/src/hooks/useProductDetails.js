@@ -1,13 +1,14 @@
 import { useEffect,useState} from 'react'
 import {useParams,useLocation,useHistory} from 'react-router-dom'
 import {useStorage} from '../context/useStorage'
-
+import {useCartStorage} from '../context/cart_context/useCartStorage'
 
 
 export default function useProductDetails(){
 
-  const {setIsLoading,cartProducts,isLoading} = useStorage()
-  
+  const {setIsLoading,isLoading} = useStorage()
+    const {cartProducts} = useCartStorage()
+
 let location = useLocation()
 let history = useHistory()
 let search = new URLSearchParams(location.search);
@@ -51,19 +52,19 @@ const [isLoaded,setIsLoaded] = useState(false)
 
         }
 
- 
+
   }
 }
   }
   fechProducts()
- 
+
   return () =>{
      controller.abort()
-   }   
-   
+   }
+
  },[productId])
 
- 
+
 let isInShoppingCart = cartProducts.find(product => product.info._id === thisProductInfo?._id) ? true : false
 
 return{ isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded,isLoading}

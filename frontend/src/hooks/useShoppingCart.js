@@ -2,15 +2,15 @@ import {useHistory} from 'react-router-dom'
 import {useState} from 'react'
 import postOrderAPI from '../API/postOrderAPI'
 import {useStorage} from '../context/useStorage'
-
+import {useCartStorage} from '../context/cart_context/useCartStorage'
 
 
 export default   function  useShoppingCart() {
-
- const {cartProducts,totalCost,emptyCart,resetTotalCost,isCartOpen,isLogin,currentUser,token,setAllOrders,setIsLoading,toggleCart}  = useStorage()
+ const {isLogin,currentUser,token,setAllOrders,setIsLoading}  = useStorage()
+ const {cartProducts,totalCost,emptyCart,resetTotalCost,isCartOpen,toggleCart}  = useCartStorage()
 
  let  [isCartLoading,setCartIsLoading] = useState(false)
- 
+
 const emptyCartAndResetTotalCost = () =>{
   emptyCart();
   resetTotalCost();
@@ -19,10 +19,10 @@ const emptyCartAndResetTotalCost = () =>{
 const history = useHistory()
 
 const handelOrden = async () =>{
-  
 
 
- 
+
+
 if(cartProducts.length !== 0){
 
   if(!isLogin) return history.push("/authentication/login")
@@ -43,5 +43,5 @@ setCartIsLoading(true)
 }
 
 
-  return { emptyCartAndResetTotalCost,handelOrden,totalCost,isCartOpen,cartProducts,isCartLoading} 
+  return { emptyCartAndResetTotalCost,handelOrden,totalCost,isCartOpen,cartProducts,isCartLoading}
 }

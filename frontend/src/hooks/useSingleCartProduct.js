@@ -1,11 +1,10 @@
 import {  useState } from 'react'
-import {useStorage} from '../context/useStorage'
-
+import {useCartStorage} from '../context/cart_context/useCartStorage'
 
 
 export default function useSingleCartProduct(product){
-  
-const {deleteOfCart, addToTotalCost,deleteOfTotalCost,actualizeCart} = useStorage()
+
+const {deleteOfCart, addToTotalCost,deleteOfTotalCost,actualizeCart} = useCartStorage()
 
   const deleteOfCartAndTotalCostHandler= (id,cost) =>{
 deleteOfTotalCost(cost)
@@ -32,7 +31,7 @@ setquantity(quantity -1)
   return
   }
     return
-    
+
 }
 
 
