@@ -138,7 +138,7 @@ border-radius: 5px;
 max-width: 50%;
 min-width: 200px;
   height: 45px;
-  display: inline-block; 
+  display: inline-block;
   margin:25px auto;
   cursor:pointer;
   outline:none;
@@ -146,19 +146,19 @@ transition: all 0.5s ease;
   &:before{
      background-color: ${props => props.theme.black};
   color: white;
-  display: flex;            
+  display: flex;
   justify-content: center;
   font-size:17px;
   font-weight:600;
   align-items: center;
   border-radius: 3px;
-  content: 'Seleccionar Imagen'; 
+  content: 'Seleccionar Imagen';
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
-  bottom: 0; 
-  
+  bottom: 0;
+
   }
     &:hover{
       transform:scale(1.05);
@@ -188,18 +188,17 @@ export const Option = styled.option`
    background: #fcba1c;
 }
 `
-export  function CategoriesOptionsInput({register,categories}){
+export  function CategoriesOptionsInput({register,categories,defaultValue}){
 
 return(
 
 
-<OptionList 
+<OptionList
 name="category"
-
-  
+value={defaultValue || categories[0]}
           ref={register({
        required: '*El campo es requrido',
-    
+
           })}
 >
   {categories?.map(cat =>
@@ -212,42 +211,44 @@ name="category"
 
 );
 
-} 
-export function ProductNameInput({register,errors}){
+}
+export function ProductNameInput({register,errors,defaultValue}){
 
   return(
     <Fragment>
         {errors.name && <ErrorMessage  role="alert">{errors.name.message}</ErrorMessage>}
 
- <TextInput 
+ <TextInput
  style={{ borderColor: errors.productName && "#bf0000" }  }
           placeholder="Nombre..."
     data-testid="name"
+      defaultValue={defaultValue || ""}
                        name="name"
           ref={register({
              required: '*El campo es requrido',
-    
+
           })}
           />
-              
+
 
     </Fragment>
-             
+
   )
 }
 
 
 
-export function ProductSizeInput({register,errors}){
+export function ProductSizeInput({register,errors,defaultValue}){
 
   return(
     <Fragment>
           {errors.size && <ErrorMessage  role="alert">{errors.size.message}</ErrorMessage>}
-          <TextInput 
+          <TextInput
            style={{ borderColor: errors.size && "#bf0000" }  }
           placeholder="Cantidad/Tamaño..."
                  data-testid="size"
                 name='size'
+                defaultValue={defaultValue || ""}
           ref={register({
               required:'*El campo es requerido' ,
              pattern:{
@@ -258,24 +259,24 @@ export function ProductSizeInput({register,errors}){
           />
 
     </Fragment>
-             
+
   )
 }
 
-export function ProductDescriptionTextArea({register,errors}){
+export function ProductDescriptionTextArea({register,errors,defaultValue}){
 
   return(
     <Fragment>
            {errors.description && <ErrorMessage  role="alert">{errors.description.message}</ErrorMessage>}
-      <Description 
+      <Description
       placeholder="Descripción..."
        style={{ borderColor: errors.description && "#bf0000" }  }
-          
+     defaultValue={defaultValue || ""}
                       name="description"
-              data-testid="description"  
+              data-testid="description"
           ref={register({
       required:'*El campo es requerido' ,
-          
+
           })}
       >
 
@@ -284,18 +285,19 @@ export function ProductDescriptionTextArea({register,errors}){
   );
 
 }
-export function ProductPriceInput({register,errors}){
+export function ProductPriceInput({register,errors,defaultValue}){
 
   return(
     <Fragment>
          {errors.productPrice && <ErrorMessage  role="alert">{errors.productPrice.message}</ErrorMessage>}
-    
-   
+
+
              <TextInput placeholder="Precio..."
            style={{ borderColor: errors.productPrice && "#bf0000" }  }
                  name="price"
-                     data-testid="price"  
-                  ref={register({ 
+                     data-testid="price"
+           defaultValue={defaultValue || ""}
+                  ref={register({
                     required:'*El campo es requerido' ,
                   pattern:{
                value:  /\d+/,
@@ -303,31 +305,28 @@ export function ProductPriceInput({register,errors}){
                }
                   })}
 
-      
-          
-          
+
+
+
           />
 
     </Fragment>
-             
+
   )
 }
- export function ImageUploader({register,errors}){
-
-
-
+ export function ImageUploader({register,errors,isNotRequired}){
 
   return(
     <Fragment>
       {errors.productImg && <ErrorMessage  role="alert">*El Campo es requerido</ErrorMessage>}
 
           <DropZone id="imgInput" type="file" name="img"    ref={register({
-             required: true,
-              
+             required: (isNotRequired) ? false:true,
+
           })}></DropZone>
 
     </Fragment>
-             
+
   )
 }
 export function FormButtons(){
@@ -339,7 +338,8 @@ export function FormButtons(){
     )
   }
 export function ProductState(props){
-  let state = props?.state || false 
+
+  let state = props?.state || false
 
    return(
           <CheckboxWrapper >
@@ -350,38 +350,38 @@ id="state" type="checkbox" defaultChecked={state} name="state" />
     )
   }
 export default  function UpdateNewProductForm() {
- 
-  
-    
-      const  {register,handleSubmit,errors,onSubmit,formIsLoading,categories} =   usePostNewProductForm()
+
+
+
+   const  {register,handleSubmit,errors,onSubmit,formIsLoading,categories} =   usePostNewProductForm()
 
   return(
     <StyledSection>
-   
+
       <ThisFormCard>
   <Logo src = {trayIcon} alt="new-product"></Logo>
         <ThisForm id='productsFactory' name='productsFactory' onSubmit={handleSubmit(onSubmit)}>
              <FormTitle>Cargar nuevos productos</FormTitle>
-                   
+
   <ProductNameInput register={register} errors={errors}/>
-            
 
 
-         
+
+
 <ProductSizeInput register={register} errors={errors}/>
-                
+
 <ProductPriceInput register={register} errors={errors}/>
   <CategoriesOptionsInput register={register} errors={errors} categories={categories}/>
 <ProductDescriptionTextArea register={register} errors={errors}  />
 
 <ProductState state="checked"/>
-  
 
 
-      <ImageUploader  register={register} errors={errors}/>     
+
+      <ImageUploader  register={register} errors={errors}/>
    {formIsLoading  &&  <LoaderSpinner small  data-testid='spinner'/> }
  <FormButtons/>
-      
+
 
         </ThisForm>
       </ThisFormCard>

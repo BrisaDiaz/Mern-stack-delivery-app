@@ -1,15 +1,15 @@
 import {useForm} from 'react-hook-form';
 import {useHistory} from 'react-router-dom';
-import {useState} from 'react' 
+import {useState} from 'react'
 import {useStorage} from '../context/useStorage'
 import upldateProfileAPI from '../API/upldateProfileAPI'
 
 
 
 export default function useEditProfileForm(){
-  
+
   const {token,setCurrentUser,setAllUsers,isAdmin,setIsSuccessfullySend,currentUser} = useStorage()
-  
+
   const [serverError,setServerError] = useState("");
     const [isChangingPassword,setIsChangingPassword] = useState(false);
 const [formIsLoading,setFormIsLoading] = useState(false);
@@ -33,21 +33,21 @@ async function onSubmit(data,e) {
 
  e.preventDefault()
 
- 
-const name =  e?.target?.userName?.value?.toLowerCase(),
- lastName =  e?.target?.userLastName?.value?.toLowerCase(),
-city = e.target.userCityAddress?.value?.toLowerCase(),
-street = e.target.userStreetAddress?.value?.toLowerCase();
+
+const name =  data.userName?.toLowerCase(),
+ lastName =  data.userLastName?.toLowerCase(),
+city = data.userCityAddress?.toLowerCase(),
+street = data.userStreetAddress?.toLowerCase();
 
 const info ={
 name,
 lastName,
-password:e?.target?.userPassword?.value || null,
-newPassword:e?.target?.userNewPassword?.value || null,
-number:e.target.userNumber?.value,
+password:data.userPassword || null,
+newPassword:data.userNewPassword || null,
+number:data.userNumber,
 city,
 street,
-streetNumber: e.target.userStreetNumber?.value
+streetNumber: data.userStreetNumber
 }
  await upldateProfileAPI({
   setFormIsLoading,
@@ -62,7 +62,7 @@ history,
 
 
   }
-  
+
 
 
   return {
@@ -76,7 +76,7 @@ formIsLoading,
 defaultsValues,
 isChangingPassword,
 setIsChangingPassword
-} 
+}
 
-  
+
 }

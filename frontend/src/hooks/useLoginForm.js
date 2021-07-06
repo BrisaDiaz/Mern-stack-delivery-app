@@ -2,7 +2,7 @@ import {useForm} from 'react-hook-form'
 import {useHistory} from 'react-router-dom';
 import {useStorage} from '../context/useStorage'
 import loginAPI from '../API/loginAPI'
-import {useState} from 'react' 
+import {useState} from 'react'
 
 
 
@@ -20,10 +20,10 @@ const history =useHistory();
 });
 
   async function onSubmit(data,e) {
-    
+
 const info ={
-email:e.target.userEmail.value,
-password:e.target.userPassword.value
+email:data.userEmail,
+password:data.userPassword
 }
     e.preventDefault()
 await loginAPI({
@@ -40,15 +40,15 @@ setAllOrders,
 setIsFormLoading,
 setIsModerator
     })
-  
 
 
 
-    
- 
+
+
+
   }
 
- 
-  return {register, handleSubmit, errors, onSubmit ,isFormLoading,serverError} 
+
+  return {register, handleSubmit, errors, onSubmit ,isFormLoading,serverError}
 
      }
