@@ -6,7 +6,7 @@ import {useCartStorage} from '../context/cart_context/useCartStorage'
 
 
 export default   function  useShoppingCart() {
- const {isLogin,currentUser,token,setAllOrders,setIsLoading}  = useStorage()
+ const {isLogin,currentUser,token,setIsLoading}  = useStorage()
  const {cartProducts,totalCost,emptyCart,resetTotalCost,isCartOpen,toggleCart}  = useCartStorage()
 
  let  [isCartLoading,setCartIsLoading] = useState(false)
@@ -33,7 +33,7 @@ if(cartProducts.length !== 0){
 
 setCartIsLoading(true)
 
-   postOrderAPI({cartProducts,token,emptyCart,setAllOrders,resetTotalCost,setIsLoading,toggleCart,history,setCartIsLoading})
+   postOrderAPI({cartProducts,token,emptyCart,resetTotalCost,setIsLoading,toggleCart,history,setCartIsLoading})
 
 
 

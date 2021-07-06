@@ -2,6 +2,7 @@ import '@testing-library/jest-dom'
 import { render, screen,act ,cleanup} from '@testing-library/react'
 import {MemoryRouter} from 'react-router-dom'
 import AppContext from '../../context/AppState'
+import CartContext from '../../context/cart_context/cart-context'
 import Menu from './Menu'
 import products from '../../mocks/products'
 import categories from '../../mocks/categories'
@@ -20,8 +21,8 @@ describe('menu fetch', ()=> {
         }));
     });
 
- 
- 
+
+
     afterEach(() => {
   jest.resetModules();
   jest.clearAllMocks();
@@ -35,7 +36,9 @@ it('display all components and fetch data components', async()=>{
  await act(async()=>render(
 <MemoryRouter initialEntries={["/menu"]}>
   <AppContext value={{categories}}>
+<CartContext.Provider value={{cartProducts:[]}}>
 <Menu/>
+</CartContext.Provider>
   </AppContext>
 </MemoryRouter>
 
@@ -61,4 +64,4 @@ expect(screen.getAllByRole('combobox')).toHaveLength(2)
 
   })
 
-  
+

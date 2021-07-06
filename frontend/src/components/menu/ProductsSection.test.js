@@ -3,30 +3,33 @@ import '@testing-library/jest-dom'
 import { render,  screen} from '@testing-library/react'
 import {MemoryRouter} from 'react-router-dom'
  import ProductsSection from './ProductsSection'
-import AppContext from '../../context/AppState'
 import products from '../../mocks/products'
-
-
+import CartContext from '../../context/cart_context/cart-context'
+import cartProducts from '../../mocks/cartProducts'
 
 
 
 let addToCart = jest.fn()
 let addToTotalCost = jest.fn()
 
+
+
  describe('ProductsSection render' , ()=>{
 
   it('renders not faund message after not getting match search results', () =>{
     render(
-      
- <MemoryRouter initialEntries={["/menu"]}>
-         <AppContext value={{
-  cartProduct:[],
+
+
+         <CartContext.Provider value={{
+  cartProducts:[],
 addToCart,
 addToTotalCost
 }}>
+   <MemoryRouter initialEntries={["/menu"]}>
 <ProductsSection isLoading={false} products={[]} />
-</AppContext>
     </MemoryRouter>
+</CartContext.Provider>
+
 
 
     )
@@ -36,15 +39,17 @@ addToTotalCost
   it('renders products  of  the match search result', () =>{
 
     render(
-       <MemoryRouter initialEntries={["/menu"]}>
-            <AppContext value={{
-  cartProduct:[],
+
+            <CartContext.Provider value={{
+  cartProducts,
 addToCart,
 addToTotalCost
 }}>
+     <MemoryRouter initialEntries={["/menu"]}>
 <ProductsSection isLoading={false} products={products.data} />
-</AppContext>
-    </MemoryRouter>
+ </MemoryRouter>
+</CartContext.Provider>
+
 
     )
 
@@ -57,4 +62,3 @@ addToTotalCost
   })
  })
 
- 

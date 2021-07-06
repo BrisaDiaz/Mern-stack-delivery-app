@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 import { render,  screen,act} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import AddToCartButton from './AddToCartButton'
-import AppContext from '../context/AppState'
+import CartContext from './../context/cart_context/cart-context'
 
 
 
@@ -19,19 +19,19 @@ const cartProducts=[
 ]
 const addedItem = {_id:15, name:'pizza'};
 const notAddedItem = {_id:18, name:'burger',price:500};
+const addToTotalCost = jest.fn()
+const addToCart = jest.fn()
 
 
-
-const value = {cartProducts} 
 
 it('has yellow background when product is already in cart',() =>{
 
   render(
-    <AppContext value={value} >
+    <CartContext.Provider value={{cartProducts,addToTotalCost,addToCart}} >
       <AddToCartButton thisProductInfo={addedItem}/>
-    </AppContext>
+    </CartContext.Provider>
   )
-  
+
   expect(screen.getByRole('button')).toHaveStyle('background:','#fcaf01')
 
 })
@@ -41,11 +41,11 @@ it('has yellow background when product is already in cart',() =>{
 it('has black background when product is not in cart',() =>{
 
 render(
-    <AppContext value={value} >
+    <CartContext.Provider value={{cartProducts,addToTotalCost,addToCart}} >
       <AddToCartButton thisProductInfo={notAddedItem}/>
-    </AppContext>
+    </CartContext.Provider>
   )
-  
+
   expect(screen.getByRole('button')).toHaveStyle('background:','#272727')
 
 })
@@ -54,10 +54,10 @@ it('adds product to cart and add the price to total cost on click', async() =>{
 
 
   render(
-    <AppContext value={{cartProducts:[]}} >
+    <CartContext.Provider value={{cartProducts,addToTotalCost,addToCart}} >
       <AddToCartButton thisProductInfo={notAddedItem}>
       </AddToCartButton>
-    </AppContext>
+    </CartContext.Provider>
   )
 
     expect(screen.getByRole('button')).toHaveStyle('background:','#272727')

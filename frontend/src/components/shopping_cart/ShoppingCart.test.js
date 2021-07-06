@@ -2,19 +2,28 @@ import React from 'react';
 import { render,  screen ,act} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import AppContext from '../../context/app-context'
+import CartContext from '../../context/cart_context/cart-context'
 import ShoppingCart from './ShoppingCart'
+import login from '../../mocks/login'
+import cartProducts from '../../mocks/cartProducts'
 
-
-
+const appContextValue ={
+isLogin:true,
+currentUser:login.user,
+setIsLoading:jest.fn()
+}
 
  it('render total const correctly', ()=>{
 
    render(
-            <AppContext.Provider value={{ cartProducts:[],totalCost:0}}>
+<AppContext.Provider value={appContextValue}>
+            <CartContext.Provider value={{ cartProducts:[],totalCost:0}}>
+
                 <ShoppingCart />
-            </AppContext.Provider>
+            </CartContext.Provider>
+</AppContext.Provider>
         )
-       
+
       expect(screen.getByText(/total:/i)).toHaveTextContent(/0$/i)
             expect(screen.getByRole('list')).toBeEmptyDOMElement()
  })
@@ -22,11 +31,11 @@ import ShoppingCart from './ShoppingCart'
 
  it('display all the products on cart with correct total cost', ()=>{
 
-   const cartProducts =[{info:{name:'burger',price:500},quantity:1} ,{info:{name:'pizza',price:550},quantity:2}]
-
    render(
-            <AppContext.Provider value={{cartProducts,totalCost:1600}}>
+     <AppContext.Provider value={appContextValue}>
+            <CartContext.Provider value={{cartProducts,totalCost:1600}}>
                 <ShoppingCart />
+            </CartContext.Provider>
             </AppContext.Provider>
         )
       expect(screen.getAllByRole('listitem')).toHaveLength(2)
@@ -41,8 +50,10 @@ import ShoppingCart from './ShoppingCart'
     resetTotalCost=  jest.fn();
 
 render(
-            <AppContext.Provider value={{cartProducts,totalCost:1600,emptyCart,resetTotalCost}}>
+       <AppContext.Provider value={appContextValue}>
+            <CartContext.Provider value={{cartProducts,totalCost:1600,emptyCart,resetTotalCost}}>
                 <ShoppingCart />
+            </CartContext.Provider>
             </AppContext.Provider>
         )
 
@@ -52,7 +63,7 @@ render(
 const emptyCartButton = screen.getByRole('button', {
   name: /vaciar carrito/i})
 
-await  act(async() =>userEvent.click(emptyCartButton)) 
+await  act(async() =>userEvent.click(emptyCartButton))
 
  expect(emptyCart.mock.calls.length).toBe(1)
   expect(resetTotalCost.mock.calls.length).toBe(1)
