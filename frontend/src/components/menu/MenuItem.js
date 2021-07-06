@@ -103,7 +103,7 @@ const handleRedirect = (id) =>{
   return(
   <Item data-testid='productItem' key={item._id}>
 
-<ImgContainer isLoaded={isLoaded}> 
+<ImgContainer isLoaded={isLoaded}>
 
 <Img src={item?.img} onLoad={()=> setIsLoaded(true)} alt={item.name}></Img>
 
@@ -111,14 +111,14 @@ const handleRedirect = (id) =>{
 
 </ImgContainer>
 
-      <ProductLink onClick={ () => handleRedirect(item._id)}>{item.name}</ProductLink>  
-   <Description><Price >{item.price}</Price> <Size>{item.size}  </Size>  </Description> 
-        
+      <ProductLink onClick={ () => handleRedirect(item._id)}>{item.name}</ProductLink>
+   <Description><Price >{item.price}</Price> <Size>{item.size}  </Size>  </Description>
+
           {
           props.children
           }
-        
-      
+
+
    </Item>
    );
 }

@@ -5,17 +5,8 @@ const StyledAbout = styled.section`
 width:100vw;
 margin-bottom:40px;
 
+`;
 
-// `;
-// const Title=styled.h2`
-// padding-bottom: 20px;
-//     text-align: center;
-
-//     text-transform: uppercase;
-//     color: #fcba1c;
-// margin: 0 auto;
-//     text-shadow: -2px -1px 0 #000;
-// `
 const AboutWrapper= styled.article`
 max-width:1250px;
 justify-content:center;
@@ -34,7 +25,7 @@ margin: 0 auto;
          margin-top:0;
     }
   }
-`; 
+`;
 const ImgSection = styled.div`
 display:flex;
 justify-content:center;
@@ -49,7 +40,7 @@ margin: 0 auto;
 `;
 const HistoriSection = styled.div`
 text-align:center;
-padding:  50px 25px;
+padding:  50px 15px;
 margin-left:-6px;
 display:flex;
 justify-content:flex-start;
@@ -66,7 +57,7 @@ margin: 0 auto 40px;
 }
 
 
-    
+
 `;
 export default function About(){
 return(

@@ -24,7 +24,7 @@ z-index:800;
 `;
 const ProductDetails = styled.section`
     width: 90vw;
-    padding: 60px 15px 20px;
+    padding: 60px 0 20px;
     margin: 0px auto;
     display: flex;
   height: 100%;
@@ -113,28 +113,28 @@ text-transform:capitalize ;
 const Description = styled(Deltail)`
 text-transform:none;
 
-` 
+`
 function ProductDetailsPage(){
 
 
 
 
-const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded,isLoading} = 
+const {isInShoppingCart,isLoaded,thisProductInfo,goBackPath,setIsLoaded,isLoading} =
 useProductDetails()
 
 
 
   return(
-(isLoading) ? null : 
+(isLoading) ? null :
 <ProductDetails >
-    
+
              <GoBackLink to={goBackPath} > Regresar</GoBackLink>
 <ImageWrapper  isLoaded={isLoaded}>
   <PrductImg src={thisProductInfo?.img}  alt={thisProductInfo?.name} onLoad={()=> setIsLoaded(true)} />
   </ImageWrapper>
     <Line/>
   <Name>{thisProductInfo?.name}</Name>
-  {(!isInShoppingCart) ? 
+  {(!isInShoppingCart) ?
    <AddToCartButton thisProductInfo={thisProductInfo}/>
         : null
 }
@@ -145,7 +145,7 @@ useProductDetails()
 <Leyend>Precio:</Leyend> <Deltail>${thisProductInfo?.price}</Deltail>
  <Leyend>Descripción:</Leyend> <Description>{thisProductInfo?.description}</Description>
     </dl>
-  
+
 </ProductDetails>
   );
 }

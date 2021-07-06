@@ -15,22 +15,22 @@ password : moderator
 ## Environment variables
 
 HOST
-MONGODB_URI  
-JWT_SECRET_KEY  
+MONGODB_URI
+JWT_SECRET_KEY
 JWT_EMAIL_CONFIRMATION_KEY
 JWT_RESET_FORGOTEN_PASSWORD_KEY
 
 ### oAuth2
 
-OAUTH_USER  
-OAUTH_CLIENT_ID  
-OAUTH_CLIENT_SECRET  
+OAUTH_USER
+OAUTH_CLIENT_ID
+OAUTH_CLIENT_SECRET
 OAUTH_REFRESH_TOKEN
 
 ### cloudinary
 
-CLOUDINARY_NAME  
-CLOUDINARY_KEY  
+CLOUDINARY_NAME
+CLOUDINARY_KEY
 CLOUDINARY_SECRET
 
 ## Backend
@@ -75,6 +75,7 @@ CLOUDINARY_SECRET
 - react-hook-form
 - react-router-dom
 - react hooks
+- swiper
 - socket.io-client
 
 ### Features:
@@ -83,7 +84,8 @@ CLOUDINARY_SECRET
 - Unit test examples.
 - Lazy Load
 - Products and orders section skeletom display
-- Auto-played sliders with dot indicators and controls.
+- Custom Auto-played sliders with dot indicators and controls.
+- Latest products carrucel using swiper.js librery.
 - Navbar responsive and animated .
 - Singup/Login/forgotPassword system.
 - Access to Public and Private routes base on roles.
