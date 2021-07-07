@@ -21,7 +21,7 @@ position: relative;
 &:focus{
   width:250px;
 box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  
+
 }
 &::placeholder {
     font-size: 14px;
@@ -29,7 +29,7 @@ box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 &:focus + div{
   margin-left: 210px;
-  
+
 }
 &::-webkit-search-cancel-button{
   display:none;
@@ -44,10 +44,10 @@ margin-left: 160px;
 transition: all 0.5s ease;
 transform:scale(0.7);
 `
-const SearchIcone = styled.img` 
+const SearchIcone = styled.img`
 height: 100%;
 `;
-export default function SearchBar({setSearch ,placeholder}){
+export default function SearchBar({setSearch ,placeholder,defaultValue}){
 
 const resetFilter = (e) =>{
   if(e.target.value ===""){
@@ -63,7 +63,7 @@ setSearch(searchString)
 }
   return(
 <StyledSearchBar onSubmit={handelSubmit}>
-<SearchInput name="search" placeholder={placeholder || 'Buscar...'} type="search" onChange={resetFilter}/>
+<SearchInput name="search"  defaultValue={defaultValue || ""}placeholder={placeholder || 'Buscar...'} type="search" onChange={resetFilter}/>
 <SerchIconeWrapper ><SearchIcone src={loupe} alt="search"/></SerchIconeWrapper>
 </StyledSearchBar>
   );

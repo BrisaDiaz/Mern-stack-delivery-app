@@ -1,7 +1,7 @@
 
 import {Option,OptionList} from './SortProductsOptions'
 
-export default function FilterProductsStateOptions({setStatePreferece}){
+export default function FilterProductsStateOptions({setStatePreferece,defaultValue}){
 
   const handelChange = (e) =>{
  e.preventDefault()
@@ -10,7 +10,7 @@ export default function FilterProductsStateOptions({setStatePreferece}){
 }
 
 return(
-<OptionList name="filterProductsByState" onChange={(e) =>handelChange(e)}>
+<OptionList name="filterProductsByState"  value={defaultValue}onChange={(e) =>handelChange(e)}>
 <Option value="all" >Todos</Option>
 <Option value="active" >Activos</Option>
 <Option value="inactive" >Inactivos</Option>
@@ -18,4 +18,4 @@ return(
 
 );
 
-} 
+}

@@ -137,7 +137,7 @@ export default function DashboardOrders({setNotification}){
 
 
 
-const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLoading,maxPage,orders,sorting,isFirstRender} = useDashboardOrders({setNotification})
+const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLoading,maxPage,orders,sorting,isFirstRender,orderID,state} = useDashboardOrders({setNotification})
 
 
   return(
@@ -145,10 +145,10 @@ const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLo
      <DashboardNav/>
      <SectionTitle>Pedidos</SectionTitle>
 
-<SearchBar placeholder='Número de orden...' setSearch={setOrderID} />
+<SearchBar defaultValue={orderID} placeholder='Número de orden...' setSearch={setOrderID} />
 <FiltersBoard>
-          <FilterOrderStateOptions setPage={setPage} setStatePreferece={setState}/>
-          <SortOrdersOptions setSortPreferece={setSorting} sortPreference={sorting} />
+          <FilterOrderStateOptions defaultValue={state}  setPage={setPage} setStatePreferece={setState}/>
+          <SortOrdersOptions defaultValue={sorting}  setSortPreferece={setSorting}  />
         </FiltersBoard>
 
   <RefreshButton data-testid="refresh-button" onClick={ () => handleRefresh()}>

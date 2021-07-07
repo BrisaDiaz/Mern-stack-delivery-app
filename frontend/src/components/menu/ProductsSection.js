@@ -26,9 +26,11 @@ justify-content: center;
 
 `;
 export const NotFaundMessage = styled.h4`
-margin-top: 20px;
 display:block;
 width:100%;
+margin 20px 0;
+text-align:center;
+padding: 0 10px;
 `;
 
 export default function ProductsSectionComponent({isLoading,products}){
@@ -36,7 +38,7 @@ export default function ProductsSectionComponent({isLoading,products}){
 return(
 <ProductsSection>
 
-{   
+{
 ( (!isLoading)   &&  (products?.length ===  0)) ?
             <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
             :
@@ -47,7 +49,7 @@ return(
             )
 }
 </ProductsSection>
- 
+
 
 )
 }

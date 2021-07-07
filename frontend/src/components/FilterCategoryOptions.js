@@ -1,7 +1,7 @@
 
 import {Option,OptionList} from './SortProductsOptions'
 
-export default function FilerCategoryOptions({categories,setCategoryPreferece}){
+export default function FilerCategoryOptions({categories,setCategoryPreferece,defaultValue}){
 
   const handelChange = (e) =>{
  e.preventDefault()
@@ -9,14 +9,14 @@ export default function FilerCategoryOptions({categories,setCategoryPreferece}){
 }
 
 return(
-<OptionList name="filterProductsByCategory" onChange={(e) =>handelChange(e)}>
+<OptionList value={defaultValue} name="filterProductsByCategory" onChange={(e) =>handelChange(e)}>
 
 <Option value="all" >Todas las categorías</Option
 >
-{categories?.map( category => 
-  
+{categories?.map( category =>
+
   <Option value={category.name} key={category._id} >{category.name}</Option>
-  
+
   )}
 
 
@@ -24,4 +24,4 @@ return(
 
 );
 
-} 
+}

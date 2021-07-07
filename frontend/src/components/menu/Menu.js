@@ -7,7 +7,7 @@ import SearchBar from '../MenuSearchBar'
 import SortProductsOptions from '../SortProductsOptions'
 import FilterCategoryOptions from '../FilterCategoryOptions'
 import PaginationButtons from '../PaginationButtons'
-import  ProductsSectionComponent from './ProductsSection' 
+import  ProductsSectionComponent from './ProductsSection'
 
 const StyledMenu = styled.main`
 min-height:100vh;
@@ -37,7 +37,7 @@ width:100%;
     left: 50%;
     z-index: 500;
     margin: -60px 0  0 -60px ;
- 
+
 }
 `;
 const CategoryTitle = styled.h4`
@@ -103,14 +103,14 @@ const FiltersBoard = styled.div`
     max-width: max-content;
     & > select {
       margin: 0 10px 10px 0;
-   
+
 }
 
 `;
 
 function Menu() {
 
-const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, setCategory, setSorting,setTitle,isFirstRender} = useMenu()
+const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, setCategory, setSorting,setTitle,isFirstRender,category,title} = useMenu()
 
 
   return (
@@ -122,7 +122,7 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
 
  <SearchBarWrapper>
 
-          <SearchBar setSearch={setTitle}  />
+          <SearchBar setSearch={setTitle}   defaultValue={title}/>
         </SearchBarWrapper>
       <MenuWrapper>
 
@@ -137,11 +137,11 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
         </CategoryWrapper >
 
 
-       
+
 
         <FiltersBoard>
-          <FilterCategoryOptions categories={populatedCategories} setCategoryPreferece={setCategory}  />
-          <SortProductsOptions setSortPreferece={setSorting} sortPreference={sorting} />
+          <FilterCategoryOptions defaultValue={category} categories={populatedCategories} setCategoryPreferece={setCategory}  />
+          <SortProductsOptions defaultValue={sorting} setSortPreferece={setSorting} sortPreference={sorting} />
         </FiltersBoard>
 
   {isLoading &&<LoaderSpinner />}
@@ -150,12 +150,12 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
 
 <ProductsSectionComponent isLoading={isLoading} products={products}/>
  }
-        
+
       </MenuWrapper>
 
 <PaginationButtons setPage={setPage} page={page} maxPage={maxPage} />
-  
-      
+
+
     </StyledMenu>
 
   );

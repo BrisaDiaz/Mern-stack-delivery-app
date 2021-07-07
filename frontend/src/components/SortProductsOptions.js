@@ -22,11 +22,11 @@ export const Option = styled.option`
    background: #fcba1c;
 }
 `
-export default function SortProductsOptions({setSortPreferece}){
+export default function SortProductsOptions({setSortPreferece,defaultValue}){
 
 
 return(
-<OptionList name="sortProductBy" onChange={(e) => setSortPreferece(e.target.value)}>
+<OptionList name="sortProductBy" value={defaultValue} onChange={(e) => setSortPreferece(e.target.value)}>
 <Option value="-createdAt" >Más recientes</Option>
 <Option value="createdAt" >Más antiguos</Option>
 <Option value="price" >Menor precio</Option>
@@ -37,4 +37,4 @@ return(
 
 );
 
-} 
+}

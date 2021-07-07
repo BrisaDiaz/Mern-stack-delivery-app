@@ -1,4 +1,4 @@
-  
+
 import styled  from 'styled-components'
 import useDashboardProducts from '../../hooks/useDashboardProducts'
 import ProductsSectionSkeletom from '../ProductsSectionSkeletom'
@@ -41,8 +41,9 @@ padding:60px 0;
     left: 50%;
     z-index: 500;
     margin: -60px 0  0 -60px ;
- 
+
 }
+
 `
 export const FiltersBoard = styled.div`
 margin: 30px 15px 0;
@@ -53,7 +54,7 @@ margin: 30px 15px 0;
 flex-wrap: wrap;
 & > select {
       margin: 0 10px 10px 0;
-   
+
 }
 `;
 const EditButton = styled(CartButton)`
@@ -81,11 +82,11 @@ margin: 20px auto;
 
  function DashboardProducts(){
 
-  
+
 
 
   let {populatedCategories,isLoading,page,maxPage,products,setCategory,setTitle,
-handleEdit,handleDelete,setPage,setActiveProducts,isFirstRender} = useDashboardProducts( )
+handleEdit,handleDelete,setPage,setActiveProducts,isFirstRender,sorting,category,activeProducts,title} = useDashboardProducts( )
 
 
   return(
@@ -96,11 +97,11 @@ handleEdit,handleDelete,setPage,setActiveProducts,isFirstRender} = useDashboardP
 
 
 
-<SearchBar setSearch={setTitle} />
+<SearchBar defaultValue={title} setSearch={setTitle} />
 <FiltersBoard>
-  <FilterCategoryOptions categories={populatedCategories} setCategoryPreferece={setCategory}  />
+  <FilterCategoryOptions defaultValue={category} categories={populatedCategories} setCategoryPreferece={setCategory}  />
 
-<FilterProductsStateOptions  setStatePreferece={setActiveProducts} />
+<FilterProductsStateOptions defaultValue={activeProducts}  setStatePreferece={setActiveProducts} />
 
 </FiltersBoard>
 
@@ -110,13 +111,13 @@ handleEdit,handleDelete,setPage,setActiveProducts,isFirstRender} = useDashboardP
 
 
   {   ( (!isLoading)   &&  products?.length === 0) ?
-  
+
   <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
 
   :
 <StyledProductsSection isLoading={isLoading}>
 
-{products?.map( product => 
+{products?.map( product =>
  <Fragment key={product._id+"abc"}>
  <Item  key={product._id} item={product}>
    <Fragment>
@@ -127,9 +128,9 @@ handleEdit,handleDelete,setPage,setActiveProducts,isFirstRender} = useDashboardP
    <Icone src={DeleteIcone} alt="delete"/>
    </DeleteOfDatabaseButton>
    </Fragment>
-   
+
    </Item>
-    
+
  </Fragment>
   ) }
 

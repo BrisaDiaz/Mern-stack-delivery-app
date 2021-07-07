@@ -9,60 +9,59 @@ const history = useHistory()
 const location = useLocation()
 
 const {categories,token,setProductToEdit}= useStorage()
-  
+
  let populatedCategories = categories?.filter(category => category?.quantity > 0)
 
- let query = new URLSearchParams();
+
     let sizeLimit = 6
 
- 
-  const [category, setCategory] = useState("all")
+  const [oldQuery, setOldQuery] = useState( new URLSearchParams(location.search))
+    const [page, setPage] = useState(oldQuery.get('page') || 1)
+  const [category, setCategory] = useState(oldQuery.get('category') || "all")
+  const [sorting, setSorting] = useState(oldQuery.get('sort')||"-createdAt")
+  const [title, setTitle] = useState(oldQuery.get('title')|| "")
   const[isLoading,setIsLoading] = useState(false)
-    const [page, setPage] = useState(1)
     const [maxPage, setMaxPage] = useState(1)
-    let [products, setProducts] = useState(null)
-    let [activeProducts,setActiveProducts] =useState('all')
-   const [title,setTitle] =useState("")
+    const [products, setProducts] = useState(null)
+    const [activeProducts,setActiveProducts] =useState(oldQuery.get('active') ||'all'  )
 const [isFirstRender, setIsFirstRender] = useState(true)
 
-   query.append('page',page)
-   query.append('limit',sizeLimit)
+ let query ;
+
+if(isFirstRender){
+query = new URLSearchParams(oldQuery.toString())
+}else{
+ query = new URLSearchParams() ;
+  query.append('sort', sorting)
+  query.append('page', page)
+  query.append('limit', sizeLimit)
+}
+
 
 useEffect(() => {
-  if(title !==""){ 
-      query.append('title',title)
-      setPage(1)
+
+if(title !==""){
+ query.append('title',title)
 setActiveProducts('all')
 setCategory('all')
-    }
-}, [title])
-  
-useEffect(() => {
-   if (category !== "all") {
-        query.append('category', category)
-        setPage(1)
-      }
-}, [category])
+}
 
-useEffect(() => {
+if (category !== "all") {
+query.append('category', category)
+ }
 
-    if(activeProducts !== "all"){
-
+if(activeProducts !== "all"){
 query.append('active',activeProducts)
-setPage(1)
-    }
+ }
+          setPage(1)
+}, [title,category,activeProducts,sorting])
 
-}, [activeProducts])
+
+
 
 useEffect(() => {
   const controller = new AbortController()
  const signal = controller.signal
-
-   if( isFirstRender && location.search !==""){
-
-        query=location.search.split('?')[1]
-
-      }
 
 const productsAPI = async () =>{
     setIsLoading(true)
@@ -79,7 +78,7 @@ const productsAPI = async () =>{
 
   history.push(`/dashboard/myProducts?${query}`)
 document.querySelector('body').scrollTo(0,100)
-       
+
 setIsFirstRender(false)
      setIsLoading(false)
   }catch(err){
@@ -96,11 +95,11 @@ setIsFirstRender(false)
   productsAPI()
      return () =>{
      controller.abort()
-   }   
+   }
  }, [title,activeProducts,page,category,sizeLimit])
 
 
-     
+
 
 
 
@@ -117,7 +116,7 @@ await deleteProductAPI(token,id,setProducts)
 
 }
   return {populatedCategories,isLoading,page,maxPage,products,setCategory,setTitle,
-handleEdit,handleDelete,setPage,setActiveProducts,setProducts,isFirstRender}
+handleEdit,handleDelete,setPage,setActiveProducts,setProducts,isFirstRender,sorting,category,activeProducts,title,title,category,activeProducts}
 
 
 }
