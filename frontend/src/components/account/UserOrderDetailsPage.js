@@ -20,7 +20,7 @@ text-transform: capitalize;
     font-size: 20px;
     margin-top: 20px;
 }
-  
+
 & > h3 span{
   display:block;
 }
@@ -53,21 +53,21 @@ text-align:center;
      padding: 10px 5px;
        font-family: "Oswald", sans-serif;
        font-size:19px;
-}     
+}
 & >  tbody tr  {
 border-bottom:1px solid;
-}   
+}
 & >  tbody tr td {
    padding: 10px ;
           text-align: center;
-}   
+}
 @media screen and (max-width: 400px){
       border-spacing: 0;
           width: 100%;
 & >  thead th {
-  
+
        font-size:16px;
-}    
+}
 & >  tbody{
   font-size: 12px;
 }
@@ -92,16 +92,29 @@ gap:5px;
 }
 `;
 
-
+const SplitSection = styled.section`
+display:flex;
+max-width:900px;
+width:100%;
+margin:0 auto;
+gap:20px;
+flex-wrap: wrap;
+& > * {
+with:100%;
+flex: 1 1 400px;
+}
+`;
 export default function OrderDetails(){
 
 
-let {thisOrder,isLoading} = useUserOrderDetailsPage()
+let {thisOrder,isLoading,isPaid} = useUserOrderDetailsPage()
+
+
 
 
 
   return(
-(isLoading) ? null 
+(isLoading) ? null
 
 :
 <Page>
@@ -109,22 +122,22 @@ let {thisOrder,isLoading} = useUserOrderDetailsPage()
   <OrderId>Nº ID:<span>{thisOrder?.orderID}</span></OrderId>
 
 
-<UserOrderStateChart  
+<UserOrderStateChart
 states={thisOrder?.states?.filter(state => state?.confirmed === true)}
 />
 
 
 
-
-
-
-
+<SplitSection>
     <ClientInfo>
           <h3>Detalles de envio</h3>
       <p><b>Destinatario:</b>{thisOrder?.client[0]?.name}</p>
     <p><b>Dirrección:</b>{thisOrder?.client[0]?.address}</p>
        <p><b>Teléfono:</b>{thisOrder?.client[0]?.number}</p>
       </ClientInfo>
+
+      </SplitSection>
+
       <br></br>
 
            <h3>Detalles del pedido</h3>
@@ -151,10 +164,10 @@ states={thisOrder?.states?.filter(state => state?.confirmed === true)}
   ${productInf?.total}
        </td>
      </tr>
-      
-      
+
+
       )}
-    
+
    </tbody>
    <tfoot>
      <tr>

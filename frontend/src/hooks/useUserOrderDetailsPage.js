@@ -3,18 +3,16 @@ import {useEffect,useState} from 'react'
 import {useStorage} from '../context/useStorage'
 
 
-  
+
 export default function useUserOrderDetails(){
 
     const {setIsLoading,token,isLoading} = useStorage()
-    
+
 let history = useHistory()
 let {orderID}=  useParams()
 
 
  const [thisOrder,setThisOrder] = useState({})
-
-
 
  useEffect(()=>{
 
@@ -37,13 +35,14 @@ signal,
         }
 
      let res = await fetch(`/api/orders/${orderID}`,setting)
-    
+
 
    if(res.status === 404) {
             setIsLoading(false)
       return history.push('/notFound')
      }
       let json = await res.json()
+
     setThisOrder(json.data)
 
      setIsLoading(false)
@@ -58,7 +57,7 @@ signal,
     fechOrder()
 
         }
- 
+
   }
 }
   }
@@ -68,11 +67,11 @@ signal,
 
   return () =>{
      controller.abort()
-   }   
-   
+   }
+
  },[orderID])
 
- 
+
 
 return {thisOrder,isLoading}
 

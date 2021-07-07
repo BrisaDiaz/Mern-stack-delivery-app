@@ -8,7 +8,7 @@ export default function useMenu(){
 const history = useHistory()
 const location = useLocation()
     const {categories} = useStorage()
-    
+
  let populatedCategories = categories?.filter(category => category?.quantity > 0)
 
   let query = new URLSearchParams();
@@ -27,8 +27,8 @@ const [isFirstRender, setIsFirstRender] = useState(true)
   query.append('sort', sorting)
   query.append('page', page)
   query.append('limit', sizeLimit)
-    
-  
+
+
 
 
 
@@ -38,7 +38,7 @@ const [isFirstRender, setIsFirstRender] = useState(true)
   }, [sorting])
 
 useEffect(() => {
- 
+
       if (category !== "all") {
         query.append('category', category)
         setPage(1)
@@ -65,7 +65,7 @@ useEffect(() => {
         query =location.search.split('?')[1]
 
       }
- 
+
 
     const fechProducts = async () => {
 
@@ -91,12 +91,12 @@ document.querySelector('body').scrollTo(0,100)
         } else {
 
           console.log(err)
-          
+
         }
       }
     }
     fechProducts()
-   
+
     return () => {
       controller.abort()
     }

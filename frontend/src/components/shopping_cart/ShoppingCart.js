@@ -3,7 +3,8 @@ import {Fragment} from 'react'
 import SingleCartProduct from './SingleCartProduct';
 import useShoppingCart from '../../hooks/useShoppingCart'
 import {LoaderSpinner} from './../LoaderSpinner'
-import CartState  from '../../context/cart_context/CartState'
+
+
   const StyledCart = styled.aside`
   position:fixed;
 z-index:1000;
@@ -113,6 +114,7 @@ const {emptyCartAndResetTotalCost,handelOrden,totalCost,isCartOpen,cartProducts,
             {(isCartLoading) ? <LoaderSpinner data-testid="spinner"small />:
             <Fragment>
               <MakeOrdenButton onClick={handelOrden}>Ordenar</MakeOrdenButton>
+
               <DeleteAllButton onClick={emptyCartAndResetTotalCost} >Vaciar Carrito</DeleteAllButton>
             </Fragment>
             }

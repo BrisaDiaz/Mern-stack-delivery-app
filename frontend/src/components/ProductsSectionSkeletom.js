@@ -11,7 +11,7 @@ const Container = styled.section`
 justify-content: center;
 `
 
-const Item = styled.figure `
+export const Item = styled.figure `
 display:flex;
 box-sizing:border-box;
 border-radius:5px;
@@ -34,7 +34,7 @@ background:#fff;
 margin-bottom:10px;
 border-radius:5px;
 box-shadow: 0 1px 3px #ccc;
- 
+
 `;
 const TextLine = styled.div`
 height:20px;
@@ -43,40 +43,28 @@ background:#fff;
 margin: 10px auto;
 box-shadow: 0 1px 3px #ccc;
 `
+export function SkeletomItem(){
+  return(
+  <Item>
+    <ImgContainer/>
+    <TextLine/>
+     <TextLine/>
+  </Item>
+  )
+}
 export default function ProductsSectionSkeletom() {
-  
+
   return(
 <Container data-testid='products-skeketom'>
-  <Item>
-    <ImgContainer/>
-    <TextLine/>
-     <TextLine/>
-  </Item>
-  <Item>
-    <ImgContainer/>
-    <TextLine/>
-     <TextLine/>
-  </Item>
- <Item>
-    <ImgContainer/>
-    <TextLine/>
-     <TextLine/>
-  </Item>
-<Item>
-    <ImgContainer/>
-    <TextLine/>
-     <TextLine/>
-  </Item>
- <Item>
-    <ImgContainer/>
-    <TextLine/>
-     <TextLine/>
-  </Item>
-<Item>
-    <ImgContainer/>
-    <TextLine/>
-     <TextLine/>
-  </Item>
+
+
+    <SkeletomItem/>
+    <SkeletomItem/>
+    <SkeletomItem/>
+    <SkeletomItem/>
+    <SkeletomItem/>
+    <SkeletomItem/>
+
 </Container>
 
   )

@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import background from '../../img/about-background.png'
 import {SectionTitle} from '../menu/Menu'
+import watchIcone from '../../img/stopwatch-solid.svg'
+import burgerIcone from '../../img/hamburger-solid.svg'
+import walletIcone from '../../img/wallet-solid.svg'
+
 const StyledAbout = styled.section`
 width:100vw;
 margin-bottom:40px;
@@ -48,7 +52,7 @@ flex-flow: column;
 align-items:center;
 line-heigth:35px;
 &>${SectionTitle}{
-margin: 0 auto 40px;
+margin: 0 auto 20px;
 }
 @media  screen and (min-width:950px){
   max-width:600px;
@@ -59,6 +63,29 @@ margin: 0 auto 40px;
 
 
 `;
+const Features = styled.div`
+display:flex;
+gap:30px;
+opacity:0.8;
+margin: 40px auto 20px;
+& div {
+  display:flex;
+  flex-direction:column;
+align-items:center;
+justify-content:center;
+transition: 0.5s ease;
+
+}
+& div:hover{
+transform:scale(1.1);
+}
+& div h4{
+margin-bottom:0;
+}
+`
+const Icone = styled.img`
+width:40px;
+`
 export default function About(){
 return(
 <StyledAbout>
@@ -73,6 +100,24 @@ return(
    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem temporibus quod itaque mollitia quidem. Eos nemo nam corrupti ipsam iusto facilis sit blanditiis, placeat omnis amet voluptatem. Dolor, recusandae atque?.
      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt voluptates quasi corporis nihil pariatur repudiandae debitis! Sed sit, quaerat laudantium consectetur quibusdam ab aut laboriosam veniam ducimus. Odit, sed aperiam!
       </p>
+      <Features>
+        <div >
+        <Icone src={burgerIcone} alt="best-ingredients"/>
+          <h4>Quality</h4>
+
+          </div>
+           <div>
+                 <Icone src={walletIcone} alt="best-prices"/>
+             <h4>Prices</h4>
+
+           </div>
+
+              <div>
+                  <Icone src={watchIcone} alt='super-fast'/>
+                <h4>Speed</h4>
+
+              </div>
+      </Features>
   </HistoriSection>
 <ImgSection>
 <Image src={background} alt="burger"></Image>

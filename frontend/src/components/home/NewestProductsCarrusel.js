@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import Item  from '../menu/MenuItem'
 import AddToCartButton from '../AddToCartButton'
 import useNewestProducts from '../../hooks/useNewestProducts'
+import ProductsCarruselSkeletom from '../ProductsCarruselSkeletom'
 // Import Swiper styles
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css"
@@ -24,8 +25,9 @@ SwiperCore.use([Pagination,Navigation]);
 export default function ProductsCarrucel() {
 
 const {isLoading,latestProducts} = useNewestProducts()
-if(isLoading) return null
 
+
+if(isLoading) return (<ProductsCarruselSkeletom/>)
   return (
     <>
     <Swiper slidesPerView={1} spaceBetween={20} slidesPerGroup={3} loop={true} loopFillGroupWithBlank={true} pagination={{
@@ -52,7 +54,7 @@ breakpoints={{
 
      {latestProducts.map( product => {
 
- return<SwiperSlide><Item key={product._id} item={product}>
+ return<SwiperSlide key={product._id} ><Item item={product}>
                   <AddToCartButton thisProductInfo={product}/>
 
  </Item></SwiperSlide>

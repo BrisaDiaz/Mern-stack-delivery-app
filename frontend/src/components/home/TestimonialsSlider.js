@@ -32,7 +32,7 @@ text-align:center;
 `;
 const Name = styled.h4`
 line-height: 25px;
-font-size:25px;
+font-size:20px;
 color: #fcba1c;
 text-align:center;
 text-shadow: ${props => props.theme.darckTextShadow};
@@ -64,7 +64,7 @@ useEffect( ()=> {
 
 const res = await fetch('https://jsonplaceholder.typicode.com/comments');
   const data = await res.json()
-  
+
   data.length = 5
 
   setTestimonials(data)
@@ -79,9 +79,9 @@ let counter = ref.current
 ref.current += 1
 
    }
-       
+
           setError(true)
-  
+
     }
 
 
@@ -101,16 +101,16 @@ return(
 
      <ThisSlide  key={index} slide={slide} index={index}>
        <ThisSlideContent>
-<Name>{testimonial.name}</Name> 
+<Name>{testimonial.name}</Name>
 <QuoteIcon src={quoteIcone} alt="happy-clients"></QuoteIcon>
 <Comment>{testimonial.body}</Comment>
 <EmailContact>{testimonial.email}</EmailContact>
        </ThisSlideContent>
- 
+
       </ThisSlide>
- 
+
   )}
-   
+
 
 
 <IndicatorWrapper>
