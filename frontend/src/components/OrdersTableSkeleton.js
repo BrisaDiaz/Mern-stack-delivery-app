@@ -32,7 +32,7 @@ height:100px;
 }
 `
 
-export default function OrdersTableSkeletom() {
+export default function OrdersTableSkeleton() {
 
   return(
 <Table>

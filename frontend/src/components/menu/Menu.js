@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import {withError} from './../withError'
 import { LoaderSpinner } from './../LoaderSpinner'
-import ProductsSectionSkeletom from '../ProductsSectionSkeletom'
+import ProductsSectionSkeleton from '../ProductsSectionSkeleton'
 import useMenu from '../../hooks/useMenu'
 import SearchBar from '../MenuSearchBar'
 import SortProductsOptions from '../SortProductsOptions'
@@ -146,7 +146,7 @@ const {isLoading, maxPage, products,populatedCategories,sorting,page,setPage, se
 
   {isLoading &&<LoaderSpinner />}
 
-{ (isLoading && isFirstRender  )?  <ProductsSectionSkeletom /> :
+{ (isLoading && isFirstRender  )?  <ProductsSectionSkeleton /> :
 
 <ProductsSectionComponent isLoading={isLoading} products={products}/>
  }

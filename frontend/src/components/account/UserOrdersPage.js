@@ -5,7 +5,7 @@ import useUserOrdersPage from '../../hooks/useUserOrdersPage'
 import {ButtonPrimary} from '../Buttons'
 import {SectionTitle} from '../menu/Menu'
 import PaginationButtons from '../PaginationButtons'
-import OrdersTableSkeletom from '../OrdersTableSkeletom'
+import OrdersTableSkeleton from '../OrdersTableSkeleton'
 import refreshIcone from '../../img/refresh.svg'
 import {LoaderSpinner} from '../LoaderSpinner'
 
@@ -191,7 +191,7 @@ const {seeDetails,handleRefresh,setPage,page,isLoading,maxPage,orders,isFirstRen
   <RefreshIcone onClick={ () => handleRefresh()}   src={refreshIcone} title='Refrescar Página'/>
   </RefreshButton>
 
-  { ((isLoading) && (isFirstRender) ) && <OrdersTableSkeletom/>}
+  { ((isLoading) && (isFirstRender) ) && <OrdersTableSkeleton/>}
 
  {  ( (!isLoading) && (!isFirstRender)  &&  orders?.length === 0)  &&
   <NotFounMessage>

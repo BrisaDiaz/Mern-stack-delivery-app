@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Item  from '../menu/MenuItem'
 import AddToCartButton from '../AddToCartButton'
 import useNewestProducts from '../../hooks/useNewestProducts'
-import ProductsCarruselSkeletom from '../ProductsCarruselSkeletom'
+import ProductsCarruselSkeleton from '../ProductsCarruselSkeleton'
 // Import Swiper styles
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css"
@@ -27,7 +27,7 @@ export default function ProductsCarrucel() {
 const {isLoading,latestProducts} = useNewestProducts()
 
 
-if(isLoading) return (<ProductsCarruselSkeletom/>)
+if(isLoading) return (<ProductsCarruselSkeleton/>)
   return (
     <>
     <Swiper slidesPerView={1} spaceBetween={20} slidesPerGroup={3} loop={true} loopFillGroupWithBlank={true} pagination={{

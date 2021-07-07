@@ -82,8 +82,8 @@ CLOUDINARY_SECRET
 
 - Interaction with the backend through API Rest .
 - Unit test examples.
-- Lazy Load
-- Products and orders section skeletom display
+- Lazy Load components and code spliting.
+- Products and orders section skeletons.
 - Custom Auto-played sliders with dot indicators and controls.
 - Latest products carrucel using swiper.js librery.
 - Navbar responsive and animated .

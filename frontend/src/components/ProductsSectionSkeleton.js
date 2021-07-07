@@ -43,7 +43,7 @@ background:#fff;
 margin: 10px auto;
 box-shadow: 0 1px 3px #ccc;
 `
-export function SkeletomItem(){
+export function SkeletonItem(){
   return(
   <Item>
     <ImgContainer/>
@@ -58,12 +58,12 @@ export default function ProductsSectionSkeletom() {
 <Container data-testid='products-skeketom'>
 
 
-    <SkeletomItem/>
-    <SkeletomItem/>
-    <SkeletomItem/>
-    <SkeletomItem/>
-    <SkeletomItem/>
-    <SkeletomItem/>
+    <SkeletonItem/>
+    <SkeletonItem/>
+    <SkeletonItem/>
+    <SkeletonItem/>
+    <SkeletonItem/>
+    <SkeletonItem/>
 
 </Container>
 

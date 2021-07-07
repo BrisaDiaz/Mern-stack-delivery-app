@@ -1,7 +1,7 @@
 
 import styled  from 'styled-components'
 import useDashboardProducts from '../../hooks/useDashboardProducts'
-import ProductsSectionSkeletom from '../ProductsSectionSkeletom'
+import ProductsSectionSkeleton from '../ProductsSectionSkeleton'
 import {  Fragment } from 'react'
 import SearchBar from '../MenuSearchBar'
 import {LoaderSpinner} from './../LoaderSpinner'
@@ -107,7 +107,7 @@ handleEdit,handleDelete,setPage,setActiveProducts,isFirstRender,sorting,category
 
   {isLoading  && <LoaderSpinner />}
 
-{(isLoading  && isFirstRender) ?  <ProductsSectionSkeletom/> : null}
+{(isLoading  && isFirstRender) ?  <ProductsSectionSkeleton/> : null}
 
 
   {   ( (!isLoading)   &&  products?.length === 0) ?

@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import React from "react";
 
-import {SkeletomItem} from './ProductsSectionSkeletom'
+import {SkeletonItem} from './ProductsSectionSkeleton'
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
@@ -12,7 +12,7 @@ import SwiperCore, {
 SwiperCore.use([Pagination,Navigation]);
 
 
-export default function ProductsCarruselSkeletom(){
+export default function ProductsCarruselSkeleton(){
 
 return(
   <>
@@ -38,13 +38,13 @@ breakpoints={{
   }}
 >
 
-<SwiperSlide><SkeletomItem >
- </SkeletomItem></SwiperSlide><SwiperSlide><SkeletomItem >
- </SkeletomItem></SwiperSlide><SwiperSlide><SkeletomItem >
- </SkeletomItem></SwiperSlide><SwiperSlide><SkeletomItem >
- </SkeletomItem></SwiperSlide><SwiperSlide><SkeletomItem >
- </SkeletomItem></SwiperSlide><SwiperSlide><SkeletomItem >
- </SkeletomItem></SwiperSlide>
+<SwiperSlide><SkeletonItem >
+ </SkeletonItem></SwiperSlide><SwiperSlide><SkeletonItem >
+ </SkeletonItem></SwiperSlide><SwiperSlide><SkeletonItem >
+ </SkeletonItem></SwiperSlide><SwiperSlide><SkeletonItem >
+ </SkeletonItem></SwiperSlide><SwiperSlide><SkeletonItem >
+ </SkeletonItem></SwiperSlide><SwiperSlide><SkeletonItem >
+ </SkeletonItem></SwiperSlide>
 
 
   </Swiper>

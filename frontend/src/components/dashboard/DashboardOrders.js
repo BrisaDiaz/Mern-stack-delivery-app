@@ -11,7 +11,7 @@ import {FiltersBoard} from './DashboardProducts'
 import FilterOrderStateOptions from './../FilterOrderStateOptions'
 import SortOrdersOptions from './../SortOrdersOptions'
 import PaginationButtons from '../PaginationButtons'
-import OrdersTableSkeletom from '../OrdersTableSkeletom'
+import OrdersTableSkeleton from '../OrdersTableSkeleton'
 
 export const Page = styled.section`
     padding: 60px 05px;
@@ -156,7 +156,7 @@ const {seeDetails,handleRefresh,setOrderID,setSorting,setPage,setState,page,isLo
   </RefreshButton>
   {isLoading ? <LoaderSpinner /> :  null }
 
-  {( (isLoading) && (isFirstRender))  &&  <OrdersTableSkeletom/>}
+  {( (isLoading) && (isFirstRender))  &&  <OrdersTableSkeleton/>}
 
   { ( (!isLoading) && (!isFirstRender)  &&  orders?.length === 0) &&
   <NotFaundMessage>No se han encontrado coincidencias, intenta de nuevo!!</NotFaundMessage>
