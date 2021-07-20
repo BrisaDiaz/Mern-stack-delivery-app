@@ -98,7 +98,24 @@ dt {
   float: left;
   color: #fcaf01;
 }
+:root {
+  --swiper-theme-color: #fcaf01 !important;
+  --swiper-navigation-size: 35px !important;
+}
 
+.swiper-wrapper {
+  padding-bottom: 40px;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  top: 160px !important;
+}
+.swiper-button-prev {
+  left: 5px !important;
+}
+.swiper-button-next {
+  right: 5px !important;
+}
 .error {
   border: 1px solid red;
   color: red;
