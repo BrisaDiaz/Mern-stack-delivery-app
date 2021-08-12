@@ -1,58 +1,39 @@
- import getCategoriesAPI from './getCategoriesAPI'
- 
- async function updateProductAPI(
-{    token,
-    formData,
-    id,
-    nameValue,
-categoryValue,
-sizeValue,
-descriptionValue,
-priceValue,
-setIsSuccessfullySend,
-setFormIsLoading,
-history,
-setAllCategories
-}
-){
-     
+import getCategoriesAPI from "./getCategoriesAPI";
+import { PUT } from "../utils/http";
 
-      
-      
-        const headers = new Headers();
-        headers.append('Accept', 'application/json');
-      headers.append('Authorization', `Bearer ${token}`);
-
-
-        const setting = {
-          method: 'PUT',
-          headers: headers,
-          body: formData,
-        }
-
-let url =`/api/products/${id}`
+async function updateProductAPI({
+  token,
+  formData,
+  id,
+  setIsSuccessfullySend,
+  setFormIsLoading,
+  history,
+  setAllCategories,
+}) {
   try {
-        let res = await fetch(url , setting);
-       setFormIsLoading(false)
+    const { response } = await PUT(
+      `/api/products/${id}`,
+      formData,
+      token,
+      "formData"
+    );
+    setFormIsLoading(false);
 
-      if(res.status === 200){
+    if (response.status === 200) {
+      await getCategoriesAPI(setAllCategories);
 
-       await getCategoriesAPI(setAllCategories)
+      setIsSuccessfullySend(true);
+      setTimeout(() => {
+        setIsSuccessfullySend(false);
+        return history.push("/dashboard/myProducts");
+      }, 2000);
+    }
 
-           setIsSuccessfullySend(true)
-          setTimeout(() => {
-           setIsSuccessfullySend(false)
-        return history.push('/dashboard/myProducts')
-}, 2000);
-      }
- 
-
-
-      if(res.status === 403) return   alert('Se require rol de Administrador') 
-      } catch (err) {
-
-        console.log(err)
-      }
+    if (response.status === 403)
+      return alert("Se require rol de Administrador");
+  } catch (err) {
+    console.log(err);
   }
+}
 
-export default updateProductAPI
+export default updateProductAPI;

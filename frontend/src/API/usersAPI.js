@@ -1,30 +1,12 @@
-async function getUsers({token,setAllUsers}){
-       const headers = new Headers();
-        headers.append('Accept', 'application/json');
-      headers.append('Authorization', `Bearer ${token}`);
+import { GET } from "../utils/http";
+async function getUsers({ token, setAllUsers }) {
+  try {
+    const { json } = await GET("/api/users", token);
 
-
-    const setting = {
-          method: 'GET',
-          headers: headers,
-
-        }
-    try{
-
-const res = await fetch('/api/users', setting);
-  const data = await res.json()
-if (res.status === 200){
-
-  setAllUsers(data)
-
+    setAllUsers(json);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-
-    }catch(err){
-
-      console.log(err)
-    }
-
-  };
-  
-  export default getUsers
+export default getUsers;

@@ -64,7 +64,6 @@ export const TextInput= styled.input`
    letter-spacing: 1px;
   font-size:16px;
   }
-    text-transform: capitalize;
 border:none;
 border-radius:5px;
 outline:transparent;
@@ -91,12 +90,12 @@ outline:transparent;
 border: 2px solid #171717;
 margin-bottom:15px;
 padding: 10px 15px;
-  min-height:250px; 
-  max-height:250px; 
+  min-height:250px;
+  max-height:250px;
   margin-bottom:25px;
   min-width:100%;
   max-width:100%;
-  
+
 `;
 export const ErrorMessage = styled.small`
 color:#bf0000;
@@ -116,14 +115,14 @@ color:#000;
 export default  function ContactForm() {
 
     const {register,handleSubmit,errors,onSubmit}= useContactForm()
-  
+
   return(
     <StyledContact>
       <FormSection>
         <Form onSubmit={handleSubmit(onSubmit)}>
-     
+
            {errors.userName && <ErrorMessage>{errors.userName.message}</ErrorMessage>}
-          <  TextInput 
+          <  TextInput
           type='text'
           placeholder='Tu Nombre Completo...'
           name="userName"
@@ -134,18 +133,18 @@ export default  function ContactForm() {
                    value: /^[A-Za-zñÑáÁéÉíÍóÓúÚÜü\s\w]+$/,
                     message:'*Nombre no valido'
                       }
-            
+
           })}
                  style={{ borderColor: errors.userName && "#bf0000" }}
           />
                                 {errors.userEmail && <ErrorMessage>{errors.userEmail.message}</ErrorMessage>}
-          <TextInput 
+          <TextInput
           type='email'
           placeholder='Tu email...'
           name="userEmail"
           ref={register({
                                 required: "*El campo es requrido",
-                
+
                       pattern:{
                         value:/^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$/,
                        meassage:'*Email no valido'
@@ -156,21 +155,21 @@ export default  function ContactForm() {
                {errors.subject && <ErrorMessage>{errors.subject.message}</ErrorMessage>}
 
 
-           <TextInput 
+           <TextInput
            type='text'
           placeholder='Asunto...'
           name="subject"
           ref={register({
              required: "*El campo es requrido",
-            
+
           })}
                  style={{ borderColor: errors.subject && "#bf0000" }}
-          />     
+          />
             {errors.userMessage && <ErrorMessage>{errors.userMessage.message}</ErrorMessage>}
-          <Textarea 
+          <Textarea
           placeholder='Tu mensaje...'
           name="userMessage"
-          
+
           ref={register({
           required: '*El campo es requerido',
            maxLength:{
@@ -184,7 +183,7 @@ export default  function ContactForm() {
         </Form>
       </FormSection>
       <InfoSection>
-   
+
         <ContactTitle>Contactenos</ContactTitle>
          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit nulla accumsan metus.
            Ipsum dolor sit amet, consectetur adipiscing elit nulla accumsan.

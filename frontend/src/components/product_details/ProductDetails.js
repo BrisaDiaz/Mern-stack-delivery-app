@@ -124,8 +124,9 @@ useProductDetails()
 
 
 
-  return(
-(isLoading) ? null :
+
+if(thisProductInfo !=={})  return(
+
 <ProductDetails >
 
              <GoBackLink to={goBackPath} > Regresar</GoBackLink>

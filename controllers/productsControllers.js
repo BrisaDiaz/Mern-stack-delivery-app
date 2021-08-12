@@ -16,7 +16,7 @@ const getAllProducts = async (req,res) => {
     let query = {}
      let sort = '-createdAt'
     let page = 1
-    let limit = 6 
+    let limit = 6
 
    if(req.query.title){
 
@@ -45,7 +45,7 @@ const getAllProducts = async (req,res) => {
      if(req.query.limit){
       limit = parseInt(req.query.limit)
     }
-   
+
      let skip = (page - 1 ) * limit
 
          const products = await Product.find(query).sort(sort).limit(limit).skip(skip).exec()
@@ -96,14 +96,15 @@ const price = parseInt(req.body.price);
     return
   }
  })
- 
+
 
 
 await Category.findByIdAndUpdate( req.categoryId,{$inc:{ quantity: 1 }},{new : true}  )
+
 const newProduct = await product.save( )
 
  res.status(201).json({success: true , data: newProduct})
- 
+
    }catch(error){
 
 console.log(error)
@@ -118,7 +119,9 @@ const { name, category, size ,description ,active} = req.body
 const price = parseInt(req.body.price);
 
   try{
- let productFound = await Product.findById(req.params.id)
+
+ const productFound = await Product.findById(req.params.id)
+
   if (!productFound) return res.status(404).json({success:false, message:'product not faund'});
 
 
@@ -126,7 +129,6 @@ let img;
 let img_id;
 
 if(req.file){
-
 
  const imageUploaded = await  cloudinary.v2.uploader.upload(req.file.path)
 
@@ -138,31 +140,27 @@ fs.unlink(req.file.path, (err) => {
  })
 
 
-  img =imageUploaded.secure_url
+ img =imageUploaded.secure_url
  img_id = imageUploaded.public_id
 
 }else{
 
 img =productFound.img
- img_id = productFound.img_id
+img_id = productFound.img_id
 }
 
 
 
 
 if(category && (category !== productFound.category )){
-  
-await Category.findOneAndUpdate({name: productFound.category },{$inc:{ quantity: -1 }},{new : true} )
 
-await Category.findByIdAndUpdate( req.categoryId,{$inc:{ quantity: 1 }},{new : true}  )
+await Category.decrementCategoryProducts(productFound.category)
 
+await Category.incrementCategoryProducts( category)
 
-
- 
 }
 
-
-            product = await Product.findByIdAndUpdate(req.params.id, {
+     const   updatedProduct = await Product.findByIdAndUpdate(req.params.id, {
                 name: name || productFound.name,
                 description: description || productFound.description,
                 category: category || productFound.category,
@@ -172,8 +170,8 @@ await Category.findByIdAndUpdate( req.categoryId,{$inc:{ quantity: 1 }},{new : t
                 img_id,
                 active: active || productFound.active
             }, { new: true });
-            
-            updatedProduct = await product.save();
+
+
     res.status(200).json({success: true ,data: updatedProduct});
 
   }catch(error){
@@ -189,19 +187,19 @@ const deleteProductById= async (req,res) => {
 
   if (!product) return res.status(404).json({success:false, message:'product not faund'});
 
-await Category.findOneAndUpdate( {name:productFound.category},{$inc:{ quantity: -1 }},{new : true}  )
+await Category.decrementCategoryProducts(productFound.category)
 
 await Product.findByIdAndRemove(req.params.id);
 
- await  cloudinary.v2.uploader.destroy(product.img_id)
+await  cloudinary.v2.uploader.destroy(product.img_id)
 
 
     res.status(204).json({success:true , message:"Product has been deleted"});
-    
+
   }catch(error){
     console.log(error)
 
-    res.status(500).json({success:false,message:error})
+    res.status(500).json({success:false,message:'something went wrong, product was not delete correctly'})
   }
 }
 module.exports = {

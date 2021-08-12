@@ -1,51 +1,31 @@
-import getCategoriesAPI from './getCategoriesAPI'
+import getCategoriesAPI from "./getCategoriesAPI";
+import { POST } from "../utils/http";
 
-async function createCategoryAPI({token,info,setAllCategories,setIsCreateFormLoading,setIsSuccessfullySend,e}){
+async function createCategoryAPI({
+  token,
+  info,
+  setAllCategories,
+  setIsCreateFormLoading,
+  setIsSuccessfullySend,
+  e,
+}) {
+  setIsCreateFormLoading(true);
+  try {
+    const { response } = await POST("/api/categories", info, token);
 
+    setIsCreateFormLoading(false);
 
-  setIsCreateFormLoading(true)
-try {
-
-
-  const headers = new Headers();
-
- headers.append('Accept', 'application/json');
-headers.append('Content-Type', 'application/json');
- headers.append('Authorization', `Bearer ${token}`);
-
-
-       
-
-        const setting = {
-          method: 'POST',
-            body: JSON.stringify(info),
-          headers: headers,
-        }
-
-        let res = await fetch("/api/categories", setting);
-
-      setIsCreateFormLoading(false)
-
-      if(res.status === 201) {
-
-      await getCategoriesAPI(setAllCategories)
-      e.target.newCategory.value = ""
-      setIsSuccessfullySend(true)
+    if (response.status === 201) {
+      await getCategoriesAPI(setAllCategories);
+      e.target.newCategory.value = "";
+      setIsSuccessfullySend(true);
       setTimeout(() => {
-              setIsSuccessfullySend(false)
+        setIsSuccessfullySend(false);
       }, 3000);
- return
-      
-      
+      return;
     }
-
-
-       
-}catch(err){
-
-  console.log(err)
-
+  } catch (err) {
+    console.log(err);
+  }
 }
-
-}
-export default createCategoryAPI
+export default createCategoryAPI;

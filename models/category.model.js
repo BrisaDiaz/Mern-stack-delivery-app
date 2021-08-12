@@ -15,8 +15,12 @@ const categorySchema = new Schema(
   versionKey: false,
   }
 );
-
-
+categorySchema.statics.decrementCategoryProducts = function(categoryName){
+this.findOneAndUpdate({name: categoryName},{$inc:{ quantity: -1 }},{new : true} )
+}
+categorySchema.statics.icrementCategoryProducts  = function(categoryName){
+this.findOneAndUpdate({name: categoryName},{$inc:{ quantity: 1 }},{new : true} )
+}
 const Category = mongoose.model('Category', categorySchema);
 
 module.exports = {Category,CATEGORIES}

@@ -29,7 +29,7 @@ lowercase:true,
   number:{
    type:Number,
    required:false,
-   
+
  },
   roles: [
       {
@@ -76,10 +76,27 @@ userSchema.statics.comparePassword = async (password, receivedPassword) => {
   return await bcrypt.compare(password, receivedPassword)
 }
 
+userSchema.methods.addOrder = function(orderId){
+this.orders=[...this.orders,orderId]
+return this
+}
+userSchema.methods.setIsClient = function(){
+this.client = true
+return this
+}
 
+userSchema.methods.deleteOrder = function(orderId){
+const actualizedOrderList = this.orders.filter(order => order !== orderId)
+this.orders = actualizedOrderList
 
+return this
+}
+userSchema.methods.subscribe = function () {
+  this.subscribed = true
+  return this
+}
 const User =mongoose.model('User',userSchema)
 
 
 
-module.exports = User 
+module.exports = User

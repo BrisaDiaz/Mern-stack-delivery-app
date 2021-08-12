@@ -1,62 +1,36 @@
-
+import { POST } from "../utils/http";
 
 async function singUpAPI({
-setIsFormLoading,
-setServerError,
+  setIsFormLoading,
+  setServerError,
 
-history,
-info
-}){
-try{
+  history,
+  info,
+}) {
+  try {
+    const { response, json } = await POST("/api/auth/singUp", info);
 
+    setIsFormLoading(false);
 
-     const headers = new Headers();
-        headers.append('Accept', 'application/json');
-headers.append('Content-Type', 'application/json');
+    if (response.status === 201 || 302) {
+      setServerError("");
 
+      const { redirect, id } = json;
 
-        const setting = {
-          method: 'POST',
-          headers: headers,
-            body: JSON.stringify(info),
-        }
+      localStorage.setItem("toConfirmUser", id);
 
+      setTimeout(() => {
+        return history.push(redirect);
+      }, 1000);
+    }
 
-
-        let res = await fetch("/api/auth/singUp", setting);
-            let  json = await res.json()
-setIsFormLoading(false)
-
-         if(res.status === 201 || 302) {
-      setServerError("")
-
-    
-
-        const {redirect,id} = json 
-
-       localStorage.setItem('toConfirmUser', id)
-
- setTimeout(() => {
-       return history.push(redirect)
-  }, 1000);
-      }
-
-       if(res.status === 400) {
-  const {message} = json
-   console.log(message)
-      setServerError(message)
-return
- }
- 
-
-      
-}catch(err){
-
-  console.log(err)
-
-
+    if (response.status === 400) {
+      setServerError(json.message);
+      return;
+    }
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-}
-
-export default singUpAPI
+export default singUpAPI;

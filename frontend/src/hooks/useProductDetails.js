@@ -22,7 +22,7 @@ const [isLoaded,setIsLoaded] = useState(false)
 
  useEffect(()=>{
 
-    setIsLoading(true)
+   setIsLoading(true)
 
   const controller = new AbortController()
  const signal = controller.signal

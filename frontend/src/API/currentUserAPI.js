@@ -1,30 +1,14 @@
-async function getCurrentUser({setCurrentUser,token}){
+import { GET } from "../utils/http";
+async function getCurrentUser({ setCurrentUser, token }) {
+  const id = localStorage.getItem("userId");
 
-    const id = localStorage.getItem('userId')
-    
-        const headers = new Headers();
-        headers.append('Accept', 'application/json');
-      headers.append('Authorization', `Bearer ${token}`);
+  try {
+    const { json } = await GET(`/api/users/me/${id}`, token);
 
+    setCurrentUser(json.data);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-    const setting = {
-          method: 'GET',
-          headers: headers,
-
-        }
-    try{
-
-const res = await fetch(`/api/users/me/${id}`,setting);
-  const {data} = await res.json()
-
-setCurrentUser(data)
-
-
-    }catch(err){
-
-      console.log(err)
-    }
-
-  };
-
-  export default getCurrentUser
+export default getCurrentUser;

@@ -22,7 +22,13 @@ sold:{type:Number,default:0},
 );
 
 
-
+productSchema.statics.incrementProductSales=function(productName,quantiy){
+  this.findOneAndUpdate(
+            { name: productName },
+            { $inc: { sold: quantiy} },
+            { new: true }
+          );
+}
 const Product = mongoose.model('Product',productSchema)
 
-module.exports = Product 
+module.exports = Product

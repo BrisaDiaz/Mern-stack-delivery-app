@@ -3,6 +3,7 @@ import React, { Suspense, lazy, Fragment } from 'react';
 import useApp from './hooks/useApp'
 import  ScrollToTop from './components/ScrollToTop'
 import {ThemeProvider} from 'styled-components'
+import theme from './theme/styles'
 import PrivateRoute from './components/PrivateRoute'
 import PublicRoute from './components/PublicRoute'
 import Footer from './components/Footer'
@@ -57,20 +58,7 @@ let {setOrderActualizationNotification,setNewOrdersNotification,newOrdersNotific
       <ScrollToTop />
 
      <ThemeProvider theme={
-       {
-         darckYellow: `#fcaf01`,
-         lightYellow:'rgb(255 165 0 / 58%)',
-         orange:'#e83c2e',
-         darckRed:'#9c0101',
-         black: '#272727',
-         gray:'#F0F0F0',
-         darckTextShadow:'  -2px -1px 0 #000',
-         whiteTextShadow:'  -2px -1px 0 #fff',
-         lightTextShadow:'-1px 1px 1px #000',
-         lightBoxShadow:'1px 1px 5px #00000057',
-         darckBoxShadow:'2px 4px 14px 6px rgb(23 23 23 / 36%);',
-         inputShadow:'inset 1px 1px 6px 0px #ccc'
-       }
+      theme
      }>
        <OrderNotificationPopUp message={orderActualizationMessage} notification={orderActualizationNotification}/>
            <OrderNotificationPopUp message='Nuevos Pedidos' notification={newOrdersNotification} />
@@ -78,6 +66,7 @@ let {setOrderActualizationNotification,setNewOrdersNotification,newOrdersNotific
           <LoadingPage/>
          <ShooppingCart/>
           <Header/>
+
    <Suspense fallback={ <LoadingPage isLoading={true} />}>
 
 

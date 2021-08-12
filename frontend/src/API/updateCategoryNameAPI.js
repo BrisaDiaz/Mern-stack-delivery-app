@@ -1,49 +1,36 @@
-import getCategoriesAPI from './getCategoriesAPI'
+import getCategoriesAPI from "./getCategoriesAPI";
+import { PUT } from "../utils/http";
 
+export default async function updateCategoryNameAPI({
+  categorySelectId,
+  info,
+  setIsRenameFormLoading,
+  setIsSuccessfullySend,
+  token,
+  setAllCategories,
+}) {
+  setIsRenameFormLoading(true);
 
-export default async function updateCategoryNameAPI({categorySelectId,info,setIsRenameFormLoading,setIsSuccessfullySend,token,setAllCategories}){
+  try {
+    const { response } = await PUT(
+      `/api/categories/${categorySelectId}`,
+      info,
+      token
+    );
 
-setIsRenameFormLoading(true)
+    setIsRenameFormLoading(false);
 
-   const headers = new Headers();
-        headers.append('Accept', 'application/json');
-headers.append('Content-Type', 'application/json');
-      headers.append('Authorization', `Bearer ${token}`);
+    if (response.status === 200) {
+      await getCategoriesAPI(setAllCategories);
 
-        const setting = {
-          method: 'PUT',
-          headers: headers,
-          body: JSON.stringify(info),
-        }
+      setIsSuccessfullySend(true);
+      setTimeout(() => {
+        setIsSuccessfullySend(false);
+      }, 3000);
 
-
-try{
-
-        let res = await fetch(`/api/categories/${categorySelectId}`, setting);
-  
-
-setIsRenameFormLoading(false)
-
-         if(res.status === 200) {
-    
-
-       await getCategoriesAPI(setAllCategories)
-
-         setIsSuccessfullySend(true);
-         setTimeout(() => {
-
-                  setIsSuccessfullySend(false)
-         }, 3000);
-
-     return
-      }
-      
-
-
- }catch(err){
-
-  console.log(err)
-}
-
-
+      return;
+    }
+  } catch (err) {
+    console.log(err);
+  }
 }

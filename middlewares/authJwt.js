@@ -5,7 +5,7 @@ const TemporalUser =require('../models/temporalUser.model');
 
 const verifyToken = async (req,res,next) =>{
 
-try{ 
+try{
 
      let token;
 
@@ -15,15 +15,16 @@ try{
   ) {
     token = req.headers.authorization.split(" ")[1];
   }
-req.headers
+
 
 
   if(!token) return res.status(401).json({message:"No token provided"})
 
-  
+
  const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY)
 
 req.userId = decoded.id
+
 
  const user = await User.findById(req.userId,{password:0})
 
@@ -35,7 +36,7 @@ req.userId = decoded.id
       console.log(err)
 res.status(401).json({message: "Unauthorized"})
 }
-  
+
 }
 
 
@@ -56,7 +57,7 @@ try{
 }catch (error) {
     console.log(error)
     return res.status(500).json({ message: "something went wrong , can't verify role" });
-    
+
   }
 
 }
@@ -66,7 +67,7 @@ const verifyAccountConfirmartion = async (req,res,next) =>{
 
   const user = await User.findOne({email: req.body.email})
 
-  
+
    if(!user) {
 
     const temporaUser = await TemporalUser.findOne({email: req.body.email})
@@ -77,7 +78,7 @@ const verifyAccountConfirmartion = async (req,res,next) =>{
     return res.status(404).json({success:false ,message:"No user faund"} )
 
    }
-   
+
 
    next()
 
@@ -96,14 +97,14 @@ const verifyAccountConfirmartion = async (req,res,next) =>{
         return;
       }
     }
-console.log(roles)
+
     return res.status(403).json({ message: "Require Moderator Role!" });
-  } 
+  }
   catch (error) {
     console.log(error)
     return res.status(500).json({ message: error });
   }
- 
+
 }
 
 const isAdminOrIsModerator = async (req,res,next) =>{
@@ -124,7 +125,7 @@ try{
 }catch (error) {
     console.log(error)
     return res.status(500).json({ message: error });
-    
+
   }
 
 }

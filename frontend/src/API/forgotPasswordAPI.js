@@ -1,52 +1,28 @@
+import { POST } from "../utils/http";
+
 async function forgotPasswordAPI({
-setIsFormLoading,
-setServerError,
-info,
-setIsModalOpen
-}){
-try{
-  setIsFormLoading(true)
+  setIsFormLoading,
+  setServerError,
+  info,
+  setIsModalOpen,
+}) {
+  try {
+    setIsFormLoading(true);
 
+    const { response, json } = await POST("/api/auth/forgotPassword", info);
 
-  
+    setIsFormLoading(false);
 
+    if (response.status >= 400) {
+      setServerError(json.message);
+      return;
+    }
 
-
-     const headers = new Headers();
-        headers.append('Accept', 'application/json');
-headers.append('Content-Type', 'application/json');
-
-
-        const setting = {
-          method: 'POST',
-          headers: headers,
-            body: JSON.stringify(info),
-        }
-
-
-
-        let res = await fetch("/api/auth/forgotPassword", setting);
-            let  json = await res.json()
-
-      setIsFormLoading(false)
-  
-
-      if(res.status >= 400){
-      setServerError(json.message)
-      return
-      }
-  
-      setIsModalOpen(false)
- return
-
-      
-}catch(err){
-
-  console.log(err)
-
-
+    setIsModalOpen(false);
+    return;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-}
-
-export default forgotPasswordAPI
+export default forgotPasswordAPI;

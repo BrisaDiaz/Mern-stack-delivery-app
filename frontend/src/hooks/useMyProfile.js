@@ -1,20 +1,19 @@
-import {useStorage} from '../context/useStorage'
+import { useStorage } from "../context/useStorage";
+import { useCartStorage } from "../context/cart_context/useCartStorage";
 
+export default function useMyProfile() {
+  const { currentUser, setIsAdmin, setIsModerator, setToken, setIsNotLogin } =
+    useStorage();
+  const { resetTotalCost, emptyCart } = useCartStorage();
 
-export default function useMyProfile(){
-
-  const {currentUser,setIsAdmin,setIsModerator,setToken,setIsNotLogin,emptyCart,resetTotalCost}  = useStorage()
-
-
-const handleLogout = () =>{
-emptyCart()
-setIsNotLogin() ;
-setToken("");
- setIsAdmin(false);
-  setIsModerator(false);
- resetTotalCost()
-localStorage.removeItem('userId');
-
-}
-  return {handleLogout,currentUser}
+  const handleLogout = () => {
+    emptyCart();
+    setIsNotLogin();
+    setToken("");
+    setIsAdmin(false);
+    setIsModerator(false);
+    resetTotalCost();
+    localStorage.removeItem("userId");
+  };
+  return { handleLogout, currentUser };
 }
