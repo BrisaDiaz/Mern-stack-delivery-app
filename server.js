@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 require("dotenv").config({ path: ".env" });
 const connectDB = require("./config/db.js");
 const path = require("path");
@@ -8,8 +10,8 @@ const morgan = require("morgan");
 const http = require("http").createServer(app);
 const io = require("socket.io")(http, {
   cors: {
-    origin: ["http://localhost:3000"],
-    methods: ["GET", "POST"],
+    origin: ["http://localhost:3000", process.env.DOMAIN],
+    methods: ["GET", "POST", "PUT", "DELETE"],
   },
 });
 
@@ -19,12 +21,22 @@ const {
   createModerator,
   creatCategorys,
 } = require("./libs/initialSetUp");
-
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 app.use(morgan("tiny"));
-
+app.use(
+  session({
+    key: process.env.SESSION_KEY,
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 1000 * 60 * 60 * 24,
+    },
+  })
+);
 connectDB();
 createRoles();
 createAdmin();

@@ -4,7 +4,7 @@ import {Fragment } from 'react'
 import {LoaderSpinner} from './../LoaderSpinner'
 import {ErrorMessage} from '../contact/ContactForm';
 import trayIcon from '../../img/tray.svg';
-import {FormCard,Form,Logo} from '../auth/SingupForm'
+import {FormCard,Form,Logo} from '../auth/SignUpForm'
 import {ButtonPrimary,Button} from '../Buttons'
 
 

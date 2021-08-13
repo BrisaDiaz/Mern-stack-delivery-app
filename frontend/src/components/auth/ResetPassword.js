@@ -1,10 +1,14 @@
-import styled  from 'styled-components'
-import useResetPassword from '../../hooks/useResetPassword'
-import {ButtonPrimary} from '../Buttons'
-import {LoaderSpinner} from '../LoaderSpinner'
-import pizzaBackgroun from'../../img/pizza-background.jpg'
-import {FormCard, Form,UserPasswordInput,ErrorServerMessage} from './SingupForm'
-
+import styled from "styled-components";
+import useResetPassword from "../../hooks/useResetPassword";
+import { ButtonPrimary } from "../Buttons";
+import { LoaderSpinner } from "../LoaderSpinner";
+import pizzaBackgroun from "../../img/pizza-background.jpg";
+import {
+  FormCard,
+  Form,
+  UserPasswordInput,
+  ErrorServerMessage,
+} from "./SignUpForm";
 
 const StyledInitSession = styled.main`
     min-height: 100vh;
@@ -34,26 +38,38 @@ text-aling:center;
 }
 `;
 
-export default function ForgotPassword(){
+export default function ForgotPassword() {
+  const {
+    isFormLoading,
+    serverError,
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+  } = useResetPassword();
+  return (
+    <StyledInitSession>
+      <FormCard>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <h2>🔑</h2>
+          <h3>Establecer nueva contraseña</h3>
+          <UserPasswordInput
+            register={register}
+            errors={errors}
+            placeholder="Nueva contraseña..."
+          />
+          <UserPasswordInput
+            register={register}
+            errors={errors}
+            name="confirmPassword"
+            placeholder="Confirnmar contraseña..."
+          />
+          <ErrorServerMessage>{serverError}</ErrorServerMessage>
 
-const {isFormLoading,serverError,register, handleSubmit,onSubmit, errors}=useResetPassword()
-  return(
-
-        <StyledInitSession>
-<FormCard>
-<Form onSubmit={handleSubmit(onSubmit)}>
-  <h2>🔑</h2>
-<h3>Establecer nueva contraseña</h3> 
-<UserPasswordInput  register={register} errors={errors} placeholder='Nueva contraseña...'/>
-<UserPasswordInput  register={register} errors={errors} name='confirmPassword' placeholder='Confirnmar contraseña...'/>
-  <ErrorServerMessage >{serverError}</ErrorServerMessage >
-      
-
-
- <ButtonPrimary as="input" type="submit" value="Enviar"/>
-      {(isFormLoading) && <LoaderSpinner small /> }
-</Form>
-</FormCard>
-        </StyledInitSession>
-  )
+          <ButtonPrimary as="input" type="submit" value="Enviar" />
+          {isFormLoading && <LoaderSpinner small />}
+        </Form>
+      </FormCard>
+    </StyledInitSession>
+  );
 }

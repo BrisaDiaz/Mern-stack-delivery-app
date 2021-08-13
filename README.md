@@ -14,24 +14,25 @@ password : moderator
 
 ## Environment variables
 
-HOST
-MONGODB_URI
-JWT_SECRET_KEY
-JWT_EMAIL_CONFIRMATION_KEY
-JWT_RESET_FORGOTEN_PASSWORD_KEY
+- HOST
+- MONGODB_URI
+- JWT_SECRET_KEY
+- JWT_EMAIL_CONFIRMATION_KEY
+- JWT_RESET_FORGOTEN_PASSWORD_KEY
+- SESSION_SECRET
 
 ### oAuth2
 
-OAUTH_USER
-OAUTH_CLIENT_ID
-OAUTH_CLIENT_SECRET
-OAUTH_REFRESH_TOKEN
+- OAUTH_USER
+- OAUTH_CLIENT_ID
+- OAUTH_CLIENT_SECRET
+- OAUTH_REFRESH_TOKEN
 
 ### cloudinary
 
-CLOUDINARY_NAME
-CLOUDINARY_KEY
-CLOUDINARY_SECRET
+- CLOUDINARY_NAME
+- CLOUDINARY_KEY
+- CLOUDINARY_SECRET
 
 ## Backend
 
@@ -62,7 +63,7 @@ CLOUDINARY_SECRET
 
 - **request supported** : GET, PUT, POST, DELETE
 
-- **rutes:** USERS , PRODUCTS, CATEGORIES, ORDERS,NEWSLETTER, CONTACT, AUTH (Login/Sing Up/forgotPassword/resetPassword),
+- **rutes:** USERS , PRODUCTS, CATEGORIES, ORDERS,NEWSLETTER, CONTACT, AUTH (login/signUp/logout/session/forgotPassword/resetPassword),
 
 - initial mongoose set up with : default categories , roles and admin and moderator users.
 
