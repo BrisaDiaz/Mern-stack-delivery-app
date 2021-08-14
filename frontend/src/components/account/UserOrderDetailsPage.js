@@ -105,7 +105,7 @@ const SplitSection = styled.section`
   }
 `;
 export default function OrderDetails() {
-  let { thisOrder, isLoading, isPaid } = useUserOrderDetailsPage();
+  let { thisOrder, isLoading } = useUserOrderDetailsPage();
 
   return isLoading ? null : (
     <Page>

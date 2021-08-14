@@ -3,6 +3,7 @@ const Product = require("../models/product.model");
 const User = require("../models/user.model");
 const { Order, STATES } = require("../models/order.model");
 const ioObj = require("./../server.js");
+const { io, ioStorage } = require("./../config/socketIo");
 const orderFactory = require("./../utils/orderGenerator");
 
 const getAllOrders = async (req, res) => {
@@ -149,8 +150,8 @@ const createOrder = async (req, res) => {
     await clientFound.addOrder(orderId).save();
 
     ///socket io notification to admins
-    console.log(ioObj.io);
-    ioObj.io.to("admins-room").emit("newOrder");
+
+    io.to("admins-room").emit("newOrder");
 
     res
       .status(201)
@@ -196,10 +197,10 @@ const actualizeOrderState = async (req, res) => {
     await clientFound.save();
     // notify user about an order actualization
 
-    const orderClientSocket = ioObj.ioStorage[clientFound._id]?.socketId;
+    const orderClientSocket = ioStorage[clientFound._id]?.socketId;
 
     if (orderClientSocket) {
-      ioObj.io.to(orderClientSocket).emit("orderActualization", order);
+      io.to(orderClientSocket).emit("orderActualization", order);
     }
 
     res

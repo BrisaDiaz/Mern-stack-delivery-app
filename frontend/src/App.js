@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, Fragment } from "react";
+import React, { Suspense, lazy } from "react";
 
 import useApp from "./hooks/useApp";
 import ScrollToTop from "./components/ScrollToTop";

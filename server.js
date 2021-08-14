@@ -4,17 +4,11 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 require("dotenv").config({ path: ".env" });
-const connectDB = require("./config/db.js");
 const path = require("path");
 const morgan = require("morgan");
 const http = require("http").createServer(app);
-const io = require("socket.io")(http, {
-  cors: {
-    origin: ["http://localhost:3000", process.env.DOMAIN],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  },
-});
-
+const connectDB = require("./config/db.js");
+const { connectSocketIo } = require("./config/socketIo.js");
 const {
   createRoles,
   createAdmin,
@@ -37,12 +31,13 @@ app.use(
     },
   })
 );
+
 connectDB();
 createRoles();
 createAdmin();
 createModerator();
 creatCategorys();
-
+connectSocketIo(http);
 const port = process.env.PORT || 7000;
 
 const productsRouter = require("./routes/products.js");
@@ -72,32 +67,6 @@ app.use("/api/newsletter", newsletterRouter);
 app.use("/api/orders", ordersRouter);
 app.use("/api/categories", categoriesRouter);
 
-let ioStorage = {};
-
-io.on("connection", (socket) => {
-  console.log("a user connected");
-
-  socket.data.userId = socket.handshake?.auth?.userId;
-  socket.data.userRole = socket.handshake?.auth?.userRole;
-
-  ioStorage[socket.data.userId] = { socketId: socket.id };
-
-  if (
-    socket.data.userRole === "admin" ||
-    socket.data.userRole === "moderator"
-  ) {
-    console.log("admin join room");
-    socket.join("admins-room");
-  }
-
-  socket.on("disconnect", (socket) => {
-    console.log("user disconnected");
-  });
-});
-
 http.listen(port, () => {
   console.log(`server is listening from port ${port}`);
 });
-
-module.exports.io = io;
-module.exports.ioStorage = ioStorage;
