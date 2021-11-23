@@ -44,7 +44,7 @@ CLOUDINARY_SECRET
 - Nodemailer
 - Multer
 - Cloudinary
-  -socket.io
+- socket.io
 
 ### Features:
 
@@ -58,7 +58,7 @@ CLOUDINARY_SECRET
 
 - media storage using multer library and cloudinary service
 
--real time new orders and order actualization notifications
+- real time new orders and order actualization notifications
 
 - **request supported** : GET, PUT, POST, DELETE
 
