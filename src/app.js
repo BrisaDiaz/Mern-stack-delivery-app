@@ -21,12 +21,12 @@ const categoriesRouter = require("./routes/categories.js");
 app.use("/media", express.static(path.join(__dirname, "storage", "media")));
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "frontend", "build")));
+  app.use(express.static(path.join(__dirname, "../frontend", "build")));
   app.get(" * ", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "../frontend", "build", "index.html"));
   });
 } else {
-  app.use(express.static(path.join(__dirname, "frontend")));
+  app.use(express.static(path.join(__dirname, "../frontend")));
 }
 
 app.use("/api/auth", authRouter);
