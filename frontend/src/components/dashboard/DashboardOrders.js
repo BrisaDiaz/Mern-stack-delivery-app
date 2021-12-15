@@ -82,7 +82,7 @@ export const OrdersTable = styled.table`
   }
 `;
 
-export default function DashboardOrders({ setNotification }) {
+export default function DashboardOrders({ closeNotification }) {
   const {
     seeDetails,
     handleRefresh,
@@ -98,7 +98,7 @@ export default function DashboardOrders({ setNotification }) {
     isFirstRender,
     orderID,
     state,
-  } = useDashboardOrders({ setNotification });
+  } = useDashboardOrders({ closeNotification });
 
   return (
     <Page isLoading={isLoading}>

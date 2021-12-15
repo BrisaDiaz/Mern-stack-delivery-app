@@ -5,12 +5,10 @@ const sendToAdminEmail = async (req, res) => {
     const { userEmail, userMessage, userName, subject } = req.body;
 
     if (!userName || !userEmail || !userMessage || !subject)
-      return res
-        .status(400)
-        .json({
-          successful: false,
-          message: " Bad request name, email ,subject and message are required",
-        });
+      return res.status(400).json({
+        successful: false,
+        message: " Bad request name, email ,subject and message are required",
+      });
 
     const emailOptions = {
       from: `"Food Delivery App " <${process.env.OAUTH_USER}> `,
@@ -52,12 +50,10 @@ const sendToAdminEmail = async (req, res) => {
 
     await sendEmail(emailOptions);
 
-    res
-      .status(200)
-      .json({
-        successful: true,
-        message: "The message have been send successfully",
-      });
+    res.status(200).json({
+      successful: true,
+      message: "The message have been send successfully",
+    });
   } catch (err) {
     res
       .status(500)

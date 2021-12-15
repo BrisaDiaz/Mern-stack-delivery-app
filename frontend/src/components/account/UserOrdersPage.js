@@ -125,7 +125,7 @@ export const RefreshIcone = styled.img`
   cursor: pointer;
 `;
 
-export default function UserOrdersPage({ setNotification }) {
+export default function UserOrdersPage({ closeNotification }) {
   const {
     seeDetails,
     handleRefresh,
@@ -136,7 +136,7 @@ export default function UserOrdersPage({ setNotification }) {
     orders,
     isFirstRender,
     deleteOrder,
-  } = useUserOrdersPage({ setNotification });
+  } = useUserOrdersPage({ closeNotification });
 
   return (
     <Page isLoading={isLoading}>

@@ -87,7 +87,7 @@ password : moderator
 - Custom Auto-played sliders with dot indicators and controls.
 - Latest products carrucel using swiper.js librery.
 - Navbar responsive and animated .
-- Singup/Login/forgotPassword system.
+- Complete authentication system width singup/email validation/login/ forgot password support.
 - Access to Public and Private routes base on roles.
 - Funtional contact section with form validation.
 - Loading modal and loading form indicators.

@@ -1,14 +1,12 @@
-const sendEmail = require('../config/nodemailer') ;
+const sendEmail = require("../config/nodemailer");
 
-const sendResetPasswordEmail = async (url,email) =>{
-try{
-
-  const emailOptions = {
-
-     from: `"Food Delivery App " <${process.env.OAUTH_USER}> `, 
-    to: email, 
-    subject: "Establecer nueva contraseña", 
-    html: `
+const sendResetPasswordEmail = async (url, email) => {
+  try {
+    const emailOptions = {
+      from: `"Food Delivery App " <${process.env.OAUTH_USER}> `,
+      to: email,
+      subject: "Establecer nueva contraseña",
+      html: `
     <div style= "max-width:600px; margin: 0 auto;">
       <h1 style="text-align: center;
     color: #5f6368;
@@ -37,21 +35,18 @@ margin: 40px auto;
     display: inline-block;">Canbiar contraseña</a></div>
 
       <p style="  margin-bottom:0;   font-size: 16px;">Si no funciona, por favor copia y pega el siguiente link en tu navegador: </p>
-    
+
       <p style="text-align:center; margin:10px 0;  font-size: 16px;"><a href="#" target="_blank" style="color: #FFA73B;">${url}</a></p>
 
   <div>
- 
+
 `,
+    };
+
+    await sendEmail(emailOptions);
+  } catch (err) {
+    console.log(err);
   }
+};
 
- await  sendEmail(emailOptions)
-  
-}catch(err){
-console.log(err)
-  
-}
-
-}
-
-module.exports = sendResetPasswordEmail
+module.exports = sendResetPasswordEmail;

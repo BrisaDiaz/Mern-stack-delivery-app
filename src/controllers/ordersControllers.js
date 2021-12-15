@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const Product = require("../models/product.model");
 const User = require("../models/user.model");
-const { Order, STATES } = require("../models/order.model");
-const ioObj = require("./../server.js");
-const orderFactory = require("./../utils/orderGenerator");
+const { Order } = require("../models/order.model");
+const orderFactory = require("../utils/orderGenerator");
+const { orderEmiter } = require("../config/io");
 
 const getAllOrders = async (req, res) => {
   let query = {};
@@ -110,8 +110,7 @@ const getAllUserOrders = async (req, res) => {
 
 const createOrder = async (req, res) => {
   try {
-    const orderResume = JSON.parse(JSON.stringify(req.body)).order;
-
+    const orderResume = req.body;
     if (!orderResume || orderResume.length < 1)
       return res
         .status(400)
@@ -149,8 +148,8 @@ const createOrder = async (req, res) => {
     await clientFound.addOrder(orderId).save();
 
     ///socket io notification to admins
-    console.log(ioObj.io);
-    ioObj.io.to("admins-room").emit("newOrder");
+
+    orderEmiter.emit("newOrder", newOrder);
 
     res
       .status(201)
@@ -195,12 +194,7 @@ const actualizeOrderState = async (req, res) => {
     await order.save();
     await clientFound.save();
     // notify user about an order actualization
-
-    const orderClientSocket = ioObj.ioStorage[clientFound._id]?.socketId;
-
-    if (orderClientSocket) {
-      ioObj.io.to(orderClientSocket).emit("orderActualization", order);
-    }
+    orderEmiter.emit("orderActualization", clientFound._id, order);
 
     res
       .status(200)
