@@ -6,7 +6,7 @@ import { ButtonPrimary } from "../Buttons";
 import { SectionTitle } from "../menu/Menu";
 import PaginationButtons from "../PaginationButtons";
 import OrdersTableSkeleton from "../OrdersTableSkeleton";
-import refreshIcone from "../../img/refresh.svg";
+import refreshIcon from "../../img/refresh.svg";
 import { LoaderSpinner } from "../LoaderSpinner";
 
 const Page = styled.main`
@@ -37,7 +37,7 @@ const Page = styled.main`
 `;
 export const TableHead = styled.thead`
   background-color: ${(props) => props.theme.black};
-  color: ${(props) => props.theme.darckYellow};
+  color: ${(props) => props.theme.darkYellow};
   & > tr th {
     padding: 10px 0;
     font-family: "Oswald", sans-serif;
@@ -47,7 +47,7 @@ export const TableHead = styled.thead`
 export const TableWrapper = styled.div`
   max-width: 900px;
   margin: 0 auto 40px;
-  overflow-x: scroll;
+  overflow-x: auto;
 `;
 export const OrdersTable = styled.table`
   width: 900px;
@@ -98,7 +98,7 @@ const NotFounMessage = styled.div`
     padding: 15px 30px;
   }
 `;
-const NotFounIcone = styled.h2`
+const NotFounIcon = styled.h2`
   font-size: 50px;
 `;
 export const RefreshButton = styled.div`
@@ -120,7 +120,7 @@ export const RefreshButton = styled.div`
   }
 `;
 
-export const RefreshIcone = styled.img`
+export const RefreshIcon = styled.img`
   height: 50%;
   cursor: pointer;
 `;
@@ -145,9 +145,9 @@ export default function UserOrdersPage({ closeNotification }) {
       <SectionTitle light>Mis Pedidos</SectionTitle>
 
       <RefreshButton onClick={() => handleRefresh()}>
-        <RefreshIcone
+        <RefreshIcon
           onClick={() => handleRefresh()}
-          src={refreshIcone}
+          src={refreshIcon}
           title="Refrescar Página"
         />
       </RefreshButton>
@@ -156,7 +156,7 @@ export default function UserOrdersPage({ closeNotification }) {
 
       {!isLoading && !isFirstRender && orders?.length === 0 && (
         <NotFounMessage>
-          <NotFounIcone>👩🏻&zwj;🍳</NotFounIcone>
+          <NotFounIcon>👩🏻&zwj;🍳</NotFounIcon>
           <h3>Ningún pedido realizado, tienes hambre?</h3>
 
           <ButtonPrimary small as={Link} to="/menu">

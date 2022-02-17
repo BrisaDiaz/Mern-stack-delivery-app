@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import useDashboardOrders from "../../hooks/useDashboardOrders";
 import DashboardNav from "../DashboardNav";
-import refreshIcone from "../../img/refresh.svg";
+import refreshIcon from "../../img/refresh.svg";
 import SearchBar from "../MenuSearchBar";
 import {
   RefreshButton,
-  RefreshIcone,
+  RefreshIcon,
   TableWrapper,
 } from "../account/UserOrdersPage";
 import { LoaderSpinner } from "./../LoaderSpinner";
-import { NotFaundMessage } from "../menu/ProductsSection";
+import { NotFoundMessage } from "../menu/ProductsSection";
 import { SectionTitle } from "../menu/Menu";
 import { FiltersBoard } from "./DashboardProducts";
 import FilterOrderStateOptions from "./../FilterOrderStateOptions";
@@ -42,7 +42,7 @@ export const Page = styled.section`
     z-index: 500;
     margin: -60px 0 0 -60px;
   }
-  & > ${NotFaundMessage} {
+  & > ${NotFoundMessage} {
     padding: 0 5px;
   }
   & > ${FiltersBoard} {
@@ -126,16 +126,16 @@ export default function DashboardOrders({ closeNotification }) {
         data-testid="refresh-button"
         onClick={() => handleRefresh()}
       >
-        <RefreshIcone src={refreshIcone} title="Refrescar Página" />
+        <RefreshIcon src={refreshIcon} title="Refrescar Página" />
       </RefreshButton>
       {isLoading ? <LoaderSpinner /> : null}
 
       {isLoading && isFirstRender && <OrdersTableSkeleton />}
 
       {!isLoading && !isFirstRender && orders?.length === 0 && (
-        <NotFaundMessage>
+        <NotFoundMessage>
           No se han encontrado coincidencias, intenta de nuevo!!
-        </NotFaundMessage>
+        </NotFoundMessage>
       )}
 
       {orders?.length !== 0 && (

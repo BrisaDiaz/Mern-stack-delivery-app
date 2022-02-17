@@ -10,7 +10,7 @@ const { verifyToken, isAdmin } = require("../middlewares/authJwt");
 const {
   checkDuplicatedEmail,
   checkRolesExisted,
-} = require("../middlewares/verifySingUp");
+} = require("../middlewares/verifySignUp");
 const {
   checkIsValidUser,
   checkIsValidUpdate,

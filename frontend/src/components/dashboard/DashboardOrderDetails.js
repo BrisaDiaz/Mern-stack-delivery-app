@@ -1,7 +1,7 @@
-import useDashboarOrderDetails from "../../hooks/useDashboarOrderDetails";
+import useDashboardOrderDetails from "../../hooks/useDashboardOrderDetails";
 import AdminOrderStateChart from "./AdminOrderStateChart";
 import { Fragment } from "react";
-import { GoBackLink } from "../product_details/ProductDetails";
+import GoBackLink from "../GoBackLink";
 import {
   Page,
   OrderId,
@@ -11,7 +11,7 @@ import {
 
 export default function OrderDetails() {
   const { thisOrder, isRefreshing, isLoading, setIsRefreshing } =
-    useDashboarOrderDetails();
+    useDashboardOrderDetails();
 
   return (
     <Page>

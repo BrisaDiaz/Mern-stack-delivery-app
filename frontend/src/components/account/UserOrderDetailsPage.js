@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GoBackLink } from "../product_details/ProductDetails";
+import GoBackLink from "../GoBackLink";
 import UserOrderStateChart from "./UserOrderStateChart";
 import useUserOrderDetailsPage from "../../hooks/useUserOrderDetailsPage";
 
@@ -7,11 +7,10 @@ export const Page = styled.main`
   padding: 60px 15px;
   min-height: 100vh;
   width: 100%;
-  max-width: 1250px;
+  max-width: 900px;
   margin: 0 auto;
   text-transform: capitalize;
   & > h3 {
-    text-align: center;
     margin-top: 20px;
   }
   @media screen and (max-width: 440px) {
@@ -27,6 +26,7 @@ export const Page = styled.main`
 `;
 export const OrderId = styled.h3`
   margin-top: 40px;
+  text-align: center;
 `;
 
 export const DetailTable = styled.table`
@@ -40,7 +40,7 @@ export const DetailTable = styled.table`
   & > thead,
   tfoot {
     background-color: ${(props) => props.theme.black};
-    color: ${(props) => props.theme.darckYellow};
+    color: ${(props) => props.theme.darkYellow};
   }
   & > tfoot td h4 {
     margin: 10px 0;
@@ -83,8 +83,12 @@ export const ClientInfo = styled.div`
 align-self: center;
 }
 }
+    background: #f0f0f0;
+    padding: 8px 16px;
+    border-radius: 12px;
+
 margin: 0 auto;
-max-width:900px;
+
 display: flex;
 flex-direction:column;
 align-items:start;

@@ -1,23 +1,21 @@
-import {  useState } from 'react'
-import {useHistory} from 'react-router-dom'
-import {useStorage} from '../context/useStorage'
-import accountConfirmationAPI from '../API/accountConfirmationAPI'
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useStorage } from "../context/useStorage";
+import accountConfirmationAPI from "../API/accountConfirmationAPI";
 
+export default function useEmailConfirmationModal() {
+  const { setIsSuccessfullySend } = useStorage();
 
- 
-export default function useEmailConfirmationModal(){
+  const history = useHistory();
 
-   const {setIsSuccessfullySend} =useStorage()
-   
- const history= useHistory()
+  const [isRequestLoading, setIsRequestLoading] = useState(false);
 
- 
-const [isRequesLoading, setIsRequesLoading] = useState(false)
-
-const sendConfirmationEmail = async() =>{
-
- await accountConfirmationAPI ({setIsRequesLoading,setIsSuccessfullySend,history})
-
-}
-  return {isRequesLoading,sendConfirmationEmail}
+  const sendConfirmationEmail = async () => {
+    await accountConfirmationAPI({
+      setIsRequestLoading,
+      setIsSuccessfullySend,
+      history,
+    });
+  };
+  return { isRequestLoading, sendConfirmationEmail };
 }

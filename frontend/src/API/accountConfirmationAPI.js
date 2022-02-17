@@ -2,17 +2,17 @@ import { POST } from "../utils/http";
 
 const accountConfirmationAPI = async ({
   setIsSuccessfullySend,
-  setIsRequesLoading,
+  setIsRequestLoading,
   history,
 }) => {
-  setIsRequesLoading(true);
+  setIsRequestLoading(true);
 
   const info = { id: localStorage.getItem("toConfirmUser") };
 
   try {
     const { response } = await POST("/api/auth/confirmation", info);
 
-    setIsRequesLoading(false);
+    setIsRequestLoading(false);
 
     if (response.status === 200) {
       setIsSuccessfullySend(true);
@@ -22,8 +22,6 @@ const accountConfirmationAPI = async ({
         history.push("/menu");
       }, 3000);
     }
-    if (response.status === 500)
-      alert("Error en el servidor, vuelva a interntar");
   } catch (err) {
     console.log(err);
   }

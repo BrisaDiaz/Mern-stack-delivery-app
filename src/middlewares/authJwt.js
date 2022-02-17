@@ -22,7 +22,7 @@ const verifyToken = async (req, res, next) => {
 
     const user = await User.findById(req.userId, { password: 0 });
 
-    if (!user) return res.status(404).json({ message: "No user faund" });
+    if (!user) return res.status(404).json({ message: "No user found" });
 
     next();
   } catch (err) {
@@ -55,19 +55,17 @@ const verifyAccountConfirmartion = async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    const temporaUser = await TemporalUser.findOne({ email: req.body.email });
+    const tempUser = await TemporalUser.findOne({ email: req.body.email });
 
-    if (temporaUser)
-      return res
-        .status(302)
-        .json({
-          successful: false,
-          message: "Email unverified",
-          redirect: `/#/authentication/confirmation`,
-          id: temporaUser._id,
-        });
+    if (tempUser)
+      return res.status(302).json({
+        successful: false,
+        message: "Email unverified",
+        redirect: `/#/authentication/confirmation`,
+        id: tempUser._id,
+      });
 
-    return res.status(404).json({ success: false, message: "No user faund" });
+    return res.status(404).json({ success: false, message: "No user found" });
   }
 
   next();

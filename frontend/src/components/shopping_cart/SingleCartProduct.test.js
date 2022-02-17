@@ -36,7 +36,7 @@ size:'400 gr'
  })
 
 
- it('trigger deleteOfCart fuction when click on delete button', ()=>{
+ it('trigger deleteOfCart function when click on delete button', ()=>{
 
    render(
        <AppContext.Provider value={{isLoading:false}}>

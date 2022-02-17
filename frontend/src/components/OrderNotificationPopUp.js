@@ -8,7 +8,7 @@ const Notification = styled.aside`
   transform: translateX(-50%);
   min-width: max-content;
 
-  background: ${(props) => props.theme.darckYellow};
+  background: ${(props) => props.theme.darkYellow};
   border-radius: 5px;
   padding: 8px 15px 10px;
 

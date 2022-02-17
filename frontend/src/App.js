@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, Fragment } from "react";
+import React, { Suspense, lazy } from "react";
 
 import useOrderNotification from "./hooks/useOrderNotification";
 import ScrollToTop from "./components/ScrollToTop";
@@ -11,53 +11,34 @@ import LoadingPage from "./components/LoadingPage";
 import OrderNotificationPopUp from "./components/OrderNotificationPopUp";
 import Header from "./components/Header";
 import NotFound404Page from "./components/NotFound404Page";
-import SuccessfullFormModal from "./components/SuccessfullFormModal";
-import ShooppingCart from "./components/shopping_cart/ShoppingCart";
-import ProductsDetails from "./components/product_details/ProductDetails";
-import DashboarOrderDetails from "./components/dashboard/DashboarOrderDetails";
-
+import SuccessfulFormModal from "./components/SuccessfulFormModal";
+import ShoppingCart from "./components/shopping_cart/ShoppingCart";
+import Login from "./components/auth/Login";
+import SignUp from "./components/auth/SignUp";
+import DashboardOrderDetails from "./components/dashboard/DashboardOrderDetails";
+import Menu from "./components/menu/Menu";
+import Home from "./components/home/Home";
+import Contact from "./components/contact/Contact";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
-
-const Home = lazy(() => import("./components/home/Home"));
-const Menu = lazy(() => import("./components/menu/Menu"));
-const Contact = lazy(() => import("./components/contact/Contact"));
-const Login = lazy(() => import("./components/auth/Login"));
-const SingUp = lazy(() => import("./components/auth/SingUp"));
-const MyProfile = lazy(() => import("./components/account/MyProfile"));
-const EditMyProfile = lazy(() => import("./components/account/EditMyProfile"));
-const UserOrdersPage = lazy(() =>
-  import("./components/account/UserOrdersPage")
-);
-const UserOrderDetailsPage = lazy(() =>
-  import("./components/account/UserOrderDetailsPage")
-);
+import MyProfile from "./components/account/MyProfile";
+import EditMyProfile from "./components/account/EditMyProfile";
+import UserOrdersPage from "./components/account/UserOrdersPage";
+import UserOrderDetailsPage from "./components/account/UserOrderDetailsPage";
+import DashboardNewProduct from "./components/dashboard/DashboardNewProduct";
+import DashboardCategories from "./components/dashboard/DashboardCategories";
+import DashboardOrders from "./components/dashboard/DashboardOrders";
+import DashboardUsers from "./components/dashboard/DashboardUsers";
+import DashboardEditProduct from "./components/dashboard/DashboardEditProduct";
+import DashboardProducts from "./components/dashboard/DashboardProducts";
 const EmailConfirmationModal = lazy(() =>
   import("./components/auth/EmailConfirmationModal")
 );
 const ResetPassword = lazy(() => import("./components/auth/ResetPassword"));
-const DashboardCategories = lazy(() =>
-  import("./components/dashboard/DashboardCategories")
-);
-const DashboardOrders = lazy(() =>
-  import("./components/dashboard/DashboardOrders")
-);
-const DashboardUsers = lazy(() =>
-  import("./components/dashboard/DashboardUsers")
-);
-const DashboardEditProduct = lazy(() =>
-  import("./components/dashboard/DashboardEditProduct")
-);
-const DashboardProducts = lazy(() =>
-  import("./components/dashboard/DashboardProducts")
-);
-const DashboardNewProduct = lazy(() =>
-  import("./components/dashboard/DashboardNewProduct")
-);
 
 function App() {
   let {
     newOrdersCount,
-    actualizationsCount,
+    actualizationCount,
     orderActualizationMessage,
     closeActualizationNotification,
     closeNewOrderNotification,
@@ -70,7 +51,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <OrderNotificationPopUp
           message={orderActualizationMessage}
-          notificationCount={actualizationsCount}
+          notificationCount={actualizationCount}
           close={closeActualizationNotification}
         />
         <OrderNotificationPopUp
@@ -78,18 +59,18 @@ function App() {
           notificationCount={newOrdersCount}
           close={closeNewOrderNotification}
         />
-        <SuccessfullFormModal />
+        <SuccessfulFormModal />
         <LoadingPage />
-        <ShooppingCart />
+        <ShoppingCart />
         <Header />
 
         <Suspense fallback={<LoadingPage isLoading={true} />}>
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/menu" exact component={Menu} />
-            <Route path="/menu/:productId" component={ProductsDetails} />
+
             <Route path="/authentication/login" exact component={Login} />
-            <Route path="/authentication/singUp" exact component={SingUp} />
+            <Route path="/authentication/singUp" exact component={SignUp} />
             <Route
               path="/authentication/resetPassword/:token"
               component={ResetPassword}
@@ -140,7 +121,7 @@ function App() {
             />
             <PrivateRoute
               path="/dashboard/orders/:orderID"
-              component={DashboarOrderDetails}
+              component={DashboardOrderDetails}
             />
             <PrivateRoute
               path="/dashboard/categories"

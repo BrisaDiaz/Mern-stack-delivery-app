@@ -7,11 +7,11 @@ const {
   sendResetPasswordEmail,
   resetPassword,
 } = require("../controllers/authControllers");
-const { checkDuplicatedEmail } = require("../middlewares/verifySingUp");
+const { checkDuplicatedEmail } = require("../middlewares/verifySignUp");
 const { verifyAccountConfirmartion } = require("../middlewares/authJwt.js");
 const { checkIsValidUser } = require("../middlewares/userValidator");
 
-router.post("/singup", [checkDuplicatedEmail, checkIsValidUser], signUp);
+router.post("/signup", [checkDuplicatedEmail, checkIsValidUser], signUp);
 router.get("/verification/:token", validateEmailToken);
 router.post("/forgotPassword", sendResetPasswordEmail);
 router.post("/resetPassword/:token", resetPassword);

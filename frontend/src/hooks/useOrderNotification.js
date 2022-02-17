@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import { useStorage } from "../context/useStorage";
 
 export default function useOrderNotification() {
-  const [actualizationsCount, setActualizationsCount] = useState(0);
+  const [actualizationCount, setActualizationsCount] = useState(0);
   const [orderActualizationMessage, setOrderActualizationMessage] =
     useState("");
   const [newOrdersCount, setNewOrdersCount] = useState(0);
@@ -50,7 +50,7 @@ export default function useOrderNotification() {
 
   return {
     newOrdersCount,
-    actualizationsCount,
+    actualizationCount,
     orderActualizationMessage,
     closeActualizationNotification,
     closeNewOrderNotification,

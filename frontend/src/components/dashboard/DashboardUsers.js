@@ -42,7 +42,7 @@ export const TableHeader = styled.div`
   width: 100%;
   padding: 10px 15px;
   background: #fecb00;
-  box-shadow: inset 0 0 20px 5px ${(props) => props.theme.darckYellow};
+  box-shadow: inset 0 0 20px 5px ${(props) => props.theme.darkYellow};
 `;
 export const TableTitle = styled.h4`
   margin: 0;
@@ -69,7 +69,7 @@ const UserCell = styled.div`
   border-bottom: 1px solid rgb(252 175 1);
 
   & > h4 span {
-    text-shadow: 0 0 6px ${(props) => props.theme.darckYellow};
+    text-shadow: 0 0 6px ${(props) => props.theme.darkYellow};
   }
 `;
 const UserName = styled.h4`

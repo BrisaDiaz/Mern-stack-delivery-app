@@ -87,12 +87,10 @@ const createUser = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "something went wrong, failt to create user ",
-      });
+    res.status(500).json({
+      success: false,
+      message: "something went wrong, failt to create user ",
+    });
   }
 };
 const UpdateProfileById = async (req, res) => {
@@ -152,12 +150,10 @@ const UpdateProfileById = async (req, res) => {
 
     console.log(user.profileState);
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: `User ${updatedUser.name} Udated Successfully`,
-      });
+    res.status(200).json({
+      success: true,
+      message: `User ${updatedUser.name} Udated Successfully`,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: error });

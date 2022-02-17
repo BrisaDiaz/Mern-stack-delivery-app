@@ -18,7 +18,7 @@ password : moderator
 - MONGODB_URI
 - JWT_SECRET_KEY
 - JWT_EMAIL_CONFIRMATION_KEY
-- JWT_RESET_FORGOTEN_PASSWORD_KEY
+- JWT_RESET_FORGOTTEN_PASSWORD_KEY
 
 ### oAuth2
 
@@ -48,55 +48,54 @@ password : moderator
 
 ### Features:
 
-- athentication using Jeson Web Tokens
+- Authentication using Json Web Tokens
 
-- password encryption using bcrypt librery
+- password encryption using bcrypt library
 
 - account validation , and functional contact form using Nodemailer and googleapis oAuth2
 
-- accesss of routes base athorization and permition
+- Access of routes base authorization and permissions.
 
-- media storage using multer library and cloudinary service
+- Media storage using multer library and cloudinary service.
 
-- real time new orders and order actualization notifications
+- Real time new orders and order actualization notifications.
 
 - **request supported** : GET, PUT, POST, DELETE
 
-- **rutes:** USERS , PRODUCTS, CATEGORIES, ORDERS,NEWSLETTER, CONTACT, AUTH (Login/Sing Up/forgotPassword/resetPassword),
+- **routes:** USERS , PRODUCTS, CATEGORIES, ORDERS,NEWSLETTER, CONTACT, AUTH (Login/Sing Up/forgotPassword/resetPassword),
 
 - initial mongoose set up with : default categories , roles and admin and moderator users.
 
 ## Frontend
 
-### Tecnologies and tools:
+### Technologies and tools:
 
 - React.js
-- style-components
-- react-hook-form
-- react-router-dom
-- react hooks
-- swiper
-- socket.io-client
+- Style-Components
+- React-hook-form
+- React-router-dom
+- React hooks
+- Swiper
+- Socket.io-client
 
 ### Features:
 
 - Interaction with the backend through API Rest .
 - Unit test examples.
-- Lazy Load components and code spliting.
+- Lazy Load components and code splitting.
 - Products and orders section skeletons.
 - Custom Auto-played sliders with dot indicators and controls.
-- Latest products carrucel using swiper.js librery.
+- Latest products carrousel using swiper.js library.
 - Navbar responsive and animated .
-- Complete authentication system width singup/email validation/login/ forgot password support.
+- Complete authentication system width signup/email validation/login/ forgot password support.
 - Access to Public and Private routes base on roles.
-- Funtional contact section with form validation.
+- Functional contact section with form validation.
 - Loading modal and loading form indicators.
 - Shopping cart.
 - Editable User profile.
 - Products and orders section with sorter, filter and search bar.
-- URL able to storage the user seach
+- URL able to storage the user search
 - pagination.
-- Product details page.
 - User orders tracker page.
 - Real time order notifications.
 - Dashboard with users, categories, orders and products management system.
