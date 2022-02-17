@@ -24,7 +24,7 @@ export default function useShoppingCart() {
 
   const history = useHistory();
 
-  const handelOrden = async () => {
+  const handelOrder = async () => {
     if (cartProducts.length !== 0) {
       if (!isLogin) return history.push("/authentication/login");
 
@@ -54,7 +54,7 @@ export default function useShoppingCart() {
 
   return {
     emptyCartAndResetTotalCost,
-    handelOrden,
+    handelOrder,
     totalCost,
     isCartOpen,
     cartProducts,
