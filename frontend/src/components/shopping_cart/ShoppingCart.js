@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Fragment } from "react";
+
 import SingleCartProduct from "./SingleCartProduct";
 import useShoppingCart from "../../hooks/useShoppingCart";
 import { LoaderSpinner } from "./../LoaderSpinner";
@@ -16,6 +16,7 @@ const StyledCart = styled.aside`
   right: ${(props) => (props.isCartOpen === true ? "0" : "-100vw")};
   transition: all 0.5s;
   margin: 0 auto;
+  padding: 10px 0;
   background: #fff;
   border-radius: 0 0 15px 15px;
   box-shadow: 1px 3px 5px #00000057;
@@ -26,7 +27,7 @@ const CartHeader = styled.div`
 `;
 const CartTitle = styled.h2`
   text-shadow: ${(props) => props.theme.lightTextShadow};
-  padding-top: 10px;
+
   margin-bottom: 10px;
   color: ${(props) => props.theme.darkYellow};
   font-size: 40px;
@@ -36,6 +37,8 @@ const CartProductsList = styled.ul`
   overflow-y: scroll;
   min-height: max-content;
   max-height: 160px;
+  border-top: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
 `;
 const DeleteAllButton = styled.button`
   position: relative;
@@ -64,8 +67,12 @@ const CartResume = styled.div`
   margin: 10px 0;
   padding: 0 15px 0 15px;
   display: flex;
+  gap: 10px;
   flex-flow: column;
   align-items: center;
+  & > * {
+    margin: 0;
+  }
 `;
 
 export default function ShoppingCart() {
@@ -84,16 +91,17 @@ export default function ShoppingCart() {
         <CartTitle>Mi carrito</CartTitle>
       </CartHeader>
 
-      <CartProductsList>
-        {cartProducts?.length > 0
-          ? cartProducts.map((product, index) => (
-              <SingleCartProduct
-                key={index}
-                product={product}
-              ></SingleCartProduct>
-            ))
-          : null}
-      </CartProductsList>
+      {cartProducts?.length > 0 ? (
+        <CartProductsList>
+          {cartProducts.map((product, index) => (
+            <SingleCartProduct
+              key={index}
+              product={product}
+            ></SingleCartProduct>
+          ))}
+        </CartProductsList>
+      ) : null}
+
       <CartResume>
         <h2>Total: ${totalCost}</h2>
 
