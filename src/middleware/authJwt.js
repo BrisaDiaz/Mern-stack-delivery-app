@@ -51,7 +51,7 @@ const isModerator = async (req, res, next) => {
   }
 };
 
-const verifyAccountConfirmartion = async (req, res, next) => {
+const verifyAccountConfirmation = async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
@@ -115,6 +115,6 @@ module.exports = {
   verifyToken,
   isAdmin,
   isModerator,
-  verifyAccountConfirmartion,
+  verifyAccountConfirmation,
   isAdminOrIsModerator,
 };

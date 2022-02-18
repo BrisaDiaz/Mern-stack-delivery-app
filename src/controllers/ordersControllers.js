@@ -3,7 +3,7 @@ const Product = require("../models/product.model");
 const User = require("../models/user.model");
 const { Order } = require("../models/order.model");
 const orderFactory = require("../utils/orderGenerator");
-const { orderEmiter } = require("../config/io");
+const { orderEmitter } = require("../config/io");
 
 const getAllOrders = async (req, res) => {
   let query = {};
@@ -18,7 +18,7 @@ const getAllOrders = async (req, res) => {
     if (req.query.state === "finish") {
       query.finished = true;
     }
-    if (req.query.state === "unfinish") {
+    if (req.query.state === "unfinished") {
       query.finished = false;
     }
   }
@@ -62,7 +62,7 @@ const getOrderById = async (req, res) => {
       .populate("client")
       .exec();
 
-    res.status(200).json({ successfull: true, data: orderFound });
+    res.status(200).json({ successful: true, data: orderFound });
   } catch (err) {
     res.status(500).json({
       success: false,
@@ -96,7 +96,7 @@ const getAllUserOrders = async (req, res) => {
       .exec();
 
     res.status(200).json({
-      successfull: true,
+      successful: true,
       data: ordersFound,
       total: user.orders.length,
     });
@@ -114,7 +114,7 @@ const createOrder = async (req, res) => {
     if (!orderResume || orderResume.length < 1)
       return res
         .status(400)
-        .json({ successful: false, message: "Order is emty!" });
+        .json({ successful: false, message: "Order is empty!" });
 
     const promises = orderResume.map((field) =>
       Product.findById(field.productId)
@@ -149,11 +149,11 @@ const createOrder = async (req, res) => {
 
     ///socket io notification to admins
 
-    orderEmiter.emit("newOrder", newOrder);
+    orderEmitter.emit("newOrder", newOrder);
 
     res
       .status(201)
-      .json({ success: true, message: "Order creaded successfully" });
+      .json({ success: true, message: "Order created successfully" });
   } catch (error) {
     console.log(error);
 
@@ -194,11 +194,11 @@ const actualizeOrderState = async (req, res) => {
     await order.save();
     await clientFound.save();
     // notify user about an order actualization
-    orderEmiter.emit("orderActualization", clientFound._id, order);
+    orderEmitter.emit("orderActualization", clientFound._id, order);
 
     res
       .status(200)
-      .json({ success: false, message: "order satate updated successfully" });
+      .json({ success: false, message: "order state updated successfully" });
   } catch (err) {
     console.log(err);
 

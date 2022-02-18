@@ -43,5 +43,5 @@ function connectIO(server) {
     });
   });
 }
-module.exports.orderEmiter = emiter;
+module.exports.orderEmitter = emiter;
 module.exports.connectIO = connectIO;

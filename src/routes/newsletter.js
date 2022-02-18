@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { subscribeUser } = require("../controllers/newsletterControllers");
 
-router.post("/subscribtion", subscribeUser);
+router.post("subscription", subscribeUser);
 
 module.exports = router;

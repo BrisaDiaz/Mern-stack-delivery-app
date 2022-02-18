@@ -42,7 +42,7 @@ const signUp = async (req, res) => {
 
     return res.status(201).json({
       successful: true,
-      message: "User creacted successfully",
+      message: "User created successfully",
       redirect: "/#/authentication/confirmation",
       id: id,
     });
@@ -152,7 +152,7 @@ const sendResetPasswordEmail = async (req, res) => {
     if (!userFound)
       return res.status(422).json({
         successful: false,
-        message: "Dosen't exits account link with that email",
+        message: "Doesn't exits account link with that email",
       });
 
     const id = userFound._id;
@@ -218,7 +218,7 @@ const resetPassword = async (req, res) => {
     if (newPassword !== confirmPassword)
       res
         .status(400)
-        .json({ successful: false, message: "Passwords dosen't match" });
+        .json({ successful: false, message: "Passwords doesn't match" });
 
     if (newPassword.length < 5)
       res

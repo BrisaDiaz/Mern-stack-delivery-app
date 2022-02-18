@@ -1,7 +1,7 @@
 import updateProductAPI from "../API/updateProductAPI";
 import { useForm } from "react-hook-form";
 import { useStorage } from "../context/useStorage";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 export default function useEditProductForm() {

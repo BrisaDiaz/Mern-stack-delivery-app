@@ -1,15 +1,8 @@
 const Product = require("../models/product.model");
 const { Category } = require("../models/category.model");
+const { cloudinary } = require("../config/cloudinary");
 const fs = require("fs");
 const path = require("path");
-
-const cloudinary = require("cloudinary");
-//cloudinary config
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_KEY,
-  api_secret: process.env.CLOUDINARY_SECRET,
-});
 
 const getAllProducts = async (req, res) => {
   try {
@@ -56,7 +49,7 @@ const getAllProducts = async (req, res) => {
       .json({ success: true, data: products, total: totalResults.length });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: error.mesage });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -66,7 +59,7 @@ const getProductById = async (req, res) => {
     res.status(200).json({ success: true, data: product });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: error.mesage });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -96,7 +89,7 @@ const postNewProduct = async (req, res) => {
     });
 
     await Category.findByIdAndUpdate(
-      req.categoryId,
+      req.id,
       { $inc: { quantity: 1 } },
       { new: true }
     );
@@ -106,7 +99,7 @@ const postNewProduct = async (req, res) => {
     res.status(201).json({ success: true, data: newProduct });
   } catch (error) {
     console.log(error);
-    res.status(400).json({ success: false, message: error.mesage });
+    res.status(400).json({ success: false, message: error.message });
   }
 };
 
@@ -166,7 +159,7 @@ const updateProductById = async (req, res) => {
     res.status(200).json({ success: true, data: updatedProduct });
   } catch (error) {
     console.log(error);
-    res.status(400).json({ success: false, message: error.mesage });
+    res.status(400).json({ success: false, message: error.message });
   }
 };
 
@@ -191,12 +184,10 @@ const deleteProductById = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "something went wrong, product was not delete correctly",
-      });
+    res.status(500).json({
+      success: false,
+      message: "something went wrong, product was not delete correctly",
+    });
   }
 };
 module.exports = {

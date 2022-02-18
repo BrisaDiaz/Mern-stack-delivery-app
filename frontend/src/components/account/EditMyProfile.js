@@ -261,7 +261,7 @@ function EditMyProfile() {
         </InputWrapper>
 
         {isChangingPassword ? (
-          <Fragment>
+          <>
             <UserPasswordInput
               errors={errors}
               register={register}
@@ -274,7 +274,7 @@ function EditMyProfile() {
               name="newPassword"
               placeholder="Nueva contraseña..."
             />
-          </Fragment>
+          </>
         ) : null}
 
         {formIsLoading ? (
@@ -282,7 +282,7 @@ function EditMyProfile() {
         ) : (
           <ErrorServerMessage>{serverError}</ErrorServerMessage>
         )}
-
+        <br />
         <FormButtons small />
       </EditProfileForm>
     </EditProfilePage>

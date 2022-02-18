@@ -3,8 +3,8 @@ const router = require("express").Router();
 const {
   checkDuplicatedCategory,
   checkCategoryExist,
-} = require("../middlewares/verifyCategory");
-const { verifyToken, isAdmin } = require("../middlewares/authJwt");
+} = require("../middleware/verifyCategory");
+const { verifyToken, isAdmin } = require("../middleware/authJwt");
 const {
   getAllCategories,
   deleteCategory,
@@ -15,12 +15,12 @@ const {
 router.get("/", getAllCategories);
 router.post("/", [verifyToken, isAdmin], createCategory);
 router.put(
-  "/:categoryId",
+  "/:id",
   [verifyToken, isAdmin, checkCategoryExist],
   editCategoryName
 );
 router.delete(
-  "/:categoryId",
+  "/:id",
   [verifyToken, isAdmin, checkCategoryExist],
   deleteCategory
 );

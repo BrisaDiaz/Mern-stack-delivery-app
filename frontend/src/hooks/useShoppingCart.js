@@ -28,7 +28,7 @@ export default function useShoppingCart() {
     if (cartProducts.length !== 0) {
       if (!isLogin) return history.push("/authentication/login");
 
-      if (currentUser?.profileState !== "complited")
+      if (currentUser?.profileState !== "completed")
         return alert(
           "Se require que complete su  perfil en la cuenta para poder realizar la orden"
         );

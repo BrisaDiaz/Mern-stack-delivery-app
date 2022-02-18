@@ -13,15 +13,15 @@ const {
   verifyToken,
   isAdmin,
   isAdminOrIsModerator,
-} = require("../middlewares/authJwt");
+} = require("../middleware/authJwt");
 const {
   checkOrderExist,
   checkProfileState,
   checkAllowedDelete,
   checkAllowedUpdates,
   checkAuthorizedUser,
-} = require("../middlewares/verifyOrder");
-const checkIsValidId = require("../middlewares/checkIsValidId");
+} = require("../middleware/verifyOrder");
+const checkIsValidId = require("../middleware/checkIsValidId");
 
 router.get("/", [verifyToken, isAdminOrIsModerator], getAllOrders);
 router.post("/", [verifyToken, checkProfileState], createOrder);

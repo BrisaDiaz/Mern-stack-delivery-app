@@ -3,14 +3,14 @@ import { io } from "socket.io-client";
 import { useStorage } from "../context/useStorage";
 
 export default function useOrderNotification() {
-  const [actualizationCount, setActualizationsCount] = useState(0);
+  const [actualizationCount, setActualizationCount] = useState(0);
   const [orderActualizationMessage, setOrderActualizationMessage] =
     useState("");
   const [newOrdersCount, setNewOrdersCount] = useState(0);
   const [socket, setSocket] = useState(null);
   const { currentUser, isLogin } = useStorage();
   const closeActualizationNotification = () => {
-    setActualizationsCount(0);
+    setActualizationCount(0);
   };
   const closeNewOrderNotification = () => {
     setNewOrdersCount(0);
@@ -43,7 +43,7 @@ export default function useOrderNotification() {
         .reverse()
         .find((state) => state.confirmed === true);
 
-      setActualizationsCount(setActualizationsCount + 1);
+      setActualizationCount(setActualizationCount + 1);
       setOrderActualizationMessage(`Pedido ${lastUpdateState.name}`);
     });
   }

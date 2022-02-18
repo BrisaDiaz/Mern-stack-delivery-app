@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-// the orden is important !!
-
 const STATES = ["enviado", "aceptado", "despachado", "entregado", "liquidado"];
 
 const orderSchema = new Schema(

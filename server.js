@@ -9,14 +9,14 @@ const {
   createRoles,
   createAdmin,
   createModerator,
-  creatCategorys,
+  createCategories,
 } = require("./src/libs/initialSetUp");
 
 connectDB();
 createRoles();
 createAdmin();
 createModerator();
-creatCategorys();
+createCategories();
 connectIO(http);
 
 const port = process.env.PORT || 7000;

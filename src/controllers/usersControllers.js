@@ -7,7 +7,7 @@ const getAllUsers = async (req, res) => {
 
     res.status(200).json(users);
   } catch (error) {
-    res.status(500).json({ success: false, message: error.mesage });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -20,7 +20,7 @@ const getUserById = async (req, res) => {
     res.status(200).json({ successful: true, data: user });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: error.mesage });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -89,7 +89,7 @@ const createUser = async (req, res) => {
 
     res.status(500).json({
       success: false,
-      message: "something went wrong, failt to create user ",
+      message: "something went wrong, fail to create user ",
     });
   }
 };
@@ -126,10 +126,13 @@ const UpdateProfileById = async (req, res) => {
 
     let profileState;
 
-    if ((req.userAdress || userFound.address) && (number || userFound.number)) {
-      profileState = "complited";
+    if (
+      (req.userAddress || userFound.address) &&
+      (number || userFound.number)
+    ) {
+      profileState = "completed";
     } else {
-      profileState = "incomplited";
+      profileState = "uncompleted";
     }
 
     user = await User.findByIdAndUpdate(
@@ -139,7 +142,7 @@ const UpdateProfileById = async (req, res) => {
         password: encodedPassword || userFound.password,
         email: userFound.email,
         roles: userFound.roles,
-        address: req.userAdress || userFound.address,
+        address: req.userAddress || userFound.address,
         number: number || userFound.number,
         profileState: profileState,
         client: userFound.client,
@@ -152,7 +155,7 @@ const UpdateProfileById = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: `User ${updatedUser.name} Udated Successfully`,
+      message: `User ${updatedUser.name} Updated Successfully`,
     });
   } catch (error) {
     console.log(error);

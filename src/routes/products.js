@@ -13,10 +13,10 @@ const {
   verifyToken,
   isAdmin,
   isAdminOrIsModerator,
-} = require("../middlewares/authJwt");
+} = require("../middleware/authJwt");
 
-const checkCategoryExist = require("../middlewares/verifyProduct");
-const checkIsValidId = require("../middlewares/checkIsValidId");
+const checkCategoryExist = require("../middleware/verifyProduct");
+const checkIsValidId = require("../middleware/checkIsValidId");
 //multer config
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
