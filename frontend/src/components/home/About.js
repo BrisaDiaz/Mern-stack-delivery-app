@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import background from "../../img/about-background.png";
-import { SectionTitle } from "../menu/Menu";
+import SectionTitle from "../SectionTitle";
 import watchIcon from "../../img/stopwatch-solid.svg";
 import burgerIcon from "../../img/hamburger-solid.svg";
 import walletIcon from "../../img/wallet-solid.svg";
@@ -40,7 +40,7 @@ const Image = styled.img`
     margin-top: -45px;
   }
 `;
-const HistoriSection = styled.div`
+const HistorySection = styled.div`
   text-align: center;
   padding: 50px 15px;
   margin-left: -6px;
@@ -48,10 +48,7 @@ const HistoriSection = styled.div`
   justify-content: flex-start;
   flex-flow: column;
   align-items: center;
-  line-heigth: 35px;
-  & > ${SectionTitle} {
-    margin: 0 auto 20px;
-  }
+
   @media screen and (min-width: 950px) {
     max-width: 600px;
     margin-right: -100px;
@@ -84,7 +81,7 @@ export default function About() {
   return (
     <StyledAbout>
       <AboutWrapper cassName="flex">
-        <HistoriSection>
+        <HistorySection>
           <SectionTitle>Sobre Nosotros</SectionTitle>
 
           <p>
@@ -111,7 +108,7 @@ export default function About() {
               <h4>Speed</h4>
             </div>
           </Features>
-        </HistoriSection>
+        </HistorySection>
         <ImgSection>
           <Image src={background} alt="burger"></Image>
         </ImgSection>

@@ -4,7 +4,7 @@ const {
   getUserById,
   createUser,
   updateUserRoleById,
-  UpdateProfileById,
+  updateProfileById,
 } = require("../controllers/usersControllers");
 const { verifyToken, isAdmin } = require("../middleware/authJwt");
 const {
@@ -23,8 +23,8 @@ router.put(
   [verifyToken, isAdmin, checkRolesExisted],
   updateUserRoleById
 );
-router.get("/me/:id", [verifyToken], getUserById);
-router.put("/me/:id", [verifyToken, checkIsValidUpdate], UpdateProfileById);
+
+router.put("/me", [verifyToken, checkIsValidUpdate], updateProfileById);
 router.post(
   "/",
   [

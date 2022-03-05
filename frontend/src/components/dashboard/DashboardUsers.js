@@ -3,7 +3,7 @@ import { withError } from "./../withError";
 import { useState, Fragment } from "react";
 import { useStorage } from "../../context/useStorage";
 import DashboardNav from "../DashboardNav";
-import { SectionTitle } from "../menu/Menu";
+import SectionTitle from "../SectionTitle";
 import EditUserModal from "./EditUserModal";
 import SeeMoreButton from "./../SeeMoreButton";
 
@@ -21,7 +21,7 @@ export const Table = styled.div`
   width: 100%;
   min-width: 300px;
   margin: 0 5px;
-  box-shadow: ${(props) => props.theme.lihgtBoxShadow};
+  box-shadow: ${(props) => props.theme.lightBoxShadow};
   height: max-content;
   margin-top: 30px;
 

@@ -52,6 +52,8 @@ function App() {
     setIsLogin,
     setIsAdmin,
     setIsModerator,
+    setAllCategories,
+    setIsLoading,
   } = useStorage();
 
   React.useEffect(() => {
@@ -73,6 +75,32 @@ function App() {
       setIsModerator(false);
     };
     sessionAPI(onSuccess, onError);
+  }, []);
+  React.useEffect(() => {
+    const getCategoriesAPI = async () => {
+      const headers = new Headers();
+      headers.append("Accept", "application/json");
+
+      const setting = {
+        method: "GET",
+        headers: headers,
+      };
+      try {
+        let res = await fetch("/api/categories", setting);
+        let json = await res.json();
+
+        const { data } = json;
+
+        setAllCategories(data);
+        setIsLoading(false);
+      } catch (err) {
+        getCategoriesAPI();
+
+        console.log(err);
+      }
+    };
+
+    getCategoriesAPI();
   }, []);
 
   return (

@@ -1,4 +1,3 @@
-import currentUserAPI from "./currentUserAPI";
 import usersAPI from "./usersAPI";
 import { PUT } from "../utils/http";
 
@@ -17,16 +16,14 @@ async function UploadProfileAPI({
     setFormIsLoading(true);
     setServerError("");
 
-    const id = localStorage.getItem("userId");
-
-    const { response, json } = await PUT(`/api/users/me/${id}`, info, token);
+    const { json } = await PUT(`/api/users/me`, info, token);
 
     setFormIsLoading(false);
 
-    if (response.status === 200) {
+    if (json.user) {
       isAdmin && (await usersAPI({ token, setAllUsers }));
 
-      await currentUserAPI({ token, setCurrentUser });
+      setCurrentUser(json.user);
 
       setIsSuccessfullySend(true);
       setTimeout(() => {

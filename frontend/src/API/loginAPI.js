@@ -1,5 +1,5 @@
 import usersAPI from "./usersAPI";
-import currentUserAPI from "./currentUserAPI";
+
 import { POST } from "../utils/http";
 async function loginAPI({
   info,
@@ -17,12 +17,11 @@ async function loginAPI({
   try {
     setIsFormLoading(true);
 
-    const { response, json } = await POST("/api/auth/login", info);
+    const { json } = await POST("/api/auth/login", info);
 
-    const { message } = json;
     setIsFormLoading(false);
 
-    if (response.status === 200) {
+    if (json.user) {
       setServerError("");
 
       setIsLoading(true);
@@ -30,9 +29,7 @@ async function loginAPI({
 
       await setToken(token);
 
-      localStorage.setItem("userId", user._id);
-
-      await currentUserAPI({ setCurrentUser, token });
+      setCurrentUser(user);
 
       setIsLogin();
 
@@ -55,19 +52,12 @@ async function loginAPI({
       return history.push("/menu");
     }
 
-    if (response.status === 302) {
-      const { redirect, id } = json;
-
-      localStorage.setItem("toConfirmUser", id);
-
-      setTimeout(() => {
-        return history.push(redirect);
-      }, 1000);
-    }
-
-    setServerError(message);
+    setServerError(json.message);
   } catch (err) {
     console.log(err);
+    setServerError(
+      "A ocurrido un error en el servidor, por favor intente de nuevo"
+    );
   }
 }
 export default loginAPI;

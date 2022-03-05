@@ -43,9 +43,7 @@ const EditProfileForm = styled.form`
   & > label {
     margin: 0 auto 20px;
   }
-  & > small {
-    margin: -10px auto 4px 0;
-  }
+
   & > ${OptionList} {
     min-width: 100%;
   }

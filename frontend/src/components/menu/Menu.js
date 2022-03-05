@@ -8,22 +8,16 @@ import SortProductsOptions from "../SortProductsOptions";
 import FilterCategoryOptions from "../FilterCategoryOptions";
 import PaginationButtons from "../PaginationButtons";
 import ProductsSectionComponent from "./ProductsSection";
-
+import SectionTitle from "../SectionTitle";
 const StyledMenu = styled.main`
   min-height: 100vh;
   width: 100vw;
-  padding: 65px 0 20px;
+  padding: 58px 0;
   margin: 0;
   margin-bottom: 20px;
-  text-aling: center;
-`;
-export const SectionTitle = styled.h2`
   text-align: center;
-  text-transform: uppercase;
-  margin-bottom: 40px;
-  color: ${(props) => (props.light ? "#fff" : "#fcba1c")};
-  text-shadow: ${(props) => props.theme.darkTextShadow};
 `;
+
 const MenuWrapper = styled.section`
   display: flex;
   flex-direction: column;

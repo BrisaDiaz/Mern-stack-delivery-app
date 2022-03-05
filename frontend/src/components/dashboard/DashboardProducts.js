@@ -8,7 +8,7 @@ import { NotFoundMessage, ProductsSection } from "../menu/ProductsSection";
 import DashboardNav from "../DashboardNav";
 import FilterProductsStateOptions from "../FilterProductsStateOptions";
 import FilterCategoryOptions from "../FilterCategoryOptions";
-import { SectionTitle } from "../menu/Menu";
+import SectionTitle from "../SectionTitle";
 import Item from "../menu/MenuItem";
 import { CartButton, CartIcon } from "../AddToCartButton";
 import PaginationButtons from "../PaginationButtons";
@@ -16,13 +16,10 @@ import editIcon from "../../img/pencil-alt-solid.svg";
 import DeleteIcon from "../../img/trash-alt-regular.svg";
 import { withError } from "./../withError";
 
-const Title = styled(SectionTitle)`
-  margin-bottom: 40px;
-`;
 const StyledSection = styled.section`
   min-height: 100vh;
   width: 100vw;
-  padding: 60px 0;
+  padding: 58px 0;
   &:before {
     display: ${(props) => (props.isLoading ? "block" : "none")};
     position: absolute;
@@ -98,7 +95,7 @@ function DashboardProducts() {
   return (
     <StyledSection>
       <DashboardNav />
-      <Title>mis productos</Title>
+      <SectionTitle>mis productos</SectionTitle>
 
       <SearchBar defaultValue={title} setSearch={setTitle} />
       <FiltersBoard>

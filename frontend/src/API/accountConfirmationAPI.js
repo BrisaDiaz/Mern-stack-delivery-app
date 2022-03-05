@@ -10,7 +10,7 @@ const accountConfirmationAPI = async ({
   const info = { id: localStorage.getItem("toConfirmUser") };
 
   try {
-    const { response } = await POST("/api/auth/confirmation", info);
+    const { response } = await POST("/api/auth/confirmation", { email: info });
 
     setIsRequestLoading(false);
 

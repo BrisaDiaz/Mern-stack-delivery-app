@@ -93,12 +93,12 @@ const createUser = async (req, res) => {
     });
   }
 };
-const UpdateProfileById = async (req, res) => {
+const updateProfileById = async (req, res) => {
   const { password, newPassword } = req.body;
   const number = parseInt(req.body.number);
 
   try {
-    let userFound = await User.findById(req.params.id);
+    let userFound = await User.findById(req.userId);
 
     if (!userFound)
       return res
@@ -151,10 +151,9 @@ const UpdateProfileById = async (req, res) => {
     );
     updatedUser = await user.save();
 
-    console.log(user.profileState);
-
     res.status(200).json({
       success: true,
+      user,
       message: `User ${updatedUser.name} Updated Successfully`,
     });
   } catch (error) {
@@ -168,5 +167,5 @@ module.exports = {
   getUserById,
   createUser,
   updateUserRoleById,
-  UpdateProfileById,
+  updateProfileById,
 };

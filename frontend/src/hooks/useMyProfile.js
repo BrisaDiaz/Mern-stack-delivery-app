@@ -12,7 +12,6 @@ export default function useMyProfile() {
     setIsAdmin(false);
     setIsModerator(false);
     resetTotalCost();
-    localStorage.removeItem("userId");
   };
   const onError = () => {
     window.alert(

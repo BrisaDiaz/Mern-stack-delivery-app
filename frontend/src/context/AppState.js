@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import { useReducer } from "react";
 import AppContext from "./app-context";
 import appReducer from "./app-reducer";
 
@@ -17,33 +17,6 @@ import {
 } from "./app-actions";
 
 export default function AppState(props) {
-  useEffect(() => {
-    const getCategoriesAPI = async () => {
-      const headers = new Headers();
-      headers.append("Accept", "application/json");
-
-      const setting = {
-        method: "GET",
-        headers: headers,
-      };
-      try {
-        let res = await fetch("/api/categories", setting);
-        let json = await res.json();
-
-        const { data } = json;
-
-        setAllCategories(data);
-        setIsLoading(false);
-      } catch (err) {
-        getCategoriesAPI();
-
-        console.log(err);
-      }
-    };
-
-    getCategoriesAPI();
-  }, []);
-
   const initialState = {
     users: [],
     categories: [],

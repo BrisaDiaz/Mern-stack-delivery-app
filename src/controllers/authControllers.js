@@ -13,39 +13,39 @@ const signUp = async (req, res) => {
   try {
     const { email, password, roles } = req.body;
 
-    const id = mongoose.Types.ObjectId();
+    const foundTemporalUser = await TemporalUser.findOne({ email });
 
-    const newTemporalUser = new TemporalUser({
-      _id: id,
-      name: req.userName,
-      email,
-      password,
-    });
+    const temporalUser =
+      foundTemporalUser ||
+      new TemporalUser({
+        name: req.userName,
+        email,
+        password,
+      });
 
     if (req.body.roles) {
       const foundRoles = await Role.find({ name: { $in: roles } });
-      newTemporalUser.roles = foundRoles.map((role) => role._id);
+      temporalUser.roles = foundRoles.map((role) => role._id);
     } else {
       const role = await Role.findOne({ name: "user" });
-      newTemporalUser.roles = [role._id];
+      temporalUser.roles = [role._id];
     }
 
     const token = jwt.sign(
       {
-        id,
+        id: temporalUser.id,
       },
       process.env.JWT_EMAIL_CONFIRMATION_KEY
     );
 
-    newTemporalUser.emailToken = token;
+    temporalUser.emailToken = token;
 
-    await newTemporalUser.save();
+    await temporalUser.save();
 
     return res.status(201).json({
       successful: true,
       message: "User created successfully",
-      redirect: "/#/authentication/confirmation",
-      id: id,
+      email: temporalUser.email,
     });
   } catch (error) {
     console.log(error);
@@ -58,7 +58,7 @@ const signUp = async (req, res) => {
 
 const sendConfirmationEmail = async (req, res) => {
   try {
-    const userFound = await TemporalUser.findById(req.body.id);
+    const userFound = await TemporalUser.findOne({ email: req.body.email });
 
     const token = userFound.emailToken;
 
@@ -70,7 +70,7 @@ const sendConfirmationEmail = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: " Account confirmation email has been send successfully",
+      message: "Account confirmation email has been send successfully",
     });
   } catch (error) {
     console.log(error);

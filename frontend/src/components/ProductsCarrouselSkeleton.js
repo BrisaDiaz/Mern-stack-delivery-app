@@ -1,26 +1,15 @@
+import { Swiper, SwiperSlide } from "swiper/react";
 import React from "react";
 
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-import Item from "../menu/MenuItem";
-import AddToCartButton from "../AddToCartButton";
-import useNewestProducts from "../../hooks/useNewestProducts";
-import ProductsCarruselSkeleton from "../ProductsCarruselSkeleton";
-// Import Swiper styles
+import { SkeletonItem } from "./ProductsSectionSkeleton";
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import "swiper/components/navigation/navigation.min.css";
 
-// import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation } from "swiper/core";
-
-// install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
 
-export default function ProductsCarrucel() {
-  const { isLoading, latestProducts } = useNewestProducts();
-
-  if (isLoading) return <ProductsCarruselSkeleton />;
+export default function ProductsCarruselSkeleton() {
   return (
     <>
       <Swiper
@@ -33,7 +22,7 @@ export default function ProductsCarrucel() {
           clickable: true,
         }}
         navigation={true}
-        className="mySwiper  "
+        className="mySwiper"
         breakpoints={{
           330: {
             width: 660,
@@ -50,15 +39,24 @@ export default function ProductsCarrucel() {
           },
         }}
       >
-        {latestProducts.map((product) => {
-          return (
-            <SwiperSlide key={product._id}>
-              <Item item={product}>
-                <AddToCartButton thisProductInfo={product} />
-              </Item>
-            </SwiperSlide>
-          );
-        })}
+        <SwiperSlide>
+          <SkeletonItem></SkeletonItem>
+        </SwiperSlide>
+        <SwiperSlide>
+          <SkeletonItem></SkeletonItem>
+        </SwiperSlide>
+        <SwiperSlide>
+          <SkeletonItem></SkeletonItem>
+        </SwiperSlide>
+        <SwiperSlide>
+          <SkeletonItem></SkeletonItem>
+        </SwiperSlide>
+        <SwiperSlide>
+          <SkeletonItem></SkeletonItem>
+        </SwiperSlide>
+        <SwiperSlide>
+          <SkeletonItem></SkeletonItem>
+        </SwiperSlide>
       </Swiper>
     </>
   );

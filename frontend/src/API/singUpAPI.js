@@ -12,15 +12,15 @@ async function singUpAPI({
 
     setIsFormLoading(false);
 
-    if (response.status === 201 || 302) {
+    if (json.email) {
       setServerError("");
 
-      const { redirect, id } = json;
+      const { email } = json;
 
-      localStorage.setItem("toConfirmUser", id);
+      localStorage.setItem("toConfirmUser", email);
 
       setTimeout(() => {
-        return history.push(redirect);
+        return history.push("/#/authentication/confirmation");
       }, 1000);
     }
 

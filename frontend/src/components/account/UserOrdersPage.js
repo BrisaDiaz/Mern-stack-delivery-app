@@ -3,14 +3,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useUserOrdersPage from "../../hooks/useUserOrdersPage";
 import { ButtonPrimary } from "../Buttons";
-import { SectionTitle } from "../menu/Menu";
+import SectionTitle from "../SectionTitle";
 import PaginationButtons from "../PaginationButtons";
 import OrdersTableSkeleton from "../OrdersTableSkeleton";
 import refreshIcon from "../../img/refresh.svg";
 import { LoaderSpinner } from "../LoaderSpinner";
 
 const Page = styled.main`
-  padding: 65px 5px;
+  padding: 58px 0;
+
   min-height: 100vh;
   width: 100%;
   margin: 0 auto;
@@ -55,7 +56,7 @@ export const OrdersTable = styled.table`
   border-spacing: 10px;
   border-collapse: collapse;
   border: 2px solid ${(props) => props.theme.black};
-  box-shadow: ${(props) => props.theme.lihgtBoxShadow};
+  box-shadow: ${(props) => props.theme.lightBoxShadow};
   text-transform: capitalize;
   & > tbody {
     background: #fff;
@@ -86,7 +87,7 @@ const CancelOrderButton = styled.button`
     background: ${(props) => (props.disabled ? "unset" : "#cdc8c8")};
   }
 `;
-const NotFounMessage = styled.div`
+const NotFoundMessage = styled.div`
   padding: 30px 0;
   & > h3 {
     margin-bottom: 40px;
@@ -98,7 +99,7 @@ const NotFounMessage = styled.div`
     padding: 15px 30px;
   }
 `;
-const NotFounIcon = styled.h2`
+const NotFoundIcon = styled.h2`
   font-size: 50px;
 `;
 export const RefreshButton = styled.div`
@@ -107,7 +108,7 @@ export const RefreshButton = styled.div`
   align-items: center;
   border-radius: 5px;
   height: 40px;
-  box-shadow: ${(props) => props.theme.lihgtBoxShadow};
+  box-shadow: ${(props) => props.theme.lightBoxShadow};
   background: ${(props) => props.theme.black};
 
   margin: -46px 0 10px auto;
@@ -155,14 +156,14 @@ export default function UserOrdersPage({ closeNotification }) {
       {isLoading && isFirstRender && <OrdersTableSkeleton />}
 
       {!isLoading && !isFirstRender && orders?.length === 0 && (
-        <NotFounMessage>
-          <NotFounIcon>👩🏻&zwj;🍳</NotFounIcon>
+        <NotFoundMessage>
+          <NotFoundIcon>👩🏻&zwj;🍳</NotFoundIcon>
           <h3>Ningún pedido realizado, tienes hambre?</h3>
 
           <ButtonPrimary small as={Link} to="/menu">
             Ver Menú
           </ButtonPrimary>
-        </NotFounMessage>
+        </NotFoundMessage>
       )}
 
       {orders?.length !== 0 && (

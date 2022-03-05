@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { withError } from "./../withError";
 import { Page } from "./DashboardOrders";
 import useDashboardCategories from "../../hooks/useDashboardCategories";
-import { SectionTitle } from "../menu/Menu";
+import SectionTitle from "../SectionTitle";
 import DashboardNav from "../DashboardNav";
 import {
   TextInput,
@@ -14,7 +14,7 @@ import { LoaderSpinner } from "./../LoaderSpinner";
 
 const CategoriesPage = styled(Page)`
   background: ${(props) => props.theme.lightYellow};
-  padding: 65px 5px;
+  padding: 58px 5px;
   max-height: max-content;
   min-width: 100%;
 `;

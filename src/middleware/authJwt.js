@@ -51,26 +51,6 @@ const isModerator = async (req, res, next) => {
   }
 };
 
-const verifyAccountConfirmation = async (req, res, next) => {
-  const user = await User.findOne({ email: req.body.email });
-
-  if (!user) {
-    const tempUser = await TemporalUser.findOne({ email: req.body.email });
-
-    if (tempUser)
-      return res.status(302).json({
-        successful: false,
-        message: "Email unverified",
-        redirect: `/#/authentication/confirmation`,
-        id: tempUser._id,
-      });
-
-    return res.status(404).json({ success: false, message: "No user found" });
-  }
-
-  next();
-};
-
 const isAdmin = async (req, res, next) => {
   try {
     const user = await User.findById(req.userId);
@@ -115,6 +95,5 @@ module.exports = {
   verifyToken,
   isAdmin,
   isModerator,
-  verifyAccountConfirmation,
   isAdminOrIsModerator,
 };

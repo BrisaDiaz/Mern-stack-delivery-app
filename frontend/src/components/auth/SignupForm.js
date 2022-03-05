@@ -72,8 +72,8 @@ export const Form = styled.form`
 `;
 export const ErrorServerMessage = styled(ErrorMessage)`
   text-align: center;
-  font-size: 20px;
-  margin: 5px 0 15px;
+  font-size: 16px;
+  margin: 5px auto 15px;
 `;
 export const FormLink = styled(Link)`
   margin-bottom: 20px;
