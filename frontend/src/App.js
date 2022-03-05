@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from "react";
-
+import { useStorage } from "./context/useStorage";
+import sessionAPI from "./API/getSessionAPI";
 import useOrderNotification from "./hooks/useOrderNotification";
 import ScrollToTop from "./components/ScrollToTop";
 import { ThemeProvider } from "styled-components";
@@ -30,6 +31,7 @@ import DashboardOrders from "./components/dashboard/DashboardOrders";
 import DashboardUsers from "./components/dashboard/DashboardUsers";
 import DashboardEditProduct from "./components/dashboard/DashboardEditProduct";
 import DashboardProducts from "./components/dashboard/DashboardProducts";
+
 const EmailConfirmationModal = lazy(() =>
   import("./components/auth/EmailConfirmationModal")
 );
@@ -43,6 +45,35 @@ function App() {
     closeActualizationNotification,
     closeNewOrderNotification,
   } = useOrderNotification();
+  const {
+    setToken,
+    setIsNotLogin,
+    setCurrentUser,
+    setIsLogin,
+    setIsAdmin,
+    setIsModerator,
+  } = useStorage();
+
+  React.useEffect(() => {
+    const onSuccess = (data) => {
+      setToken(data.token);
+      setCurrentUser(data.user);
+      if (data.user.roles[0].name === "admin") {
+        setIsAdmin(true);
+      } else if (data.user.roles[0].name === "moderator") {
+        setIsModerator(true);
+      }
+
+      setIsLogin(true);
+    };
+    const onError = () => {
+      setToken("");
+      setIsNotLogin();
+      setIsAdmin(false);
+      setIsModerator(false);
+    };
+    sessionAPI(onSuccess, onError);
+  }, []);
 
   return (
     <Router>

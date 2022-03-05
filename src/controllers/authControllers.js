@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 
 const sendConfirmationEmailFunction = require("../libs/sendConfirmationEmail");
 const sendResetPasswordEmailFunction = require("../libs/sendResetPasswordEmail");
+const { getCookieValueByName } = require("../utils/getCookieValueByName");
 
 const signUp = async (req, res) => {
   try {
@@ -67,7 +68,7 @@ const sendConfirmationEmail = async (req, res) => {
 
     await sendConfirmationEmailFunction(url, userFound.email);
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: " Account confirmation email has been send successfully",
     });
@@ -77,7 +78,31 @@ const sendConfirmationEmail = async (req, res) => {
     return res.status(500).json({ message: "something went wrong" });
   }
 };
+const getSession = async (req, res) => {
+  try {
+    const cookieToken = getCookieValueByName(
+      req.cookies,
+      "delivery-app-session-token"
+    );
 
+    if (!cookieToken)
+      return res
+        .status(404)
+        .json({ successful: false, message: "No session token was found" });
+    /// check if is a valid token
+    const decoded = jwt.verify(cookieToken, process.env.JWT_SECRET_KEY);
+    const user = await User.findById(decoded.id, { password: 0 }).populate(
+      "roles"
+    );
+
+    if (!user) return res.status(404).json({ message: "No user found" });
+
+    return res.status(200).json({ successful: true, user, token: cookieToken });
+  } catch (error) {
+    console.log(error);
+    return res.status(401).json({ successful: false, message: "Unauthorized" });
+  }
+};
 const validateEmailToken = async (req, res) => {
   try {
     const token = req.params.token;
@@ -115,9 +140,9 @@ const validateEmailToken = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const userFound = await User.findOne({ email: req.body.email })
-      .populate("roles")
-      .populate("orders");
+    const userFound = await User.findOne({ email: req.body.email }).populate(
+      "roles"
+    );
 
     if (!userFound) return res.status(400).json({ message: "User Not Found" });
 
@@ -131,14 +156,28 @@ const login = async (req, res) => {
         token: null,
         message: "Invalid Password",
       });
+    const oneDayInSeconds = 86400;
 
     const token = jwt.sign({ id: userFound._id }, process.env.JWT_SECRET_KEY, {
-      expiresIn: 86400,
+      expiresIn: oneDayInSeconds,
     });
-
+    res.cookie("delivery-app-session-token", token, {
+      expire: oneDayInSeconds + Date.now(),
+    });
     res
       .status(200)
       .json({ token: token, roles: userFound.roles, user: userFound });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error });
+  }
+};
+const logout = async (req, res) => {
+  try {
+    res.clearCookie("delivery-app-session-token");
+    res
+      .status(200)
+      .json({ successfully: true, message: "User has logout successfully" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: error });
@@ -251,4 +290,6 @@ module.exports = {
   sendConfirmationEmail,
   sendResetPasswordEmail,
   resetPassword,
+  logout,
+  getSession,
 };

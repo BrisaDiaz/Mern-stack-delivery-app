@@ -11,7 +11,7 @@ import profileIcon from "../img/user-circle-solid.svg";
 
 export const StyledLink = styled(Link)`
   display: flex;
-  aling-items: center;
+  align-items: center;
   text-decoration: none;
   color: #171717;
   font-family: "Oswald", sans-serif;
@@ -75,8 +75,8 @@ const LogoImg = styled.img`
 `;
 const IconButton = styled.div`
   width: 40px;
-  heght: 40px;
-  text-decoretion: none;
+
+  text-decoration: none;
   cursor: pointer;
   margin-left: auto;
   margin-right: 20px;
@@ -84,7 +84,7 @@ const IconButton = styled.div`
 `;
 const CartIcon = styled.img`
   width: 100%;
-  heght: 100%;
+
   transform: scale(0.65);
   @media screen and (min-width: 500px) {
     transform: scale(0.8);
@@ -137,7 +137,7 @@ const NavLinks = styled.div`
     height: 80%;
   }
 `;
-const Menubtn = styled.img`
+const MenuBtn = styled.img`
   cursor: pointer;
   width: 25px;
   cursor: pointer;
@@ -217,11 +217,11 @@ export default function Header() {
         <CartIcon src={cartIcon} alt="Cart-button" />
         <CartNumber>{numberOfProductsInCart}</CartNumber>
       </IconButton>
-      <Menubtn
+      <MenuBtn
         src={navIsOpened ? clouseMenu : menu}
         alt="menu"
         onClick={handelNavClick}
-      ></Menubtn>
+      ></MenuBtn>
     </StyledHeader>
   );
 }

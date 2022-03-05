@@ -9,7 +9,7 @@ import {
   SET_IS_LOGIN_FALSE,
   SET_IS_ADMIN,
   SET_IS_MODERATOR,
-  SET_FORM_DATA_SUCCESFULLY_SEND,
+  SET_FORM_DATA_SUCCESSFULLY_SEND,
 } from "./app-actions";
 
 function appReducer(state, action) {
@@ -67,7 +67,7 @@ function appReducer(state, action) {
         ...state,
         isLogin: false,
       };
-    case SET_FORM_DATA_SUCCESFULLY_SEND:
+    case SET_FORM_DATA_SUCCESSFULLY_SEND:
       return {
         ...state,
         isSuccessfullySend: action.payload,

@@ -86,7 +86,7 @@ function MenuItem(props) {
         <Img
           src={item?.img}
           onLoad={() => setIsLoaded(true)}
-          alt={item.name}
+          alt={item.description}
         ></Img>
       </ImgContainer>
 

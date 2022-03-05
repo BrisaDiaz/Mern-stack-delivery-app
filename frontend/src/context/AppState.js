@@ -13,7 +13,7 @@ import {
   SET_IS_LOGIN_FALSE,
   SET_IS_ADMIN,
   SET_IS_MODERATOR,
-  SET_FORM_DATA_SUCCESFULLY_SEND,
+  SET_FORM_DATA_SUCCESSFULLY_SEND,
 } from "./app-actions";
 
 export default function AppState(props) {
@@ -109,23 +109,23 @@ export default function AppState(props) {
       type: SET_IS_LOGIN_FALSE,
     });
   };
-  const setIsAdmin = (bulean) => {
+  const setIsAdmin = (boolean) => {
     dispatch({
       type: SET_IS_ADMIN,
-      payload: bulean,
+      payload: boolean,
     });
   };
-  const setIsModerator = (bulean) => {
+  const setIsModerator = (boolean) => {
     dispatch({
       type: SET_IS_MODERATOR,
-      payload: bulean,
+      payload: boolean,
     });
   };
 
-  const setIsSuccessfullySend = (bulean) => {
+  const setIsSuccessfullySend = (boolean) => {
     dispatch({
-      type: SET_FORM_DATA_SUCCESFULLY_SEND,
-      payload: bulean,
+      type: SET_FORM_DATA_SUCCESSFULLY_SEND,
+      payload: boolean,
     });
   };
   return (
