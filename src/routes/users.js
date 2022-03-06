@@ -18,13 +18,13 @@ const {
 
 router.get("/", [verifyToken], getAllUsers);
 router.get("/:id", [verifyToken], getUserById);
+
+router.put("/me", [verifyToken, checkIsValidUpdate], updateProfileById);
 router.put(
-  "/:id",
+  "/role/:id",
   [verifyToken, isAdmin, checkRolesExisted],
   updateUserRoleById
 );
-
-router.put("/me", [verifyToken, checkIsValidUpdate], updateProfileById);
 router.post(
   "/",
   [

@@ -10,7 +10,9 @@ const subscribeUser = async (req, res) => {
     await userFound.subscribe().save();
   } catch (err) {
     console.log(err);
-    res.status(500).json({ success: false, message: "subscription fail" });
+    return res
+      .status(500)
+      .json({ success: false, message: "subscription fail" });
   }
 };
 

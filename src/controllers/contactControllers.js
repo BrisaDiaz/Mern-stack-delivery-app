@@ -50,12 +50,12 @@ const sendToAdminEmail = async (req, res) => {
 
     await sendEmail(emailOptions);
 
-    res.status(200).json({
+    return res.status(200).json({
       successful: true,
       message: "The message have been send successfully",
     });
   } catch (err) {
-    res
+    return res
       .status(500)
       .json({ successful: false, message: "something went wrong" });
   }

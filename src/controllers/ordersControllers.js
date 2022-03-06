@@ -43,13 +43,13 @@ const getAllOrders = async (req, res) => {
       .exec();
     const totalResults = await Order.find(query);
 
-    res
+    return res
       .status(200)
       .json({ successful: true, data: orders, total: totalResults.length });
   } catch (err) {
     console.log(err);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Something went wrong, couldn't get orders",
     });
@@ -62,9 +62,9 @@ const getOrderById = async (req, res) => {
       .populate("client")
       .exec();
 
-    res.status(200).json({ successful: true, data: orderFound });
+    return res.status(200).json({ successful: true, data: orderFound });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Something went wrong, the state couldn't get order",
     });
@@ -95,13 +95,13 @@ const getAllUserOrders = async (req, res) => {
       .populate("client")
       .exec();
 
-    res.status(200).json({
+    return res.status(200).json({
       successful: true,
       data: ordersFound,
       total: user.orders.length,
     });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Something went wrong,  couldn't get user orders",
     });
@@ -151,13 +151,13 @@ const createOrder = async (req, res) => {
 
     orderEmitter.emit("newOrder", newOrder);
 
-    res
+    return res
       .status(201)
       .json({ success: true, message: "Order created successfully" });
   } catch (error) {
     console.log(error);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Something went wrong, order couldn't be created",
     });
@@ -183,7 +183,7 @@ const actualizeOrderState = async (req, res) => {
         await Promise.all(promises);
       } catch (err) {
         console.log(err);
-        res.status(500).json({
+        return res.status(500).json({
           success: false,
           message:
             "Something went wrong, the product sold quantity could not be updated",
@@ -196,13 +196,13 @@ const actualizeOrderState = async (req, res) => {
     // notify user about an order actualization
     orderEmitter.emit("orderActualization", clientFound._id, order);
 
-    res
+    return res
       .status(200)
       .json({ success: false, message: "order state updated successfully" });
   } catch (err) {
     console.log(err);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Something went wrong, the state couldn't be upgraded",
     });
@@ -217,11 +217,13 @@ const deleteOrderById = async (req, res) => {
 
     clientFound.deleteOrder(req.orderId).save();
 
-    res.status(204).json({ success: true, message: "Order has been deleted" });
+    return res
+      .status(204)
+      .json({ success: true, message: "Order has been deleted" });
   } catch (err) {
     console.log(err);
 
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Order couldn't been deleted" });
   }

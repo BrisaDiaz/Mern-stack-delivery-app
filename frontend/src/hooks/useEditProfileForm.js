@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useStorage } from "../context/useStorage";
-import upldateProfileAPI from "../API/upldateProfileAPI";
+import updateProfileAPI from "../API/updateProfileAPI";
 
 export default function useEditProfileForm() {
   const {
@@ -55,8 +55,9 @@ export default function useEditProfileForm() {
       street,
       streetNumber: data.userStreetNumber,
     };
-    await upldateProfileAPI({
+    await updateProfileAPI({
       setFormIsLoading,
+      setCurrentUser,
       setIsSuccessfullySend,
       setServerError,
       info,
@@ -73,7 +74,7 @@ export default function useEditProfileForm() {
     errors,
     onSubmit,
     serverError,
-    setCurrentUser,
+
     formIsLoading,
     defaultsValues,
     isChangingPassword,

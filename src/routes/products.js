@@ -9,25 +9,21 @@ const {
   updateProductById,
   deleteProductById,
 } = require("../controllers/productsControllers");
-const {
-  verifyToken,
-  isAdmin,
-  isAdminOrIsModerator,
-} = require("../middleware/authJwt");
+const { verifyToken, isAdmin } = require("../middleware/authJwt");
 
 const checkCategoryExist = require("../middleware/verifyProduct");
 const checkIsValidId = require("../middleware/checkIsValidId");
 //multer config
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./storage/media");
+    cb(null, "src/storage/media");
   },
 
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
-const filefilter = (req, file, cb) => {
+const fileFilter = (req, file, cb) => {
   if (!file) {
     cb(null, false);
   } else {
@@ -37,7 +33,7 @@ const filefilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   limits: { fieldSize: 10 * 1024 * 1024 },
-  fileFilter: filefilter,
+  fileFilter: fileFilter,
 });
 
 router.get("/", getAllProducts);

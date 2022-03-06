@@ -1,28 +1,11 @@
-import getCategoriesAPI from "./getCategoriesAPI";
 import { POST } from "../utils/http";
 
-async function createCategoryAPI({
-  token,
-  info,
-  setAllCategories,
-  setIsCreateFormLoading,
-  setIsSuccessfullySend,
-  e,
-}) {
-  setIsCreateFormLoading(true);
+async function createCategoryAPI({ token, info, onSuccess }) {
   try {
-    const { response } = await POST("/api/categories", info, token);
+    const { json } = await POST("/api/categories", info, token);
 
-    setIsCreateFormLoading(false);
-
-    if (response.status === 201) {
-      await getCategoriesAPI(setAllCategories);
-      e.target.newCategory.value = "";
-      setIsSuccessfullySend(true);
-      setTimeout(() => {
-        setIsSuccessfullySend(false);
-      }, 3000);
-      return;
+    if (json.category) {
+      return onSuccess(json);
     }
   } catch (err) {
     console.log(err);

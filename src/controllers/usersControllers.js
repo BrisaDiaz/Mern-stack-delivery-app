@@ -5,9 +5,9 @@ const getAllUsers = async (req, res) => {
   try {
     const users = await User.find().populate("roles");
 
-    res.status(200).json(users);
+    return res.status(200).json(users);
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -17,10 +17,10 @@ const getUserById = async (req, res) => {
       "roles"
     );
 
-    res.status(200).json({ successful: true, data: user });
+    return res.status(200).json({ successful: true, data: user });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -49,10 +49,10 @@ const updateUserRoleById = async (req, res) => {
     );
     updatedUser = await user.save();
 
-    res.status(200).json({ success: true, data: updatedUser });
+    return res.status(200).json({ success: true, data: updatedUser });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: error });
+    return res.status(500).json({ success: false, message: error });
   }
 };
 
@@ -75,7 +75,7 @@ const createUser = async (req, res) => {
 
     const savedUser = await user.save();
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       data: {
         id: savedUser._id,
@@ -87,14 +87,14 @@ const createUser = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "something went wrong, fail to create user ",
     });
   }
 };
 const updateProfileById = async (req, res) => {
-  const { password, newPassword } = req.body;
+  const { password, newPassword, userName } = req.body;
   const number = parseInt(req.body.number);
 
   try {
@@ -135,8 +135,8 @@ const updateProfileById = async (req, res) => {
       profileState = "uncompleted";
     }
 
-    user = await User.findByIdAndUpdate(
-      req.params.id,
+    const updatedUser = await User.findByIdAndUpdate(
+      userFound.id,
       {
         name: req.userName || userFound.name,
         password: encodedPassword || userFound.password,
@@ -147,18 +147,21 @@ const updateProfileById = async (req, res) => {
         profileState: profileState,
         client: userFound.client,
       },
-      { new: true }
+      {
+        new: true,
+      }
     );
-    updatedUser = await user.save();
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
-      user,
-      message: `User ${updatedUser.name} Updated Successfully`,
+      user: updatedUser,
+      message: `User updated successfully`,
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: error });
+    return res
+      .status(500)
+      .json({ success: false, message: "server side error" });
   }
 };
 

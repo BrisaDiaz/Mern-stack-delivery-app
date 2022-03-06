@@ -33,7 +33,7 @@ export default function useEditProductForm() {
 
     const formData = new FormData();
 
-    let img = data?.img?.files ? data?.img?.files[0] : undefined;
+    let img = data?.img?.length ? data?.img[0] : undefined;
     const price = parseInt(data.price);
 
     formData.append("img", img);

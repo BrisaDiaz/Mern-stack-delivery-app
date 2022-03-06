@@ -2,9 +2,9 @@ async function POST(url, info, token, type) {
   const headers = new Headers();
   headers.append("Accept", "application/json");
 
-  type === "formData"
-    ? headers.append("Content-Type", "multipart/form-data")
-    : headers.append("Content-Type", "application/json");
+  if (type !== "formData") {
+    headers.append("Content-Type", "application/json");
+  }
   headers.append("Authorization", `Bearer ${token}`);
 
   const body = type === "formData" ? info : JSON.stringify(info);
@@ -23,10 +23,11 @@ async function PUT(url, info, token, type) {
   const headers = new Headers();
 
   headers.append("Authorization", `Bearer ${token}`);
-  type === "formData"
-    ? headers.append("Content-Type", "multipart/form-data")
-    : headers.append("Content-Type", "application/json");
+  if (type !== "formData") {
+    headers.append("Content-Type", "application/json");
+  }
 
+  headers.append("Accept", "application/json");
   const body = type === "formData" ? info : JSON.stringify(info);
   const setting = {
     method: "PUT",

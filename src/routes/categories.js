@@ -13,7 +13,11 @@ const {
 } = require("../controllers/categoryControllers");
 
 router.get("/", getAllCategories);
-router.post("/", [verifyToken, isAdmin], createCategory);
+router.post(
+  "/",
+  [verifyToken, isAdmin, checkDuplicatedCategory],
+  createCategory
+);
 router.put(
   "/:id",
   [verifyToken, isAdmin, checkCategoryExist],

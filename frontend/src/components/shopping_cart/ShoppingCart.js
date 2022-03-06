@@ -16,7 +16,7 @@ const StyledCart = styled.aside`
   right: ${(props) => (props.isCartOpen === true ? "0" : "-100vw")};
   transition: all 0.5s;
   margin: 0 auto;
-  padding: 10px 0;
+  padding: 10px 0 16px;
   background: #fff;
   border-radius: 0 0 15px 15px;
   box-shadow: 1px 3px 5px #00000057;
@@ -37,8 +37,9 @@ const CartProductsList = styled.ul`
   overflow-y: scroll;
   min-height: max-content;
   max-height: 160px;
-  border-top: 1px solid #dcdcdc;
-  border-bottom: 1px solid #dcdcdc;
+  padding-bottom: 1rem;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
 `;
 const DeleteAllButton = styled.button`
   position: relative;

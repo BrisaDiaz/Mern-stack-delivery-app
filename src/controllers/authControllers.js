@@ -161,10 +161,10 @@ const login = async (req, res) => {
     const token = jwt.sign({ id: userFound._id }, process.env.JWT_SECRET_KEY, {
       expiresIn: oneDayInSeconds,
     });
-    res.cookie("delivery-app-session-token", token, {
+    return res.cookie("delivery-app-session-token", token, {
       expire: oneDayInSeconds + Date.now(),
     });
-    res
+    return res
       .status(200)
       .json({ token: token, roles: userFound.roles, user: userFound });
   } catch (error) {
@@ -174,8 +174,8 @@ const login = async (req, res) => {
 };
 const logout = async (req, res) => {
   try {
-    res.clearCookie("delivery-app-session-token");
-    res
+    return res.clearCookie("delivery-app-session-token");
+    return res
       .status(200)
       .json({ successfully: true, message: "User has logout successfully" });
   } catch (error) {
@@ -210,14 +210,14 @@ const sendResetPasswordEmail = async (req, res) => {
 
     await sendResetPasswordEmailFunction(url, req.body.email);
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Reset password email has been send successfully",
     });
   } catch (err) {
     console.log(err);
 
-    res.status(500).json({
+    return res.status(500).json({
       successful: false,
       message: "Something went wrong, fail to to send reset password email",
     });
@@ -255,12 +255,12 @@ const resetPassword = async (req, res) => {
     if (!userFound) return res.status(404).json({ message: "User not found" });
 
     if (newPassword !== confirmPassword)
-      res
+      return res
         .status(400)
         .json({ successful: false, message: "Passwords doesn't match" });
 
     if (newPassword.length < 5)
-      res
+      return res
         .status(400)
         .json({ successful: false, message: "Passwords min length is 5" });
 
@@ -270,13 +270,13 @@ const resetPassword = async (req, res) => {
 
     await userFound.save();
 
-    res
+    return res
       .status(200)
       .json({ success: true, message: "Password updated successfully" });
   } catch (err) {
     console.log(err);
 
-    res.status(500).json({
+    return res.status(500).json({
       successful: false,
       message: "Something went wrong, fail to update password",
     });

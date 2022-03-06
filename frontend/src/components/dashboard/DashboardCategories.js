@@ -106,8 +106,8 @@ function DashboardCategories() {
     handleRenameSubmit,
     handleCreateSubmit,
     handleDelete,
-    setEditingCategory,
-    editingCategory,
+    handleCategorySelect,
+    isDeleteFormLoading,
     isRenameFormLoading,
     isCreateFormLoading,
     categories,
@@ -125,25 +125,22 @@ function DashboardCategories() {
           <form name="editCategory" onSubmit={handleRenameSubmit}>
             <OptionList
               name="category"
-              onChange={(e) => setEditingCategory(e.target.value)}
+              onChange={(e) => handleCategorySelect(e)}
             >
               {categories?.map((cat) => (
-                <Option key={cat?._id} value={cat?.name}>
+                <Option key={cat?._id} value={cat._id}>
                   {cat?.name}
                 </Option>
               ))}
             </OptionList>
 
             <DeleteButton onClick={handleDelete}>Eliminar</DeleteButton>
-
+            {isDeleteFormLoading && <LoaderSpinner small />}
             <hr></hr>
 
             <h4>Remombrar categoría</h4>
 
-            <Input
-              placeholder={`Renombrar ${editingCategory}`}
-              name="categoryNewName"
-            />
+            <Input placeholder={"Renombrar Categoría"} name="categoryNewName" />
             {isRenameFormLoading && <LoaderSpinner small />}
             <LoadButton as="input" type="submit" value="Editar" />
           </form>

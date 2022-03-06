@@ -1,6 +1,7 @@
 const { Category } = require("../models/category.model");
 
 const checkCategoryExist = async (req, res, next) => {
+  console.log(req.body);
   try {
     const categoryFound = await Category.findOne({ name: req.body.category });
 

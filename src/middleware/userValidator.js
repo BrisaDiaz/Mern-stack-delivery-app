@@ -2,12 +2,10 @@ const checkIsValidUser = (req, res, next) => {
   const { lastName, email, name, password } = req.body;
 
   if (!email || !lastName || !name || !password)
-    res
-      .status(400)
-      .json({
-        successful: false,
-        message: `Missing inputs, name: ${name} lastName: ${lastName} email:${email} password:${password}`,
-      });
+    res.status(400).json({
+      successful: false,
+      message: `Missing inputs, name: ${name} lastName: ${lastName} email:${email} password:${password}`,
+    });
 
   let reg =
     /^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$/;
@@ -84,6 +82,7 @@ const checkIsValidUpdate = (req, res, next) => {
       .json({ successful: false, message: `Street address not valid` });
 
   req.userAddress = `${street} ${streetNumber}, ${city}`;
+  req.userName = `${name} ${lastName}`;
   next();
 };
 module.exports = { checkIsValidUser, checkIsValidUpdate };

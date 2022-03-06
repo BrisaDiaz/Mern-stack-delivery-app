@@ -12,7 +12,7 @@ async function uploadUserAPI({
   try {
     setFormIsLoading(true);
 
-    const { response, json } = await PUT(`/api/users/${id}`, info, token);
+    const { response, json } = await PUT(`/api/users/role/${id}`, info, token);
 
     setFormIsLoading(false);
     if (response.status === 200) {

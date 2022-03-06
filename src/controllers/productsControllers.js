@@ -18,13 +18,11 @@ const getAllProducts = async (req, res) => {
       query.category = req.query.category;
     }
     if (req.query.active) {
-      if (req.query.active === "active") {
-        query.active = true;
-      }
-      if (req.query.active === "inactive") {
-        query.active = false;
-      }
+      req.query.active === "true"
+        ? (query.active = true)
+        : (query.active = false);
     }
+
     if (req.query.sort) {
       sort = req.query.sort;
     }
@@ -44,22 +42,22 @@ const getAllProducts = async (req, res) => {
       .exec();
     const totalResults = await Product.find(query);
 
-    res
+    return res
       .status(200)
       .json({ success: true, data: products, total: totalResults.length });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 
 const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-    res.status(200).json({ success: true, data: product });
+    return res.status(200).json({ success: true, data: product });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -77,7 +75,7 @@ const postNewProduct = async (req, res) => {
       size,
       description,
       active,
-      img: imageUploaded.secured_url,
+      img: imageUploaded.secure_url,
       img_id: imageUploaded.public_id,
     });
 
@@ -96,10 +94,10 @@ const postNewProduct = async (req, res) => {
 
     const newProduct = await product.save();
 
-    res.status(201).json({ success: true, data: newProduct });
+    return res.status(201).json({ success: true, data: newProduct });
   } catch (error) {
     console.log(error);
-    res.status(400).json({ success: false, message: error.message });
+    return res.status(400).json({ success: false, message: error.message });
   }
 };
 
@@ -156,35 +154,35 @@ const updateProductById = async (req, res) => {
       { new: true }
     );
 
-    res.status(200).json({ success: true, data: updatedProduct });
+    return res.status(200).json({ success: true, data: updatedProduct });
   } catch (error) {
     console.log(error);
-    res.status(400).json({ success: false, message: error.message });
+    return res.status(400).json({ success: false, message: error.message });
   }
 };
 
 const deleteProductById = async (req, res) => {
   try {
-    let product = await Product.findById(req.params.id).exec();
+    let product = await Product.findById(req.params.id);
 
     if (!product)
       return res
         .status(404)
         .json({ success: false, message: "product not found" });
 
-    await Category.decrementCategoryProducts(productFound.category);
+    await Category.decrementCategoryProducts(product.category);
 
     await Product.findByIdAndRemove(req.params.id);
 
     await cloudinary.v2.uploader.destroy(product.img_id);
 
-    res
+    return res
       .status(204)
       .json({ success: true, message: "Product has been deleted" });
   } catch (error) {
     console.log(error);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "something went wrong, product was not delete correctly",
     });

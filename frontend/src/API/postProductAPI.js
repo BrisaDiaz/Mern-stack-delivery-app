@@ -14,6 +14,7 @@ async function postProductAPI({
       "formData"
     );
     setFormIsLoading(false);
+
     if (response.status === 201) {
       setIsSuccessfullySend(true);
       e.target.reset();
@@ -24,6 +25,7 @@ async function postProductAPI({
       return;
     }
   } catch (err) {
+    setFormIsLoading(false);
     console.log(err);
   }
 }

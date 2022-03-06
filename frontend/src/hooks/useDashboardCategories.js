@@ -8,19 +8,11 @@ export default function useCategoriesForms() {
   const { categories, setIsSuccessfullySend, token, setAllCategories } =
     useStorage();
 
-  const [editingCategory, setEditingCategory] = useState("categoria");
   const [isRenameFormLoading, setIsRenameFormLoading] = useState(false);
   const [isCreateFormLoading, setIsCreateFormLoading] = useState(false);
+  const [isDeleteFormLoading, setIsDeleteFormLoading] = useState(false);
 
   const [categorySelectId, setCategorySelectId] = useState("");
-
-  useEffect(() => {
-    let categoryId = categories?.find(
-      (category) => category.name === editingCategory
-    )?._id;
-
-    setCategorySelectId(categoryId);
-  }, [editingCategory, categories]);
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -28,52 +20,87 @@ export default function useCategoriesForms() {
     const confirmation = window.confirm(
       "Al eliminar la categoría se eliminarn todos los productos de la misma, está deguro?"
     );
+    const onSuccess = () => {
+      setIsDeleteFormLoading(false);
+      setIsSuccessfullySend(true);
+      setAllCategories(
+        categories.filter((category) => category._id !== categorySelectId)
+      );
+      setTimeout(() => {
+        setIsSuccessfullySend(false);
+      }, 3000);
+    };
 
     if (confirmation) {
-      await deleteCategoryAPI({ categorySelectId, token, setAllCategories });
-      setEditingCategory("category");
-      return;
+      setIsDeleteFormLoading(true);
+      await deleteCategoryAPI({ categorySelectId, token });
+
+      onSuccess();
     }
   };
 
-  const handleRenameSubmit = (e) => {
+  const handleRenameSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
     const info = {
       categoryNewName: e.target.categoryNewName.value.trim(),
     };
-
-    updateCategoryNameAPI({
+    const onSuccess = (data) => {
+      setIsRenameFormLoading(false);
+      setAllCategories(
+        categories.map((category) =>
+          category._id === categorySelectId
+            ? { ...category, name: data.category.name }
+            : category
+        )
+      );
+      setIsSuccessfullySend(true);
+      setTimeout(() => {
+        setIsSuccessfullySend(false);
+      }, 3000);
+    };
+    setIsRenameFormLoading(true);
+    await updateCategoryNameAPI({
       categorySelectId,
       info,
-      setIsRenameFormLoading,
-      setIsSuccessfullySend,
+      onSuccess,
       token,
-      setAllCategories,
     });
-    setEditingCategory("category");
+    setIsRenameFormLoading(false);
   };
-  const handleCreateSubmit = (e) => {
+  const handleCreateSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
     const info = {
       category: e.target.newCategory.value.trim(),
     };
-    createCategoryAPI({
+    const onSuccess = (data) => {
+      e.target.newCategory.value = "";
+      setIsCreateFormLoading(false);
+      setAllCategories([...categories, data.category]);
+      setIsSuccessfullySend(true);
+      setTimeout(() => {
+        setIsSuccessfullySend(false);
+      }, 3000);
+    };
+    setIsCreateFormLoading(true);
+    await createCategoryAPI({
       token,
       info,
-      setAllCategories,
-      setIsCreateFormLoading,
-      setIsSuccessfullySend,
+      onSuccess,
       e,
     });
+    setIsCreateFormLoading(false);
+  };
+  const handleCategorySelect = (e) => {
+    setCategorySelectId(e.target.value);
   };
   return {
     handleRenameSubmit,
+    handleCategorySelect,
     handleCreateSubmit,
-    setEditingCategory,
-    editingCategory,
+    isDeleteFormLoading,
     handleDelete,
     isRenameFormLoading,
     isCreateFormLoading,

@@ -185,7 +185,7 @@ export function CategoriesOptionsInput({ register, categories, defaultValue }) {
   return (
     <OptionList
       name="category"
-      value={defaultValue || categories[0]}
+      defaultValue={defaultValue || categories[0]}
       ref={register({
         required: "*El campo es requrido",
       })}

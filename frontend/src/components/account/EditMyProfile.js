@@ -125,22 +125,13 @@ function CityAddressOptions({ register, defaultValue }) {
   return (
     <OptionList
       name="userCityAddress"
+      defaultValue={defaultValue}
       ref={register({
         required: "*El campo es requrido",
       })}
     >
-      <Option
-        value="Córdoba"
-        selected={defaultValue === "córdoba" ? true : false}
-      >
-        Córdoba
-      </Option>
-      <Option
-        value="Buenos Aires"
-        selected={defaultValue === "buenos aires" ? true : false}
-      >
-        Buenos Aires
-      </Option>
+      <Option value="Córdoba">Córdoba</Option>
+      <Option value="Buenos Aires">Buenos Aires</Option>
     </OptionList>
   );
 }
