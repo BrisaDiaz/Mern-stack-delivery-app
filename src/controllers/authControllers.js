@@ -161,7 +161,7 @@ const login = async (req, res) => {
     const token = jwt.sign({ id: userFound._id }, process.env.JWT_SECRET_KEY, {
       expiresIn: oneDayInSeconds,
     });
-    return res.cookie("delivery-app-session-token", token, {
+    res.cookie("delivery-app-session-token", token, {
       expire: oneDayInSeconds + Date.now(),
     });
     return res

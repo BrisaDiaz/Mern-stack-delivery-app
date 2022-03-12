@@ -55,6 +55,8 @@ async function loginAPI({
     setServerError(json.message);
   } catch (err) {
     console.log(err);
+
+    setIsLoading(false);
     setServerError(
       "A ocurrido un error en el servidor, por favor intente de nuevo"
     );
