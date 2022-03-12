@@ -174,7 +174,7 @@ const login = async (req, res) => {
 };
 const logout = async (req, res) => {
   try {
-    return res.clearCookie("delivery-app-session-token");
+    res.clearCookie("delivery-app-session-token");
     return res
       .status(200)
       .json({ successfully: true, message: "User has logout successfully" });
